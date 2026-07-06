@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Las Horneras - Casa de Comidas</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background-color: #fff8f6;
+      color: #4a2e2e;
+    }
+    .portada {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: 100vh;
+      padding: 3rem 2rem;
+      background-color: #702e3d;
+      color: #fce8d5;
+      position: relative;
+    }
+    .portada img {
+
+      max-width: 300px;
+      margin: 1.5rem 0;
+    }
+    .portada h1, .portada h2, .portada h3 {
+      margin: 0.2rem 0;
+    }
+    .portada h2 {
+      color: #f9d8b5;
+    }
+    .portada p {
+      max-width: 700px;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+    .boton {
+      padding: 1rem 2rem;
+      background-color: #fce8d5;
+      color: #702e3d;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 2rem;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .carta {
+      display: none;
+      padding: 3rem 2rem;
+      background-color: #ffffff;
+      color: #4a2e2e;
+      text-align: center;
+    }
+    .carta h2 {
+      font-size: 2rem;
+      margin-bottom: 2.5rem;
+      color: #702e3d;
+    }
+    .carta p {
+      color: #CFB292;
+      max-width: 50%;
+      margin: 0 auto 2rem auto;
+    }
+    .bloque-categoria {
+      max-width: 1000px;
+      margin: 0 auto 3rem auto;
+      text-align: left;
+    }
+    .bloque-categoria h3 {
+      font-size: 1.6rem;
+      color: #702e3d;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 0.5rem;
+    }
+    .plato {
+      margin-bottom: 1.5rem;
+    }
+    .plato-header {
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+    }
+    .plato-desc {
+      font-size: 0.95rem;
+      color: #777;
+      margin-top: 0.3rem;
+    }
+    .separador {
+      border-top: 1px solid #ddd;
+      margin: 2rem 0;
+    }
+    .menu-asado {
+      text-align: center;
+      border: 1px solid #ddd;
+      padding: 1.5rem;
+      border-radius: 8px;
+      background-color: #fff8f6;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .menu-asado h4 {
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+      color: #702e3d;
+    }
+    .menu-asado p {
+      margin: 0.3rem 0;
+      font-size: 0.95rem;
+    }
+    .precio-menu {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #999;
+    }
+    footer img {
+      width: 40px;
+      height: auto;
+      border-radius: 0;
+      margin-bottom: 0.5rem;
+    }
+    .icono-portada {
+      position: absolute;
+      top: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+    }
+    .icono-portada img {
+      width: 200px;
+      height: auto;
+      border: none;
+      background-color: transparent;
+      border-radius: 0;
+      box-shadow: none;
+    }
+    .btn-imprimir {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #CFB292;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    @media (max-width: 600px) {
+      .portada h1 {
+        font-size: 2rem;
+      }
+      .boton, .btn-imprimir {
+        font-size: 0.9rem;
+        padding: 0.8rem 1.2rem;
+      }
+    }
+
+    /* Oculta la portada en pantalla si quieres que solo se vea la carta (opcional) */
+    /* Comentado para que inicialmente la portada se muestre */
+    /* 
+    #portada.oculto {
+      display: none;
+    }
+    */
+
+ @media print {
+  body, .portada {
+    background-color: #702e3d !important;
+    color: #fce8d5 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Asegurar que la portada se imprima y ocupe la página */
+  #portada {
+    display: block !important;
+    min-height: 90vh;
+    page-break-after: always;
+    position: relative;
+    text-align: center;
+    padding: 3rem 2rem !important;
+  }
+
+  /* Ajustar imagen logo para impresión */
+  .icono-portada {
+    position: static !important;
+    margin: 0 auto 0rem auto;
+    display: block;
+    transform: none !important;
+  }
+
+  .icono-portada img {
+    width: 200px !important;
+    height: auto !important;
+    box-shadow: none !important;
+  }
+
+  /* Ajustar la foto principal */
+  .portada > img {
+    width: 200px !important;
+    margin: 0px auto  !important;
+margin-top:-50px !important;
+    display: block;
+  }
+
+  /* Ocultar elementos que no quieres imprimir */
+  .boton, .btn-imprimir {
+    display: none !important;
+  }
+
+  /* Mostrar carta también al imprimir */
+  #carta {
+    display: block !important;
+    visibility: visible !important;
+    page-break-after: always;
+  }
+
+  /* Evitar que todo se oculte */
+  body * {
+    visibility: visible !important;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <!-- Contenedor de contenido -->
+  <div id="contenido-a-imprimir">
+    <!-- Portada -->
+    <div class="portada" id="portada">
+      <div class="icono-portada">
+        <img src="https://www.lashornerasdelaltotajo.com/wp-content/uploads/2025/07/HORNERAS_CASACOMIDAS_avatar2-removebg-preview.png" alt="Icono Horneras" />
+      </div>
+      <img src="https://www.lashornerasdelaltotajo.com/wp-content/uploads/2024/02/00.jpg" alt="Foto antigua de las Horneras" style="width: 200px; margin-top: 150px;" />
+      <h3>¿Quiénes eran las Horneras de Cobeta?</h3>
+      <p>
+        Las Horneras de Cobeta hacen honor a uno de los antiguos hornos de pan del pueblo, donde una mujer viuda de 32 años sacó adelante a sus cinco hijos con esfuerzo y dedicación.
+      </p>
+      <p>
+        En estos hornos, cada familia del pueblo llevaba su masa a cocer en turnos. El último horno de estas características se mantuvo en uso hasta el año 2022, y hoy su historia vive en esta casa de comidas.
+      </p>
+      <button class="boton" onclick="mostrarCarta()">Ver la Carta</button>
+      <footer>
+        <img src="https://www.lashornerasdelaltotajo.com/wp-content/uploads/2025/07/HORNERAS_CASACOMIDAS_2.png" alt="Icono Footer" />
+        <br />
+        www.lashorneras.com · info@lashorneras.com
+      </footer>
+    </div>
+
+    <!-- Carta -->
+    <div class="carta" id="carta">
+      <h2>Nuestra Carta</h2>
+      <p>
+        Las Horneras de Cobeta hacen honor a uno de los antiguos hornos de pan del pueblo, donde una mujer viuda de 32 años sacó adelante a sus cinco hijos con esfuerzo y dedicación.
+      </p>
+
+      <div class="bloque-categoria">
+        <h3>Entrantes</h3>
+        <div class="plato">
+          <div class="plato-header">Entrante 1 <span>22.99€</span></div>
+          <div class="plato-desc">Descripción del entrante 1 con ingredientes destacados.</div>
+        </div>
+        <div class="plato">
+          <div class="plato-header">Entrante 2 <span>22.99€</span></div>
+          <div class="plato-desc">Descripción del entrante 2. Textura, preparación o historia.</div>
+        </div>
+        <div class="plato">
+          <div class="plato-header">Entrante 3 <span>22.99€</span></div>
+          <div class="plato-desc">Descripción breve del tercer plato frío o caliente.</div>
+        </div>
+      </div>
+
+      <div class="separador"></div>
+
+      <div class="bloque-categoria">
+        <h3>Platos Principales</h3>
+        <div class="plato">
+          <div class="plato-header">Principal 1 <span>22.99€</span></div>
+          <div class="plato-desc">Descripción del plato fuerte 1. Cocción lenta, ingredientes locales.</div>
+        </div>
+        <div class="plato">
+          <div class="plato-header">Principal 2 <span>22.99€</span></div>
+          <div class="plato-desc">Carne o pescado, servido con guarnición de temporada.</div>
+        </div>
+        <div class="plato">
+          <div class="plato-header">Principal 3 <span>22.99€</span></div>
+          <div class="plato-desc">Especialidad de la casa. Receta tradicional reinterpretada.</div>
+        </div>
+      </div>
+
+      <div class="separador"></div>
+
+      <div class="bloque-categoria">
+        <h3>Postres</h3>
+        <div class="plato">
+          <div class="plato-header">Postre 1 <span>22.99€</span></div>
+          <div class="plato-desc">Delicia dulce para terminar la comida.</div>
+        </div>
+        <div class="plato">
+          <div class="plato-header">Postre 2 <span>22.99€</span></div>
+          <div class="plato-desc">Pastel casero con frutas de temporada.</div>
+        </div>
+        <div class="plato">
+          <div class="plato-header">Postre 3 <span>22.99€</span></div>
+          <div class="plato-desc">Helado artesanal o sorbete refrescante.</div>
+        </div>
+      </div>
+
+      <div class="separador"></div>
+
+      <div class="menu-asado">
+        <h4>Menú asado</h4>
+        <p>Incluye entrantes, plato principal, postre y bebida</p>
+        <p class="precio-menu">Precio: 22.99€</p>
+      </div>
+
+      <button class="btn-imprimir" onclick="window.print()">Imprimir Carta</button>
+    </div>
+  </div>
+
+  <script>
+    function mostrarCarta() {
+      document.getElementById('portada').style.display = 'none';
+      document.getElementById('carta').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

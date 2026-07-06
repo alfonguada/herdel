@@ -1,0 +1,2174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario Laboral - Gestionaempresa</title>
+    <link rel="icon" href="{{ url_for('static', filename='logo_empresa.png') }}" type="image/png">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <!-- Nucleo Icons -->
+  <link href="/static/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="/static/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <!-- CSS Files -->
+  <link id="pagestyle" href="/static/assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
+  <!-- Nepcha Analytics (nepcha.com) -->
+  <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
+
+
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.9/index.global.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.9/locales/es.min.js"></script>
+    <!-- Puedes enlazar tu archivo CSS para estilos aquí -->
+<script src="https://kit.fontawesome.com/3da862d4a6.js" crossorigin="anonymous"></script>
+
+
+
+ <style>
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+}
+
+#counter {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+
+    input, button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin-top: 10px;
+    }
+
+
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700);
+
+
+#prog-bar-cont {
+
+  background: gainsboro;
+  width: 75vw;
+  height: 2.5em;
+  padding: 0.5em;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  border-radius: 50px;
+  box-sizing: border-box;
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.75) inset, 0 0 4px 0 rgba(0, 0, 0, 0.5);
+}
+#prog-bar-cont #prog-bar {
+  background: #000;
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset, 0 0 1px 3px rgba(255, 255, 255, 0.75) inset;
+  background: transparent;
+}
+#prog-bar-cont #prog-bar:before {
+  border-radius: 50px;
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3) inset, 0 0 5px 2px rgba(255, 255, 255, 0.8) inset;
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+}
+#prog-bar-cont #prog-bar:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 2px;
+  width: 96%;
+  left: 50%;
+  margin-left: -48%;
+  border-radius: 20px;
+  height: 10px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.85) 30%, transparent 120%);
+}
+#prog-bar-cont #prog-bar #background {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(-90deg, violet, #30b3fc, #70dc23, yellow, orange, #ff1076);
+  -webkit-clip-path: inset(0 100% 0 0);
+  clip-path: inset(0 100% 0 0);
+  transition: all 3s;
+  -webkit-transition: all 3s;
+}
+#prog-bar-cont #prog-bar #background:before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background-image: repeating-linear-gradient(-45deg, transparent, transparent 10px, #000 10px, #000 20px);
+  opacity: 0.75;
+  mix-blend-mode: overlay;
+  border-radius: 50px;
+}
+#prog-bar-cont:hover #prog-bar #background {
+  -webkit-clip-path: inset(0 0 0 0);
+  clip-path: inset(0 0 0 0);
+}
+
+
+ #prog-bar-cont {
+margin-top:40px;
+      position: relative;
+      width: 80%;
+      height: 40px; /* Altura de la barra de progreso */
+margin-bottom:100px;
+    }
+
+    #prog-bar {
+
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background-color: #e0e0e0;
+    }
+
+    #background {
+    height: 100%;
+    background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+    clip-path: inset(0 100% 0 0); /* Inicialmente escondido */
+    -webkit-clip-path: inset(0 100% 0 0);
+    transition: clip-path 0.5s, -webkit-clip-path 0.5s;
+}
+
+    #trophy {
+      position: absolute;
+      top: -100px; /* Ajusta esto según sea necesario */
+      left: 50%; /* Centrar la imagen horizontalmente */
+      transform: translateX(-50%);
+      width: 100px; /* Ajusta el tamaño según sea necesario */
+      height: 100px;
+}
+
+#all{
+margin-top: 80px;
+margin-bottom:-20px;
+
+}
+
+
+ h3 {
+      text-align: center;
+margin-top: -75px;
+margin-bottom:65px;
+    }
+
+
+.embed-responsive {
+        position: relative;
+        padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+        background-color: #000;
+    }
+    .embed-responsive-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+.card {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column; /* Asegura que el contenido y el footer se alineen verticalmente */
+    height: 100%; /* Asegura que la tarjeta ocupe todo el alto disponible */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+        .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+padding: 15px; /* Asegura suficiente espacio alrededor del título */
+        }
+        .card-body {
+            padding: 15px;
+
+
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .footer-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .footer-link a {
+            color: #4C94E0;
+            text-decoration: none;
+        }
+        .footer-link a:hover {
+            text-decoration: underline;
+        }
+h3 {
+            margin-top:-15px;/* Ajusta el espacio debajo del título */
+        }
+.card-header h3 {
+            margin-bottom: 15px; /* Ajusta el espacio debajo del título */
+        }
+
+.events-card,
+.news-card,
+.prog-card {
+    position: relative;
+    max-height: 600px; /* Altura máxima para las tarjetas de eventos y noticias */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede la altura máxima */
+}
+.summary-card{
+    position: relative;
+    max-height: 400px; /* Altura máxima para las tarjetas de eventos y noticias */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede la altura máxima */
+}
+
+.footer-link {
+    position: relative; /* Necesario para que el footer se alinee al final del card */
+    text-align: center;
+    margin-top: auto; /* Empuja el footer al fondo de la tarjeta */
+    background-color: #f8f9fa; /* Fondo del footer */
+    padding: 10px;
+    border-top: 1px solid #e9ecef; /* Línea superior del footer */
+}
+        .footer-link a {
+            color: #6c6c6c;
+            text-decoration: none;
+        }
+        .footer-link a:hover {
+            text-decoration: underline;
+        }
+
+
+.card-body {
+    padding: 15px;
+    flex: 1; /* Esto hace que el cuerpo de la tarjeta ocupe todo el espacio disponible */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede el alto disponible */
+
+}
+
+
+#user-distribution-card {
+    height: 450px; /* Ajusta la altura total de la tarjeta */
+}
+
+#user-distribution-card .card-header {
+    height: 350px; /* Ajusta la altura del encabezado de la tarjeta para dejar espacio al gráfico */
+    padding: 0; /* Elimina el relleno para ajustar el tamaño */
+    overflow: hidden; /* Asegura que el contenido no se desborde */
+}
+
+#user-distribution-card .card-body {
+    height: calc(100% - 150px); /* Ajusta la altura del cuerpo de la tarjeta */
+    padding: 10px; /* Espacio interno del cuerpo de la tarjeta */
+    overflow: auto; /* Agrega desplazamiento si el contenido excede la altura disponible */
+margin-left:10px;
+}
+
+#user-distribution-card .chart {
+    height: 100%; /* Ajusta la altura del contenedor del gráfico */
+    width: 100%; /* Ajusta el ancho del contenedor del gráfico */
+}
+
+#user-distribution-card .chart-canvas {
+    height: 100% !important; /* Asegura que el gráfico ocupe el 100% del contenedor */
+    width: 100% !important; /* Asegura que el gráfico ocupe el 100% del contenedor */
+}
+
+#user-distribution-card .chart {
+    height: 300px; /* Ajusta la altura del contenedor del gráfico */
+    width: 300px; /* Ajusta el ancho del contenedor del gráfico */
+    display: flex; /* Utiliza flexbox para centrar el gráfico */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+margin-left:80px;
+}
+
+
+
+/* Estilos para la tarjeta de resumen */
+#summary-card {
+    display: flex;
+    flex-direction: column;
+    height: 600px; /* Ajusta la altura total de la tarjeta */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative; /* Necesario para el posicionamiento absoluto del pie de página */
+margin-top:-20px;
+
+}
+
+#summary-card .card-body {
+    flex: 1; /* Ocupa el espacio disponible */
+
+    overflow-y: auto; /* Desplazamiento vertical si es necesario */
+}
+
+#summary-card .card-footer {
+    background-color: #f8f9fa; /* Fondo del pie de página */
+    padding: 10px; /* Espacio interno del pie de página */
+    border-top: 1px solid #e9ecef; /* Línea superior del pie de página */
+ /* Centra el texto en el pie de página */
+    margin-top: auto; /* Empuja el pie de página hacia el fondo */
+}
+
+/* Estilos para los contadores */
+.counter-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido verticalmente */
+    border: 1px solid #e0e0e0; /* Borde para separar los contadores */
+    border-radius: 8px; /* Esquinas redondeadas */
+    padding: 5px; /* Reducir el padding */
+    color: #ffffff; /* Color del texto */
+}
+
+.counter-header {
+    position: relative;
+    height: 50px; /* Reducir la altura del encabezado */
+    padding: 0;
+    overflow: hidden; /* Evita el desbordamiento */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
+.counter-body, .counter-body2 {
+    padding: 5px; /* Reducir el padding del cuerpo del contador */
+    text-align: center; /* Centra el texto en el cuerpo */
+}
+
+.counter-body h6, .counter-body2 h6 {
+    font-size: 14px; /* Reducir el tamaño de la fuente del título */
+}
+
+.counter-body p, .counter-body2 p {
+    font-size: 12px; /* Reducir el tamaño de la fuente del párrafo */
+}
+
+.bg-primary {
+    background-color: #4C94E0 !important; /* Azul */
+}
+.btn-primary3 {
+    background-color: #a965f5 !important; /* Morado */
+    color:white;
+}
+.btn-primary3:hover {
+    background-color: #a965f5 !important; /* Morado */
+    color:white;
+}
+
+.bg-success {
+    background-color: #28a745 !important; /* Verde */
+}
+
+.bg-info {
+    background-color: #17a2b8 !important; /* Azul claro */
+}
+
+.bg-warning {
+    background-color: #ffc107 !important; /* Amarillo */
+}
+
+  .card-global {
+            height: 450px; /* Ajusta según tus necesidades */
+            display: flex;
+            flex-direction: column;
+margin-top:-25px;
+        }
+
+        /* Clase para la tarjeta negra específica del gráfico */
+        .card-graph {
+            height: 130%; /* Ajusta según el espacio que quieras para el gráfico */
+            display: flex;
+            align-items: center; /* Centra el gráfico verticalmente */
+            justify-content: center; /* Centra el gráfico horizontalmente */
+        }
+
+        /* Estilo para el canvas dentro de la tarjeta negra */
+        .chart-canvas {
+            width: 100%;
+            height: 100%;
+}
+.custom-card-body {
+            margin-top: 100px; /* Ajusta el valor según tus necesidades */
+margin-left:20px;
+        }
+
+
+.recurso {
+            display: inline-block;
+            width: 30%;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        .recurso img {
+            max-width: 100px;
+            max-height: 100px;
+            margin-bottom: 10px;
+        }
+
+.embed-responsive {
+        position: relative;
+        padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+        background-color: #000;
+    }
+    .embed-responsive-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+ .toast-center-center {
+            top: 50%;
+            left: 70%;
+            transform: translate(-50%, -50%);
+            min-width: 800px; /* Más grande */
+min-height: 800px; /* Más grande */
+            opacity: 1; /* Menos transparente */
+        }
+        .toast-success .toast-message {
+            color: green;
+        }
+        .toast-error .toast-message {
+            color: red;
+        }
+        .toast {
+            font-size: 1.2em; /* Tamaño de fuente más grande */
+            padding: 20px; /* Más relleno */
+        }
+
+.btn-mark-as-read {
+            padding: 5px 10px;
+            font-size: 12px;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            color: #333;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .btn-mark-as-read:hover {
+            background-color: #e0e0e0;
+            color: white !important;
+        }
+
+        /* Estilos para la pantalla de carga */
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+.container{
+   margin-bottom: 70px; /* Añadir margen inferior a la sección de ranking */
+margin-top:-20px;
+width: 100%; /* Ocupa el 100% del ancho disponible */
+   max-width: 100%; /* Asegúrate de que el ancho máximo sea 100% */
+
+}
+.ranking-container {
+
+    max-height: 250px; /* Ajusta la altura según sea necesario */
+    overflow-y: auto;
+overflow-x: hidden;
+    padding-right: 15px; /* Ajusta el padding para que no corte el contenido */
+
+}
+
+/* Opcional: Estilos para la barra de desplazamiento */
+.ranking-container::-webkit-scrollbar {
+    width: 12px;
+}
+
+.ranking-container::-webkit-scrollbar-track {
+    background: #9f9f9f;
+background-image: linear-gradient(195deg, #9f9f9f 50%, #fff 150%)
+}
+
+.ranking-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.ranking-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+  .table {
+        max-width: 720px; /* Limita el ancho máximo */
+min-width: 720px;
+        table-layout: fixed; /* Asegura que se respete el ancho máximo */
+    }
+
+    .table td, .table th {
+        overflow: hidden; /* Oculta el contenido que excede el ancho */
+        text-overflow: ellipsis; /* Muestra puntos suspensivos para el texto que excede */
+        white-space: nowrap; /* Previene el salto de línea */
+    }
+
+
+
+.card {
+
+
+    background-clip: padding-box !important;
+}
+.h4{
+text-align:center;
+align-items:center;
+}
+h5 {
+    text-align: center;
+}
+.centered-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+
+            font-weight: bold;
+
+        }
+.btn-link {
+    color: #4C94E0; /* Color inicial del enlace */
+    text-decoration: none; /* Opcional: quitar subrayado del enlace */
+    transition: color 0.3s; /* Suavizar la transición del color */
+}
+
+/* Estilo de hover para el enlace de eventos */
+.btn-link:hover {
+    color: #6f42c1; /* Color morado en hover */
+    text-decoration: underline; /* Opcional: añadir subrayado en hover */
+}
+
+
+
+        #chartdiv {
+            width: 150%;
+            height: 100px;
+        }
+
+.notificaciones {
+    position: relative; /* o 'absolute' o 'fixed' si es necesario */
+    z-index: 9999999; /* Valor alto para asegurarte de que está por encima de otros elementos */
+}
+/* Estilo del ícono de campana */
+.nav-item .fa-bell {
+    position: relative;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-bell:hover {
+    color: #495057;
+}
+
+/* Badge de notificaciones */
+.nav-item .badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    border-radius: 50%;
+    background-color: #f44336;
+    color: #fff;
+}
+
+/* Dropdown */
+.dropdown-menu {
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Estilo de cada notificación */
+.dropdown-item {
+    border-radius: 0.375rem;
+    transition: background-color 0.2s ease;
+    padding: 12px 15px;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* Estilo del texto de la notificación */
+.text-sm {
+    font-size: 0.875rem;
+    color: #343a40;
+    font-weight: 600;
+}
+
+.text-xs {
+    font-size: 0.75rem;
+    color: #6c757d;
+}
+
+/* Botón para marcar como leída */
+.btn-mark-as-read {
+    background: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-mark-as-read:hover {
+    background: #0056b3;
+}
+
+/* Sin notificaciones */
+.text-center span {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+/* Posiciona el badge a la izquierda */
+.nav-item .badge {
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    border-radius: 50%;
+    background-color: #f44336;
+    color: #fff;
+    margin-right: 10px; /* Separa el badge del icono */
+}
+
+/* Ajuste de icono de campana */
+.nav-item .fa-bell {
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-bell:hover {
+    color: #495057;
+}
+/* Estilo del ícono de cerrar sesión */
+.nav-item .fa-sign-out {
+    position: relative;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-sign-out:hover {
+    color: #495057;
+}
+    /* Estilos para los mensajes flash */
+.flash-messages {
+    margin-bottom: 20px;
+}
+
+.flash {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.flash.success {
+    background-color: #d4edda; /* Color de fondo para mensajes de éxito */
+    color: #155724; /* Color del texto para mensajes de éxito */
+    border: 1px solid #c3e6cb;
+}
+
+.flash.error {
+    background-color: #f8d7da; /* Color de fondo para mensajes de error */
+    color: #721c24; /* Color del texto para mensajes de error */
+    border: 1px solid #f5c6cb;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+}
+
+.calendar {
+    margin-left: -20px;
+    margin-top: 150px;
+}
+
+.calendar ul {
+    margin-left: -40px;
+}
+
+.punto {
+    width: 10px;
+    height: 5px;
+    border-radius: 50%;
+    margin-right: 1px;
+}
+
+.calendar-container {
+    background-color: #fff;
+    justify-content:center;
+    border-radius: 8px;
+    padding: 5px;
+    max-height: 400px;
+    overflow: hidden;
+}
+
+.volver-button {
+    padding: 12px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #5fbd63;
+    border: 1px solid #5fbd63;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.volver-button:hover {
+    background-color: #58A15B;
+    border-color: #58A15B;
+}
+
+.volver-button:active {
+    background-color: #58A15B;
+    border-color: #58A15B;
+}
+
+.container {
+   margin-top: -150px;
+ /* Puedes ajustar el valor según lo necesites */
+   margin-bottom:50px;
+}
+
+.user-modal {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    display: none; /* inicialmente oculto */
+}
+
+.user-modal-content {
+    max-width: 200px; /* ancho máximo del globo */
+}
+
+           .popup {
+            position: absolute;
+            background-color: #333; /* Fondo negro */
+            color: #fff; /* Letras blancas */
+            border: 1px solid #555; /* Borde ligeramente más claro */
+            padding: 10px;
+            border-radius: 5px; /* Bordes redondeados */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar un efecto de elevación */
+            z-index: 1000;
+            display: none;
+            font-family: 'Open Sans', sans-serif; /* Fuente profesional */
+        }
+
+        .popup p {
+            margin: 0;
+            padding: 2px 0; /* Espaciado interno para separar los nombres */
+        }
+        .popup p:last-child {
+            border-bottom: none;
+        }
+
+.solicitudes-container {
+    margin: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+
+}
+
+.solicitudes-list {
+    margin-top: 10px;
+height:170px;
+
+}
+
+.solicitud-item {
+margin-top:-25px;
+    padding: 2px;
+    margin-bottom: 0px;
+    background-color: white;
+    font-size:12px;
+
+
+}
+.contenedores-leyenda-solicitudes {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.solicitudes-container {
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+font-size:16px;
+margin-top:-20px;
+    /* Tus estilos existentes más cualquier ajuste para que se muestren bien juntos */
+    flex-basis: calc(50% - 40px); /* Ajusta según sea necesario */
+    margin: 20px;
+width:30%;
+overflow: hidden;
+}
+
+.solicitudes-container {
+font-family: 'open sans', sans-serif;
+  flex: 1; /* Esto permite que las cajas ocupen el espacio disponible */
+  margin: 10px; /* Asegúrate de que haya un poco de espacio entre las cajas */
+  box-sizing: border-box; /* Incluye el padding y border dentro del ancho total */
+}
+
+/* Si deseas que cada caja tenga un ancho máximo específico, puedes usar esto */
+
+.solicitudes-container {
+    font-family: 'open sans', sans-serif;
+    max-width: 50%; /* Esto asigna un máximo del 50% del ancho del contenedor padre a cada caja */
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Definir la sombra con un desplazamiento x, un desplazamiento y, un radio de desenfoque y un color RGBA */
+}
+
+
+.solicitudes-list {
+margin-bottom:20px;
+margin-top:30px;
+height:162px;
+  background-color:#fff /* Esto asigna un máximo del 48% del ancho del contenedor padre a cada caja */
+}
+.solicitudes-container h2 {
+margin-bottom:10px;
+font-family: 'open sans', sans-serif;
+margin-bottom:25px;
+font-size:28px;
+max-height:40px;
+}
+
+.solicitudes-container h2 {
+
+font-size:25px;
+}
+.button-container {
+max-heigth:20px;
+margin-top:-80px;
+  width: 100%; /* Ocupa todo el ancho del contenedor padre */
+  display: flex;
+  justify-content: space-around; /* Espacio distribuido alrededor de los botones */
+}
+
+.button-container button {
+  flex: 1; /* Los botones ocupan un espacio flexible y equitativo */
+  margin: 0 10px; /* Espacio entre botones */
+
+}
+
+.icono {
+        max-width: 20px; /* Ajusta el ancho según lo necesites */
+        max-height: 20px; /* Ajusta la altura según lo necesites */
+min-width: 20px; /* Ajusta el ancho según lo necesites */
+        min-height: 20px;
+    }
+
+/* Estilos para el botón de color rojo */
+.btn-danger {
+    background-color: #ff2525;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-bottom:30px;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.btn-danger2 {
+    background-color: #ff2525;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+
+}
+
+.btn-danger2:hover {
+    background-color: #c82333;
+}
+@media (max-width: 900px) {
+    .container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+margin-top:50px;
+    }
+}
+
+/* Estilo general del contenedor del calendario */
+.container-menu {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+    padding: 20px;
+    background-color: transparent;
+    margin-top: -100px;
+}
+
+/* Estilo general del contenedor del calendario */
+.container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+    padding: 20px;
+    background-color: transparent;
+    margin-top: 30px;
+}
+
+/* Estilo de cada contenedor de mes */
+.calendar-container {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Título de cada mes */
+.calendar-container h2 {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Estilo de las fechas dentro del calendario */
+.calendar-container .date {
+    font-size: 1rem;
+    text-align: center;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: #e2e2e2;
+    color: #666;
+    margin: 5px;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    transition: background-color 0.2s ease;
+}
+
+/* Efecto hover en las fechas */
+.calendar-container .date:hover {
+    background-color: #4caf50;
+    color: #fff;
+}
+  .container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: repeat(2, auto);
+            gap: 20px;
+            max-width: 90%;
+margin-left:5%;
+        }
+        .calendar-container {
+justify-content:center;
+            max-height: 550px;
+            overflow: hidden;
+        }
+
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Contenedor para los controles del calendario con flexbox */
+.calendar-controls {
+    display: flex;               /* Usamos flexbox */
+    align-items: center;         /* Centra los elementos verticalmente */
+    justify-content: center;     /* Centra los elementos horizontalmente */
+}
+
+/* Estilo específico para los botones dentro del contenedor calendar-controls */
+.calendar-controls button {
+    border: none;    /* Quita el borde */
+    background: none; /* Quita el fondo */
+    padding: 0;       /* Elimina el relleno */
+    cursor: pointer;  /* Asegura que el botón sea clickeable */
+}
+
+/* Estilo específico para los iconos dentro de calendar-controls */
+.calendar-icon {
+    font-size: 30px;   /* Tamaño del icono */
+    color: #1565A8;    /* Color del icono */
+    margin: 0 10px;    /* Añade un pequeño margen a los lados del icono */
+}
+
+/* Estilo para el año en negrita y con la fuente Roboto */
+.year-text {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    margin: 0 10px;    /* Añade un pequeño margen a los lados del texto */
+}
+
+  </style>
+
+     <!-- End Navbar -->
+    <style>
+        .containerr {
+            max-width: 101%;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+
+        .hidden {
+            max-height: 0;
+        }
+
+        .show {
+            max-height: 3000px; /* Suficientemente grande para mostrar el contenido */
+        }
+
+        .toggle-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .toggle-btn i {
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .rotate {
+            transform: rotate(180deg);
+        }
+
+        .context-menu {
+    position: absolute;
+    display: none;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.context-menu ul {
+    list-style: none;
+    padding: 5px 0;
+    margin: 0;
+}
+
+.context-menu li {
+    padding: 8px 20px;
+    cursor: pointer;
+}
+
+.context-menu li:hover {
+    background-color: #f0f0f0;
+}
+
+@media (min-width: 500px) and (max-width: 1500px) {
+
+  .container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr) !important;
+            grid-template-rows: repeat(3, auto) !important;
+            gap: 20px;
+            max-width: 90%;
+            max-height: 300px;
+margin-left:5%;
+margin-bottom:350px;
+        }
+        .calendar-container {
+justify-content:center;
+            max-height: 350px;
+            overflow: hidden;
+        }
+
+
+/* Contenedor para los controles del calendario con flexbox */
+.calendar-controls {
+    display: flex;               /* Usamos flexbox */
+    align-items: center;         /* Centra los elementos verticalmente */
+    justify-content: center;     /* Centra los elementos horizontalmente */
+}
+
+/* Estilo específico para los botones dentro del contenedor calendar-controls */
+.calendar-controls button {
+    border: none;    /* Quita el borde */
+    background: none; /* Quita el fondo */
+    padding: 0;       /* Elimina el relleno */
+    cursor: pointer;  /* Asegura que el botón sea clickeable */
+}
+
+/* Estilo específico para los iconos dentro de calendar-controls */
+.calendar-icon {
+    font-size: 30px;   /* Tamaño del icono */
+    color: #1565A8;    /* Color del icono */
+    margin: 0 10px;    /* Añade un pequeño margen a los lados del icono */
+}
+
+   .calendar-container:nth-last-child(-n+4) {
+        margin-bottom: 500px !important; /* Ajusta según la separación deseada */
+    }
+
+}
+
+
+.btn-mark-as-read {
+    background: #1565a8;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-mark-as-read:hover {
+    background: #0d4376;
+}
+
+.dropdown-item {
+    border-radius: 0.375rem;
+    transition: background-color 0.2s ease;
+    padding: 1px 15px !important;
+    margin-top:0px;
+}
+
+
+
+
+
+
+
+.custom-width-modal {
+  max-width: 600px; /* o el ancho que prefieras */
+}
+
+.btn-mark-as-read {
+  min-width: 28px !important;
+  padding: 3px 3px;
+}
+/* Modal tipo barra lateral derecha */
+.modal-side-right {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 0;
+  height: 100%;
+  max-width: 500px;
+  width: 100%;
+  z-index: 1055;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+/* Cuando el modal se muestra */
+.modal.show .modal-side-right {
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+/* Evitamos que Bootstrap lo sobrescriba */
+.modal.fade .modal-dialog {
+  transition: none !important;
+  transform: none !important;
+}
+
+/* Ajustes al contenido del modal */
+.modal-side-right .modal-content {
+  height: 100%;
+  border-radius: 0;
+  text-align: left;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+}
+/* Estilo del texto de la notificación */
+.text-sm {
+    font-size: 0.75rem !important;
+    color: #000;
+    font-weight: 600;
+}
+
+.text-xs {
+    font-size: 0.70rem !important;
+    color: #6c757d;
+}
+
+
+
+.btn-primary3 {
+  background-color: #1565a8 !important;
+  color: white;
+  font-size: 0.75rem;
+  text-transform: none; /* evita mayúsculas automáticas */
+  margin-left:10px;
+}
+
+.btn-primary3:hover {
+  background-color: #0d4b80 !important; /* un tono más oscuro para el hover */
+}
+
+
+
+  @media (max-width: 576px) {
+    .dropdown-menu-mobile-half {
+      width: 50vw !important;
+      right: 0 !important;
+      left: auto !important;
+    }
+  }
+
+  .dropdown-menu-mobile-half {
+    width: 50vw !important; /* Ajusta al 50% del ancho de la ventana */
+    max-width: 400px;        /* Máximo ancho opcional */
+    min-width: 250px;        /* Mínimo opcional */
+    padding: 1rem;
+}
+
+.dropdown-menu-mobile-half .dropdown-item {
+    white-space: normal; /* Permite que el texto se ajuste a múltiples líneas */
+    word-wrap: break-word;
+    width: 100%;
+}
+
+.dropdown-menu-mobile-half .btn-mark-as-read {
+
+    padding: 0 5px;
+    font-size: 0.9rem;
+}
+
+
+.fc .fc-daygrid-day-top {
+    justify-content: center;
+}
+
+.fc-event {
+    background-color: green; /* Color para eventos aceptados */
+}
+.fc-day-red {
+    background-color: #FF6F6F !important;
+}
+
+/* Estilo para el día actual */
+.fc .fc-daygrid-day.fc-day-today {
+    background-color: transparent; /* azul claro de fondo */
+  }
+
+
+
+.fc .fc-daygrid-day.fc-day-today  {
+  background-color: #ffc107;
+  color: #000;
+  font-weight: bolder;
+}
+
+.fc-daygrid-day-number {
+  display: inline-flex;       /* Para alinear el texto */
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;         /* Ajusta según necesidad */
+  margin: auto;               /* Centra horizontalmente */
+  line-height: 1;             /* Asegura que no se desborde */
+}
+
+/* Quita bordes de las celdas del calendario */
+.fc td, .fc th {
+    border: none !important;
+  }
+
+  /* También puede ser útil eliminar el borde del grid general */
+  .fc .fc-daygrid-day-frame {
+    border: none !important;
+  }
+
+  /* Opcional: Quitar líneas de separación entre semanas */
+  .fc .fc-scrollgrid {
+    border: none !important;
+  }
+
+
+.fc .fc-button {
+  font-size: 0.6rem;     /* Tamaño de texto más pequeño */
+  padding: 0.2rem 0.2rem; /* Menos espacio interior */
+}
+.fc-toolbar-title {
+    text-transform: capitalize !important;
+    font-size: 0.95rem !important; /* Cambia este valor según lo pequeño que quieras el texto */
+}
+.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
+    min-height: 0;
+}
+.fc .fc-daygrid-body-natural .fc-daygrid-day-events {
+    margin-bottom: 0;
+}
+.fc-day-number {
+    color: #000000 !important;
+}
+.fc-header-toolbar .fc-toolbar-title {
+    color: #000000;
+}
+
+.fc-header-toolbar{
+    margin-bottom: 0 !important;
+}
+
+.fc-col-header-cell {
+    color: #000000;
+}
+
+.fc-day {
+    color: #000000;
+}
+
+.fc-daygrid-day-number{
+    font-size: 0.6rem !important ;
+}
+
+@media (min-width: 1600px) {
+  .fc-daygrid-day-number {
+    font-size: 0.75rem !important;
+  }
+}
+  .fc table{
+    font-size: 0.9em !important;
+  }
+
+    .highlighted-day {
+        background-color: #8bff98 !important;
+        border: 2px dashed black !important;
+    }
+    .highlighted-day:hover {
+        color: white;
+    }
+    .fc-daygrid-day.highlighted-day .fc-daygrid-day-number {
+      color: #ffffff; /* Cambia el color del número */
+      font-weight: bold;  /* Poner el número en negrita */
+    }
+    .fc-day-green {
+    background-color: #59cb5e70;
+    cursor: pointer;
+}
+
+    .fc-day-yellow{
+        background-color: rgba(255, 255, 0, 0.608);
+    }
+
+    </style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+ <script>
+    const nonWorkdays = {{ non_workdays | tojson | safe }};
+</script>
+
+</head>
+
+<body class="g-sidenav-show  bg-gray-200">
+
+
+<!-- Menu HTML añadido de otro .html -->
+
+{% if view_mode == 'user' %}
+    {% include 'menu_user.html' %}
+{% else %}
+    {% include 'menu_admin.html' %}
+{% endif %}
+
+
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+   <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+    <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                <h5 class="font-weight-bolder mb-0 d-none d-sm-block">
+                    <i class="fa fa-calendar-plus-o me-2" style="color: #000;"></i>
+                    Calendario laboral
+                </h5>
+            </ol>
+            <div class="centered-message">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+            </div>
+        </nav>
+
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <div class="input-group input-group-outline"></div>
+            </div>
+            <ul class="navbar-nav justify-content-end">
+                <li class="nav-item d-flex align-items-center">
+
+
+
+
+</li>
+
+
+
+
+
+                <li class="nav-item px-3 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-body p-0"></a>
+                </li>
+                <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                        <div class="sidenav-toggler-inner" style="margin-right:10px;">
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                        </div>
+                    </a>
+                </li>
+<li class="nav-item dropdown pe-2 d-flex align-items-center">
+    <a href="javascript:;" class="nav-link text-body p-0 d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#notificacionesModal">
+        {% if notificaciones %}
+            <span class="badge bg-danger me-2">{{ notificaciones|length }}</span>
+        {% endif %}
+        <i class="fa fa-bell cursor-pointer" style="font-size: 1.5rem;"></i>
+    </a>
+</li>
+
+          <li class="nav-item d-flex align-items-center">
+              <a href="/cerrar_sesion" class="nav-link text-body font-weight-bold px-0">
+                <i class="fa fa-sign-out"style="font-size: 1.5rem;"></i>
+    </a>
+</li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+
+<br>
+
+
+<!-- Modal -->
+<div class="modal fade" id="notificacionesModal" tabindex="-1" aria-labelledby="notificacionesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-side-right">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="notificacionesModalLabel">
+          <i class="fa fa-bell cursor-pointer" style="font-size: 1.5rem;"></i> Notificaciones
+        </h5>
+        <button type="button" class="btn m-0" data-bs-dismiss="modal" aria-label="Cerrar">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="modal-body text-start">
+        <form action="{{ url_for('marcar_notificaciones_leidas') }}" method="post">
+          <button type="submit" class="btn btn-primary3 btn-sm mb-3">Marcar todas como leídas</button>
+        </form>
+
+        {% for notificacion in notificaciones %}
+        <div class="mb-3 border-bottom pb-2">
+          <h6 class="text-sm font-weight-normal mb-1">
+            {{ notificacion.concepto }}
+            {% if not notificacion.leida %}
+              <button class="btn btn-link btn-mark-as-read ms-2" style="min-width: 32px;" data-id="{{ notificacion.id }}">
+                <i class="fa-solid fa-check" style="font-size: 1.2rem;"></i>
+              </button>
+            {% endif %}
+          </h6>
+          <p class="text-xs text-secondary mb-0">
+            <i class="fa fa-clock me-1"></i>
+            {{ notificacion.fecha_hora.strftime('%d/%m/%Y %H:%M') }}
+          </p>
+        </div>
+        {% endfor %}
+
+        {% if notificaciones|length == 0 %}
+        <div class="text-start">
+          <span class="text-sm">No tienes notificaciones</span>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+<h3 style="background-color: #f5f5f5; padding: 15px; border-radius: 12px; color: #000000; font-weight: bold; font-size: 1.5rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+  Calendario laboral de {{ user.nombre }} {{ user.primer_apellido }}
+</h3>
+
+
+
+
+<div class="calendar-controls"style="margin-bottom:20px;">
+        <button id="prev-year"><span class="material-icons calendar-icon">keyboard_arrow_left</span></button>
+        <span id="current-year" class="year-text">{{current_year}}</span>
+        <button id="next-year"><span class="material-icons calendar-icon">keyboard_arrow_right</span></button>
+    </div>
+
+
+<div class="container">
+    <!-- FullCalendar containers for each month -->
+    <div id="calendar-jan" class="calendar-container"></div>
+    <div id="calendar-feb" class="calendar-container"></div>
+    <div id="calendar-mar" class="calendar-container"></div>
+    <div id="calendar-apr" class="calendar-container"></div>
+    <div id="calendar-may" class="calendar-container"></div>
+    <div id="calendar-jun" class="calendar-container"></div>
+    <div id="calendar-jul" class="calendar-container"></div>
+    <div id="calendar-aug" class="calendar-container"></div>
+    <div id="calendar-sep" class="calendar-container"></div>
+    <div id="calendar-oct" class="calendar-container"></div>
+    <div id="calendar-nov" class="calendar-container"></div>
+    <div id="calendar-dec" class="calendar-container"></div>
+</div>
+
+<!-- Popup Modal -->
+<div class="popup" id="event-popup"></div>
+
+<!-- Context Menu -->
+<div class="container">
+    <div id="context-menu" class="context-menu">
+        <ul>
+            <li id="mark-festive">Marcar como festivo</li>
+        </ul>
+    </div>
+</div>
+<!-- Popup Modal -->
+<div class="modal fade" id="dayModal" tabindex="-1" aria-labelledby="dayModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center w-100">
+                <h5 class="modal-title w-100 text-start" id="dayModalLabel">
+                    <i class="fas fa-calendar-day"></i> Configuración día laboral
+                </h5>
+                <button type="button" class="btn m-0" data-bs-dismiss="modal" aria-label="Cerrar">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="exceptionForm">
+                    <div class="mb-3">
+                        <label for="date" class="form-label text-start d-block" style="font-weight: bold; color: black;">
+                            <i class="fas fa-calendar-alt"></i> Fecha
+                        </label>
+                        <input type="text" class="form-control" id="date" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="entryTime" class="form-label text-start d-block" style="font-weight: bold; color: black;">
+                            <i class="fas fa-sign-in-alt"></i> Hora de entrada
+                        </label>
+                        <input type="time" class="form-control" id="entryTime">
+                    </div>
+                    <div class="mb-3" id="comidaFields1" style="display: none;">
+                        <label for="salida_comida" class="form-label text-start d-block" style="font-weight: bold; color: black;">
+                            <i class="fas fa-utensils"></i> Hora de inicio comida
+                        </label>
+                        <input type="time" class="form-control" id="salida_comida">
+                    </div>
+                    <div class="mb-3" id="comidaFields2" style="display: none;">
+                        <label for="entrada_comida" class="form-label text-start d-block" style="font-weight: bold; color: black;">
+                            <i class="fas fa-door-open"></i> Hora de vuelta comida
+                        </label>
+                        <input type="time" class="form-control" id="entrada_comida">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exitTime" class="form-label text-start d-block" style="font-weight: bold; color: black;">
+                            <i class="fas fa-sign-out-alt"></i> Hora de salida
+                        </label>
+                        <input type="time" class="form-control" id="exitTime">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="saveException" style="text-transform: lowercase; background-color: #1565a8; color: white; border: none; font-size: 14px; font-weight: bold;" onclick="disableSaveButton()">
+                    <i class="fas fa-save"></i> <span style="text-transform: uppercase;">G</span>uardar excepción
+                </button>
+                <div id="loadingException" style="display: none; margin-left: 10px; color: #0d6efd;">
+                    <i class="fas fa-spinner fa-spin"></i> Guardando...
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Hover effect inline -->
+<script>
+    document.getElementById('saveException').addEventListener('mouseover', function () {
+        this.style.backgroundColor = '#0d4376';
+    });
+
+    document.getElementById('saveException').addEventListener('mouseout', function () {
+        this.style.backgroundColor = '#1565a8';
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- Minified JS Files -->
+<script src="/static/assets/js/core/popper.min.js"></script>
+<script src="/static/assets/js/core/bootstrap.min.js"></script>
+<script src="/static/assets/js/plugins/perfect-scrollbar.min.js"></script>
+<script src="/static/assets/js/plugins/smooth-scrollbar.min.js"></script>
+<script src="/static/assets/js/plugins/chartjs.min.js"></script>
+<script src="/static/assets/js/material-dashboard.min.js?v=3.1.0"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
+<script src="https://buttons.github.io/buttons.js" async defer></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+
+<script>
+    function disableSaveButton() {
+        var saveBtn = document.getElementById("saveException");
+        var loadingDiv = document.getElementById("loadingException");
+
+        saveBtn.disabled = true; // Deshabilita el botón
+        saveBtn.style.opacity = "0.6"; // Reduce opacidad para indicar inactividad
+        saveBtn.style.cursor = "not-allowed"; // Cambia el cursor
+
+        loadingDiv.style.display = "inline"; // Muestra la animación de carga
+
+        // Simulación de un tiempo de espera antes de habilitarlo de nuevo (reemplazar con lógica real)
+        setTimeout(function() {
+            saveBtn.disabled = false;
+            saveBtn.style.opacity = "1";
+            saveBtn.style.cursor = "pointer";
+            loadingDiv.style.display = "none";
+        }, 3000);
+    }
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const events = {{ events|tojson }};
+    const pendingEvents = {{ pending_events|tojson }};
+    let non_workdays = {{ non_workdays|tojson }};
+    let work_schedule = {{ work_schedule|tojson }}; // El horario de trabajo
+    let work_schedule_verano = {{ work_schedule_verano|tojson }};
+    let excepciones = {{ excepciones|tojson }}; // Las excepciones de días no laborales
+    let currentYear = new Date().getFullYear();
+    let tipoJornada = '{{ user.tipo_jornada }}'; // Tipo de jornada (intensiva o partida)
+
+    // Asignamos las fechas de inicio y fin de verano
+    let fecha_inicio_verano = '{{ fecha_inicio_verano }}'; // Formato 'YYYY-MM-DD'
+    let fecha_fin_verano = '{{ fecha_fin_verano }}'; // Formato 'YYYY-MM-DD'
+
+    const yearElement = document.getElementById('current-year');  // Referencia al span del año
+
+    // Actualizar el año en el span
+    function updateYearDisplay(year) {
+        yearElement.textContent = year;  // Actualiza el contenido del año en el DOM
+    }
+
+    // Función para mostrar los campos de comida dependiendo del tipo de jornada
+    function mostrarCamposJornada(tipoJornada) {
+        const entradaComida = document.getElementById('entrada_comida');
+        const salidaComida = document.getElementById('salida_comida');
+
+        // Si la jornada es intensiva, ocultar los campos de comida
+        if (tipoJornada === 'intensiva') {
+            entradaComida.closest('.mb-3').style.display = 'none';
+            salidaComida.closest('.mb-3').style.display = 'none';
+        } else { // Si la jornada es partida, mostrar los campos de comida
+            entradaComida.closest('.mb-3').style.display = 'block';
+            salidaComida.closest('.mb-3').style.display = 'block';
+        }
+    }
+
+    // Función para quitar los acentos de una cadena
+    function removeAccents(str) {
+        return str.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+    }
+
+    // Función para verificar si es un día laboral
+    function isWorkingDay(date) {
+        let dayOfWeek = removeAccents(date.toLocaleString('es', { weekday: 'long' }).toLowerCase());
+        return work_schedule[dayOfWeek] && work_schedule[dayOfWeek].trabaja;
+    }
+
+    // Función para verificar si el día es un festivo
+    function isHoliday(date) {
+        let dateString = date.toISOString().split('T')[0];
+        return non_workdays.includes(dateString);
+    }
+
+    // Función para verificar si existe una excepción para el día
+    function isException(date) {
+        let dateString = date.toISOString().split('T')[0];
+        return excepciones.some(exception => exception.fecha === dateString);
+    }
+
+    // Función para verificar si un día tiene una excepción de horario
+    function hasExceptionTime(date) {
+        let dayOfWeek = removeAccents(date.toLocaleString('es', { weekday: 'long' }).toLowerCase());
+        let daySchedule = work_schedule[dayOfWeek];
+        let dayDateString = date.toISOString().split('T')[0];
+
+        let exception = excepciones.find(ex => {
+            let exceptionDate = new Date(ex.fecha);
+            let exceptionDateString = exceptionDate.toISOString().split('T')[0];
+            return exceptionDateString === dayDateString;
+        });
+
+        if (exception) {
+            if (daySchedule && daySchedule.trabaja) {
+                let entryTime = new Date(`${dayDateString}T${exception.entrada}`);
+                let exitTime = new Date(`${dayDateString}T${exception.salida}`);
+                let normalEntryTime = new Date(`${dayDateString}T${daySchedule.entrada}`);
+                let normalExitTime = new Date(`${dayDateString}T${daySchedule.salida}`);
+                // Se verifica si las horas de comida están incluidas en la excepción
+                let entryTimeComida = exception.entrada_comida ? new Date(`${dayDateString}T${exception.entrada_comida}`) : null;
+                let exitTimeComida = exception.salida_comida ? new Date(`${dayDateString}T${exception.salida_comida}`) : null;
+
+                if (entryTime.getTime() !== normalEntryTime.getTime() || exitTime.getTime() !== normalExitTime.getTime()) {
+                    // Si hay una excepción en las horas de comida también, lo consideramos como una excepción
+                    if (entryTimeComida && exitTimeComida) {
+                        return 'yellow'; // Modificación solo en las horas de comida
+                    }
+                    return 'yellow'; // Modificación en horas de entrada o salida o ambas
+                }
+            } else {
+                return 'yellow'; // No se trabaja en este día
+            }
+        }
+
+        return null; // No hay excepción
+    }
+
+    // Función para verificar si es verano
+    function isSummer(date) {
+        let startSummer = new Date(fecha_inicio_verano);
+        let endSummer = new Date(fecha_fin_verano);
+        return date >= startSummer && date <= endSummer;
+    }
+
+    // Función para renderizar los calendarios
+    function renderCalendars(year) {
+        const months = [
+            { id: 'calendar-jan', title: 'Enero', month: 0 },
+            { id: 'calendar-feb', title: 'Febrero', month: 1 },
+            { id: 'calendar-mar', title: 'Marzo', month: 2 },
+            { id: 'calendar-apr', title: 'Abril', month: 3 },
+            { id: 'calendar-may', title: 'Mayo', month: 4 },
+            { id: 'calendar-jun', title: 'Junio', month: 5 },
+            { id: 'calendar-jul', title: 'Julio', month: 6 },
+            { id: 'calendar-aug', title: 'Agosto', month: 7 },
+            { id: 'calendar-sep', title: 'Septiembre', month: 8 },
+            { id: 'calendar-oct', title: 'Octubre', month: 9 },
+            { id: 'calendar-nov', title: 'Noviembre', month: 10 },
+            { id: 'calendar-dec', title: 'Diciembre', month: 11 }
+        ];
+
+        months.forEach(function(month) {
+            var calendarEl = document.getElementById(month.id);
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: '',
+                    center: 'title',
+                    right: '',
+                },
+                fixedWeekCount: false,
+                titleFormat: { month: 'long' },
+                dayHeaderFormat: { weekday: 'narrow' },
+                height: '100%',
+                contentHeight: 'auto',
+                locale: 'es',
+                firstDay: 1,
+                dayMaxEvents: true,
+                dayCellDidMount: function(info) {
+                    var cellDate = info.date;
+                    if (info.el.innerText.trim() === '') {
+                        return; // No colorear la celda vacía
+                    }
+
+                    // Comprobamos si es un día festivo
+                    if (isHoliday(new Date(cellDate.getTime() + 24 * 60 * 60 * 1000))) {
+                        info.el.classList.add('fc-day-red');
+                    } else {
+                        let exceptionColor = hasExceptionTime(new Date(cellDate.getTime() + 24 * 60 * 60 * 1000));
+                        if (exceptionColor === 'yellow') {
+                            info.el.classList.add('fc-day-yellow');
+                        } else if (isWorkingDay(cellDate)) {
+                            info.el.classList.add('fc-day-green');
+                        }
+                    }
+                },
+                dateClick: function(info) {
+                    var selectedDate = info.date;
+
+                    selectedDate.setHours(6, 0, 0, 0);
+
+                    var entryTime = '';
+                    var exitTime = '';
+                    var entryTimeComida = '';
+                    var exitTimeComida = '';
+
+                    // Verificamos si es verano y ajustamos los horarios
+                    let isInSummer = isSummer(selectedDate);
+                    let currentSchedule = isInSummer ? work_schedule_verano : work_schedule;
+
+                    // Buscamos si hay una excepción para la fecha seleccionada
+                    let exception = excepciones.find(ex => {
+                        let exceptionDate = new Date(ex.fecha);
+                        let exceptionDateString = exceptionDate.toISOString().split('T')[0];
+                        return exceptionDateString === selectedDate.toISOString().split('T')[0];
+                    });
+
+                    if (exception) {
+                        entryTime = exception.entrada;
+                        exitTime = exception.salida;
+                        entryTimeComida = exception.entrada_comida || '';
+                        exitTimeComida = exception.salida_comida || '';
+                    } else {
+                        let dayOfWeek = removeAccents(selectedDate.toLocaleString('es', { weekday: 'long' }).toLowerCase());
+                        let daySchedule = currentSchedule[dayOfWeek];
+                        if (daySchedule && daySchedule.trabaja) {
+                            entryTime = daySchedule.entrada;
+                            exitTime = daySchedule.salida;
+
+                            // Si es jornada partida, asignamos los horarios de comida
+                            if (tipoJornada === 'partida') {
+                                entryTimeComida = daySchedule.entrada_comida;
+                                exitTimeComida = daySchedule.salida_comida;
+                            }else{
+                                entryTimeComida = daySchedule.entrada_comida;
+                                exitTimeComida = daySchedule.salida_comida;
+                            }
+                        }
+                    }
+
+                    // Asignamos la fecha seleccionada al campo 'date' (en formato YYYY-MM-DD)
+                    document.getElementById('date').value = selectedDate.toISOString().split('T')[0];
+
+                    // Asignamos los horarios al modal
+                    document.getElementById('entryTime').value = entryTime;
+                    document.getElementById('exitTime').value = exitTime;
+                    document.getElementById('entrada_comida').value = entryTimeComida;
+                    document.getElementById('salida_comida').value = exitTimeComida;
+
+                    // Mostrar los campos de comida si la jornada es partida
+                    mostrarCamposJornada(tipoJornada);
+
+                    // Mostrar el modal
+                    $('#dayModal').modal('show');
+                }
+            });
+
+            calendar.gotoDate(new Date(year, month.month, 1));
+            calendar.render();
+        });
+    }
+
+    renderCalendars(currentYear);
+
+    document.getElementById('prev-year').addEventListener('click', function() {
+        currentYear--;
+        updateYearDisplay(currentYear);
+        renderCalendars(currentYear);
+    });
+
+    document.getElementById('next-year').addEventListener('click', function() {
+        currentYear++;
+        updateYearDisplay(currentYear);
+        renderCalendars(currentYear);
+    });
+
+    document.getElementById('saveException').addEventListener('click', function() {
+        var date = document.getElementById('date').value;
+        var entryTime = document.getElementById('entryTime').value;
+        var exitTime = document.getElementById('exitTime').value;
+        var entryTimeComida = document.getElementById('entrada_comida').value;
+        var exitTimeComida = document.getElementById('salida_comida').value;
+
+        var userId = {{ user_id }};
+
+        // Enviar la solicitud POST incluyendo los horarios de comida si existen
+        fetch('/save_exception', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user_id: userId,
+                fecha: date,
+                entrada: entryTime,
+                salida: exitTime,
+                entrada_comida: entryTimeComida,  // Nuevo campo para entrada de comida
+                salida_comida: exitTimeComida    // Nuevo campo para salida de comida
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                let exceptionIndex = excepciones.findIndex(ex => ex.fecha === date);
+                if (exceptionIndex > -1) {
+                    excepciones[exceptionIndex].entrada = entryTime;
+                    excepciones[exceptionIndex].salida = exitTime;
+                    excepciones[exceptionIndex].entrada_comida = entryTimeComida;  // Actualiza el horario de comida
+                    excepciones[exceptionIndex].salida_comida = exitTimeComida;   // Actualiza el horario de comida
+                } else {
+                    excepciones.push({
+                        user_id: userId,
+                        fecha: date,
+                        entrada: entryTime,
+                        salida: exitTime,
+                        entrada_comida: entryTimeComida,  // Agregar el horario de comida
+                        salida_comida: exitTimeComida    // Agregar el horario de comida
+                    });
+                }
+                $('#dayModal').modal('hide');
+                alert('Excepción guardada correctamente');
+                window.location.reload();
+            } else {
+                alert('Hubo un error al guardar la excepción');
+            }
+        });
+    });
+});
+
+
+</script>
+
+ <script>
+        $(document).ready(function() {
+            $('.btn-mark-as-read').on('click', function() {
+                var notificacionId = $(this).data('id');
+                var $notificationDiv = $('#notificacion-' + notificacionId);
+
+                $.ajax({
+                    url: '/marcar_leida/' + notificacionId,
+                    type: 'POST',
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            // Elimina la notificación del DOM
+                            $notificationDiv.remove();
+                             location.reload();
+                        }
+                        // No hay necesidad de manejar el caso de error aquí, ya que se puede manejar en el backend
+                    },
+                    error: function(xhr, status, error) {
+                        // Opcional: manejar errores en la solicitud
+                        console.error('Error al marcar la notificación como leída:', error);
+                    }
+                });
+            });
+        });
+    </script>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var dropdownToggle = document.querySelectorAll('[data-bs-toggle="dropdown"]');
+    dropdownToggle.forEach(function(dropdown) {
+      dropdown.addEventListener('click', function(event) {
+        event.preventDefault();
+        var dropdownMenu = new bootstrap.Dropdown(dropdown);
+        dropdownMenu.toggle();
+      });
+    });
+  });
+</script>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script>
+        // Custom script to close the dropdown when clicking outside
+        $(document).on('click', function(event) {
+            var $trigger = $("#dropdownMenuButton");
+            if($trigger !== event.target && !$trigger.has(event.target).length){
+                $('.dropdown-menu').removeClass('show');
+            }
+        });
+
+        // Ensure dropdown stays open when clicking inside
+        $('#dropdownMenuButton').on('click', function(event) {
+            event.stopPropagation();
+            var $menu = $(this).next('.dropdown-menu');
+            $menu.toggleClass('show');
+        });
+
+        // Close the dropdown if clicking inside the dropdown menu
+        $('.dropdown-menu').on('click', function(event) {
+            event.stopPropagation();
+        });
+    </script>
+<script>
+    function actualizarFechaHora() {
+        const fechaHoraElem = document.getElementById('fechaHora');
+        const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const opcionesHora = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+        const ahora = new Date();
+
+        // Formatear fecha y hora
+        const fecha = ahora.toLocaleDateString('es-ES', opcionesFecha);
+        const hora = ahora.toLocaleTimeString('es-ES', opcionesHora);
+
+        fechaHoraElem.innerHTML = `${fecha} - ${hora}`;
+    }
+
+    // Actualizar fecha y hora al cargar y cada segundo
+    // actualizarFechaHora();
+    // setInterval(actualizarFechaHora, 1000);
+</script>
+
+<script>
+   document.getElementById("dayModal").addEventListener("shown.bs.modal", function () {
+    const dateInput = document.getElementById("date");
+
+    if (dateInput && dateInput.value) {
+        let partes = dateInput.value.split("-"); // Divide en [YYYY, MM, DD]
+
+        if (partes.length === 3) {
+            let fechaFormateada = `${partes[2]}/${partes[1]}/${partes[0]}`;
+            dateInput.value = fechaFormateada;
+        }
+    }
+});
+
+</script>
+
+
+<script>
+    // document.querySelector('.menu-button').addEventListener('click', function() {
+    //     document.querySelector('.menu-container').classList.toggle('active');
+    // });
+</script>
+ <script>
+        $(document).ready(function() {
+            $('.btn-mark-as-read').on('click', function() {
+                var notificacionId = $(this).data('id');
+                var $notificationDiv = $('#notificacion-' + notificacionId);
+
+                $.ajax({
+                    url: '/marcar_leida/' + notificacionId,
+                    type: 'POST',
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            // Elimina la notificación del DOM
+                            $notificationDiv.remove();
+                             location.reload();
+                        }
+                        // No hay necesidad de manejar el caso de error aquí, ya que se puede manejar en el backend
+                    },
+                    error: function(xhr, status, error) {
+                        // Opcional: manejar errores en la solicitud
+                        console.error('Error al marcar la notificación como leída:', error);
+                    }
+                });
+            });
+        });
+    </script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var dropdownToggle = document.querySelectorAll('[data-bs-toggle="dropdown"]');
+    dropdownToggle.forEach(function(dropdown) {
+      dropdown.addEventListener('click', function(event) {
+        event.preventDefault();
+        var dropdownMenu = new bootstrap.Dropdown(dropdown);
+        dropdownMenu.toggle();
+      });
+    });
+  });
+</script>
+
+    <script>
+        // Custom script to close the dropdown when clicking outside
+        $(document).on('click', function(event) {
+            var $trigger = $("#dropdownMenuButton");
+            if($trigger !== event.target && !$trigger.has(event.target).length){
+                $('.dropdown-menu').removeClass('show');
+            }
+        });
+
+        // Ensure dropdown stays open when clicking inside
+        $('#dropdownMenuButton').on('click', function(event) {
+            event.stopPropagation();
+            var $menu = $(this).next('.dropdown-menu');
+            $menu.toggleClass('show');
+        });
+
+        // Close the dropdown if clicking inside the dropdown menu
+        $('.dropdown-menu').on('click', function(event) {
+            event.stopPropagation();
+        });
+    </script>
+
+
+</body>
+
+</html>

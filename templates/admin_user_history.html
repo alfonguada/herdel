@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de vacaciones - Gestionaempresa</title>
+    <link rel="icon" href="{{ url_for('static', filename='logo_empresa.png') }}" type="image/png">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <!-- Nucleo Icons -->
+  <link href="/static/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="/static/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <!-- CSS Files -->
+  <link id="pagestyle" href="/static/assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
+  <!-- Nepcha Analytics (nepcha.com) -->
+  <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
+
+
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Puedes enlazar tu archivo CSS para estilos aquí -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.9/fullcalendar.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.9/index.global.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.9/locales/es.min.js"></script>
+<script src="https://kit.fontawesome.com/3da862d4a6.js" crossorigin="anonymous"></script>
+ <style>
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+}
+
+
+.page-container {
+            padding-top: 100px; /* Baja todo el contenido dentro del contenedor */
+}
+
+#counter {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+
+    input, button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin-top: 10px;
+    }
+
+
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700);
+
+
+
+ h3 {
+      text-align: center;
+margin-top: -75px;
+margin-bottom:65px;
+    }
+
+
+.embed-responsive {
+        position: relative;
+        padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+        background-color: #000;
+    }
+    .embed-responsive-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+.card {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column; /* Asegura que el contenido y el footer se alineen verticalmente */
+    height: 100%; /* Asegura que la tarjeta ocupe todo el alto disponible */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+        .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+padding: 15px; /* Asegura suficiente espacio alrededor del título */
+        }
+        .card-body {
+            padding: 15px;
+
+
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .footer-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .footer-link a {
+            color: #4C94E0;
+            text-decoration: none;
+        }
+        .footer-link a:hover {
+            text-decoration: underline;
+        }
+h3 {
+            margin-top:-15px;/* Ajusta el espacio debajo del título */
+        }
+.card-header h3 {
+            margin-bottom: 15px; /* Ajusta el espacio debajo del título */
+        }
+
+.events-card,
+.news-card,
+.prog-card {
+    position: relative;
+    max-height: 600px; /* Altura máxima para las tarjetas de eventos y noticias */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede la altura máxima */
+}
+.summary-card{
+    position: relative;
+    max-height: 400px; /* Altura máxima para las tarjetas de eventos y noticias */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede la altura máxima */
+}
+
+.footer-link {
+    position: relative; /* Necesario para que el footer se alinee al final del card */
+    text-align: center;
+    margin-top: auto; /* Empuja el footer al fondo de la tarjeta */
+    background-color: #f8f9fa; /* Fondo del footer */
+    padding: 10px;
+    border-top: 1px solid #e9ecef; /* Línea superior del footer */
+}
+        .footer-link a {
+            color: #6c6c6c;
+            text-decoration: none;
+        }
+        .footer-link a:hover {
+            text-decoration: underline;
+        }
+
+
+.card-body {
+    padding: 15px;
+    flex: 1; /* Esto hace que el cuerpo de la tarjeta ocupe todo el espacio disponible */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede el alto disponible */
+
+}
+
+
+/* Estilos para los contadores */
+.counter-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido verticalmente */
+    border: 1px solid #e0e0e0; /* Borde para separar los contadores */
+    border-radius: 8px; /* Esquinas redondeadas */
+    padding: 5px; /* Reducir el padding */
+    color: #ffffff; /* Color del texto */
+}
+
+.counter-header {
+    position: relative;
+    height: 50px; /* Reducir la altura del encabezado */
+    padding: 0;
+    overflow: hidden; /* Evita el desbordamiento */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
+.counter-body, .counter-body2 {
+    padding: 5px; /* Reducir el padding del cuerpo del contador */
+    text-align: center; /* Centra el texto en el cuerpo */
+}
+
+.counter-body h6, .counter-body2 h6 {
+    font-size: 14px; /* Reducir el tamaño de la fuente del título */
+}
+
+.counter-body p, .counter-body2 p {
+    font-size: 12px; /* Reducir el tamaño de la fuente del párrafo */
+}
+
+.bg-primary {
+    background-color: #4C94E0 !important; /* Azul */
+}
+.btn-primary3 {
+    background-color: #a965f5 !important; /* Morado */
+    color:white;
+}
+.btn-primary3:hover {
+    background-color: #a965f5 !important; /* Morado */
+    color:white;
+}
+
+.bg-success {
+    background-color: #28a745 !important; /* Verde */
+}
+
+.bg-info {
+    background-color: #17a2b8 !important; /* Azul claro */
+}
+
+.bg-warning {
+    background-color: #ffc107 !important; /* Amarillo */
+}
+
+  .card-global {
+            height: 450px; /* Ajusta según tus necesidades */
+            display: flex;
+            flex-direction: column;
+margin-top:-25px;
+        }
+
+        /* Clase para la tarjeta negra específica del gráfico */
+        .card-graph {
+            height: 130%; /* Ajusta según el espacio que quieras para el gráfico */
+            display: flex;
+            align-items: center; /* Centra el gráfico verticalmente */
+            justify-content: center; /* Centra el gráfico horizontalmente */
+        }
+
+        /* Estilo para el canvas dentro de la tarjeta negra */
+        .chart-canvas {
+            width: 100%;
+            height: 100%;
+}
+.custom-card-body {
+            margin-top: 100px; /* Ajusta el valor según tus necesidades */
+margin-left:20px;
+        }
+
+
+.recurso {
+            display: inline-block;
+            width: 30%;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        .recurso img {
+            max-width: 100px;
+            max-height: 100px;
+            margin-bottom: 10px;
+        }
+
+.embed-responsive {
+        position: relative;
+        padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+        background-color: #000;
+    }
+    .embed-responsive-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+ .toast-center-center {
+            top: 50%;
+            left: 70%;
+            transform: translate(-50%, -50%);
+            min-width: 800px; /* Más grande */
+min-height: 800px; /* Más grande */
+            opacity: 1; /* Menos transparente */
+        }
+        .toast-success .toast-message {
+            color: green;
+        }
+        .toast-error .toast-message {
+            color: red;
+        }
+        .toast {
+            font-size: 1.2em; /* Tamaño de fuente más grande */
+            padding: 20px; /* Más relleno */
+        }
+
+.btn-mark-as-read {
+            padding: 5px 10px;
+            font-size: 12px;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            color: #333;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .btn-mark-as-read:hover {
+            background-color: #e0e0e0;
+            color:white !important;
+        }
+
+        /* Estilos para la pantalla de carga */
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+
+.notificaciones {
+    position: relative; /* o 'absolute' o 'fixed' si es necesario */
+    z-index: 9999999; /* Valor alto para asegurarte de que está por encima de otros elementos */
+}
+/* Estilo del ícono de campana */
+.nav-item .fa-bell {
+    position: relative;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-bell:hover {
+    color: #495057;
+}
+
+/* Badge de notificaciones */
+.nav-item .badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    border-radius: 50%;
+    background-color: #f44336;
+    color: #fff;
+}
+
+/* Dropdown */
+.dropdown-menu {
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Estilo de cada notificación */
+.dropdown-item {
+    border-radius: 0.375rem;
+    transition: background-color 0.2s ease;
+    padding: 12px 15px;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* Estilo del texto de la notificación */
+.text-sm {
+    font-size: 0.875rem;
+    color: #343a40;
+    font-weight: 600;
+}
+
+.text-xs {
+    font-size: 0.75rem;
+    color: #6c757d;
+}
+
+/* Botón para marcar como leída */
+.btn-mark-as-read {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-mark-as-read:hover {
+    background: #0056b3;
+}
+
+/* Sin notificaciones */
+.text-center span {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+/* Posiciona el badge a la izquierda */
+.nav-item .badge {
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    border-radius: 50%;
+    background-color: #f44336;
+    color: #fff;
+    margin-right: 10px; /* Separa el badge del icono */
+}
+
+/* Ajuste de icono de campana */
+.nav-item .fa-bell {
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-bell:hover {
+    color: #495057;
+}
+/* Estilo del ícono de cerrar sesión */
+.nav-item .fa-sign-out {
+    position: relative;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-sign-out:hover {
+    color: #495057;
+}
+    /* Estilos para los mensajes flash */
+.flash-messages {
+    margin-bottom: 20px;
+}
+
+.flash {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.flash.success {
+    background-color: #d4edda; /* Color de fondo para mensajes de éxito */
+    color: #155724; /* Color del texto para mensajes de éxito */
+    border: 1px solid #c3e6cb;
+}
+
+.flash.error {
+    background-color: #f8d7da; /* Color de fondo para mensajes de error */
+    color: #721c24; /* Color del texto para mensajes de error */
+    border: 1px solid #f5c6cb;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+}
+
+
+
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.flash-messages {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        width: 300px;
+        z-index: 1000;
+    }
+
+.contenido {
+    width: 100%;
+    max-width: 1600px; /* Ancho máximo */
+    margin: 0 auto; /* Centra el contenedor */
+    padding: 20px; /* Espacio interno */
+}
+
+#contenido-imprimible {
+    width: 100%;
+    margin-bottom: 20px; /* Espacio inferior */
+}
+
+table {
+    width: 100%; /* Hace que la tabla ocupe todo el ancho */
+    border-collapse: collapse; /* Elimina espacios entre celdas */
+    margin-bottom: 20px; /* Espacio inferior */
+}
+
+th, td {
+    padding: 10px; /* Relleno de celdas */
+    text-align: left; /* Alineación izquierda */
+    border-bottom: 1px solid #ddd; /* Línea separadora */
+}
+
+
+.rejection-reason {
+    overflow: hidden; /* Para evitar desbordamientos */
+    text-overflow: ellipsis; /* Muestra "..." si el texto es demasiado largo */
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+}
+
+.circle {
+    width: 50px; /* Ajusta el tamaño según sea necesario */
+    height: 50px; /* Ajusta el tamaño según sea necesario */
+    border-radius: 50%; /* Hace que sea circular */
+    background-color: #f0f0f0; /* Color de fondo */
+    display: flex; /* Flex para centrar el contenido */
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+    margin: 10px 0; /* Espacio vertical */
+}
+
+.nav-buttons {
+    display: flex; /* Flexbox para botones de navegación */
+    justify-content: space-between; /* Espacio entre botones */
+    margin-top: 20px; /* Espacio superior */
+}
+.cont2 {
+    text-align: center; /* Centra el texto de todo el contenedor */
+}
+
+.title {
+    margin-bottom: 10px; /* Espacio entre el título y el número de días */
+}
+
+.circle {
+    display: inline-block; /* Asegura que el círculo se trate como un bloque en línea */
+    padding: 20px; /* Espacio interno para el círculo */
+    border: 2px solid #4C94E0; /* Puedes cambiar el color del borde */
+    border-radius: 50%; /* Hace que el div sea un círculo */
+    width: 100px; /* Ancho fijo para el círculo */
+    height: 100px; /* Altura fija para el círculo */
+    line-height: 100px; /* Centra verticalmente el contenido */
+    font-size: 24px; /* Tamaño de fuente para el número de días */
+    color: #4C94E0; /* Color del texto dentro del círculo */
+}
+
+.logo-img {
+    width: 20px; /* Ajusta el tamaño de los íconos */
+    height: auto; /* Mantiene la proporción */
+    vertical-align: middle; /* Alinea con el texto */
+}
+.accepted {
+        background-color: #4CAF50; /* Verde */
+        color: white;
+    }
+
+    .rejected {
+        background-color: #f44336; /* Rojo */
+        color: white;
+    }
+
+    .pending {
+        background-color: #FFA500; /* Naranja */
+        color: white;
+    }
+.cancel {
+        background-color: #B0B0B0; /* Naranja */
+        color: white;
+    }
+
+
+h1{
+
+    margin-left:20px;
+}
+.contenido{
+margin-top:100px;
+}
+
+
+
+
+
+        /* Estilos para pantallas grandes */
+        @media only screen and (min-width: 901px) {
+            .menu-button {
+                display: none; /* Oculta el botón en pantallas grandes */
+            }
+
+            .menu-links {
+                display: none; /* Muestra el menú en pantallas grandes */
+            }
+            .contenido2{
+                display:none;
+
+            }
+        }
+
+        /* Estilos para pantallas pequeñas */
+        @media only screen and (max-width: 900px) {
+
+
+            .contenido {
+                display: none; /* Oculta la tabla en pantallas pequeñas */
+            }
+
+            .contenido2 .solicitud-container {
+                display: block; /* Muestra las solicitudes individuales en pantallas pequeñas */
+            }
+
+            .menu-container {
+                background-color: #fff
+            }
+            .contenido2 .nav-buttons{
+                display: block;
+            }
+
+
+
+            .remaining-days {
+                text-align: center;
+                margin-top: 10px; /* Ajusta el margen superior para dispositivos móviles */
+            }
+
+            /* Estilos para círculo azul */
+
+
+            .contenido2 {
+                margin-top: 0px; /* Ajusta la distancia hacia arriba en dispositivos móviles */
+                /* Otros estilos ... */
+            }
+
+            /* Estilos para títulos con box-shadows */
+            h1,
+             {
+                text-align: center;
+                margin-top: 0px; /* Reduce el margen superior */
+                margin-bottom: 10px; /* Añade un margen inferior más pequeño */
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Agrega box-shadow a los títulos */
+                padding: 10px; /* Añade espacio interno a los títulos */
+            }
+
+        }
+
+        .logo-container {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+        }
+
+        .logo-container img {
+            max-width: 100px;
+            height: auto;
+        }
+
+    .logo-img {
+        display: block; /* Hace que la imagen sea un bloque para poder aplicar márgenes automáticamente */
+        margin: 0 auto;
+        max-width: 20px; /* Ajusta el ancho máximo de las imágenes según tus necesidades */
+        height: auto; /* Mantiene la proporción original */
+    }
+  .container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: repeat(2, auto);
+            gap: 20px;
+            max-width: 90%;
+margin-left:5%;
+        }
+        .calendar-container {
+justify-content:center;
+            border-radius: 8px;
+            padding: 5px;
+            max-height: 350px;
+            overflow: hidden;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+.volver-button {
+            padding: 12px 20px;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            background-color: #5fbd63;
+            border: 1px solid #5fbd63;
+            border-radius: 5px;
+            cursor: pointer;
+
+        }
+
+        .volver-button:hover {
+            background-color: #58A15B;
+            border-color: #58A15B;
+        }
+
+        .volver-button:active {
+            background-color: #58A15B;
+            border-color: #58A15B;
+        }
+
+  .filtro-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            margin: 0 auto;
+        }
+
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+            color: #555;
+        }
+
+        select {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+            flex: 1; /* Para que el select ocupe el espacio disponible */
+        }
+
+        button {
+            padding: 8px 15px;
+            background-color: #4C94E0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+
+    @media (max-width: 768px) { /* Pantallas con ancho menor o igual a 768px */
+    .breadcrumb {
+        display: flex;
+        flex-direction: column; /* Apila los elementos en columna si hay otros hijos */
+        align-items: center;    /* Centra horizontalmente */
+        justify-content: center; /* Centra verticalmente si hay espacio */
+        text-align: center;     /* Centra el texto */
+        margin-left: 10%;         /* Asegura el centrado horizontal */
+    }
+
+    .breadcrumb h5 {
+        text-align: center; /* Centra específicamente el texto del <h5> */
+        display:none;
+    }
+
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+
+
+@media (min-width: 500px) and (max-width: 1500px) {
+
+  .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr) !important;
+            grid-template-rows: repeat(4, auto) !important;
+            gap: 20px;
+            max-width: 90%;
+            max-height: 400px;
+margin-left:5%;
+margin-bottom:800px;
+        }
+        .calendar-container {
+justify-content:center;
+            border-radius: 8px;
+            max-height: 400px;
+            overflow: hidden;
+        }
+
+
+/* Contenedor para los controles del calendario con flexbox */
+.calendar-controls {
+    display: flex;               /* Usamos flexbox */
+    align-items: center;         /* Centra los elementos verticalmente */
+    justify-content: center;     /* Centra los elementos horizontalmente */
+}
+
+/* Estilo específico para los botones dentro del contenedor calendar-controls */
+.calendar-controls button {
+    border: none;    /* Quita el borde */
+    background: none; /* Quita el fondo */
+    padding: 0;       /* Elimina el relleno */
+    cursor: pointer;  /* Asegura que el botón sea clickeable */
+}
+
+/* Estilo específico para los iconos dentro de calendar-controls */
+.calendar-icon {
+    font-size: 30px;   /* Tamaño del icono */
+    color: #4C94E0;    /* Color del icono */
+    margin: 0 10px;    /* Añade un pequeño margen a los lados del icono */
+}
+
+   .calendar-container:nth-last-child(-n+3) {
+        margin-bottom: 500px !important; /* Ajusta según la separación deseada */
+    }
+
+}
+
+
+
+
+.btn-mark-as-read {
+    background: #1565a8;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-mark-as-read:hover {
+    background: #0d4376;
+}
+
+.dropdown-item {
+    border-radius: 0.375rem;
+    transition: background-color 0.2s ease;
+    padding: 1px 15px !important;
+    margin-top:0px;
+}
+
+
+
+
+
+
+
+.custom-width-modal {
+  max-width: 600px; /* o el ancho que prefieras */
+}
+
+.btn-mark-as-read {
+  min-width: 28px !important;
+  padding: 3px 3px;
+}
+/* Modal tipo barra lateral derecha */
+.modal-side-right {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 0;
+  height: 100%;
+  max-width: 500px;
+  width: 100%;
+  z-index: 1055;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+/* Cuando el modal se muestra */
+.modal.show .modal-side-right {
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+/* Evitamos que Bootstrap lo sobrescriba */
+.modal.fade .modal-dialog {
+  transition: none !important;
+  transform: none !important;
+}
+
+/* Ajustes al contenido del modal */
+.modal-side-right .modal-content {
+  height: 100%;
+  border-radius: 0;
+  text-align: left;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+}
+/* Estilo del texto de la notificación */
+.text-sm {
+    font-size: 0.75rem !important;
+    color: #000;
+    font-weight: 600;
+}
+
+.text-xs {
+    font-size: 0.70rem !important;
+    color: #6c757d;
+}
+
+
+
+.btn-primary3 {
+  background-color: #1565a8 !important;
+  color: white;
+  font-size: 0.75rem;
+  text-transform: none; /* evita mayúsculas automáticas */
+  margin-left:10px;
+}
+
+.btn-primary3:hover {
+  background-color: #0d4b80 !important; /* un tono más oscuro para el hover */
+}
+
+
+
+
+  @media (max-width: 576px) {
+    .dropdown-menu-mobile-half {
+      width: 50vw !important;
+      right: 0 !important;
+      left: auto !important;
+    }
+  }
+
+  .dropdown-menu-mobile-half {
+    width: 50vw !important; /* Ajusta al 50% del ancho de la ventana */
+    max-width: 400px;        /* Máximo ancho opcional */
+    min-width: 250px;        /* Mínimo opcional */
+    padding: 1rem;
+}
+
+.dropdown-menu-mobile-half .dropdown-item {
+    white-space: normal; /* Permite que el texto se ajuste a múltiples líneas */
+    word-wrap: break-word;
+    width: 100%;
+}
+
+.dropdown-menu-mobile-half .btn-mark-as-read {
+
+    padding: 0 5px;
+    font-size: 0.9rem;
+}
+
+
+.fc .fc-daygrid-day-top {
+    justify-content: center;
+}
+
+.fc-event {
+    background-color: green; /* Color para eventos aceptados */
+}
+.fc-day-red {
+    background-color: #FF6F6F !important;
+}
+
+/* Estilo para el día actual */
+.fc .fc-daygrid-day.fc-day-today {
+    background-color: transparent; /* azul claro de fondo */
+  }
+
+
+
+.fc .fc-daygrid-day.fc-day-today .fc-daygrid-day-number {
+  background-color: #ffc107;
+  color: #000;
+  font-weight: bolder;
+}
+
+.fc-daygrid-day-number {
+  display: inline-flex;       /* Para alinear el texto */
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;         /* Ajusta según necesidad */
+  margin: auto;               /* Centra horizontalmente */
+  line-height: 1;             /* Asegura que no se desborde */
+}
+
+/* Quita bordes de las celdas del calendario */
+.fc td, .fc th {
+    border: none !important;
+  }
+
+  /* También puede ser útil eliminar el borde del grid general */
+  .fc .fc-daygrid-day-frame {
+    border: none !important;
+  }
+
+  /* Opcional: Quitar líneas de separación entre semanas */
+  .fc .fc-scrollgrid {
+    border: none !important;
+  }
+
+
+.fc .fc-button {
+  font-size: 0.6rem;     /* Tamaño de texto más pequeño */
+  padding: 0.2rem 0.2rem; /* Menos espacio interior */
+}
+.fc-toolbar-title {
+    text-transform: capitalize !important;
+    font-size: 0.95rem !important; /* Cambia este valor según lo pequeño que quieras el texto */
+}
+.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
+    min-height: 0;
+}
+.fc .fc-daygrid-body-natural .fc-daygrid-day-events {
+    margin-bottom: 0;
+}
+.fc-day-number {
+    color: #000000 !important;
+}
+.fc-header-toolbar .fc-toolbar-title {
+    color: #000000;
+}
+
+.fc-header-toolbar{
+    margin-bottom: 0 !important;
+}
+
+.fc-col-header-cell {
+    color: #000000;
+}
+
+.fc-day {
+    color: #000000;
+}
+
+.fc-daygrid-day-number{
+    font-size: 0.6rem !important ;
+}
+
+@media (min-width: 1600px) {
+  .fc-daygrid-day-number {
+    font-size: 0.75rem !important;
+  }
+}
+  .fc table{
+    font-size: 0.9em !important;
+  }
+
+
+</style>
+
+</head>
+
+<body class="g-sidenav-show  bg-gray-200">
+
+ <div class="modal fade" id="welcomeModal" tabindex="-1" role="dialog" aria-labelledby="welcomeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="welcomeModalLabel">Bienvenido</h5>
+                </div>
+                <div class="modal-body" id="welcomeMessage">
+                    <!-- El mensaje de bienvenida se establecerá mediante JavaScript -->
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<!-- Menu HTML añadido de otro .html -->
+
+    {% include 'menu_admin.html' %}
+
+
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg w-100">
+
+
+    <!-- Navbar -->
+   <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+    <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                <h5 class="font-weight-bolder mb-0 d-none d-sm-block">
+                    <i class="material-icons opacity-10">calendar_month</i>
+                    Historial de Vacaciones
+                </h5>
+            </ol>
+            <div class="centered-message">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="flash-messages">
+                            {% for category, message in messages %}
+                                <div class="flash {{ category }}">{{ message }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </nav>
+
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <div class="input-group input-group-outline"></div>
+            </div>
+            <ul class="navbar-nav justify-content-end">
+                <li class="nav-item d-flex align-items-center">
+
+
+
+
+</li>
+
+
+
+
+
+                <li class="nav-item px-3 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-body p-0"></a>
+                </li>
+                <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                        <div class="sidenav-toggler-inner" style="margin-right:10px;">
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                        </div>
+                    </a>
+                </li>
+<li class="nav-item dropdown pe-2 d-flex align-items-center">
+    <a href="javascript:;" class="nav-link text-body p-0 d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#notificacionesModal">
+        {% if notificaciones %}
+            <span class="badge bg-danger me-2">{{ notificaciones|length }}</span>
+        {% endif %}
+        <i class="fa fa-bell cursor-pointer" style="font-size: 1.5rem;"></i>
+    </a>
+</li>
+
+
+          <li class="nav-item d-flex align-items-center">
+              <a href="/cerrar_sesion" class="nav-link text-body font-weight-bold px-0">
+                <i class="fa fa-sign-out"style="font-size: 1.5rem;"></i>
+    </a>
+</li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+    <h5 class="font-weight-bolder mb-0 d-md-none text-start">
+                    <i class="material-icons opacity-10" style="color: #000; margin-left:5px;">calendar_month</i>
+                    Historial de Vacaciones
+                </h5>
+    <!-- End Navbar -->
+
+
+    <!-- Cuerpo del HTML -->
+
+<!-- Filtro por usuario -->
+<div class="centro-pantalla" style="display: flex;
+            justify-content: space-between;
+            align-items: center; background-color:#f4f4f4;">
+    <div class="filtro-container" style="margin-top: 10px; background-color:#f4f4f4;">
+        <form id="filtro-formulario" method="GET" action="{{ url_for('admin_user_history') }}">
+            <i class="fas fa-user" style="margin-right: 8px;"></i>
+            <label for="usuario-filtro" style="color: black; font-weight: bold;">Nombre del empleado:</label>
+            <select id="usuario-filtro" name="usuario">
+                <option value="">Todos</option>
+                {% for usuario in users %}
+                    <option value="{{ usuario.id }}" {% if usuario.id|string == usuario_filtro|string %}selected{% endif %}>
+                        {{ usuario.nombre }} {{ usuario.primer_apellido }}
+                    </option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="filtro-button" style="background-color: #1565a8; color: white; border: none; padding: 5px 13px; border-radius: 4px;">
+    <i class="fas fa-filter" style="color: white; font-size: 12px;"></i></button>
+
+
+
+        </form>
+    </div>
+</div>
+
+<script>
+    document.getElementById('filtro-formulario').addEventListener('submit', function(event) {
+        var usuarioFiltro = document.getElementById('usuario-filtro').value;
+    });
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="notificacionesModal" tabindex="-1" aria-labelledby="notificacionesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-side-right">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="notificacionesModalLabel">
+          <i class="fa fa-bell cursor-pointer" style="font-size: 1.5rem;"></i> Notificaciones
+        </h5>
+        <button type="button" class="btn m-0" data-bs-dismiss="modal" aria-label="Cerrar">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="modal-body text-start">
+        <form action="{{ url_for('marcar_notificaciones_leidas') }}" method="post">
+          <button type="submit" class="btn btn-primary3 btn-sm mb-3">Marcar todas como leídas</button>
+        </form>
+
+        {% for notificacion in notificaciones %}
+        <div class="mb-3 border-bottom pb-2">
+          <h6 class="text-sm font-weight-normal mb-1">
+            {{ notificacion.concepto }}
+            {% if not notificacion.leida %}
+              <button class="btn btn-link btn-mark-as-read ms-2" style="min-width: 32px;" data-id="{{ notificacion.id }}">
+                <i class="fa-solid fa-check" style="font-size: 1.2rem;"></i>
+              </button>
+            {% endif %}
+          </h6>
+          <p class="text-xs text-secondary mb-0">
+            <i class="fa fa-clock me-1"></i>
+            {{ notificacion.fecha_hora.strftime('%d/%m/%Y %H:%M') }}
+          </p>
+        </div>
+        {% endfor %}
+
+        {% if notificaciones|length == 0 %}
+        <div class="text-start">
+          <span class="text-sm">No tienes notificaciones</span>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+        <!-- FullCalendar containers for each month -->
+        <div id="calendar-jan" class="calendar-container"></div>
+        <div id="calendar-feb" class="calendar-container"></div>
+        <div id="calendar-mar" class="calendar-container"></div>
+        <div id="calendar-apr" class="calendar-container"></div>
+        <div id="calendar-may" class="calendar-container"></div>
+        <div id="calendar-jun" class="calendar-container"></div>
+        <div id="calendar-jul" class="calendar-container"></div>
+        <div id="calendar-aug" class="calendar-container"></div>
+        <div id="calendar-sep" class="calendar-container"></div>
+        <div id="calendar-oct" class="calendar-container"></div>
+        <div id="calendar-nov" class="calendar-container"></div>
+        <div id="calendar-dec" class="calendar-container"></div>
+    </div>
+
+
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const months = [
+            { id: 'calendar-jan', title: 'Enero', month: 0 },
+            { id: 'calendar-feb', title: 'Febrero', month: 1 },
+            { id: 'calendar-mar', title: 'Marzo', month: 2 },
+            { id: 'calendar-apr', title: 'Abril', month: 3 },
+            { id: 'calendar-may', title: 'Mayo', month: 4 },
+            { id: 'calendar-jun', title: 'Junio', month: 5 },
+            { id: 'calendar-jul', title: 'Julio', month: 6 },
+            { id: 'calendar-aug', title: 'Agosto', month: 7 },
+            { id: 'calendar-sep', title: 'Septiembre', month: 8 },
+            { id: 'calendar-oct', title: 'Octubre', month: 9 },
+            { id: 'calendar-nov', title: 'Noviembre', month: 10 },
+            { id: 'calendar-dec', title: 'Diciembre', month: 11 }
+        ];
+
+        const events = {{ events|tojson }};
+        const non_workdays = {{ non_workdays|tojson }};
+
+        months.forEach(function(month) {
+            var calendarEl = document.getElementById(month.id);
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: '',
+                    center: 'title',
+                    right: '',
+
+                },
+                fixedWeekCount: false,
+                titleFormat: { month: 'long' },
+                dayHeaderFormat: { weekday: 'narrow' },
+                height: '100%',
+                contentHeight: 'auto',
+                locale: 'es', // Añade esta línea para establecer el idioma español
+                events: events,
+		firstDay: 1,
+                eventBackgroundColor: 'green', // Color de fondo para eventos
+                eventDisplay: 'background', // Muestra el color de fondo en la celda
+                dayMaxEvents: true,
+               dayCellDidMount: function(info) {
+    // Restar un día a la fecha de la celda
+    var cellDate = new Date(info.date);
+    cellDate.setDate(cellDate.getDate() + 1);
+    var cellDateString = cellDate.toISOString().split('T')[0];
+    var currentMonth = info.view.currentStart.getMonth();
+
+    // Verificar si el día pertenece al mes actual y si está en la lista de días festivos
+    if (info.date.getMonth() === currentMonth && non_workdays.includes(cellDateString)) {
+        var cell = info.el;
+        cell.classList.add('fc-day-red');
+    }
+}
+            });
+            calendar.gotoDate(new Date(new Date().getFullYear(), month.month, 1));
+            calendar.render();
+        });
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Minified and consolidated JS files -->
+    <script src="/static/assets/js/core/popper.min.js"></script>
+    <script src="/static/assets/js/core/bootstrap.min.js"></script>
+    <script src="/static/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="/static/assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="/static/assets/js/plugins/chartjs.min.js"></script>
+    <script src="/static/assets/js/material-dashboard.min.js?v=3.1.0"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
+    <script src="https://buttons.github.io/buttons.js" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+
+     <script>
+        $(document).ready(function() {
+            $('.btn-mark-as-read').on('click', function() {
+                var notificacionId = $(this).data('id');
+                var $notificationDiv = $('#notificacion-' + notificacionId);
+
+                $.ajax({
+                    url: '/marcar_leida/' + notificacionId,
+                    type: 'POST',
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            // Elimina la notificación del DOM
+                            $notificationDiv.remove();
+                             location.reload();
+                        }
+                        // No hay necesidad de manejar el caso de error aquí, ya que se puede manejar en el backend
+                    },
+                    error: function(xhr, status, error) {
+                        // Opcional: manejar errores en la solicitud
+                        console.error('Error al marcar la notificación como leída:', error);
+                    }
+                });
+            });
+        });
+    </script>
+
+
+
+
+
+
+</body>
+</html>

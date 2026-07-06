@@ -1,0 +1,1523 @@
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Mis Ausencias - Gestionaempresa</title>
+        <link rel="icon" href="{{ url_for('static', filename='logo_empresa.png') }}" type="image/png">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+    <!-- Nucleo Icons -->
+    <link href="/static/assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="/static/assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <!-- CSS Files -->
+    <link id="pagestyle" href="/static/assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
+    <!-- Nepcha Analytics (nepcha.com) -->
+    <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+
+        <!-- Font Awesome CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+        <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+        <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <!-- Puedes enlazar tu archivo CSS para estilos aquí -->
+
+    <script src="https://kit.fontawesome.com/3da862d4a6.js" crossorigin="anonymous"></script>
+    <style>
+
+    body {
+                font-family: 'Roboto' !important;
+                background-color: #fff;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                text-align: center; /* Centrar el texto */
+
+    }
+
+
+
+    .page-container {
+                padding-top: 100px; /* Baja todo el contenido dentro del contenedor */
+    }
+
+    #counter {
+        font-size: 24px;
+        margin-top: 20px;
+        }
+
+        input, button {
+        font-size: 18px;
+        padding: 10px 20px;
+        margin-top: 10px;
+        }
+
+
+    @import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700);
+
+
+
+    h3 {
+        text-align: center;
+    margin-top: -75px;
+    margin-bottom:65px;
+        }
+
+
+    .embed-responsive {
+            position: relative;
+            padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background-color: #000;
+        }
+        .embed-responsive-item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    .card {
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column; /* Asegura que el contenido y el footer se alineen verticalmente */
+        height: 100%; /* Asegura que la tarjeta ocupe todo el alto disponible */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+            .card-header {
+                background-color: #f8f9fa;
+                border-bottom: 1px solid #e9ecef;
+    padding: 15px; /* Asegura suficiente espacio alrededor del título */
+            }
+            .card-body {
+                padding: 15px;
+
+
+            }
+            .container {
+                margin-top: 20px;
+            }
+            .footer-link {
+                text-align: center;
+                margin-top: 10px;
+            }
+            .footer-link a {
+                color: #4C94E0;
+                text-decoration: none;
+            }
+            .footer-link a:hover {
+                text-decoration: underline;
+            }
+    h3 {
+                margin-top:-15px;/* Ajusta el espacio debajo del título */
+            }
+    .card-header h3 {
+                margin-bottom: 15px; /* Ajusta el espacio debajo del título */
+            }
+
+    .events-card,
+    .news-card,
+    .prog-card {
+        position: relative;
+        max-height: 600px; /* Altura máxima para las tarjetas de eventos y noticias */
+        overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede la altura máxima */
+    }
+    .summary-card{
+        position: relative;
+        max-height: 400px; /* Altura máxima para las tarjetas de eventos y noticias */
+        overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede la altura máxima */
+    }
+
+    .footer-link {
+        position: relative; /* Necesario para que el footer se alinee al final del card */
+        text-align: center;
+        margin-top: auto; /* Empuja el footer al fondo de la tarjeta */
+        background-color: #f8f9fa; /* Fondo del footer */
+        padding: 10px;
+        border-top: 1px solid #e9ecef; /* Línea superior del footer */
+    }
+            .footer-link a {
+                color: #6c6c6c;
+                text-decoration: none;
+            }
+            .footer-link a:hover {
+                text-decoration: underline;
+            }
+
+
+    .card-body {
+        padding: 15px;
+        flex: 1; /* Esto hace que el cuerpo de la tarjeta ocupe todo el espacio disponible */
+        overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede el alto disponible */
+
+    }
+
+
+    /* Estilos para los contadores */
+    .counter-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Centra el contenido verticalmente */
+        border: 1px solid #e0e0e0; /* Borde para separar los contadores */
+        border-radius: 8px; /* Esquinas redondeadas */
+        padding: 5px; /* Reducir el padding */
+        color: #ffffff; /* Color del texto */
+    }
+
+    .counter-header {
+        position: relative;
+        height: 50px; /* Reducir la altura del encabezado */
+        padding: 0;
+        overflow: hidden; /* Evita el desbordamiento */
+        display: flex;
+        justify-content: center; /* Centra horizontalmente */
+        align-items: center; /* Centra verticalmente */
+    }
+
+    .counter-body, .counter-body2 {
+        padding: 5px; /* Reducir el padding del cuerpo del contador */
+        text-align: center; /* Centra el texto en el cuerpo */
+    }
+
+    .counter-body h6, .counter-body2 h6 {
+        font-size: 14px; /* Reducir el tamaño de la fuente del título */
+    }
+
+    .counter-body p, .counter-body2 p {
+        font-size: 12px; /* Reducir el tamaño de la fuente del párrafo */
+    }
+
+    .bg-primary {
+        background-color: #4C94E0 !important; /* Azul */
+    }
+
+.btn-primary3 {
+  background-color: #1565a8 !important;
+  color: white;
+  font-size: 0.75rem;
+  text-transform: none; /* evita mayúsculas automáticas */
+  margin-left:10px;
+}
+
+.btn-primary3:hover {
+  background-color: #0d4b80 !important; /* un tono más oscuro para el hover */
+}
+
+    .bg-success {
+        background-color: #28a745 !important; /* Verde */
+    }
+
+    .bg-info {
+        background-color: #17a2b8 !important; /* Azul claro */
+    }
+
+    .bg-warning {
+        background-color: #ffc107 !important; /* Amarillo */
+    }
+
+    .card-global {
+                height: 450px; /* Ajusta según tus necesidades */
+                display: flex;
+                flex-direction: column;
+    margin-top:-25px;
+            }
+
+            /* Clase para la tarjeta negra específica del gráfico */
+            .card-graph {
+                height: 130%; /* Ajusta según el espacio que quieras para el gráfico */
+                display: flex;
+                align-items: center; /* Centra el gráfico verticalmente */
+                justify-content: center; /* Centra el gráfico horizontalmente */
+            }
+
+            /* Estilo para el canvas dentro de la tarjeta negra */
+            .chart-canvas {
+                width: 100%;
+                height: 100%;
+    }
+    .custom-card-body {
+                margin-top: 100px; /* Ajusta el valor según tus necesidades */
+    margin-left:20px;
+            }
+
+
+    .recurso {
+                display: inline-block;
+                width: 30%;
+                margin: 10px;
+                padding: 10px;
+                border: 1px solid #ccc;
+                text-align: center;
+            }
+            .recurso img {
+                max-width: 100px;
+                max-height: 100px;
+                margin-bottom: 10px;
+            }
+
+    .embed-responsive {
+            position: relative;
+            padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background-color: #000;
+        }
+        .embed-responsive-item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    .toast-center-center {
+                top: 50%;
+                left: 70%;
+                transform: translate(-50%, -50%);
+                min-width: 800px; /* Más grande */
+    min-height: 800px; /* Más grande */
+                opacity: 1; /* Menos transparente */
+            }
+            .toast-success .toast-message {
+                color: green;
+            }
+            .toast-error .toast-message {
+                color: red;
+            }
+            .toast {
+                font-size: 1.2em; /* Tamaño de fuente más grande */
+                padding: 20px; /* Más relleno */
+            }
+
+    .btn-mark-as-read {
+                padding: 5px 10px;
+                font-size: 12px;
+                border: 1px solid #ccc;
+                background-color: #1565a8 !important;
+                color: #333;
+                border-radius: 3px;
+                cursor: pointer;
+            }
+
+            .btn-mark-as-read:hover {
+                background-color: #0d4376 !important;
+                color: white !important;
+            }
+
+            /* Estilos para la pantalla de carga */
+
+
+    .notificaciones {
+        position: relative; /* o 'absolute' o 'fixed' si es necesario */
+        z-index: 9999999; /* Valor alto para asegurarte de que está por encima de otros elementos */
+    }
+    /* Estilo del ícono de campana */
+    .nav-item .fa-bell {
+        position: relative;
+        color: #6c757d;
+        transition: color 0.3s ease;
+    }
+
+    .nav-item .fa-bell:hover {
+        color: #495057;
+    }
+
+    /* Badge de notificaciones */
+    .nav-item .badge {
+        position: absolute;
+        top: -8px;
+        right: -10px;
+        font-size: 0.75rem;
+        padding: 4px 6px;
+        border-radius: 50%;
+        background-color: #f44336;
+        color: #fff;
+    }
+
+    /* Dropdown */
+    .dropdown-menu {
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    /* Estilo de cada notificación */
+    .dropdown-item {
+        border-radius: 0.375rem;
+        transition: background-color 0.2s ease;
+        padding: 12px 15px;
+    }
+
+    .dropdown-item:hover {
+        background-color: #f8f9fa;
+    }
+
+    /* Estilo del texto de la notificación */
+    .text-sm {
+        font-size: 0.875rem;
+        color: #343a40;
+        font-weight: 600;
+    }
+
+    .text-xs {
+        font-size: 0.75rem;
+        color: #6c757d;
+    }
+
+    /* Botón para marcar como leída */
+    .btn-mark-as-read {
+        color: #fff;
+        border: none;
+        padding: 4px 8px;
+        font-size: 0.75rem;
+        border-radius: 0.25rem;
+        cursor: pointer;
+        margin-left: 10px;
+        transition: background-color 0.2s ease;
+    }
+
+
+    /* Sin notificaciones */
+    .text-center span {
+        font-size: 0.875rem;
+        color: #6c757d;
+    }
+    /* Posiciona el badge a la izquierda */
+    .nav-item .badge {
+        font-size: 0.75rem;
+        padding: 4px 6px;
+        border-radius: 50%;
+        background-color: #f44336;
+        color: #fff;
+        margin-right: 10px; /* Separa el badge del icono */
+    }
+
+    /* Ajuste de icono de campana */
+    .nav-item .fa-bell {
+        color: #6c757d;
+        transition: color 0.3s ease;
+    }
+
+    .nav-item .fa-bell:hover {
+        color: #495057;
+    }
+    /* Estilo del ícono de cerrar sesión */
+    .nav-item .fa-sign-out {
+        position: relative;
+        color: #6c757d;
+        transition: color 0.3s ease;
+    }
+
+    .nav-item .fa-sign-out:hover {
+        color: #495057;
+    }
+        /* Estilos para los mensajes flash */
+    .flash-messages {
+        margin-bottom: 20px;
+    }
+
+    .flash {
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+    .flash.success {
+        background-color: #d4edda; /* Color de fondo para mensajes de éxito */
+        color: #155724; /* Color del texto para mensajes de éxito */
+        border: 1px solid #c3e6cb;
+    }
+
+    .flash.error {
+        background-color: #f8d7da; /* Color de fondo para mensajes de error */
+        color: #721c24; /* Color del texto para mensajes de error */
+        border: 1px solid #f5c6cb;
+    }
+
+    .navbar-brand {
+        display: flex;
+        align-items: center; /* Centra verticalmente */
+        justify-content: center; /* Centra horizontalmente */
+    }
+
+
+
+
+    /* Responsividad */
+    @media (max-width: 768px) {
+        .container {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .container {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .flash-messages {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 300px;
+            z-index: 1000;
+        }
+
+    .form-box {
+        border: 1px solid #ccc; /* Color y grosor del borde */
+        padding: 20px; /* Espacio interno */
+        border-radius: 5px; /* Esquinas redondeadas */
+        background-color: #f9f9f9; /* Color de fondo */
+        margin-top: 20px; /* Espacio superior */
+    }
+
+    .contenido {
+        margin: 20px;
+        font-family: 'Roboto';
+    }
+
+    .cont2 {
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border: 0px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        color: #333;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .btn-archivo-adjunto {
+        background-color: #45A049;
+        color: white;
+        padding: 5px 10px;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+    .btn-archivo-adjunto:hover {
+        background-color: #357c38; /* Color al pasar el ratón */
+        color: white; /* Mantén el mismo color del texto en hover */
+    }
+
+    .alert {
+        padding: 10px;
+        margin-top: 20px;
+        border-radius: 5px;
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+
+    /* Estilo para el botón de editar */
+        .edit-btn {
+            color: white;
+            background-color: #1565A8;
+            border-color: #1565A8;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin: 0; /* Quita márgenes */
+
+    .edit-btn:hover {
+        background-color: #0056b3; /* Color al pasar el ratón */
+    }
+
+    /* Estilos para los círculos de días restantes */
+    .circle {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-color: #f0f0f0;
+        font-size: 24px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+    }
+
+    /* Estilos de la tabla para pantallas grandes */
+        #area_tabla table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+
+        }
+
+        #area_tabla th {
+            padding: 12px;
+        text-align: left;
+        border: 0px solid #ddd;
+        background-color: #f2f2f2;
+        color: #333;
+        }
+
+        #area_tabla td {
+        padding: 12px;
+        text-align: left;
+        border: 0px solid #ddd;
+        }
+        /* Estilos generales */
+        .contenido, .contenido2 {
+            padding: 20px;
+            font-family: 'Roboto';
+        }
+        .contenido {
+                max-width: 1600px;
+                margin: 0 auto;
+
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+            }
+
+
+    .btn-mark-as-read {
+        color: #fff;
+        border: none;
+        padding: 4px 8px;
+        font-size: 0.75rem;
+        border-radius: 0.25rem;
+        cursor: pointer;
+        margin-left: 10px;
+        transition: background-color 0.2s ease;
+    }
+
+    .dropdown-item {
+        border-radius: 0.375rem;
+        transition: background-color 0.2s ease;
+        padding: 1px 15px !important;
+        margin-top:0px;
+    }
+
+
+
+
+
+
+
+    .custom-width-modal {
+    max-width: 600px; /* o el ancho que prefieras */
+    }
+
+    .btn-mark-as-read {
+    min-width: 28px !important;
+    padding: 3px 3px;
+    }
+    /* Modal tipo barra lateral derecha */
+    .modal-side-right {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    margin: 0 !important;
+    height: 100% !important;
+    max-width: 500px !important;
+    width: 100% !important;
+    z-index: 1055 !important;
+    transform: translateX(100%) !important;
+    transition: transform 0.3s ease-in-out !important;
+    pointer-events: none !important;
+    }
+
+    /* Cuando el modal se muestra */
+    .modal.show .modal-side-right {
+    transform: translateX(0);
+    pointer-events: auto;
+    }
+
+    /* Evitamos que Bootstrap lo sobrescriba */
+    .modal.fade .modal-dialog {
+    transition: none !important;
+    transform: none !important;
+    }
+
+    /* Ajustes al contenido del modal */
+    .modal-side-right .modal-content {
+    height: 100%;
+    border-radius: 0;
+    text-align: left;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+    }
+    /* Estilo del texto de la notificación */
+    .text-sm {
+        font-size: 0.75rem !important;
+        color: #000;
+        font-weight: 600;
+    }
+
+    .text-xs {
+        font-size: 0.70rem !important;
+        color: #6c757d;
+    }
+
+
+
+
+
+    @media (max-width: 576px) {
+        .dropdown-menu-mobile-half {
+        width: 50vw !important;
+        right: 0 !important;
+        left: auto !important;
+        }
+    }
+
+    .dropdown-menu-mobile-half {
+        width: 50vw !important; /* Ajusta al 50% del ancho de la ventana */
+        max-width: 400px;        /* Máximo ancho opcional */
+        min-width: 250px;        /* Mínimo opcional */
+        padding: 1rem;
+    }
+
+    .dropdown-menu-mobile-half .dropdown-item {
+        white-space: normal; /* Permite que el texto se ajuste a múltiples líneas */
+        word-wrap: break-word;
+        width: 100%;
+    }
+
+    .dropdown-menu-mobile-half .btn-mark-as-read {
+
+        padding: 0 5px;
+        font-size: 0.9rem;
+    }
+
+
+
+    </style>
+
+    </head>
+
+    <body class="g-sidenav-show  bg-gray-200">
+    <style>
+        @media (max-width: 768px) { /* Pantallas con ancho menor o igual a 768px */
+        .breadcrumb {
+            display: flex;
+            flex-direction: column; /* Apila los elementos en columna si hay otros hijos */
+            align-items: center;    /* Centra horizontalmente */
+            justify-content: center; /* Centra verticalmente si hay espacio */
+            text-align: center;     /* Centra el texto */
+            margin-left: 20%;         /* Asegura el centrado horizontal */
+        }
+
+        .breadcrumb h5 {
+            text-align: center; /* Centra específicamente el texto del <h5> */
+            display:none !important;
+        }
+        .logo-spinner{
+
+            display:none;
+        }
+        table {
+                margin-top: 0 !important;
+            }
+    }
+
+    @media (max-width: 768px) {
+        th:nth-child(1), td:nth-child(1),
+        th:nth-child(5), td:nth-child(5), /* Descripción */
+        th:nth-child(6), td:nth-child(6), /* Duración */
+        th:nth-child(7), td:nth-child(7), /* Archivo Adjunto */
+        th:nth-child(8), td:nth-child(8)  /* Editar */
+        {
+            display: none;
+        }
+
+        /* Ajustar el ancho de la tabla */
+        table {
+            width: 100%;
+        }
+
+        th, td {
+            font-size: 14px;
+            text-align: center; /* Centrar contenido */
+        }
+    }
+
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        font-size: 14px;
+    }
+
+    .pagination a, .pagination span {
+        margin: 0 5px;
+        padding: 8px 12px;
+        text-decoration: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        color: #333;
+    }
+
+    .pagination a:hover {
+        background-color: #f0f0f0;
+    }
+
+    .pagination .current {
+        font-weight: bold;
+        background-color: #ddd;
+        border-color: #bbb;
+    }
+
+    .pagination .disabled {
+        color: #aaa;
+        pointer-events: none;
+    }
+
+    .tag {
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-weight: 600;
+        color: #ffffff;
+    }
+    .tag_otras {
+        background-color: #475268;
+    }
+    .tag_fuerza {
+        background-color: #A1CED3;
+    }
+    .tag_consulta {
+        background-color: #FD9282;
+    }
+    .tag_default {
+        background-color: #eaa3ff;
+    }
+
+
+    </style>
+    <div class="modal fade" id="welcomeModal" tabindex="-1" role="dialog" aria-labelledby="welcomeModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="welcomeModalLabel">Bienvenido</h5>
+                    </div>
+                    <div class="modal-body" id="welcomeMessage">
+                        <!-- El mensaje de bienvenida se establecerá mediante JavaScript -->
+                    </div>
+                    <div class="modal-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    <!-- Menu HTML añadido de otro .html -->
+
+        {% include 'menu_user.html' %}
+
+
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg w-100">
+
+
+        <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+        <div class="container-fluid py-1 px-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                    <h5 class="font-weight-bolder mb-0">
+                        <i class="fas fa-calendar-times me-2" style="color: #000;"></i> <!-- Icono de vacaciones con espacio -->
+                        Mis Ausencias
+                    </h5>
+
+                </ol>
+                <div class="centered-message">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            <div class="flash-messages">
+                                {% for category, message in messages %}
+                                    <div class="flash {{ category }}">{{ message }}</div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    {% endwith %}
+                </div>
+            </nav>
+
+            <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+                <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                    <div class="input-group input-group-outline"></div>
+                </div>
+                <ul class="navbar-nav justify-content-end">
+                    <li class="nav-item d-flex align-items-center">
+
+
+
+
+    </li>
+
+
+
+
+
+                    <li class="nav-item px-3 d-flex align-items-center">
+                        <a href="javascript:;" class="nav-link text-body p-0"></a>
+                    </li>
+                    <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                        <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                            <div class="sidenav-toggler-inner" style="margin-right:10px;">
+                                <i class="sidenav-toggler-line"></i>
+                                <i class="sidenav-toggler-line"></i>
+                                <i class="sidenav-toggler-line"></i>
+                            </div>
+                        </a>
+                    </li>
+    <li class="nav-item dropdown pe-2 d-flex align-items-center">
+        <a href="javascript:;" class="nav-link text-body p-0 d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#notificacionesModal">
+            {% if notificaciones %}
+                <span class="badge bg-danger me-2">{{ notificaciones|length }}</span>
+            {% endif %}
+            <i class="fa fa-bell cursor-pointer" style="font-size: 1.5rem;"></i>
+        </a>
+    </li>
+            <li class="nav-item d-flex align-items-center">
+                <a href="/cerrar_sesion" class="nav-link text-body font-weight-bold px-0">
+                    <i class="fa fa-sign-out"style="font-size: 1.5rem;"></i>
+        </a>
+    </li>
+
+            </ul>
+            </div>
+        </div>
+        </nav>
+        <!-- Modal -->
+    <div class="modal fade" id="notificacionesModal" tabindex="-1" aria-labelledby="notificacionesModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-side-right" style="  position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    margin: 0 !important;
+    min-height: 150% !important;
+    max-width: 500px !important;
+    width: 100% !important;
+    z-index: 1055 !important;
+
+    transition: transform 0.3s ease-in-out !important;
+    pointer-events: none !important;">
+
+        <div class="modal-content" style="min-height:100%;">
+        <div class="modal-header">
+            <h5 class="modal-title" id="notificacionesModalLabel">
+            <i class="fa fa-bell cursor-pointer" style="font-size: 1.5rem;"></i> Notificaciones
+            </h5>
+            <button type="button" class="btn m-0" data-bs-dismiss="modal" aria-label="Cerrar">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="modal-body text-start" style="min-height:100%;">
+            <form action="{{ url_for('marcar_notificaciones_leidas') }}" method="post">
+            <button type="submit" class="btn btn-primary3 btn-sm mb-3" style="
+        color: #fff;">Marcar todas como leídas</button>
+            </form>
+
+            {% for notificacion in notificaciones %}
+            <div class="mb-3 border-bottom pb-2">
+            <h6 class="text-sm font-weight-normal mb-1">
+                {{ notificacion.concepto }}
+                {% if not notificacion.leida %}
+                <button class="btn btn-link btn-mark-as-read ms-2" style="min-width: 32px;
+        color: #fff;" data-id="{{ notificacion.id }}">
+                    <i class="fa-solid fa-check" style="font-size: 1.2rem;"></i>
+                </button>
+                {% endif %}
+            </h6>
+            <p class="text-xs text-secondary mb-0">
+                <i class="fa fa-clock me-1"></i>
+                {{ notificacion.fecha_hora.strftime('%d/%m/%Y %H:%M') }}
+            </p>
+            </div>
+            {% endfor %}
+
+            {% if notificaciones|length == 0 %}
+            <div class="text-start">
+            <span class="text-sm">No tienes notificaciones</span>
+            </div>
+            {% endif %}
+        </div>
+        </div>
+    </div>
+    </div>
+
+        <h5 class="font-weight-bolder mb-0 d-md-none text-start">
+                        <i class="fas fa-calendar-times me-2" style="color: #000; margin-left:5px;"></i> <!-- Icono de vacaciones con espacio -->
+                        Mis Ausencias
+                    </h5>
+        <!-- End Navbar -->
+
+        <!-- Cuerpo del HTML -->
+        <div id="successMessage" class="alert alert-success" style="display: none;"></div>
+        <div id="errorMessage" class="alert alert-danger" style="display: none;"></div>
+
+    <div class="contenido" style="margin-top: 50px;">
+        <div id="area_tabla">
+            <table border="0" style="width: 100%; border-collapse: collapse;">
+                <tr style="font-size: 12px; border-bottom: 1px solid #ddd;">
+                    <th><i class="fas fa-user" style="margin-right: 8px;"></i>Nombre</th>
+                    <th><i class="fas fa-calendar-day" style="margin-right: 8px;"></i>Fecha de Ausencia</th>
+                    <th><i class="fas fa-clock" style="margin-right: 8px;"></i>Hora</th>
+                    <th><i class="fas fa-info-circle" style="margin-right: 8px;"></i>Motivo</th>
+                    <th><i class="fas fa-align-left" style="margin-right: 8px;"></i>Descripción</th>
+                    <th><i class="fas fa-clock" style="margin-right: 8px;"></i>Duración</th>
+                    <th><i class="fas fa-paperclip" style="margin-right: 8px;"></i>Justificante</th>
+                    <th><i class="fas fa-edit" style="margin-right: 8px;"></i>Editar</th>
+                </tr>
+{% for absence in user_absences.items %}
+<tr style="font-size: 12px; border-bottom: 1px solid #ddd;">
+    <td>{{ absence.user.nombre }} {{ absence.user.primer_apellido }}</td>
+    <td>
+        {{ absence.start_date.strftime('%d-%m-%Y') }}
+        {% if absence.end_date and absence.end_date != absence.start_date %}
+            <br><small>→ {{ absence.end_date.strftime('%d-%m-%Y') }}</small>
+        {% endif %}
+    </td>
+
+    <!-- Si es baja laboral, no mostrar hora -->
+    {% if absence.absence_type == 'Baja laboral' %}
+        <td>—</td>
+    {% else %}
+        <td>{{ absence.start_time.strftime('%H:%M') }}</td>
+    {% endif %}
+
+    {% if absence.absence_type == 'Consulta médica' %}
+        <td><span class="tag tag_consulta">{{ absence.absence_type }}</span></td>
+    {% elif absence.absence_type == 'Otras causas' %}
+        <td><span class="tag tag_otras">{{ absence.absence_type }}</span></td>
+    {% elif absence.absence_type == 'Causa fuerza mayor' %}
+        <td><span class="tag tag_fuerza">{{ absence.absence_type }}</span></td>
+    {% elif absence.absence_type == 'Baja laboral' %}
+        <td><span class="tag tag_baja" style="background-color: #b83d3d; color: white;">Baja laboral</span></td>
+    {% else %}
+        <td><span class="tag tag_default">{{ absence.absence_type }}</span></td>
+    {% endif %}
+
+    <td class="description fw-bolder" title="{{ absence.description }}"
+        style="cursor: pointer;"
+        data-bs-toggle="modal"
+        data-bs-target="#descriptionModal{{ absence.id }}">
+        <i class="fa-solid fa-eye pe-2"></i>{{ absence.description|truncate(30, True) }}
+    </td>
+
+    <!-- Modal de descripción -->
+    <div class="modal fade" id="descriptionModal{{ absence.id }}" tabindex="-1" aria-labelledby="descriptionModalLabel{{ absence.id }}" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="descriptionModalLabel{{ absence.id }}">
+                        <i class="fa-solid fa-tag me-1"></i> Descripción Completa
+                    </h5>
+                    <button type="button" class="btn m-0" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-body mb-4" style="word-wrap: break-word; white-space: normal;">
+                    {{ absence.description }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Si es baja laboral, no mostrar duración -->
+    {% if absence.absence_type == 'Baja laboral' %}
+        <td>—</td>
+    {% else %}
+        <td>{{ absence.duration_hours }}</td>
+    {% endif %}
+
+    <td>
+        {% if absence.file_name %}
+            <a href="{{ url_for('view_absence_file', absence_id=absence.id) }}" target="_blank" class="btn-archivo-adjunto text-decoration-none">
+                <i class="fa-solid fa-download pe-1"></i> JUSTIFICANTE
+            </a>
+        {% else %}
+            No hay archivo adjunto
+        {% endif %}
+    </td>
+
+    <td>
+        <button type="button" class="btn m-0 p-0"
+        data-bs-toggle="modal" data-bs-target="#editAbsenceModal"
+        data-absence-id="{{ absence.id }}"
+        data-absence-date="{{ absence.start_date.strftime('%Y-%m-%d') }}"
+        data-absence-end-date="{{ absence.end_date.strftime('%Y-%m-%d') }}"
+        data-absence-type="{{ absence.absence_type }}"
+        data-absence-description="{{ absence.description }}"
+        data-absence-duration="{{ absence.duration_hours }}"
+        data-absence-start-time="{{ absence.start_time.strftime('%H:%M') }}">
+    <i class="fas fa-edit"></i>
+</button>
+
+    </td>
+</tr>
+{% endfor %}
+
+
+            </table>
+
+            <div class="flash-messages">
+                {% with messages = get_flashed_messages(with_categories=True) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+    </div>
+    {% if user_absences.pages > 1 %}
+    <nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+
+        {% set total_pages = user_absences.pages %}
+        {% set current_page = user_absences.page %}
+        {% set max_visible_pages = 8 %}
+
+        <!-- Primera y anterior -->
+        {% if user_absences.has_prev %}
+        <li class="page-item">
+            <a class="page-link" href="{{ url_for('user_absence_history', page=1) }}">&lt;&lt;</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="{{ url_for('user_absence_history', page=user_absences.prev_num) }}">&laquo;</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled"><span class="page-link">&lt;&lt;</span></li>
+        <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+        {% endif %}
+
+        <!-- Números de página -->
+        {% if total_pages <= max_visible_pages %}
+            {% for p in range(1, total_pages + 1) %}
+            {% if p == current_page %}
+                <li class="page-item active"><span class="page-link">{{ p }}</span></li>
+            {% else %}
+                <li class="page-item">
+                <a class="page-link" href="{{ url_for('user_absence_history', page=p) }}">{{ p }}</a>
+                </li>
+            {% endif %}
+            {% endfor %}
+        {% else %}
+            {% if current_page <= max_visible_pages // 2 %}
+            {% for p in range(1, max_visible_pages) %}
+                {% if p == current_page %}
+                <li class="page-item active"><span class="page-link">{{ p }}</span></li>
+                {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('user_absence_history', page=p) }}">{{ p }}</a>
+                </li>
+                {% endif %}
+            {% endfor %}
+            <li class="page-item disabled"><span class="page-link">...</span></li>
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('user_absence_history', page=total_pages) }}">{{ total_pages }}</a>
+            </li>
+            {% elif current_page > total_pages - (max_visible_pages // 2) %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('user_absence_history', page=1) }}">1</a>
+            </li>
+            <li class="page-item disabled"><span class="page-link">...</span></li>
+            {% for p in range(total_pages - max_visible_pages + 1, total_pages + 1) %}
+                {% if p == current_page %}
+                <li class="page-item active"><span class="page-link">{{ p }}</span></li>
+                {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('user_absence_history', page=p) }}">{{ p }}</a>
+                </li>
+                {% endif %}
+            {% endfor %}
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('user_absence_history', page=1) }}">1</a>
+            </li>
+            <li class="page-item disabled"><span class="page-link">...</span></li>
+            {% for p in range(current_page - 3, current_page + 4) %}
+                {% if p == current_page %}
+                <li class="page-item active"><span class="page-link">{{ p }}</span></li>
+                {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('user_absence_history', page=p) }}">{{ p }}</a>
+                </li>
+                {% endif %}
+            {% endfor %}
+            <li class="page-item disabled"><span class="page-link">...</span></li>
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('user_absence_history', page=total_pages) }}">{{ total_pages }}</a>
+            </li>
+            {% endif %}
+        {% endif %}
+
+        <!-- Siguiente y última -->
+        {% if user_absences.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="{{ url_for('user_absence_history', page=user_absences.next_num) }}">&raquo;</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="{{ url_for('user_absence_history', page=total_pages) }}">&gt;&gt;</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+        <li class="page-item disabled"><span class="page-link">&gt;&gt;</span></li>
+        {% endif %}
+
+    </ul>
+    </nav>
+    {% endif %}
+
+
+    <div class="modal fade" id="editAbsenceModal" tabindex="-1" aria-labelledby="editAbsenceModalLabel" aria-hidden="true">
+        <div id="successMessage" class="alert alert-success" style="display: none; max-width: 200px; margin: 0 auto; text-align: center;"></div>
+    <div id="errorMessage" class="alert alert-danger" style="display: none; max-width: 200px; margin: 0 auto; text-align: center;"></div>
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="editAbsenceModalLabel">Editar Ausencia</h5>
+            <button type="button" class="btn m-0" data-bs-dismiss="modal" aria-label="Cerrar">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+    <div class="modal-body">
+    <form id="editAbsenceForm" enctype="multipart/form-data" style="display: flex; flex-wrap: wrap; gap: 20px;">
+        <input type="hidden" id="absenceId" name="absenceId">
+
+        <!-- Fechas -->
+        <div style="flex: 1 1 48%; display: flex; flex-direction: column;">
+            <label for="absenceDate" style="font-weight: bold; color: #343a40;">
+                <i class="fas fa-calendar-day me-2"></i> Día de inicio:
+            </label>
+            <input type="date" id="absenceDate" name="absenceDate" required
+                   style="padding: 10px; border: 1px solid #ced4da; border-radius: 5px;">
+
+            <label for="absenceEndDate" class="mt-2" style="font-weight: bold; color: #343a40;">
+                <i class="fas fa-calendar-day me-2"></i> Día de finalización:
+            </label>
+            <input type="date" id="absenceEndDate" name="absenceEndDate"
+                   style="padding: 10px; border: 1px solid #ced4da; border-radius: 5px;">
+        </div>
+
+        <!-- Motivo y horas -->
+        <div style="flex: 1 1 48%; display: flex; flex-direction: column;">
+            <label for="absenceType" style="font-weight: bold; color: #343a40;">
+                <i class="fas fa-question-circle me-2"></i> Motivo:
+            </label>
+            <select id="absenceType" name="absenceType" required
+                    style="padding: 10px; border: 1px solid #ced4da; border-radius: 5px; margin-bottom: 15px;">
+                <option value="" disabled selected hidden>Seleccione un motivo</option>
+                <option value="Consulta médica">Consulta médica</option>
+                <option value="Baja laboral">Baja laboral</option>
+                <option value="Otras causas">Otras causas</option>
+                <option value="Causa fuerza mayor">Causa de fuerza mayor</option>
+            </select>
+
+            <div class="horas-container" style="display: flex; gap: 10px;">
+                <div style="flex: 1;">
+                    <label for="start_time" style="font-weight: bold; color: #343a40;">
+                        <i class="fas fa-clock me-2"></i> Hora inicio:
+                    </label>
+                    <input type="time" id="start_time" name="start_time" step="60"
+                           style="padding: 10px; border: 1px solid #ced4da; border-radius: 5px; width: 100%;">
+                </div>
+
+                <div style="flex: 1;">
+                    <label for="end_time" style="font-weight: bold; color: #343a40;">
+                        <i class="fas fa-clock me-2"></i> Hora fin:
+                    </label>
+                    <input type="time" id="end_time" name="end_time" step="60"
+                           style="padding: 10px; border: 1px solid #ced4da; border-radius: 5px; width: 100%;">
+                </div>
+            </div>
+        </div>
+
+        <!-- Descripción -->
+        <div style="width: 100%;">
+            <label for="absenceDescription" style="font-weight: bold; color: #343a40;">
+                <i class="fas fa-align-left me-2"></i> Descripción:
+            </label>
+            <textarea id="absenceDescription" name="absenceDescription" rows="3"
+                      style="resize: none; padding: 15px; border: 1px solid #ced4da; border-radius: 5px; width: 100%;" required></textarea>
+        </div>
+
+        <!-- Botones -->
+        <div style="width: 100%; display: flex; justify-content: center; margin-top: 20px;">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    style="color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                <i class="fas fa-times me-1"></i> Cerrar
+            </button>
+
+            <button type="submit" class="btn btn-primary" id="saveAbsenceChanges"
+                    style="color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-left: 10px;">
+                <i class="fas fa-save me-1"></i> Guardar
+            </button>
+        </div>
+    </form>
+</div>
+
+
+
+
+        </div>
+    </div>
+    </div>
+
+
+
+
+
+    <script src="/static/assets/js/core/popper.min.js"></script>
+    <script src="/static/assets/js/core/bootstrap.min.js"></script>
+    <script src="/static/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="/static/assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="/static/assets/js/plugins/chartjs.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
+    <script src="https://buttons.github.io/buttons.js" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script>
+const modal = document.getElementById('editAbsenceModal');
+
+modal.addEventListener('show.bs.modal', function (event) {
+    const button = event.relatedTarget;
+
+    // Obtener los atributos del botón
+    const absenceId = button.getAttribute('data-absence-id');
+    const absenceDate = button.getAttribute('data-absence-date');
+    const absenceEndDate = button.getAttribute('data-absence-end-date');
+    const absenceType = button.getAttribute('data-absence-type');
+    const absenceDescription = button.getAttribute('data-absence-description');
+    const absenceDuration = parseFloat(button.getAttribute('data-absence-duration') || 0);
+    const absenceStartTime = button.getAttribute('data-absence-start-time');
+
+    // Rellenar los campos
+    modal.querySelector('#absenceId').value = absenceId || '';
+    modal.querySelector('#absenceDate').value = absenceDate || '';
+    modal.querySelector('#absenceEndDate').value = absenceEndDate || absenceDate || '';
+    modal.querySelector('#absenceType').value = absenceType || '';
+    modal.querySelector('#absenceDescription').value = absenceDescription || '';
+    modal.querySelector('#start_time').value = absenceStartTime || '';
+
+    // Asegurar que el campo de fecha de fin siempre se muestre
+    const endDateContainer = modal.querySelector('#absenceEndDate').closest('div');
+    endDateContainer.style.display = 'flex';
+
+    // Calcular hora de fin si hay duración
+    if (absenceStartTime && absenceDuration && absenceType !== 'Baja laboral') {
+        const [hours, minutes] = absenceStartTime.split(":").map(Number);
+        const startDate = new Date();
+        startDate.setHours(hours);
+        startDate.setMinutes(minutes);
+        startDate.setSeconds(0);
+
+        const endDate = new Date(startDate.getTime() + absenceDuration * 60 * 60 * 1000);
+        const endHours = String(endDate.getHours()).padStart(2, "0");
+        const endMinutes = String(endDate.getMinutes()).padStart(2, "0");
+        const formattedEndTime = `${endHours}:${endMinutes}`;
+
+        modal.querySelector('#end_time').value = formattedEndTime;
+    }
+
+    // Si el tipo es "Baja laboral", ocultar horas y asignar automáticamente
+    const horasContainer = modal.querySelector('.horas-container');
+    const inicio = modal.querySelector('#start_time');
+    const fin = modal.querySelector('#end_time');
+
+    if (absenceType === 'Baja laboral') {
+        horasContainer.style.display = 'none';
+        inicio.value = '00:00';
+        fin.value = '23:59';
+    } else {
+        horasContainer.style.display = 'flex';
+    }
+});
+</script>
+
+
+    <script>
+    $(document).ready(function () {
+        $('#saveAbsenceChanges').on('click', function (event) {
+            event.preventDefault();
+
+            var formData = new FormData($('#editAbsenceForm')[0]);
+
+            $.ajax({
+                url: '/edit_absence',
+                method: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    $('#successMessage').text(response.message).show();
+                    $('#editAbsenceModal').modal('hide');
+
+                    // Actualizar la duración en la tabla sin recargar la página
+                    var absenceId = $('#absenceId').val();
+                    $(`#absenceDuration-${absenceId}`).text(response.duration);
+
+                    setTimeout(function () {
+                        location.reload();
+                    }, 3000);
+                },
+                error: function (xhr) {
+                    var errorMessage = xhr.responseJSON ? xhr.responseJSON.message : "Error desconocido";
+                    $('#errorMessage').text(errorMessage).show();
+                }
+            });
+        });
+    });
+
+    </script>
+
+    <script src="/static/assets/js/core/popper.min.js"></script>
+        <script src="/static/assets/js/core/bootstrap.min.js"></script>
+        <script src="/static/assets/js/plugins/perfect-scrollbar.min.js"></script>
+        <script src="/static/assets/js/plugins/smooth-scrollbar.min.js"></script>
+        <script src="/static/assets/js/plugins/chartjs.min.js"></script>
+        <script src="/static/assets/js/material-dashboard.min.js?v=3.1.0"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" defer></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
+        <script src="https://buttons.github.io/buttons.js" async defer></script>
+
+    <script>
+            $(document).ready(function() {
+                $('.btn-mark-as-read').on('click', function() {
+                    var notificacionId = $(this).data('id');
+                    var $notificationDiv = $('#notificacion-' + notificacionId);
+
+                    $.ajax({
+                        url: '/marcar_leida/' + notificacionId,
+                        type: 'POST',
+                        success: function(response) {
+                            if (response.status === 'success') {
+                                // Elimina la notificación del DOM
+                                $notificationDiv.remove();
+                                location.reload();
+                            }
+                            // No hay necesidad de manejar el caso de error aquí, ya que se puede manejar en el backend
+                        },
+                        error: function(xhr, status, error) {
+                            // Opcional: manejar errores en la solicitud
+                            console.error('Error al marcar la notificación como leída:', error);
+                        }
+                    });
+                });
+            });
+        </script>
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var dropdownToggle = document.querySelectorAll('[data-bs-toggle="dropdown"]');
+        dropdownToggle.forEach(function(dropdown) {
+        dropdown.addEventListener('click', function(event) {
+            event.preventDefault();
+            var dropdownMenu = new bootstrap.Dropdown(dropdown);
+            dropdownMenu.toggle();
+        });
+        });
+    });
+    </script>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+        <script>
+            // Custom script to close the dropdown when clicking outside
+            $(document).on('click', function(event) {
+                var $trigger = $("#dropdownMenuButton");
+                if($trigger !== event.target && !$trigger.has(event.target).length){
+                    $('.dropdown-menu').removeClass('show');
+                }
+            });
+
+            // Ensure dropdown stays open when clicking inside
+            $('#dropdownMenuButton').on('click', function(event) {
+                event.stopPropagation();
+                var $menu = $(this).next('.dropdown-menu');
+                $menu.toggleClass('show');
+            });
+
+            // Close the dropdown if clicking inside the dropdown menu
+            $('.dropdown-menu').on('click', function(event) {
+                event.stopPropagation();
+            });
+        </script>
+
+<script>
+$(document).ready(function() {
+    $('#absenceType').on('change', function() {
+        const tipo = $(this).val();
+        const horasContainer = $('.horas-container');
+        const inicio = $('#start_time');
+        const fin = $('#end_time');
+
+        if (tipo === 'Baja laboral') {
+            horasContainer.hide();
+            inicio.val('00:00');
+            fin.val('23:59');
+        } else {
+            horasContainer.show();
+            inicio.val('');
+            fin.val('');
+        }
+    });
+});
+</script>
+
+    </body>
+    </html>

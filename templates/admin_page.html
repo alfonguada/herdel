@@ -1,0 +1,2338 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionaempresa</title>
+    <link rel="icon" href="{{ url_for('static', filename='logo_empresa.png') }}" type="image/png">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <!-- Nucleo Icons -->
+  <link href="/static/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="/static/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <!-- CSS Files -->
+  <link id="pagestyle" href="/static/assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
+  <!-- Nepcha Analytics (nepcha.com) -->
+  <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
+
+
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.9/index.global.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.9/locales/es.min.js"></script>
+    <!-- Puedes enlazar tu archivo CSS para estilos aquí -->
+<script src="https://kit.fontawesome.com/3da862d4a6.js" crossorigin="anonymous"></script>
+
+ <style>
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+}
+
+#counter {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+
+    input, button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin-top: 10px;
+    }
+
+
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700);
+
+
+#prog-bar-cont {
+
+  background: gainsboro;
+  width: 75vw;
+  height: 2.5em;
+  padding: 0.5em;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  border-radius: 50px;
+  box-sizing: border-box;
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.75) inset, 0 0 4px 0 rgba(0, 0, 0, 0.5);
+}
+#prog-bar-cont #prog-bar {
+  background: #000;
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset, 0 0 1px 3px rgba(255, 255, 255, 0.75) inset;
+  background: transparent;
+}
+#prog-bar-cont #prog-bar:before {
+  border-radius: 50px;
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3) inset, 0 0 5px 2px rgba(255, 255, 255, 0.8) inset;
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+}
+#prog-bar-cont #prog-bar:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 2px;
+  width: 96%;
+  left: 50%;
+  margin-left: -48%;
+  border-radius: 20px;
+  height: 10px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.85) 30%, transparent 120%);
+}
+#prog-bar-cont #prog-bar #background {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(-90deg, violet, #30b3fc, #70dc23, yellow, orange, #ff1076);
+  -webkit-clip-path: inset(0 100% 0 0);
+  clip-path: inset(0 100% 0 0);
+  transition: all 3s;
+  -webkit-transition: all 3s;
+}
+#prog-bar-cont #prog-bar #background:before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background-image: repeating-linear-gradient(-45deg, transparent, transparent 10px, #000 10px, #000 20px);
+  opacity: 0.75;
+  mix-blend-mode: overlay;
+  border-radius: 50px;
+}
+#prog-bar-cont:hover #prog-bar #background {
+  -webkit-clip-path: inset(0 0 0 0);
+  clip-path: inset(0 0 0 0);
+}
+
+
+ #prog-bar-cont {
+margin-top:40px;
+      position: relative;
+      width: 80%;
+      height: 40px; /* Altura de la barra de progreso */
+margin-bottom:100px;
+    }
+
+    #prog-bar {
+
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background-color: #e0e0e0;
+    }
+
+    #background {
+    height: 100%;
+    background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+    clip-path: inset(0 100% 0 0); /* Inicialmente escondido */
+    -webkit-clip-path: inset(0 100% 0 0);
+    transition: clip-path 0.5s, -webkit-clip-path 0.5s;
+}
+
+    #trophy {
+      position: absolute;
+      top: -100px; /* Ajusta esto según sea necesario */
+      left: 50%; /* Centrar la imagen horizontalmente */
+      transform: translateX(-50%);
+      width: 100px; /* Ajusta el tamaño según sea necesario */
+      height: 100px;
+}
+
+#all{
+margin-top: 80px;
+margin-bottom:-20px;
+
+}
+
+
+ h3 {
+      text-align: center;
+margin-top: -75px;
+margin-bottom:65px;
+    }
+
+
+.embed-responsive {
+        position: relative;
+        padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+        background-color: #000;
+    }
+    .embed-responsive-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+.card {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column; /* Asegura que el contenido y el footer se alineen verticalmente */
+    height: 100%; /* Asegura que la tarjeta ocupe todo el alto disponible */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+        .card-header {
+            background-color: transparent;
+            border-bottom: none !important;
+padding: 15px; /* Asegura suficiente espacio alrededor del título */
+        }
+        .card-body {
+            padding: 15px;
+
+
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .footer-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .footer-link a {
+            color: #4C94E0;
+            text-decoration: none;
+        }
+        .footer-link a:hover {
+            text-decoration: underline;
+        }
+h3 {
+            margin-top:-15px;/* Ajusta el espacio debajo del título */
+        }
+.card-header h3 {
+            margin-bottom: 15px; /* Ajusta el espacio debajo del título */
+        }
+
+.events-card,
+.news-card,
+.prog-card {
+    position: relative;
+    max-height: 600px; /* Altura máxima para las tarjetas de eventos y noticias */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede la altura máxima */
+}
+.summary-card{
+    position: relative;
+    max-height: 400px; /* Altura máxima para las tarjetas de eventos y noticias */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede la altura máxima */
+}
+
+.footer-link {
+    position: relative; /* Necesario para que el footer se alinee al final del card */
+    text-align: center;
+    margin-top: auto; /* Empuja el footer al fondo de la tarjeta */
+    background-color: #f8f9fa; /* Fondo del footer */
+    padding: 10px;
+    border-top: 1px solid #e9ecef; /* Línea superior del footer */
+}
+        .footer-link a {
+            color: #6c6c6c;
+            text-decoration: none;
+        }
+        .footer-link a:hover {
+            text-decoration: underline;
+        }
+
+
+.card-body {
+    padding: 15px;
+    flex: 1; /* Esto hace que el cuerpo de la tarjeta ocupe todo el espacio disponible */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede el alto disponible */
+
+}
+
+
+#user-distribution-card {
+    height: 450px; /* Ajusta la altura total de la tarjeta */
+}
+
+#user-distribution-card .card-header {
+    height: 350px; /* Ajusta la altura del encabezado de la tarjeta para dejar espacio al gráfico */
+    padding: 0; /* Elimina el relleno para ajustar el tamaño */
+    overflow: hidden; /* Asegura que el contenido no se desborde */
+}
+
+#user-distribution-card .card-body {
+    height: calc(100% - 150px); /* Ajusta la altura del cuerpo de la tarjeta */
+    padding: 10px; /* Espacio interno del cuerpo de la tarjeta */
+    overflow: auto; /* Agrega desplazamiento si el contenido excede la altura disponible */
+margin-left:10px;
+}
+
+#user-distribution-card .chart {
+    height: 100%; /* Ajusta la altura del contenedor del gráfico */
+    width: 100%; /* Ajusta el ancho del contenedor del gráfico */
+}
+
+#user-distribution-card .chart-canvas {
+    height: 100% !important; /* Asegura que el gráfico ocupe el 100% del contenedor */
+    width: 100% !important; /* Asegura que el gráfico ocupe el 100% del contenedor */
+}
+
+#user-distribution-card .chart {
+    height: 300px; /* Ajusta la altura del contenedor del gráfico */
+    width: 300px; /* Ajusta el ancho del contenedor del gráfico */
+    display: flex; /* Utiliza flexbox para centrar el gráfico */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+margin-left:80px;
+}
+
+
+
+/* Estilos para la tarjeta de resumen */
+#summary-card {
+    display: flex;
+    flex-direction: column;
+    height: 600px; /* Ajusta la altura total de la tarjeta */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative; /* Necesario para el posicionamiento absoluto del pie de página */
+margin-top:-20px;
+
+}
+
+#summary-card .card-body {
+    flex: 1; /* Ocupa el espacio disponible */
+
+    overflow-y: auto; /* Desplazamiento vertical si es necesario */
+}
+
+#summary-card .card-footer {
+    background-color: #f8f9fa; /* Fondo del pie de página */
+    padding: 10px; /* Espacio interno del pie de página */
+    border-top: 1px solid #e9ecef; /* Línea superior del pie de página */
+ /* Centra el texto en el pie de página */
+    margin-top: auto; /* Empuja el pie de página hacia el fondo */
+}
+
+/* Estilos para los contadores */
+.counter-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido verticalmente */
+    border: 1px solid #e0e0e0; /* Borde para separar los contadores */
+    border-radius: 8px; /* Esquinas redondeadas */
+    padding: 5px; /* Reducir el padding */
+    color: #ffffff; /* Color del texto */
+}
+
+.counter-header {
+    position: relative;
+    height: 50px; /* Reducir la altura del encabezado */
+    padding: 0;
+    overflow: hidden; /* Evita el desbordamiento */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
+.counter-body, .counter-body2 {
+    padding: 5px; /* Reducir el padding del cuerpo del contador */
+    text-align: center; /* Centra el texto en el cuerpo */
+}
+
+.counter-body h6, .counter-body2 h6 {
+    font-size: 14px; /* Reducir el tamaño de la fuente del título */
+}
+
+.counter-body p, .counter-body2 p {
+    font-size: 12px; /* Reducir el tamaño de la fuente del párrafo */
+}
+
+.bg-primary {
+    background-color: #4C94E0 !important; /* Azul */
+}
+.btn-primary3 {
+    background-color: #a965f5 !important; /* Morado */
+    color:white;
+}
+.btn-primary3:hover {
+    background-color: #a965f5 !important; /* Morado */
+    color:white;
+}
+
+.bg-success {
+    background-color: #28a745 !important; /* Verde */
+}
+
+.bg-info {
+    background-color: #17a2b8 !important; /* Azul claro */
+}
+
+.bg-warning {
+    background-color: #ffc107 !important; /* Amarillo */
+}
+
+  .card-global {
+            height: 450px; /* Ajusta según tus necesidades */
+            display: flex;
+            flex-direction: column;
+margin-top:-25px;
+        }
+
+        /* Clase para la tarjeta negra específica del gráfico */
+        .card-graph {
+            height: 130%; /* Ajusta según el espacio que quieras para el gráfico */
+            display: flex;
+            align-items: center; /* Centra el gráfico verticalmente */
+            justify-content: center; /* Centra el gráfico horizontalmente */
+        }
+
+        /* Estilo para el canvas dentro de la tarjeta negra */
+        .chart-canvas {
+            width: 100%;
+            height: 100%;
+}
+.custom-card-body {
+            margin-top: 100px; /* Ajusta el valor según tus necesidades */
+margin-left:20px;
+        }
+
+
+.recurso {
+            display: inline-block;
+            width: 30%;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        .recurso img {
+            max-width: 100px;
+            max-height: 100px;
+            margin-bottom: 10px;
+        }
+
+.embed-responsive {
+        position: relative;
+        padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+        background-color: #000;
+    }
+    .embed-responsive-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+ .toast-center-center {
+            top: 50%;
+            left: 70%;
+            transform: translate(-50%, -50%);
+            min-width: 800px; /* Más grande */
+min-height: 800px; /* Más grande */
+            opacity: 1; /* Menos transparente */
+        }
+        .toast-success .toast-message {
+            color: green;
+        }
+        .toast-error .toast-message {
+            color: red;
+        }
+        .toast {
+            font-size: 1.2em; /* Tamaño de fuente más grande */
+            padding: 20px; /* Más relleno */
+        }
+
+.btn-mark-as-read {
+            padding: 5px 10px;
+            font-size: 12px;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            color: #333;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .btn-mark-as-read:hover {
+            background-color: #e0e0e0;
+            color: white !important;
+        }
+
+        /* Estilos para la pantalla de carga */
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+.container{
+   margin-bottom: 70px; /* Añadir margen inferior a la sección de ranking */
+margin-top:-20px;
+width: 100%; /* Ocupa el 100% del ancho disponible */
+   max-width: 100%; /* Asegúrate de que el ancho máximo sea 100% */
+
+}
+.ranking-container {
+
+    max-height: 250px; /* Ajusta la altura según sea necesario */
+    overflow-y: auto;
+overflow-x: hidden;
+    padding-right: 15px; /* Ajusta el padding para que no corte el contenido */
+
+}
+
+/* Opcional: Estilos para la barra de desplazamiento */
+.ranking-container::-webkit-scrollbar {
+    width: 12px;
+}
+
+.ranking-container::-webkit-scrollbar-track {
+    background: #9f9f9f;
+background-image: linear-gradient(195deg, #9f9f9f 50%, #fff 150%)
+}
+
+.ranking-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.ranking-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+  .table {
+        max-width: 720px; /* Limita el ancho máximo */
+min-width: 720px;
+        table-layout: fixed; /* Asegura que se respete el ancho máximo */
+    }
+
+    .table td, .table th {
+        overflow: hidden; /* Oculta el contenido que excede el ancho */
+        text-overflow: ellipsis; /* Muestra puntos suspensivos para el texto que excede */
+        white-space: nowrap; /* Previene el salto de línea */
+    }
+
+
+
+.card {
+
+
+    background-clip: padding-box !important;
+}
+.h4{
+text-align:center;
+align-items:center;
+}
+h5 {
+    text-align: center;
+}
+.centered-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+
+            font-weight: bold;
+
+        }
+.btn-link {
+    color: #4C94E0; /* Color inicial del enlace */
+    text-decoration: none; /* Opcional: quitar subrayado del enlace */
+    transition: color 0.3s; /* Suavizar la transición del color */
+}
+
+/* Estilo de hover para el enlace de eventos */
+.btn-link:hover {
+    color: #6f42c1; /* Color morado en hover */
+    text-decoration: underline; /* Opcional: añadir subrayado en hover */
+}
+
+
+
+        #chartdiv {
+            width: 150%;
+            height: 100px;
+        }
+
+.notificaciones {
+    position: relative; /* o 'absolute' o 'fixed' si es necesario */
+    z-index: 9999999 !important; /* Valor alto para asegurarte de que está por encima de otros elementos */
+}
+
+.dropdown-menu.fade {
+    opacity: 1 !important;
+}
+
+/* Estilo del ícono de campana */
+.nav-item .fa-bell {
+    position: relative;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-bell:hover {
+    color: #495057;
+}
+
+/* Badge de notificaciones */
+.nav-item .badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    font-size: 0.25rem;
+    padding: 4px 6px;
+    border-radius: 50%;
+    background-color: #f44336;
+    color: #fff;
+}
+
+/* Dropdown */
+.dropdown-menu {
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Estilo de cada notificación */
+.dropdown-item {
+    border-radius: 0.375rem;
+    transition: background-color 0.2s ease;
+    padding: 1px 15px !important;
+    margin-top:0px;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+
+/* Botón para marcar como leída */
+.btn-mark-as-read {
+    background: #1565a8;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-mark-as-read:hover {
+    background: #0d4376;
+}
+
+/* Sin notificaciones */
+.text-center span {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+/* Posiciona el badge a la izquierda */
+.nav-item .badge {
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    border-radius: 50%;
+    background-color: #f44336;
+    color: #fff;
+    margin-right: 10px; /* Separa el badge del icono */
+}
+
+/* Ajuste de icono de campana */
+.nav-item .fa-bell {
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-bell:hover {
+    color: #495057;
+}
+/* Estilo del ícono de cerrar sesión */
+.nav-item .fa-sign-out {
+    position: relative;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-sign-out:hover {
+    color: #495057;
+}
+    /* Estilos para los mensajes flash */
+.flash-messages {
+    margin-bottom: 20px;
+}
+
+.flash {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.flash.success {
+    background-color: #d4edda; /* Color de fondo para mensajes de éxito */
+    color: #155724; /* Color del texto para mensajes de éxito */
+    border: 1px solid #c3e6cb;
+}
+
+.flash.error {
+    background-color: #f8d7da; /* Color de fondo para mensajes de error */
+    color: #721c24; /* Color del texto para mensajes de error */
+    border: 1px solid #f5c6cb;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+}
+
+.calendar {
+    margin-left: -20px;
+    margin-top: 150px;
+}
+
+.calendar ul {
+    margin-left: -40px;
+}
+
+.punto {
+    width: 10px;
+    height: 5px;
+    border-radius: 50%;
+    margin-right: 1px;
+}
+
+.calendar-container {
+    justify-content:center;
+    border-radius: 8px;
+    padding: 5px;
+    max-height: 400px;
+    overflow: hidden;
+}
+
+
+
+.volver-button {
+    padding: 12px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #5fbd63;
+    border: 1px solid #5fbd63;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.volver-button:hover {
+    background-color: #58A15B;
+    border-color: #58A15B;
+}
+
+.volver-button:active {
+    background-color: #58A15B;
+    border-color: #58A15B;
+}
+
+
+.container {
+   margin-top: -150px;
+ /* Puedes ajustar el valor según lo necesites */
+   margin-bottom:50px;
+}
+
+
+
+
+
+.user-modal {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    display: none; /* inicialmente oculto */
+}
+
+.user-modal-content {
+    max-width: 200px; /* ancho máximo del globo */
+}
+
+
+
+
+
+.solicitudes-container {
+    margin: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+
+}
+
+.solicitudes-list {
+    margin-top: 10px;
+height:170px;
+
+}
+
+.solicitud-item {
+margin-top:-25px;
+    padding: 2px;
+    margin-bottom: 0px;
+    background-color: white;
+    font-size:12px;
+
+
+}
+.contenedores-leyenda-solicitudes {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.solicitudes-container {
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+font-size:16px;
+margin-top:-20px;
+    /* Tus estilos existentes más cualquier ajuste para que se muestren bien juntos */
+    flex-basis: calc(50% - 40px); /* Ajusta según sea necesario */
+    margin: 20px;
+width:30%;
+overflow: hidden;
+}
+
+.solicitudes-container {
+font-family: 'open sans', sans-serif;
+  flex: 1; /* Esto permite que las cajas ocupen el espacio disponible */
+  margin: 10px; /* Asegúrate de que haya un poco de espacio entre las cajas */
+  box-sizing: border-box; /* Incluye el padding y border dentro del ancho total */
+}
+
+/* Si deseas que cada caja tenga un ancho máximo específico, puedes usar esto */
+
+.solicitudes-container {
+    font-family: 'open sans', sans-serif;
+    max-width: 50%; /* Esto asigna un máximo del 50% del ancho del contenedor padre a cada caja */
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Definir la sombra con un desplazamiento x, un desplazamiento y, un radio de desenfoque y un color RGBA */
+}
+
+
+.solicitudes-list {
+margin-bottom:20px;
+margin-top:30px;
+height:162px;
+  background-color:#fff /* Esto asigna un máximo del 48% del ancho del contenedor padre a cada caja */
+}
+.solicitudes-container h2 {
+margin-bottom:10px;
+font-family: 'open sans', sans-serif;
+margin-bottom:25px;
+font-size:28px;
+max-height:40px;
+}
+
+.solicitudes-container h2 {
+
+font-size:25px;
+}
+.button-container {
+max-heigth:20px;
+margin-top:-80px;
+  width: 100%; /* Ocupa todo el ancho del contenedor padre */
+  display: flex;
+  justify-content: space-around; /* Espacio distribuido alrededor de los botones */
+}
+
+.button-container button {
+  flex: 1; /* Los botones ocupan un espacio flexible y equitativo */
+  margin: 0 10px; /* Espacio entre botones */
+
+}
+
+.icono {
+        max-width: 20px; /* Ajusta el ancho según lo necesites */
+        max-height: 20px; /* Ajusta la altura según lo necesites */
+min-width: 20px; /* Ajusta el ancho según lo necesites */
+        min-height: 20px;
+    }
+
+/* Estilos para el botón de color rojo */
+.btn-danger {
+    background-color: #ff2525;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-bottom:30px;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.btn-danger2 {
+    background-color: #ff2525;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+
+}
+
+.btn-danger2:hover {
+    background-color: #c82333;
+}
+@media (max-width: 900px) {
+    .container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+margin-top:50px;
+    }
+}
+
+/* Estilo general del contenedor del calendario */
+.container-menu {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+    padding: 20px;
+    background-color: transparent;
+    margin-top: -100px;
+}
+
+/* Estilo general del contenedor del calendario */
+.container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+    padding: 20px;
+    background-color: transparent;
+    margin-top: 30px;
+}
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+/* Estilo de cada contenedor de mes */
+.calendar-container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+
+
+/* Título de cada mes */
+.calendar-container h2 {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Estilo de las fechas dentro del calendario */
+.calendar-container .date {
+    font-size: 1rem;
+    text-align: center;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: #e2e2e2;
+    color: #666;
+    margin: 5px;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    transition: background-color 0.2s ease;
+}
+
+/* Efecto hover en las fechas */
+.calendar-container .date:hover {
+    background-color: #4caf50;
+    color: #fff;
+}
+  .container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: repeat(2, auto);
+            gap: 20px;
+            max-width: 90%;
+margin-left:5%;
+        }
+        .calendar-container {
+justify-content:center;
+            border-radius: 8px;
+            max-height: 550px;
+            overflow: hidden;
+        }
+/* Responsividad */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Contenedor para los controles del calendario con flexbox */
+.calendar-controls {
+    display: flex;               /* Usamos flexbox */
+    align-items: center;         /* Centra los elementos verticalmente */
+    justify-content: center;     /* Centra los elementos horizontalmente */
+}
+
+/* Estilo específico para los botones dentro del contenedor calendar-controls */
+.calendar-controls button {
+    border: none;    /* Quita el borde */
+    background: none; /* Quita el fondo */
+    padding: 0;       /* Elimina el relleno */
+    cursor: pointer;  /* Asegura que el botón sea clickeable */
+}
+
+/* Estilo específico para los iconos dentro de calendar-controls */
+.calendar-icon {
+    font-size: 30px;   /* Tamaño del icono */
+    color: #1565A8;    /* Color del icono */
+    margin: 0 10px;    /* Añade un pequeño margen a los lados del icono */
+}
+
+/* Estilo para el año en negrita y con la fuente Roboto */
+.year-text {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    margin: 0 10px;    /* Añade un pequeño margen a los lados del texto */
+}
+@media (max-width: 768px) { /* Pantallas con ancho menor o igual a 768px */
+    .breadcrumb {
+        display: flex;
+        flex-direction: column; /* Apila los elementos en columna si hay otros hijos */
+        align-items: center;    /* Centra horizontalmente */
+        justify-content: center; /* Centra verticalmente si hay espacio */
+        text-align: center;     /* Centra el texto */
+        margin-left: 10%;         /* Asegura el centrado horizontal */
+    }
+
+    .breadcrumb h5 {
+        text-align: center; /* Centra específicamente el texto del <h5> */
+        display:none;
+    }
+}
+
+
+@media (min-width: 500px) and (max-width: 1500px) {
+
+  .container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr) !important;
+            grid-template-rows: repeat(3, auto) !important;
+            gap: 20px;
+            max-width: 90%;
+            max-height: 300px;
+margin-left:5%;
+margin-bottom:400px;
+        }
+        .calendar-container {
+justify-content:center;
+            border-radius: 8px;
+            max-height: 350px;
+            overflow: hidden;
+
+
+        }
+
+
+
+/* Contenedor para los controles del calendario con flexbox */
+.calendar-controls {
+    display: flex;               /* Usamos flexbox */
+    align-items: center;         /* Centra los elementos verticalmente */
+    justify-content: center;     /* Centra los elementos horizontalmente */
+}
+
+/* Estilo específico para los botones dentro del contenedor calendar-controls */
+.calendar-controls button {
+    border: none;    /* Quita el borde */
+    background: none; /* Quita el fondo */
+    padding: 0;       /* Elimina el relleno */
+    cursor: pointer;  /* Asegura que el botón sea clickeable */
+}
+
+/* Estilo específico para los iconos dentro de calendar-controls */
+.calendar-icon {
+    font-size: 30px;   /* Tamaño del icono */
+    color: #1565A8;    /* Color del icono */
+    margin: 0 10px;    /* Añade un pequeño margen a los lados del icono */
+}
+
+   .calendar-container:nth-last-child(-n+4) {
+        margin-bottom: 500px !important; /* Ajusta según la separación deseada */
+    }
+
+}
+
+.btn-primary3 {
+  background-color: #1565a8 !important;
+  color: white;
+  font-size: 0.75rem;
+  text-transform: none; /* evita mayúsculas automáticas */
+  margin-left:10px;
+}
+
+.btn-primary3:hover {
+  background-color: #0d4b80 !important; /* un tono más oscuro para el hover */
+}
+
+
+  @media (max-width: 576px) {
+    .dropdown-menu-mobile-half {
+      width: 50vw !important;
+      right: 0 !important;
+      left: auto !important;
+    }
+  }
+
+  .dropdown-menu-mobile-half {
+    width: 50vw !important; /* Ajusta al 50% del ancho de la ventana */
+    max-width: 400px;        /* Máximo ancho opcional */
+    min-width: 250px;        /* Mínimo opcional */
+    padding: 1rem;
+}
+
+.dropdown-menu-mobile-half .dropdown-item {
+    white-space: normal; /* Permite que el texto se ajuste a múltiples líneas */
+    word-wrap: break-word;
+    width: 100%;
+}
+
+.dropdown-menu-mobile-half .btn-mark-as-read {
+
+    padding: 0 5px;
+    font-size: 0.9rem;
+}
+
+.fc .fc-daygrid-day-top {
+    justify-content: center;
+}
+
+.fc-event {
+    background-color: green; /* Color para eventos aceptados */
+}
+.fc-day-red {
+    background-color: #FF6F6F !important;
+}
+
+/* Estilo para el día actual */
+.fc .fc-daygrid-day.fc-day-today {
+    background-color: transparent; /* azul claro de fondo */
+  }
+
+
+
+.fc .fc-daygrid-day.fc-day-today .fc-daygrid-day-number {
+  background-color: #ffc107;
+  color: #000;
+  font-weight: bolder;
+}
+
+.fc-daygrid-day-number {
+  display: inline-flex;       /* Para alinear el texto */
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;         /* Ajusta según necesidad */
+  margin: auto;               /* Centra horizontalmente */
+  line-height: 1;             /* Asegura que no se desborde */
+}
+
+/* Quita bordes de las celdas del calendario */
+.fc td, .fc th {
+    border: none !important;
+  }
+
+  /* También puede ser útil eliminar el borde del grid general */
+  .fc .fc-daygrid-day-frame {
+    border: none !important;
+  }
+
+  /* Opcional: Quitar líneas de separación entre semanas */
+  .fc .fc-scrollgrid {
+    border: none !important;
+  }
+
+
+.fc .fc-button {
+  font-size: 0.6rem;     /* Tamaño de texto más pequeño */
+  padding: 0.2rem 0.2rem; /* Menos espacio interior */
+}
+.fc-toolbar-title {
+    text-transform: capitalize !important;
+    font-size: 0.95rem !important; /* Cambia este valor según lo pequeño que quieras el texto */
+}
+.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
+    min-height: 0;
+}
+.fc .fc-daygrid-body-natural .fc-daygrid-day-events {
+    margin-bottom: 0;
+}
+.fc-day-number {
+    color: #000000 !important;
+}
+.fc-header-toolbar .fc-toolbar-title {
+    color: #000000;
+}
+
+.fc-header-toolbar{
+    margin-bottom: 0 !important;
+}
+
+.fc-col-header-cell {
+    color: #000000;
+}
+
+.fc-day {
+    color: #000000;
+}
+
+.fc-daygrid-day-number{
+    font-size: 0.6rem !important ;
+}
+
+@media (min-width: 1600px) {
+  .fc-daygrid-day-number {
+    font-size: 0.75rem !important;
+  }
+}
+  .fc table{
+    font-size: 0.9em !important;
+  }
+
+    .highlighted-day {
+        background-color: #8bff98 !important;
+        border: 2px dashed black !important;
+    }
+    .highlighted-day:hover {
+        color: white;
+    }
+    .fc-daygrid-day.highlighted-day .fc-daygrid-day-number {
+      color: #ffffff; /* Cambia el color del número */
+      font-weight: bold;  /* Poner el número en negrita */
+    }
+
+  </style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+ <script>
+    const nonWorkdays = {{ non_workdays | tojson | safe }};
+</script>
+
+</head>
+
+<body class="g-sidenav-show  bg-gray-200" >
+
+<!-- Menu HTML añadido de otro .html -->
+
+    {% include 'menu_admin.html' %}
+
+
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg " style="overflow-x: hidden;">
+    <!-- Navbar -->
+   <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+    <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                <h5 class="font-weight-bolder mb-0">
+                    <i class="fa fa-users me-2" style="color: #000;"></i>
+                    Toma el control de tu empresa
+                </h5>
+            </ol>
+            <div class="centered-message">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+            </div>
+        </nav>
+
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <div class="input-group input-group-outline"></div>
+            </div>
+            <ul class="navbar-nav justify-content-end">
+                <li class="nav-item d-flex align-items-center">
+
+
+
+
+</li>
+
+
+
+
+
+                <li class="nav-item px-3 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-body p-0"></a>
+                </li>
+                <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                        <div class="sidenav-toggler-inner" style="margin-right:10px;">
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                        </div>
+                    </a>
+                </li>
+<li class="nav-item dropdown pe-2 d-flex align-items-center">
+    <a href="javascript:;" class="nav-link text-body p-0 d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#notificacionesModal">
+        {% if notificaciones %}
+            <span class="badge bg-danger me-2">{{ notificaciones|length }}</span>
+        {% endif %}
+        <i class="fa fa-bell cursor-pointer" style="font-size: 1.5rem;"></i>
+    </a>
+</li>
+
+
+          <li class="nav-item d-flex align-items-center">
+              <a href="/cerrar_sesion" class="nav-link text-body font-weight-bold px-0">
+                <i class="fa fa-sign-out"style="font-size: 1.5rem;"></i>
+    </a>
+</li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- End Navbar -->
+    <style>
+        .containerr {
+            max-width: 101%;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+
+        .hidden {
+            max-height: 0;
+        }
+
+        .show {
+            max-height: 3000px; /* Suficientemente grande para mostrar el contenido */
+        }
+
+        .toggle-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .toggle-btn i {
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .rotate {
+            transform: rotate(180deg);
+        }
+
+.border-radius-lg {
+    border-radius: 10px;
+}
+
+.card {
+    background-color: white;
+    border: 1px solid #ddd;
+}
+
+.card-title {
+    font-weight: bold;
+    text-align: center;
+}
+
+
+
+
+.border-radius-lg {
+    border-radius: 10px;
+}
+
+.card {
+    background-color: #0098ff0f;
+    border: 0px solid #ddd;
+}
+.card {
+    max-height: 300px; /* Ajusta este valor según necesidad */
+    overflow: hidden;
+}
+
+.card-body {
+    overflow-y: hidden;
+    max-height: 190px; /* Ajusta según el espacio deseado */
+}
+.card-title {
+    font-weight: bold;
+    text-align: center;
+    max-height: 20px;
+    margin-top:-20px;
+    font-size:14px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse; /* Asegura que no haya espacios entre bordes */
+}
+.table th {
+
+    font-size: 0.90em;
+
+}
+
+.table td {
+
+    font-size: 0.70em;
+
+}
+
+.table th, .table td {
+    padding: 3px 1px; /* Reduce el espacio vertical */
+
+    line-height: 1.1; /* Reduce la altura de las filas */
+    text-align: center;
+    border: none !important;
+    max-width:5px!important;
+}
+.table td {
+    white-space: nowrap; /* Evita que el contenido se divida en varias líneas */
+    max-width: 80px; /* Define un ancho máximo para las celdas */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Si el texto es muy largo, agrega "..." */
+
+}
+
+.table th {
+    background-color: transparent;
+    font-weight: bold;
+    border-bottom: none !important; /* Añade un pequeño borde para separar títulos */
+
+}
+
+.table tr{
+    border-radius:1000px;
+
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f1f1f1; /* Resalta la fila al pasar el mouse */
+    border-radius:100px;
+}
+
+/* Quitar el fondo gris de los encabezados */
+/* Quitar fondo gris y bordes del encabezado */
+.table thead th {
+    background-color: transparent !important; /* Fondo transparente */
+    color: black !important; /* Color del texto */
+    border-bottom: none !important; /* Quitar borde inferior */
+    box-shadow: none !important; /* Asegurar que no haya sombras */
+}
+
+/* Quitar cualquier borde residual de las filas */
+.table,
+.table thead,
+.table tbody,
+.table tr,
+.table th,
+.table td {
+    border: none !important; /* Quitar todos los bordes */
+    box-shadow: none !important; /* Evitar sombras que parezcan bordes */
+}
+
+
+/* Opcional: Asegurar que los bordes de la tabla sean mínimos */
+.table td, .table th {
+    border: none !important; /* Quitar todos los bordes */
+}
+
+
+    .card-footer-custom {
+        padding: 5px 0; /* Reduce el espacio vertical */
+        background-color: transparent; /* Sin fondo */
+        border: none; /* Sin bordes */
+        text-align: center; /* Centra el enlace */
+        max-height:20px;
+    }
+
+    .card-footer-custom a {
+        font-size: 0.85em; /* Hace el texto un poco más pequeño */
+        text-decoration: none; /* Quita el subrayado */
+        color: #007bff; /* Color del enlace (ajústalo si quieres otro) */
+    }
+
+    .card-footer-custom a:hover {
+        text-decoration: underline; /* Subrayado solo al pasar el mouse */
+    }
+
+@media (max-width: 768px) { /* Pantallas con ancho menor o igual a 768px */
+    .toggle-btn {
+        display: none; /* Ocultar el botón */
+    }
+}
+
+
+
+
+
+
+/* Color para el icono de solicitud de vacaciones (sol y playa) */
+.fa-umbrella-beach {
+    color: #f39c12; /* Naranja */
+}
+
+
+
+
+/* Color para el icono de ausencia (persona) */
+.fa-user-slash {
+    color: #dc3545; /* Rojo */
+}
+
+/* Color para el icono de calendario en ausencias */
+
+/* Color para el icono de reloj en ausencias */
+
+.custom-width-modal {
+  max-width: 600px; /* o el ancho que prefieras */
+}
+
+.btn-mark-as-read {
+  min-width: 28px !important;
+  padding: 3px 3px;
+}
+/* Modal tipo barra lateral derecha */
+.modal-side-right {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 0;
+  height: 100%;
+  max-width: 500px;
+  width: 100%;
+  z-index: 1055;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+/* Cuando el modal se muestra */
+.modal.show .modal-side-right {
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+/* Evitamos que Bootstrap lo sobrescriba */
+.modal.fade .modal-dialog {
+  transition: none !important;
+  transform: none !important;
+}
+
+/* Ajustes al contenido del modal */
+.modal-side-right .modal-content {
+  height: 100%;
+  border-radius: 0;
+  text-align: left;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+}
+/* Estilo del texto de la notificación */
+.text-sm {
+    font-size: 0.75rem !important;
+    color: #000;
+    font-weight: 600;
+}
+
+.text-xs {
+    font-size: 0.70rem !important;
+    color: #6c757d;
+}
+   /* ESTILOS PARA EL POPUP */
+         .popup {
+            display: flex;
+            min-height: 120px;
+            font-family: 'Open Sans', sans-serif;
+            box-sizing: border-box;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-container{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            background: transparent;
+            border: 0;
+        }
+
+        .profile-image{
+            width: 2rem;
+            height: 2rem;
+            background-color: white;
+            border-radius: 50%;
+            border: 1px solid black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-letter{
+            font-weight: bold;
+        }
+
+        .profile-name{
+            font-size: smaller;
+        }
+        .pl-blue{
+            background-color: rgb(138, 138, 248);
+        }
+.profile-container {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-container:hover {
+    transform: translateY(-5px);
+}
+
+
+
+
+    </style>
+<br>
+    <!-- Mostrar día y hora actuales -->
+    <center>
+        <div id="fechaHora" class="fecha-hora" style="font-size: 1.2em; color: #333; margin-bottom: 10px;"></div>
+    </center>
+    <br>
+            <!-- Saludo centrado -->
+        <center>
+            <div class="greeting">
+                {% if empresa %}
+                <h3><strong>Hola {{ empresa.nombre }}!</strong></h3>
+                {% endif %}
+            </div>
+        </center>
+        <!--
+         <div class="toggle-btn" onclick="toggleGraphs()">
+        <i class="fas fa-chevron-down"></i>
+    </div>-->
+
+<!-- Contenedor de ancho completo -->
+<div class="container-fluid mt-4" style="margin-top:-20px; width:90% !important;">
+    <div class="row mx-0 px-0" style="margin-top:-50px;">
+        <!-- Tabla de Últimos Registros -->
+
+
+<!-- Tabla de Solicitudes de Vacaciones -->
+<div class="col-lg-4 col-md-8 p-1">
+    <div class="card p-2 shadow-sm border-radius-lg w-100">
+        <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-umbrella-beach me-2"></i>Solicitudes de Vacaciones</h5>
+            <table class="table table-hover" style="min-width:0px;">
+                <thead>
+                    <tr>
+                        <th><i class="fa-solid fa-user"></i></th>
+                        <th><i class="fa-solid fa-play"></i></th>
+                        <th><i class="fa-solid fa-flag-checkered"></i></th>
+                        <th><i class="fa-solid fa-square-poll-vertical"></i></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for vacation in ultimos_vacation_requests %}
+                    <tr>
+                        <td style="font-weight: bold;">{{ vacation.user_name }} {{ vacation.user_apellido }}</td>
+                        <td style="font-weight: bold;">{{ vacation.start_date.strftime('%d/%m') }}</td>
+                        <td style="font-weight: bold;">{{ vacation.end_date.strftime('%d/%m') }}</td>
+                        <td>
+                            {% if vacation.status == 'RECHAZADA' %}
+                                <i class="fa-solid fa-times" style="color: #dc3545;"></i> <!-- Rojo -->
+                            {% elif vacation.status == 'Aceptada' %}
+                                <i class="fa-solid fa-check" style="color: #28a745;"></i> <!-- Verde -->
+                            {% elif vacation.status == 'PENDIENTE' %}
+                                <i class="fa-solid fa-clock" style="color: #ffc107;"></i> <!-- Amarillo -->
+                                {% elif vacation.status == 'Cancelada' %}
+                                <i class="fa-solid fa-ban" style="color: #afafaf;"></i> <!-- Amarillo -->
+                            {% else %}
+                                {{ vacation.status }} <!-- Para cualquier otro valor -->
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!-- Footer con enlace centrado -->
+        <div class="card-footer-custom">
+            <a href="{{ url_for('admin_requests') }}" class="btn btn-link" style="color: #1565A8;">Ver más</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-lg-4 col-md-8 p-1">
+    <div class="card p-2 shadow-sm border-radius-lg w-100">
+        <div class="card-body">
+
+            <h5 class="card-title">
+                <i class="fas fa-clock me-2" style="color: #1565A8;"></i>Registro laboral diario
+            </h5>
+
+            <table class="table table-hover" style="min-width:0px;">
+                <thead>
+                    <tr>
+                        <th><i class="fa-solid fa-user"></i></th>
+                        <th><i class="fa-solid fa-right-to-bracket"></i></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {# Filtrar usuarios que no estén entre los correos prohibidos #}
+                    {% set usuarios_filtrados = users_status
+                        | rejectattr('user.email', 'equalto', 'admin@gestionaempresa.es')
+                        | rejectattr('user.email', 'equalto', 'gestor@gestionaempresa.es')
+                        | rejectattr('user.email', 'equalto', 'encargado@gestionaempresa.es')
+                        | rejectattr('user.email', 'equalto', 'inspector@gestionaempresa.es')
+                        | list
+                    %}
+
+                    {# Dividir entre los que han fichado y los que no #}
+                    {% set users_not_checked_in = usuarios_filtrados | selectattr('has_checked_in', 'equalto', false) %}
+                    {% set users_checked_in = usuarios_filtrados | selectattr('has_checked_in', 'equalto', true) %}
+
+                    {# Combinamos los dos grupos, primero los que no han fichado #}
+                    {% set combined_users = (users_not_checked_in | list) + (users_checked_in | list) %}
+
+                    {# Mostrar solo los primeros 6 #}
+                    {% for user_status in combined_users[:6] %}
+                    <tr>
+                        <td style="font-weight: bold;">
+                            {{ user_status.user.nombre }} {{ user_status.user.primer_apellido }}
+                        </td>
+                        <td style="font-weight: bold;">
+                            {% if user_status.has_checked_in %}
+                                <i class="fa-solid fa-check" style="color: #28a745;"></i>
+                            {% else %}
+                                <i class="fa-solid fa-times" style="color: #dc3545;"></i>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Footer con enlace "Ver más" -->
+        <div class="card-footer-custom">
+            {% if usuarios_filtrados|length > 5 %}
+                <a href="#" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#userStatusModal"
+                   style="color: #1565A8; text-decoration: none;">Ver más</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+
+        <!-- Tabla de Últimas Ausencias -->
+        <div class="col-lg-4 col-md-8 p-1">
+            <div class="card p-2 shadow-sm border-radius-lg w-100">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fa fa-ambulance" aria-hidden="true" style="color: #dc3545;"></i> Ausencias</h5>
+                    <table class="table table-hover" style="min-width:0px;">
+                        <thead>
+                            <tr>
+                                <th><i class="fa-solid fa-user"></i></th>
+                                <th><i class="fa-solid fa-calendar-days"></i></th>
+
+                                <th><i class="fa-solid fa-clock"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for absence in ultimos_absences %}
+                            <tr>
+                                <td style="font-weight: bold;">{{ absence.user.nombre }} {{ absence.user.primer_apellido }}</td>
+                                <td style="font-weight: bold;">{{ absence.start_date.strftime('%d/%m') }}</td>
+
+                                <td style="font-weight: bold;">{{ absence.duration_hours }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Footer con enlace centrado -->
+                <div class="card-footer-custom">
+                    <a href="{{ url_for('admin_absence_view') }}" class="btn btn-link" style="color: #1565A8; text-decoration: none;" onmouseover="this.style.color='#0d47a1'" onmouseout="this.style.color='#1565A8'">Ver más</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="popup container-fluid" id="event-popup"></div>
+
+<div class="modal fade" id="userStatusModal" tabindex="-1" aria-labelledby="userStatusModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="userStatusModalLabel">Estado de fichaje diario</h5>
+        <button type="button" class="btn m-0" data-bs-dismiss="modal" aria-label="Close">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <!-- Input para filtrar usuarios -->
+        <input type="text" id="userSearch" class="form-control mb-3" placeholder="Buscar usuario..." onkeyup="filterUsers()">
+
+        <table class="table table-hover" id="userTable">
+            <thead>
+                <tr>
+                    <th><i class="fa-solid fa-user"></i> Nombre</th>
+                    <th><i class="fa-solid fa-right-to-bracket"></i> Estado</th>
+                </tr>
+            </thead>
+            <tbody id="userTableBody">
+                {% set excluded_emails = [
+                    'admin@gestionaempresa.es',
+                    'inspector@gestionaempresa.es',
+                    'gestor@gestionaempresa.es',
+                    'encargado@gestionaempresa.es'
+                ] %}
+
+                {% set users_not_checked_in = users_status | selectattr('has_checked_in', 'equalto', false) | list %}
+                {% set users_checked_in = users_status | selectattr('has_checked_in', 'equalto', true) | list %}
+
+                {% for user_status in users_not_checked_in + users_checked_in %}
+                    {% if user_status.user.email not in excluded_emails %}
+                    <tr>
+                        <td class="user-name" style="font-weight: bold;">
+                            {{ user_status.user.nombre }} {{ user_status.user.primer_apellido }}
+                        </td>
+                        <td style="font-weight: bold;">
+                            {% if user_status.has_checked_in %}
+                                <i class="fa-solid fa-check" style="color: #28a745;"></i> Fichado
+                            {% else %}
+                                <i class="fa-solid fa-times" style="color: #dc3545;"></i> No ha fichado
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="notificacionesModal" tabindex="-1" aria-labelledby="notificacionesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-side-right">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="notificacionesModalLabel">
+          <i class="fa fa-bell cursor-pointer" style="font-size: 1.5rem;"></i> Notificaciones
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar">
+            <i class="fa-solid fa-xmark text-dark"></i>
+        </button>
+      </div>
+      <div class="modal-body text-start">
+        <form action="{{ url_for('marcar_notificaciones_leidas') }}" method="post">
+          <button type="submit" class="btn btn-primary3 btn-sm mb-3">Marcar todas como leídas</button>
+        </form>
+
+        {% for notificacion in notificaciones %}
+        <div class="mb-3 border-bottom pb-2">
+          <h6 class="text-sm font-weight-normal mb-1">
+            {{ notificacion.concepto }}
+            {% if not notificacion.leida %}
+              <button class="btn btn-link btn-mark-as-read ms-2" style="min-width: 32px;" data-id="{{ notificacion.id }}">
+                <i class="fa-solid fa-check" style="font-size: 1.2rem;"></i>
+              </button>
+            {% endif %}
+          </h6>
+          <p class="text-xs text-secondary mb-0">
+            <i class="fa fa-clock me-1"></i>
+            {{ notificacion.fecha_hora.strftime('%d/%m/%Y %H:%M') }}
+          </p>
+        </div>
+        {% endfor %}
+
+        {% if notificaciones|length == 0 %}
+        <div class="text-start">
+          <span class="text-sm">No tienes notificaciones</span>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      function filterUsers() {
+          let input = document.getElementById("userSearch").value.toLowerCase();
+
+          let tableBody = document.getElementById("userTableBody");
+          if (!tableBody) {
+              console.error("❌ No se encontró el tbody con id 'userTableBody'");
+              return;
+          }
+
+          let rows = tableBody.getElementsByTagName("tr");
+
+          for (let i = 0; i < rows.length; i++) {
+              let userNameCell = rows[i].getElementsByClassName("user-name")[0];
+
+              if (!userNameCell) {
+                  console.warn(`⚠️ La fila ${i} no tiene una celda con la clase 'user-name'`);
+                  continue;
+              }
+
+              let userName = userNameCell.textContent.toLowerCase();
+
+              if (userName.includes(input)) {
+                  rows[i].style.display = "";
+              } else {
+                  rows[i].style.display = "none";
+              }
+          }
+      }
+
+      // Asignar la función al evento onkeyup
+      document.getElementById("userSearch").addEventListener("keyup", filterUsers);
+  });
+</script>
+
+
+
+<div class="calendar-controls"style="margin-bottom:20px;">
+        <button id="prev-year"><span class="material-icons calendar-icon">keyboard_arrow_left</span></button>
+        <span id="current-year" class="year-text">2024</span>
+        <button id="next-year"><span class="material-icons calendar-icon">keyboard_arrow_right</span></button>
+    </div>
+
+
+<div class="container" style="margin-top:-20px;">
+        <!-- FullCalendar containers for each month -->
+        <div id="calendar-jan" class="calendar-container"></div>
+        <div id="calendar-feb" class="calendar-container"></div>
+        <div id="calendar-mar" class="calendar-container"></div>
+        <div id="calendar-apr" class="calendar-container"></div>
+        <div id="calendar-may" class="calendar-container"></div>
+        <div id="calendar-jun" class="calendar-container"></div>
+        <div id="calendar-jul" class="calendar-container"></div>
+        <div id="calendar-aug" class="calendar-container"></div>
+        <div id="calendar-sep" class="calendar-container"></div>
+        <div id="calendar-oct" class="calendar-container"></div>
+        <div id="calendar-nov" class="calendar-container"></div>
+        <div id="calendar-dec" class="calendar-container"></div>
+    </div>
+
+
+
+
+<div class="container">
+    <!-- Menú contextual que aparece con clic derecho -->
+    <div id="context-menu" class="context-menu">
+        <ul>
+
+        </ul>
+    </div>
+
+
+  </main>
+
+    <!-- Minified and consolidated JS files -->
+    <script src="/static/assets/js/core/popper.min.js"></script>
+    <script src="/static/assets/js/core/bootstrap.min.js"></script>
+    <script src="/static/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="/static/assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="/static/assets/js/plugins/chartjs.min.js"></script>
+    <script src="/static/assets/js/material-dashboard.min.js?v=3.1.0"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" defer></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
+    <script src="https://buttons.github.io/buttons.js" async defer></script>
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+
+<script>
+    let menu_buttons = document.querySelector('.menu-button');
+    if (menu_buttons){
+        document.querySelector('.menu-button').addEventListener('click', function() {
+            document.querySelector('.menu-container').classList.toggle('active');
+        });
+    }
+
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const events = {{ events|tojson }};
+    const pendingEvents = {{ pending_events|tojson }};
+    let non_workdays = {{ non_workdays|tojson }};
+    let currentYear = new Date().getFullYear();
+
+        function actualizar_colores_perfiles() {
+        // Diccionario de colores pastel por letra
+        const pastelColorsByLetter = {
+            A: "#FFB3BA", B: "#FFDFBA", C: "#FFFFBA", D: "#BAFFC9", E: "#BAE1FF",
+            F: "#E0BBE4", G: "#D5F4E6", H: "#F4E1D2", I: "#CBAACB", J: "#FFDAC1",
+            K: "#E2F0CB", L: "#B5EAD7", M: "#C7CEEA", N: "#FFCBC1", O: "#F6DFEB",
+            P: "#DAD6FF", Q: "#F0F4C3", R: "#FFD3B6", S: "#FFAAA5", T: "#AEC6CF",
+            U: "#FFF5BA", V: "#E6E6FA", W: "#F3E5F5", X: "#B2EBF2", Y: "#DCEDC1", Z: "#FBEEC1"
+        };
+        const profileImages = document.querySelectorAll('.profile-image');
+
+        profileImages.forEach(image => {
+            const letterEl = image.querySelector('.profile-letter');
+            if (!letterEl) return;
+
+            const letter = letterEl.textContent.trim().toUpperCase();
+            const color = pastelColorsByLetter[letter] || "#FFFFFF"; // blanco por defecto
+            image.style.backgroundColor = color;
+        });
+    };
+
+    function highlightVacationDaysForUser(userName) {
+        // Limpiar anteriores
+        document.querySelectorAll('.highlighted-day').forEach(el => el.classList.remove('highlighted-day'));
+
+        // Filtrar eventos por usuario
+        const userEvents = events.filter(event => event.title === userName);
+
+        userEvents.forEach(event => {
+            const start = new Date(event.start);
+            const end = new Date(event.end);
+            end.setDate(end.getDate() - 1);
+            for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+                const dateStr = d.toISOString().split('T')[0];
+                document.querySelectorAll(`[data-date='${dateStr}']`).forEach(el => {
+                    el.classList.add('highlighted-day');
+                });
+            }
+        });
+    }
+
+    const months = [
+        { id: 'calendar-jan', title: 'Enero', month: 0 },
+        { id: 'calendar-feb', title: 'Febrero', month: 1 },
+        { id: 'calendar-mar', title: 'Marzo', month: 2 },
+        { id: 'calendar-apr', title: 'Abril', month: 3 },
+        { id: 'calendar-may', title: 'Mayo', month: 4 },
+        { id: 'calendar-jun', title: 'Junio', month: 5 },
+        { id: 'calendar-jul', title: 'Julio', month: 6 },
+        { id: 'calendar-aug', title: 'Agosto', month: 7 },
+        { id: 'calendar-sep', title: 'Septiembre', month: 8 },
+        { id: 'calendar-oct', title: 'Octubre', month: 9 },
+        { id: 'calendar-nov', title: 'Noviembre', month: 10 },
+        { id: 'calendar-dec', title: 'Diciembre', month: 11 }
+    ];
+
+    function renderCalendars(year) {
+        document.getElementById('current-year').textContent = year;
+        months.forEach(function(month) {
+            var calendarEl = document.getElementById(month.id);
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: '',
+                    center: 'title',
+                    right: '',
+                },
+                fixedWeekCount: false,
+                titleFormat: { month: 'long' },
+                dayHeaderFormat: { weekday: 'narrow' },
+                height: '100%',
+                contentHeight: 'auto',
+                locale: 'es', // Idioma español
+                firstDay: 1,
+                dayMaxEvents: true,
+                dayCellDidMount: function(info) {
+                    var cellDate = new Date(info.date);
+                    cellDate.setDate(cellDate.getDate() + 1);
+                    var cellDateString = cellDate.toISOString().split('T')[0];
+                    var currentMonth = info.view.currentStart.getMonth();
+
+                    if (info.date.getMonth() === currentMonth && non_workdays.includes(cellDateString)) {
+                        var cell = info.el;
+                        cell.classList.add('fc-day-red');
+                    }
+                },
+                eventDidMount: function(info) {
+                    if (info.event.display === 'background') {
+                        const el = info.el;
+                        if (el) {
+                            el.style.cursor = 'pointer';
+                        }
+                    }
+                },
+                dateClick: function(info) {
+                    var selectedDate = info.date;
+                    selectedDate.setHours(6, 0, 0, 0);
+
+                    var eventsOnDate = events.filter(function(event) {
+                        var eventStartDate = new Date(event.start);
+                        var eventEndDate = new Date(event.end);
+                        return (eventStartDate <= selectedDate && eventEndDate >= selectedDate);
+                    });
+
+                    var pendingEventsOnDate = pendingEvents.filter(function(event) {
+                        var eventStartDate = new Date(event.start);
+                        var eventEndDate = new Date(event.end);
+                        return (eventStartDate <= selectedDate && eventEndDate >= selectedDate);
+                    });
+
+                    const allUsers = [...new Set(eventsOnDate.map(e => e.title))]; //--------------
+
+                    var popup = document.getElementById('event-popup');
+
+                    // Si no hay eventos en la fecha seleccionada, no mostrar el popup
+                    if (eventsOnDate.length === 0 && pendingEventsOnDate.length === 0) {
+                        popup.innerHTML = '';
+                        return;
+                    }
+
+
+                    // Construir el contenido del popup con los eventos encontrados
+                    var eventNames = '';
+                    if (allUsers.length > 0) {
+                        eventNames += allUsers.map(name => {
+                            const parts = name.trim().split(' ');
+                            const inicial = name[0].toUpperCase();
+                            const firstName = parts[0];
+                            const lastInitial = parts[1] ? parts[1][0].toUpperCase() + '.' : '';
+                            return `<button class="profile-container user-highlight-btn" title="${name}" data-username="${name}">
+                                        <div class="profile-image">
+                                            <p class="profile-letter m-0">${inicial}</p>
+                                        </div>
+                                        <p class="profile-name">${firstName} ${lastInitial}</p>
+                                    </button>`;
+                        }).join('');
+                    }
+                    if (pendingEventsOnDate.length > 0) {
+                        eventNames += pendingEventsOnDate.map(event => `<p>${event.title}</p>`).join('');
+                    }
+
+
+                    // Mostrar el popup en el centro de la pantalla
+                    popup.innerHTML = eventNames;
+
+                    // Agregar listeners a los botones
+                    popup.querySelectorAll('.user-highlight-btn').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            const selectedUser = this.getAttribute('data-username');
+                            highlightVacationDaysForUser(selectedUser);
+                        });
+                    });
+
+                    actualizar_colores_perfiles();
+                },
+                eventContent: function(arg) {
+                    return { html: `<div class="fc-content">${arg.timeText}</div>` };
+                }
+            });
+
+            // Asignar eventos según el tipo de calendario
+            if (month.id.includes('pending')) {
+                calendar.setOption('events', pendingEvents);
+                calendar.setOption('eventBackgroundColor', 'orange'); // Establecer color naranja para eventos pendientes
+                calendar.setOption('eventDisplay', 'background');
+            } else {
+                calendar.setOption('events', events);
+                calendar.setOption('eventBackgroundColor', 'green');
+                calendar.setOption('eventDisplay', 'background');
+            }
+
+            calendar.gotoDate(new Date(year, month.month, 1));
+            calendar.render();
+        });
+    }
+
+    // Inicializar los calendarios con el año actual
+    renderCalendars(currentYear);
+
+    // Funcionalidad para navegar entre años
+    document.getElementById('prev-year').addEventListener('click', function() {
+        currentYear--;
+        renderCalendars(currentYear);
+    });
+
+    document.getElementById('next-year').addEventListener('click', function() {
+        currentYear++;
+        renderCalendars(currentYear);
+    });
+
+    // Menú contextual al hacer clic derecho sobre un día del calendario
+    document.addEventListener('contextmenu', function(e) {
+        if (e.target.classList.contains('fc-daygrid-day')) {
+            e.preventDefault();
+            var cellDate = new Date(e.target.getAttribute('data-date'));
+
+            var contextMenu = document.getElementById('context-menu');
+            contextMenu.style.left = '50%';
+            contextMenu.style.top = '50%';
+            contextMenu.style.transform = 'translate(-50%, -50%)';
+            contextMenu.style.display = 'block';
+
+
+            // Marcar la fecha seleccionada como festivo
+            document.getElementById('mark-festive').onclick = function() {
+                var dateString = cellDate.toISOString().split('T')[0];
+
+                // Evitar duplicados
+                if (!non_workdays.includes(dateString)) {
+                    non_workdays.push(dateString);
+                    alert('El día ' + dateString + ' ha sido marcado como festivo.');
+
+                    // Actualizar el calendario para reflejar el cambio
+                    renderCalendars(currentYear);
+                }
+
+                // Ocultar el menú contextual
+                contextMenu.style.display = 'none';
+            };
+        }
+    });
+
+    // Ocultar el menú contextual si se hace clic fuera
+    document.addEventListener('click', function() {
+        document.getElementById('context-menu').style.display = 'none';
+    });
+    });
+
+    document.addEventListener('click', function(e) {
+    if (!e.target.closest('#event-popup')) {
+        const popup = document.getElementById('event-popup');
+        popup.innerHTML = '';
+
+        document.querySelectorAll('.highlighted-day').forEach(el => el.classList.remove('highlighted-day'));
+    }
+    });
+
+
+
+</script>
+
+ <script>
+        $(document).ready(function() {
+            $('.btn-mark-as-read').on('click', function() {
+                var notificacionId = $(this).data('id');
+                var $notificationDiv = $('#notificacion-' + notificacionId);
+
+                $.ajax({
+                    url: '/marcar_leida/' + notificacionId,
+                    type: 'POST',
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            // Elimina la notificación del DOM
+                            $notificationDiv.remove();
+                             location.reload();
+                        }
+                        // No hay necesidad de manejar el caso de error aquí, ya que se puede manejar en el backend
+                    },
+                    error: function(xhr, status, error) {
+                        // Opcional: manejar errores en la solicitud
+                        console.error('Error al marcar la notificación como leída:', error);
+                    }
+                });
+            });
+        });
+    </script>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+<script>
+    function actualizarFechaHora() {
+        const fechaHoraElem = document.getElementById('fechaHora');
+        const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const opcionesHora = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+        const ahora = new Date();
+
+        // Formatear fecha y hora
+        const fecha = ahora.toLocaleDateString('es-ES', opcionesFecha);
+        const hora = ahora.toLocaleTimeString('es-ES', opcionesHora);
+
+        fechaHoraElem.innerHTML = `${fecha} - ${hora}`;
+    }
+
+    // Actualizar fecha y hora al cargar y cada segundo
+    actualizarFechaHora();
+    setInterval(actualizarFechaHora, 1000);
+</script>
+
+</body>
+
+</html>

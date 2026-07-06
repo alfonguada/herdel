@@ -1,0 +1,3602 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empresa - Gestionaempresa</title>
+    <link rel="icon" href="{{ url_for('static', filename='logo_empresa.png') }}" type="image/png">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <!-- Nucleo Icons -->
+  <link href="/static/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="/static/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <!-- CSS Files -->
+  <link id="pagestyle" href="/static/assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
+  <!-- Nepcha Analytics (nepcha.com) -->
+  <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Puedes enlazar tu archivo CSS para estilos aquí -->
+
+<script src="https://kit.fontawesome.com/3da862d4a6.js" crossorigin="anonymous"></script>
+ <style>
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700);
+
+body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center; /* Centrar el texto */
+            position: relative;
+            z-index: 1;
+
+
+}
+
+.page-container {
+            padding-top: 100px; /* Baja todo el contenido dentro del contenedor */
+}
+
+#counter {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+
+    input, button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin-top: 10px;
+    }
+
+
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700);
+
+
+
+ h3 {
+      text-align: center;
+margin-top: -75px;
+margin-bottom:65px;
+    }
+
+
+.embed-responsive {
+        position: relative;
+        padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+        background-color: #000;
+    }
+    .embed-responsive-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+.card {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column; /* Asegura que el contenido y el footer se alineen verticalmente */
+    height: 100%; /* Asegura que la tarjeta ocupe todo el alto disponible */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+        .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+padding: 15px; /* Asegura suficiente espacio alrededor del título */
+        }
+        .card-body {
+            padding: 15px;
+
+
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .footer-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .footer-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .footer-link a:hover {
+            text-decoration: underline;
+        }
+h3 {
+            margin-top:-15px;/* Ajusta el espacio debajo del título */
+        }
+.card-header h3 {
+            margin-bottom: 15px; /* Ajusta el espacio debajo del título */
+        }
+
+.events-card,
+.news-card,
+.prog-card {
+    position: relative;
+    max-height: 600px; /* Altura máxima para las tarjetas de eventos y noticias */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede la altura máxima */
+}
+.summary-card{
+    position: relative;
+    max-height: 400px; /* Altura máxima para las tarjetas de eventos y noticias */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede la altura máxima */
+}
+
+.footer-link {
+    position: relative; /* Necesario para que el footer se alinee al final del card */
+    text-align: center;
+    margin-top: auto; /* Empuja el footer al fondo de la tarjeta */
+    background-color: #f8f9fa; /* Fondo del footer */
+    padding: 10px;
+    border-top: 1px solid #e9ecef; /* Línea superior del footer */
+}
+        .footer-link a {
+            color: #6c6c6c;
+            text-decoration: none;
+        }
+        .footer-link a:hover {
+            text-decoration: underline;
+        }
+
+
+.card-body {
+    padding: 15px;
+    flex: 1; /* Esto hace que el cuerpo de la tarjeta ocupe todo el espacio disponible */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede el alto disponible */
+
+}
+
+
+/* Estilos para los contadores */
+.counter-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido verticalmente */
+    border: 1px solid #e0e0e0; /* Borde para separar los contadores */
+    border-radius: 8px; /* Esquinas redondeadas */
+    padding: 5px; /* Reducir el padding */
+    color: #ffffff; /* Color del texto */
+}
+
+.counter-header {
+    position: relative;
+    height: 50px; /* Reducir la altura del encabezado */
+    padding: 0;
+    overflow: hidden; /* Evita el desbordamiento */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
+.counter-body, .counter-body2 {
+    padding: 5px; /* Reducir el padding del cuerpo del contador */
+    text-align: center; /* Centra el texto en el cuerpo */
+}
+
+.counter-body h6, .counter-body2 h6 {
+    font-size: 14px; /* Reducir el tamaño de la fuente del título */
+}
+
+.counter-body p, .counter-body2 p {
+    font-size: 12px; /* Reducir el tamaño de la fuente del párrafo */
+}
+
+.bg-primary {
+    background-color: #007bff !important; /* Azul */
+}
+.btn-primary3 {
+    background-color: #a965f5 !important; /* Morado */
+    color:white;
+}
+.btn-primary3:hover {
+    background-color: #a965f5 !important; /* Morado */
+    color:white;
+}
+
+.bg-success {
+    background-color: #28a745 !important; /* Verde */
+}
+
+.bg-info {
+    background-color: #17a2b8 !important; /* Azul claro */
+}
+
+.bg-warning {
+    background-color: #ffc107 !important; /* Amarillo */
+}
+
+  .card-global {
+            height: 450px; /* Ajusta según tus necesidades */
+            display: flex;
+            flex-direction: column;
+margin-top:-25px;
+        }
+
+        /* Clase para la tarjeta negra específica del gráfico */
+        .card-graph {
+            height: 130%; /* Ajusta según el espacio que quieras para el gráfico */
+            display: flex;
+            align-items: center; /* Centra el gráfico verticalmente */
+            justify-content: center; /* Centra el gráfico horizontalmente */
+        }
+
+        /* Estilo para el canvas dentro de la tarjeta negra */
+        .chart-canvas {
+            width: 100%;
+            height: 100%;
+}
+.custom-card-body {
+            margin-top: 100px; /* Ajusta el valor según tus necesidades */
+margin-left:20px;
+        }
+
+
+.recurso {
+            display: inline-block;
+            width: 30%;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        .recurso img {
+            max-width: 100px;
+            max-height: 100px;
+            margin-bottom: 10px;
+        }
+
+.embed-responsive {
+        position: relative;
+        padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+        background-color: #000;
+    }
+    .embed-responsive-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+ .toast-center-center {
+            top: 50%;
+            left: 70%;
+            transform: translate(-50%, -50%);
+            min-width: 800px; /* Más grande */
+min-height: 800px; /* Más grande */
+            opacity: 1; /* Menos transparente */
+        }
+        .toast-success .toast-message {
+            color: green;
+        }
+        .toast-error .toast-message {
+            color: red;
+        }
+        .toast {
+            font-size: 1.2em; /* Tamaño de fuente más grande */
+            padding: 20px; /* Más relleno */
+        }
+
+.btn-mark-as-read {
+            padding: 5px 10px;
+            font-size: 12px;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            color: #333;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .btn-mark-as-read:hover {
+            background-color: #e0e0e0;
+            color:white !important;
+        }
+
+        /* Estilos para la pantalla de carga */
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+
+.notificaciones {
+    position: relative; /* o 'absolute' o 'fixed' si es necesario */
+    z-index: 9999999; /* Valor alto para asegurarte de que está por encima de otros elementos */
+}
+/* Estilo del ícono de campana */
+.nav-item .fa-bell {
+    position: relative;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-bell:hover {
+    color: #495057;
+}
+
+/* Badge de notificaciones */
+.nav-item .badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    border-radius: 50%;
+    background-color: #f44336;
+    color: #fff;
+}
+
+/* Dropdown */
+.dropdown-menu {
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Estilo de cada notificación */
+.dropdown-item {
+    border-radius: 0.375rem;
+    transition: background-color 0.2s ease;
+    padding: 12px 15px;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* Estilo del texto de la notificación */
+.text-sm {
+    font-size: 0.875rem;
+    color: #343a40;
+    font-weight: 600;
+}
+
+.text-xs {
+    font-size: 0.75rem;
+    color: #6c757d;
+}
+
+/* Botón para marcar como leída */
+.btn-mark-as-read {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-mark-as-read:hover {
+    background: #0056b3;
+}
+
+/* Sin notificaciones */
+.text-center span {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+/* Posiciona el badge a la izquierda */
+.nav-item .badge {
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    border-radius: 50%;
+    background-color: #f44336;
+    color: #fff;
+    margin-right: 10px; /* Separa el badge del icono */
+}
+
+/* Ajuste de icono de campana */
+.nav-item .fa-bell {
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-bell:hover {
+    color: #495057;
+}
+/* Estilo del ícono de cerrar sesión */
+.nav-item .fa-sign-out {
+    position: relative;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-sign-out:hover {
+    color: #495057;
+}
+    /* Estilos para los mensajes flash */
+.flash-messages {
+    margin-bottom: 20px;
+}
+
+.flash {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.flash.success {
+    background-color: #d4edda; /* Color de fondo para mensajes de éxito */
+    color: #155724; /* Color del texto para mensajes de éxito */
+    border: 1px solid #c3e6cb;
+}
+
+.flash.error {
+    background-color: #f8d7da; /* Color de fondo para mensajes de error */
+    color: #721c24; /* Color del texto para mensajes de error */
+    border: 1px solid #f5c6cb;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+}
+
+
+.flash-messages {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        width: 300px;
+        z-index: 1000;
+    }
+
+.form-box {
+    border: 1px solid #ccc; /* Color y grosor del borde */
+    padding: 20px; /* Espacio interno */
+    border-radius: 5px; /* Esquinas redondeadas */
+    background-color: #f9f9f9; /* Color de fondo */
+    margin-top: 20px; /* Espacio superior */
+}
+
+.contenido {
+    margin: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.cont2 {
+    margin-bottom: 20px;
+}
+
+table {
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+
+}
+
+th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+.btn-archivo-adjunto {
+    background-color: #689CBE;
+    color: white;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn-archivo-adjunto:hover {
+    background-color: #4a7f9c; /* Color al pasar el ratón */
+}
+
+.alert {
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.edit-btn {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+}
+
+.edit-btn:hover {
+    background-color: #0056b3; /* Color al pasar el ratón */
+}
+
+/* Estilos para los círculos de días restantes */
+.circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+
+
+
+
+
+
+
+
+    /* Estilo para hacer el select más pequeño y ajustado a la tabla */
+    .small-select {
+        max-width: 80%;  /* Se asegura de que el campo se ajuste al ancho de la celda */
+        width: auto;      /* Ajuste automático según el contenido */
+    }
+
+/* Estilo general para el formulario */
+.profile-form {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Contenedor general del formulario */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0px;
+    max-width: 1400px;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Contenedor de las tablas */
+.tables-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+
+}
+
+
+/* Estilo para las tablas */
+.form-table {
+    width: 100%;
+    color: #333;
+    border-collapse: collapse;
+
+}
+
+/* Fila de la tabla */
+.form-table tr {
+    display: flex;
+    align-items: center;
+    text-align: left;
+
+
+}
+
+/* Estilo para las celdas de las tablas */
+.form-table .label, .form-table .input {
+    padding: 10px;
+    border:10px;
+
+
+}
+
+ .form-table .input {
+     border:10px;
+
+ }
+
+#Telefono {
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    padding: 8px;
+    border: 0px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;  /* Fondo más claro */
+    color: #333;                /* Texto en color oscuro */
+    outline: none;              /* Elimina el contorno por defecto */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    margin-top:-3px;
+    max-width:250px;
+
+
+}
+
+.custom-form-container label{
+    font-size: 12px;        /* Tamaño de fuente más grande */
+    color: #000;         /* Color azul (puedes cambiarlo al que desees) */
+    font-family: 'Roboto', sans-serif; /* Tipo de letra */
+    margin-top:5px;
+    font-weight: bold;
+}
+
+.custom-input{
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    padding: 8px;
+    border: 0px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    color: #333;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    margin-top: -3px;
+    max-width: 250px;
+}
+
+label[for="Telefono"] {
+    font-size: 12px;        /* Tamaño de fuente más grande */
+    color: #000;         /* Color azul (puedes cambiarlo al que desees) */
+    font-family: 'Roboto', sans-serif; /* Tipo de letra */
+    margin-top:5px;
+    font-weight: bold;
+}
+#email {
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    padding: 8px;
+    border: 0px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;  /* Fondo más claro */
+    color: #333;                /* Texto en color oscuro */
+    outline: none;              /* Elimina el contorno por defecto */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    margin-top:-3px;
+    max-width:250px;
+
+}
+
+label[for="email"] {
+    font-size: 12px;        /* Tamaño de fuente más grande */
+    color: #000;         /* Color azul (puedes cambiarlo al que desees) */
+    font-family: 'Roboto', sans-serif; /* Tipo de letra */
+    margin-top:5px;
+    font-weight: bold;
+}
+#nombre {
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    padding: 8px;
+    border: 0px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;  /* Fondo más claro */
+    color: #333;                /* Texto en color oscuro */
+    outline: none;              /* Elimina el contorno por defecto */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    margin-top:-3px;
+    max-width:250px;
+
+}
+
+label[for="nombre"] {
+    font-size: 12px;        /* Tamaño de fuente más grande */
+    color: #000;         /* Color azul (puedes cambiarlo al que desees) */
+    font-family: 'Roboto', sans-serif; /* Tipo de letra */
+    margin-top:5px;
+    font-weight: bold;
+}
+
+#primer_apellido {
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    padding: 8px;
+    border: 0px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;  /* Fondo más claro */
+    color: #333;                /* Texto en color oscuro */
+    outline: none;              /* Elimina el contorno por defecto */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    margin-top:-3px;
+    max-width:250px;
+
+}
+
+label[for="primer_apellido"] {
+    font-size: 12px;        /* Tamaño de fuente más grande */
+    color: #000;         /* Color azul (puedes cambiarlo al que desees) */
+    font-family: 'Roboto', sans-serif; /* Tipo de letra */
+    margin-top:5px;
+    font-weight: bold;
+}
+#CIF {
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    padding: 8px;
+    border: 0px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;  /* Fondo más claro */
+    color: #333;                /* Texto en color oscuro */
+    outline: none;              /* Elimina el contorno por defecto */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    margin-top:-3px;
+    max-width:250px;
+
+}
+
+label[for="DNI"] {
+    font-size: 12px;        /* Tamaño de fuente más grande */
+    color: #000;         /* Color azul (puedes cambiarlo al que desees) */
+    font-family: 'Roboto', sans-serif; /* Tipo de letra */
+    margin-top:5px;
+    font-weight: bold;
+}
+#Fecha_nacimiento {
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    padding: 8px;
+    border: 0px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;  /* Fondo más claro */
+    color: #333;                /* Texto en color oscuro */
+    outline: none;              /* Elimina el contorno por defecto */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    margin-top:-3px;
+    max-width:250px;
+
+}
+
+label[for="Fecha_nacimiento"] {
+   font-size: 12px;        /* Tamaño de fuente más grande */
+    color: #000;         /* Color azul (puedes cambiarlo al que desees) */
+    font-family: 'Roboto', sans-serif; /* Tipo de letra */
+    margin-top:5px;
+    font-weight: bold;
+}
+#Domicilio {
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    padding: 8px;
+    border: 0px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;  /* Fondo más claro */
+    color: #333;                /* Texto en color oscuro */
+    outline: none;              /* Elimina el contorno por defecto */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    margin-top:-3px;
+    max-width:250px;
+
+}
+
+label[for="Domicilio"] {
+    font-size: 12px;        /* Tamaño de fuente más grande */
+    color: #000;         /* Color azul (puedes cambiarlo al que desees) */
+    font-family: 'Roboto', sans-serif; /* Tipo de letra */
+    margin-top:5px;
+    font-weight: bold;
+}
+#Localidad {
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    padding: 8px;
+    border: 0px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;  /* Fondo más claro */
+    color: #333;                /* Texto en color oscuro */
+    outline: none;              /* Elimina el contorno por defecto */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    margin-top:-3px;
+    max-width:250px;
+
+}
+
+label[for="Localidad"] {
+    font-size: 12px;        /* Tamaño de fuente más grande */
+    color: #000;         /* Color azul (puedes cambiarlo al que desees) */
+    font-family: 'Roboto', sans-serif; /* Tipo de letra */
+    margin-top:5px;
+    font-weight: bold;
+}
+#Provincia {
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    padding: 8px;
+    border: 0px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;  /* Fondo más claro */
+    color: #333;                /* Texto en color oscuro */
+    outline: none;              /* Elimina el contorno por defecto */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    margin-top:-3px;
+    max-width:250px;
+
+}
+
+label[for="Provincia"] {
+    font-size: 12px;        /* Tamaño de fuente más grande */
+    color: #000;         /* Color azul (puedes cambiarlo al que desees) */
+    font-family: 'Roboto', sans-serif; /* Tipo de letra */
+    margin-top:5px;
+    font-weight: bold;
+}
+#CP {
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    padding: 8px;
+    border: 0px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;  /* Fondo más claro */
+    color: #333;                /* Texto en color oscuro */
+    outline: none;              /* Elimina el contorno por defecto */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    margin-top:-3px;
+    max-width:250px;
+
+}
+
+label[for="CP"] {
+    font-size: 12px;        /* Tamaño de fuente más grande */
+    color: #000;         /* Color azul (puedes cambiarlo al que desees) */
+    font-family: 'Roboto', sans-serif; /* Tipo de letra */
+    margin-top:5px;
+    font-weight: bold;
+}
+#Centro_trabajo {
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    padding: 8px;
+    border: 0px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;  /* Fondo más claro */
+    color: #333;                /* Texto en color oscuro */
+    outline: none;              /* Elimina el contorno por defecto */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    margin-top:-3px;
+    max-width:250px;
+
+}
+
+label[for="Centro_trabajo"] {
+    font-size: 12px;        /* Tamaño de fuente más grande */
+    color: #000;         /* Color azul (puedes cambiarlo al que desees) */
+    font-family: 'Roboto', sans-serif; /* Tipo de letra */
+    margin-top:5px;
+    font-weight: bold;
+}
+
+#centro_trabajo {
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    padding: 8px;
+    border: 0px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;  /* Fondo más claro */
+    color: #333;                /* Texto en color oscuro */
+    outline: none;              /* Elimina el contorno por defecto */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    margin-top:-3px;
+    max-width:250px;
+
+}
+
+label[for="Departamento"] {
+   font-size: 12px;        /* Tamaño de fuente más grande */
+    color: #000;         /* Color azul (puedes cambiarlo al que desees) */
+    font-family: 'Roboto', sans-serif; /* Tipo de letra */
+    margin-top:5px;
+    font-weight: bold;
+}
+
+/* Estilos generales para los campos */
+#CIF, #centro_trabajo, #departamento,
+#tipo_jornada, #hora_entrada_empresa, #hora_salida_comida, #hora_entrada_comida, #hora_salida_empresa, #horas_totales_laborables, #vacaciones, #tiempo_cortesia{
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    padding: 8px;
+    border: 0px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;  /* Fondo más claro */
+    color: #333;                /* Texto en color oscuro */
+    outline: none;              /* Elimina el contorno por defecto */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    margin-top: -3px;
+    max-width: 250px;
+}
+
+/* Estilos para las etiquetas */
+label[for="CIF"], label[for="centro_trabajo"], label[for="departamento"],
+label[for="tipo_jornada"], label[for="hora_entrada_empresa"], label[for="hora_salida_comida"],
+label[for="hora_entrada_comida"], label[for="hora_salida_empresa"], label[for="horas_totales_laborables"], label[for="vacaciones"], label[for="tiempo_cortesia"] {
+    font-size: 12px;        /* Tamaño de fuente más grande */
+    color: #000;            /* Color de texto */
+    font-family: 'Roboto', sans-serif; /* Tipo de letra */
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+
+/* Celdas de etiquetas (labels) */
+.form-table .label {
+    font-weight: bold;
+    width: 30%;
+    padding-right: 10px;
+    display: flex;
+    align-items: center;
+    color: #333;
+}
+
+/* Celdas de entradas (inputs) */
+.form-table .input {
+    width: 70%;
+}
+
+/* Iconos */
+.form-table .label i {
+    margin-right: 10px;
+}
+
+/* Estilo para el mensaje de éxito */
+.success-message {
+    display: none;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+    padding: 10px;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+/* Estilo para los botones */
+.form-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.submit-btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative; /* Permite usar top y left */
+    top: 10px; /* Subir hacia arriba */
+
+}
+
+.submit-btn:hover {
+    background-color: #45a049;
+}
+
+/* Estilo para la nota y cambio de contraseña */
+ .note {
+    text-align: center; /* Centrar el texto horizontalmente */
+    font-size: 14px; /* Tamaño del texto */
+    color: #555; /* Color de la nota */
+    margin-top: 10px; /* Espaciado con respecto al botón */
+  }
+
+.change-password-btn {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 16px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.change-password-btn:hover {
+    text-decoration: underline;
+}
+
+
+/* Estilo específico para el select de Centro de Trabajo */
+.form-table .Centro_trabajo {
+    max-width: 250px; /* Ajusta el ancho máximo que deseas para el combo */
+    width: auto; /* Permite que se ajuste si es necesario */
+}
+
+
+/* Estilo específico para el select de Centro de Trabajo */
+.form-table .Departamento {
+    max-width: 250px; /* Ajusta el ancho máximo que deseas para el combo */
+    width: auto; /* Permite que se ajuste si es necesario */
+}
+
+
+/* Estilo específico para el campo select de Provincias */
+.form-table .Provincia {
+    max-width: 100%;          /* Asegura que no se expanda más allá de su contenedor */
+    width: 100%;              /* Hace que el select ocupe el 100% del ancho disponible */
+    font-family: 'Roboto', sans-serif; /* Asegura que el tipo de letra sea consistente */
+    font-size: 16px;          /* Igual tamaño de letra */
+}
+
+.editar-small {
+    background-color: #1565A8; /* Color base */
+    color: white; /* Color del texto */
+    font-weight: bold; /* Texto en negrita */
+    border: none; /* Sin borde */
+    font-size: 16px; /* Tamaño de la fuente */
+    padding: 0; /* Sin espacio interno adicional */
+    width: 200px; /* Ancho fijo */
+    height: 40px; /* Altura fija */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Mano al pasar el mouse */
+    text-align: center; /* Centrar el texto */
+    line-height: 40px; /* Alinear verticalmente el texto */
+    position: relative; /* Permite usar top y left */
+    top: 0px; /* Subir hacia arriba */
+    left: 0px; /* Mover a la izquierda */
+    font-family: 'Roboto', sans-serif !important; /* Fuente Roboto */
+    transition: background-color 0.3s ease; /* Suaviza el cambio de fondo */
+    margin-top: 20px;
+    gap: 5px; /* Espacio entre el icono y el texto */
+}
+
+.editar-small:hover {
+    background-color: #0D4376; /* Color al hacer hover */
+    color: white; /* Mantiene el texto blanco */
+}
+
+
+
+
+/* Botones "Añadir" con estilo personalizado */
+  .modal-body .add-btn {
+    background-color: #007bff; /* Azul primario */
+    color: white; /* Texto en blanco */
+    border: none; /* Sin borde */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 8px 16px; /* Tamaño del botón */
+    font-size: 14px; /* Tamaño del texto */
+    cursor: pointer; /* Cambiar a mano al pasar */
+    margin-top: 10px; /* Espacio adicional superior */
+  }
+
+  /* Efecto hover para los botones "Añadir" */
+  .modal-body .add-btn:hover {
+    background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
+  }
+
+ .modal-body .remove-btn.no-bg {
+    background: none;
+    color: inherit;
+    padding: 0;
+    border: none;
+}
+
+.modal-body .remove-btn.no-bg:hover {
+    background: none;
+}
+/* Botón sin fondo */
+.btn-x {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 16px;
+    color: black;
+    cursor: pointer;
+}
+
+.btn-x:hover {
+    color: red;
+}
+
+/* Alinear a la derecha */
+.align-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+
+.tag {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #c3ccdc; /* Color de fondo rosa */
+    color: #000; /* Color de texto blanco */
+    border-radius: 20px; /* Borde redondeado */
+    font-size: 14px;
+    margin: 5px; /* Espacio entre las etiquetas */
+}
+
+.tag2 {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #e0514c; /* Color de fondo rosa */
+    color: #fff; /* Color de texto blanco */
+    border-radius: 20px; /* Borde redondeado */
+    font-size: 14px;
+    margin: 5px; /* Espacio entre las etiquetas */
+}
+
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px; /* Espacio entre las etiquetas */
+    background-color: white; /* Fondo blanco entre las etiquetas */
+    padding: 5px; /* Espacio interior para que el fondo blanco sea visible */
+    align-items: center;
+    justify-content: center;
+}
+
+#palabrasClaveTrabajos {
+    margin-top: 0px; /* Mueve todo el contenedor hacia arriba */
+    padding: 10px; /* Espaciado interno */
+    background-color: #f9f9f9; /* Fondo del contenedor */
+    /* border: 1px solid #ddd; /* Borde para distinguir el contenedor */
+    border-radius: 4px; /* Bordes redondeados */
+}
+
+#palabrasClaveTrabajos p {
+    margin: 0 0 10px; /* Espaciado entre el título y las etiquetas */
+    font-weight: bold; /* Hace el texto más destacado */
+    /* Subraya el texto */
+    color: #333; /* Color del texto */
+    font-size: 16px; /* Tamaño del texto */
+}
+
+#palabrasClaveTrabajos .tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px; /* Espaciado entre etiquetas */
+    background-color: white; /* Fondo del área de etiquetas */
+    padding: 5px; /* Espaciado interno del contenedor de etiquetas */
+    margin-top: 10px; /* Espaciado entre el título y las etiquetas */
+    border-radius: 4px; /* Bordes redondeados */
+    /* border: 1px solid #ddd; /* Borde del contenedor de etiquetas */
+}
+
+.form-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Opcional, centra los botones horizontalmente */
+        gap: 10px; /* Espaciado entre los botones */
+        margin-top: -10px
+    }
+
+    .submit-btn {
+        width: 100%; /* Opcional, para que ocupen todo el ancho disponible */
+        max-width: 200px; /* Ajusta el ancho máximo si lo deseas */
+    }
+
+.delete-festivo {
+    color: red;
+    margin-left: 10px;
+    cursor: pointer;
+    display: none;
+}
+
+.tag:hover .delete-festivo {
+    display: inline;
+}
+
+.dia-semana {
+    font-size: 14px;
+    color: #000;
+    font-family: 'Roboto', sans-serif;
+    margin-top: 5px;
+    font-weight: bold;
+}
+ th, td {
+        padding: 8px; /* Reduce el padding para hacer las celdas más bajas */
+        text-align: center; /* Centra el texto en las celdas */
+    }
+    input[type="time"] {
+        width: 70px; /* Ajusta el ancho de los inputs según sea necesario */
+        padding: 2px; /* Reduce el padding interno de los inputs */
+        font-size: 12px; /* Reduce el tamaño de la fuente de los inputs */
+    }
+    .titulo {
+        font-size: 14px; /* Ajusta el tamaño de la fuente de los encabezados */
+    }
+
+
+
+
+/* Ajustar el tamaño del modal */
+#modalPreview .modal-dialog {
+    max-width: 90%; /* Ancho máximo del modal */
+}
+
+/* Ajustar la tabla al modal */
+#modalPreview .table {
+    width: 100%;
+    table-layout: fixed; /* Hace que todas las columnas tengan el mismo ancho */
+    border-collapse: collapse;
+}
+
+/* Ajustar el tamaño de las celdas */
+#modalPreview th, #modalPreview td {
+    padding: 2px; /* Reducir el espacio interno */
+    font-size: 8px; /* Ajustar tamaño del texto */
+    text-align: center;
+    border: 1px solid #ddd;
+    width: calc(100% / 32) !important; /* Distribuir columnas proporcionalmente */
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.table-sm td, .table-sm th {
+    padding: .3rem !important; /* Ajuste de padding para el alto */
+    width: 3% !important; /* Ajusta el ancho de las celdas */
+}
+
+  .time-cortesia-hover:hover {
+        cursor: pointer;
+        color: #5381ad !important;
+    }
+
+
+.eye-hover:hover {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 25px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.switch2 {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 25px;
+}
+
+.switch2 input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 25px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #28a745;
+}
+
+input:checked + .slider:before {
+    transform: translateX(24px);
+}
+
+.slider2 {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 25px;
+}
+
+.slider2:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider2 {
+    background-color: #fdd71a;
+}
+
+input:checked + .slider2:before {
+    transform: translateX(24px);
+}
+
+    .form-group {
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    .file-label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 500;
+        color: #333;
+    }
+
+    .file-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .custom-file-button {
+        padding: 8px 18px;
+        background-color: #1565A8;
+        color: white;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .custom-file-button:hover {
+        background-color: #0069D9;
+    }
+
+    .custom-file-input {
+        display: none;
+    }
+
+    .file-name-input {
+        flex: 1;
+        padding: 7px 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 13px;
+        background-color: #f9f9f9;
+        color: #555;
+    }
+
+    .custom-modal-button {
+        padding: 8px 18px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .custom-modal-button i {
+        font-size: 14px;
+    }
+
+    .btn-close-modal {
+        background-color: #6c757d;
+        color: white;
+    }
+
+    .btn-close-modal:hover {
+        background-color: #545b62;
+    }
+
+    .btn-save-modal {
+        background-color: #1565A8;
+        color: white;
+    }
+
+    .btn-save-modal:hover {
+        background-color: #0d4376;
+    }
+
+    .custom-modal-button {
+        padding: 8px 18px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .custom-modal-button i {
+        font-size: 14px;
+    }
+
+    .btn-close-modal {
+        background-color: #6c757d;
+        color: white;
+    }
+
+    .btn-close-modal:hover {
+        background-color: #545b62;
+    }
+
+    .btn-save-modal {
+        background-color: #1565A8;
+        color: white;
+    }
+
+    .btn-save-modal:hover {
+        background-color: #0d4376;
+    }
+
+    .custom-modal-button {
+        padding: 8px 18px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-family: 'Roboto', sans-serif;
+        color: white;
+        background-color: #1565A8;
+    }
+
+    .custom-modal-button:hover {
+        background-color: #0d4376;
+    }
+
+    .custom-modal-button i {
+        font-size: 16px !important;
+        vertical-align: middle;
+        margin-right: 6px;
+        color: white !important;
+    }
+
+    .custom-modal-button {
+        padding: 8px 18px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-family: 'Roboto', sans-serif;
+        color: white;
+        background-color: #1565A8;
+    }
+
+    .custom-modal-button:hover {
+        background-color: #0d4376;
+    }
+
+    .custom-modal-button i {
+        font-size: 16px !important;
+        vertical-align: middle;
+        color: white !important;
+    }
+
+    .custom-modal-button.cerrar {
+        background-color: #6c757d; /* gris */
+    }
+
+    .modal-title {
+        font-family: 'Roboto', sans-serif;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .capital-text::first-letter {
+        text-transform: capitalize;
+    }
+
+    .capital-text {
+        text-transform: lowercase;
+    }
+
+
+.btn-mark-as-read {
+    background: #1565a8;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-mark-as-read:hover {
+    background: #0d4376;
+}
+
+.dropdown-item {
+    border-radius: 0.375rem;
+    transition: background-color 0.2s ease;
+    padding: 1px 15px !important;
+    margin-top:0px;
+}
+
+
+
+
+
+
+
+.custom-width-modal {
+  max-width: 600px; /* o el ancho que prefieras */
+}
+
+.btn-mark-as-read {
+  min-width: 28px !important;
+  padding: 3px 3px;
+}
+/* Modal tipo barra lateral derecha */
+.modal-side-right {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 0;
+  height: 100%;
+  max-width: 500px;
+  width: 100%;
+  z-index: 1055;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+/* Cuando el modal se muestra */
+.modal.show .modal-side-right {
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+/* Evitamos que Bootstrap lo sobrescriba */
+.modal.fade .modal-dialog {
+  transition: none !important;
+  transform: none !important;
+}
+
+/* Ajustes al contenido del modal */
+.modal-side-right .modal-content {
+  height: 100%;
+  border-radius: 0;
+  text-align: left;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+}
+/* Estilo del texto de la notificación */
+.text-sm {
+    font-size: 0.75rem !important;
+    color: #000;
+    font-weight: 600;
+}
+
+.text-xs {
+    font-size: 0.70rem !important;
+    color: #6c757d;
+}
+
+
+
+.btn-primary3 {
+  background-color: #1565a8 !important;
+  color: white;
+  font-size: 0.75rem;
+  text-transform: none; /* evita mayúsculas automáticas */
+  margin-left:10px;
+}
+
+.btn-primary3:hover {
+  background-color: #0d4b80 !important; /* un tono más oscuro para el hover */
+}
+
+
+  .dropdown-menu-mobile-half {
+    width: 50vw !important; /* Ajusta al 50% del ancho de la ventana */
+    max-width: 400px;        /* Máximo ancho opcional */
+    min-width: 250px;        /* Mínimo opcional */
+    padding: 1rem;
+}
+
+.dropdown-menu-mobile-half .dropdown-item {
+    white-space: normal; /* Permite que el texto se ajuste a múltiples líneas */
+    word-wrap: break-word;
+    width: 100%;
+}
+
+.dropdown-menu-mobile-half .btn-mark-as-read {
+
+    padding: 0 5px;
+    font-size: 0.9rem;
+}
+
+label{
+    text-align: start;
+}
+
+
+</style>
+
+</head>
+
+<body class="g-sidenav-show  bg-gray-200">
+<!-- Modal -->
+<div class="modal fade" id="notificacionesModal" tabindex="-1" aria-labelledby="notificacionesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-side-right">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="notificacionesModalLabel">
+          <i class="fa fa-bell cursor-pointer" style="font-size: 1.5rem;"></i> Notificaciones
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar">
+            <i class="fa-solid fa-xmark text-dark"></i>
+        </button>
+      </div>
+      <div class="modal-body text-start">
+        <form action="{{ url_for('marcar_notificaciones_leidas') }}" method="post">
+          <button type="submit" class="btn btn-primary3 btn-sm mb-3">Marcar todas como leídas</button>
+        </form>
+
+        {% for notificacion in notificaciones %}
+        <div class="mb-3 border-bottom pb-2">
+          <h6 class="text-sm font-weight-normal mb-1">
+            {{ notificacion.concepto }}
+            {% if not notificacion.leida %}
+              <button class="btn btn-link btn-mark-as-read ms-2" style="min-width: 32px;" data-id="{{ notificacion.id }}">
+                <i class="fa-solid fa-check" style="font-size: 1.2rem;"></i>
+              </button>
+            {% endif %}
+          </h6>
+          <p class="text-xs text-secondary mb-0">
+            <i class="fa fa-clock me-1"></i>
+            {{ notificacion.fecha_hora.strftime('%d/%m/%Y %H:%M') }}
+          </p>
+        </div>
+        {% endfor %}
+
+        {% if notificaciones|length == 0 %}
+        <div class="text-start">
+          <span class="text-sm">No tienes notificaciones</span>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+ <div class="modal fade" id="welcomeModal" tabindex="-1" role="dialog" aria-labelledby="welcomeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="welcomeModalLabel">Bienvenido</h5>
+                </div>
+                <div class="modal-body" id="welcomeMessage">
+                    <!-- El mensaje de bienvenida se establecerá mediante JavaScript -->
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<!-- Menu HTML añadido de otro .html -->
+
+    {% include 'menu_admin.html' %}
+
+
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg w-100">
+
+
+    <!-- Navbar -->
+   <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+    <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                <h5 class="font-weight-bolder mb-0 d-none d-md-block">
+                    <i class="fa fa-briefcase" aria-hidden="true" style="color: #000;"></i> <!-- Icono de vacaciones con espacio -->
+                    Empresa
+
+                </h5>
+
+            </ol>
+
+            <div class="centered-message">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="flash-messages">
+                            {% for category, message in messages %}
+                                <div class="flash {{ category }}">{{ message }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </nav>
+
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <div class="input-group input-group-outline"></div>
+            </div>
+            <ul class="navbar-nav justify-content-end">
+                <li class="nav-item d-flex align-items-center">
+
+
+
+
+
+</li>
+
+
+
+
+
+                <li class="nav-item px-3 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-body p-0"></a>
+                </li>
+
+                   <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <div class="input-group input-group-outline"></div>
+            </div>
+            <ul class="navbar-nav justify-content-end">
+
+<li class="nav-item d-flex align-items-center">
+                    <tr>
+    <td class="label eye">
+    <i class="fas fa-eye" data-bs-toggle="modal" data-bs-target="#botonModal" style="cursor: pointer; text-decoration: none;"
+
+       onmouseout="this.style.textDecoration='none'" style="color:#4C94E0;">
+    </i>
+</td>
+
+    <td class="input" style="margin-right:10px;" >
+        <label class="switch" style="margin-top:10px;margin-right:10px;">
+            <input type="checkbox" id="ver_vacaciones_switch" {% if empresa.ver_vacaciones %}checked{% endif %}>
+            <span class="slider round"></span>
+        </label>
+    </td>
+
+     <td class="label eye">
+    <i class="fa-solid fa-pause" data-bs-toggle="modal" data-bs-target="#botonModal2" style="cursor: pointer; text-decoration: none;"
+
+       onmouseout="this.style.textDecoration='none'" style="color:#4C94E0;">
+    </i>
+</td>
+
+    <td class="input" >
+        <label class="switch2" style="margin-top:10px;">
+            <input type="checkbox" id="ver_pausas_switch" {% if empresa.ver_pausas %}checked{% endif %}>
+            <span class="slider2 round"></span>
+        </label>
+    </td>
+</tr>
+  </li>
+                <!-- Botón de "Más Información" -->
+            <li class="nav-item d-flex align-items-center">
+    <button type="button"
+        class="btn btn-info ms-3"
+        data-bs-toggle="modal"
+        data-bs-target="#modalLogos"
+        onmouseover="this.style.backgroundColor='#0D4376'"
+        onmouseout="this.style.backgroundColor='#1565A8'"
+        style="font-family: 'Roboto', sans-serif; font-weight: bold; color: white;
+               background-color: #1565A8;
+               border: none;
+               margin-right: 40px;
+               margin-top: 15px;
+               font-size: 15px;
+               text-transform: none;
+               transition: background-color 0.3s ease;">
+        <i class="fa fa-font-awesome"></i> Editar logos
+    </button>
+</li>
+
+    <li class="nav-item d-xl-none ps-3 d-flex align-items-center" style="margin-right:10px;">
+        <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+            <div class="sidenav-toggler-inner">
+                <i class="sidenav-toggler-line"></i>
+                <i class="sidenav-toggler-line"></i>
+                <i class="sidenav-toggler-line"></i>
+            </div>
+        </
+    </li>
+
+
+
+
+<li class="nav-item dropdown pe-2 d-flex align-items-center">
+    <a href="javascript:;" class="nav-link text-body p-0 d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#notificacionesModal">
+        {% if notificaciones %}
+            <span class="badge bg-danger me-2">{{ notificaciones|length }}</span>
+        {% endif %}
+        <i class="fa fa-bell cursor-pointer" style="font-size: 1.5rem;"></i>
+    </a>
+</li>
+          <li class="nav-item d-flex align-items-center">
+              <a href="/cerrar_sesion" class="nav-link text-body font-weight-bold px-0">
+                <i class="fa fa-sign-out"style="font-size: 1.5rem;"></i>
+    </a>
+</li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+    <!-- Cuerpo del HTML-->
+{% if empresas %}
+
+<tr>
+    <td class="label"><i class="fas fa-building"></i> Seleccionar empresa</td>
+    <td class="input">
+        <form method="GET" action="{{ url_for('guardar_empresa') }}">
+            <select id="empresa-id" class="shadow p-1 bg-transparent" name="empresa_id" onchange="this.form.submit()"
+                style="border-radius: 10px;">
+                {% for e in empresas %}
+                    <option value="{{ e.id }}" {% if empresa and empresa.id == e.id %}selected{% endif %}>
+                        {{ e.nombre }} ({{ e.CIF }})
+                    </option>
+                {% endfor %}
+            </select>
+        </form>
+    </td>
+</tr>
+
+
+<div class="mb-3">
+    <button class="btn" id="nuevaEmpresaBtn" title="Añadir empresa">
+        <i class="fas fa-plus-circle"></i>
+    </button>
+    <button class="btn" id="eliminarEmpresaBtn" style="margin-top:10px;" title="Eliminar empresa">
+        <i class="fas fa-trash-alt"></i>
+    </button>
+</div>
+{% endif %}
+
+
+
+
+
+<style>
+    .form-table tr:nth-child(even) {
+    background-color: transparent !important;
+}
+    @media (min-width: 992px) {
+    .custom-col-lg-6 {
+        -ms-flex: 0 0 50%;
+        flex: 0 0 49%;
+        max-width: 50%;
+    }
+}
+</style>
+
+<div class="container-fluid row p-0 custom-form-container mb-5 mx-auto justify-content-between" style="max-width: 1400px;">
+    <div class="col-11 mx-auto custom-col-lg-6 shadow bg-white rounded-3 mb-4">
+        <!-- Tabla 1: Empresa -->
+        <table class="form-table mb-3">
+            <tr>
+                <td class="label"><i class="fas fa-building"></i> {{ form.nombre.label }}</td>
+                <td class="input">{{ form.nombre }}</td>
+            </tr>
+            <tr>
+                <td class="label"><i class="fas fa-id-badge"></i> {{ form.CIF.label }}</td>
+                <td class="input">{{ form.CIF }}</td>
+            </tr>
+            <tr>
+                <td class="label"><i class="fas fa-home"></i> {{ form.Domicilio.label }}</td>
+                <td class="input">{{ form.Domicilio }}</td>
+            </tr>
+            <tr>
+                <td class="label"><i class="fas fa-envelope"></i> {{ form.email.label }}</td>
+                <td class="input">{{ form.email }}</td>
+            </tr>
+            <tr>
+                <td class="label">
+                    <i class="fas fa-sun"></i>
+                    <label for="vacaciones">Vacaciones</label>
+                    <i class="fa-solid fa-circle-info time-cortesia-hover ms-1" data-bs-toggle="modal" data-bs-target="#vacacionesModal" style="color:#0D4376;" title="Más Información"></i>
+                </td>
+                <td class="input">
+                    <select name="vacaciones" id="vacaciones">
+                        {% for i in range(1, 31) %}
+                            <option value="{{ i }}" {% if i == empresa.dias_vacaciones %}selected{% endif %}>{{ i }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="label"><i class="fas fa-city"></i> {{ form.Localidad.label }}</td>
+                <td class="input">{{ form.Localidad }}</td>
+            </tr>
+            <tr>
+                <td class="label"><i class="fas fa-map-marker-alt"></i> {{ form.Provincia.label }}</td>
+                <td class="input">{{ form.Provincia() }}</td>
+            </tr>
+            <tr>
+                <td class="label"><i class="fas fa-phone"></i> {{ form.Telefono.label }}</td>
+                <td class="input">{{ form.Telefono }}</td>
+            </tr>
+            <tr>
+                <td class="label"><i class="fas fa-map-pin"></i> {{ form.CP.label }}</td>
+                <td class="input">{{ form.CP }}</td>
+            </tr>
+            <tr>
+                <td class="label">
+                    <i class="fa-solid fa-clock"></i>
+                    <label for="tiempo_cortesia">Tiempo de cortesía</label>
+                    <i class="fa-solid fa-circle-info time-cortesia-hover ms-1" data-bs-toggle="modal" data-bs-target="#cortesiaModal" style="color:#0D4376;" title="Más Información"></i>
+                </td>
+                <td class="input">
+                    <select name="tiempo_cortesia" id="tiempo_cortesia">
+                        {% for i in range(1, 31) %}
+                            <option value="{{ i }}" {% if i == empresa.tiempo_cortesia %}selected{% endif %}>{{ i }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+
+            </tr>
+            <tr>
+    <td class="label"><i class="fas fa-network-wired"></i> {{ form.ip_empresa.label }}</td>
+    <td class="input">{{ form.ip_empresa(class="form-control", placeholder="Ej: 192.168.1.100") }}</td>
+</tr>
+
+        </table>
+                <!-- Lista de Centros de Trabajo y Departamentos -->
+        <div id="palabrasClaveTrabajos" class="bg-white mt-4">
+            <i class="fa-solid fa-building"></i>  <p class="text-uppercase text-sm m-0">Centro de Trabajo</p>
+            <div class="tags-container mb-3 mt-0">
+                {% for centro in empresa.centros_trabajo %}
+                    <span class="tag">{{ centro.nombre }}</span>
+                {% endfor %}
+            </div>
+
+            <i class="fa-solid fa-building-user"></i> <p class="text-uppercase text-sm m-0">Departamentos</p>
+            <div class="tags-container mb-3 mt-0">
+                {% for departamento in empresa.departamentos %}
+                    <span class="tag">{{ departamento.nombre }}</span>
+                {% endfor %}
+            </div>
+            <button type="button" class="btn mt-0 " style="font-size: small;" data-bs-toggle="modal" data-bs-target="#modalCentrosDepartamentos">
+                <i class="fa fa-pencil" aria-hidden="true"></i> Editar Empresas y Departamentos
+            </button>
+        </div>
+    </div>
+
+    <div class="col-11 mx-auto custom-col-lg-6 shadow bg-white rounded-3 p-2 mb-4">
+        <table class="mt-0">
+            <thead>
+                <tr>
+                    <th class="titulo">Día</th>
+                    <th class="titulo">Trabaja</th>
+                    <th class="titulo">Entrada</th>
+                    <th class="titulo">Salida comida</th>
+                    <th class="titulo">Entrada comida</th>
+                    <th class="titulo">Salida</th>
+                </tr>
+            </thead>
+            <tbody id="tabla-jornada">
+                {% for dia in ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'] %}
+                <tr id="tr_{{ dia }}">
+                    <td class="dia-semana">{{ dia.capitalize() }}</td>
+
+                    <!-- Checkbox 'Trabaja' -->
+                    <td>
+                        <input type="checkbox" name="trabaja_invierno_{{ dia }}" id="trabaja_invierno_{{ dia }}" class="trabaja-invierno"
+                            {% if empresa['trabaja_invierno_' + dia] %} checked {% endif %}>
+
+                        <input type="checkbox" name="trabaja_verano_{{ dia }}" id="trabaja_verano_{{ dia }}" class="trabaja-verano"
+                            {% if empresa['trabaja_verano_' + dia] %} checked {% endif %} style="display: none;">
+                    </td>
+
+                    <!-- Horarios -->
+                    <td id="entrada_{{ dia }}_cell">
+                        <input type="time" name="entrada_invierno_{{ dia }}" id="entrada_invierno_{{ dia }}" class="entrada-invierno"
+                            value="{{ empresa['entrada_invierno_' + dia] or '' }}" style="border:0px; cursor: pointer;">
+                        <input type="time" name="entrada_verano_{{ dia }}" id="entrada_verano_{{ dia }}" class="entrada-verano"
+                            value="{{ empresa['entrada_verano_' + dia] or '' }}" style="display: none;border:0px;cursor: pointer;">
+                    </td>
+                    <td id="salida_comida_{{ dia }}_cell">
+                        <input type="time" name="salida_comida_invierno_{{ dia }}" id="salida_comida_invierno_{{ dia }}" class="salida-comida-invierno"
+                            value="{{ empresa['salida_comida_invierno_' + dia] or '' }}" style="border:0px;cursor: pointer;">
+                        <input type="time" name="salida_comida_verano_{{ dia }}" id="salida_comida_verano_{{ dia }}" class="salida-comida-verano"
+                            value="{{ empresa['salida_comida_verano_' + dia] or '' }}" style="display: none;border:0px;cursor: pointer;">
+                    </td>
+                    <td id="entrada_comida_{{ dia }}_cell">
+                        <input type="time" name="entrada_comida_invierno_{{ dia }}" id="entrada_comida_invierno_{{ dia }}" class="entrada-comida-invierno"
+                            value="{{ empresa['entrada_comida_invierno_' + dia] or '' }}" style="border:0px;cursor: pointer;">
+                        <input type="time" name="entrada_comida_verano_{{ dia }}" id="entrada_comida_verano_{{ dia }}" class="entrada-comida-verano"
+                            value="{{ empresa['entrada_comida_verano_' + dia] or '' }}" style="display: none;border:0px;cursor: pointer;">
+                    </td>
+                    <td id="salida_{{ dia }}_cell">
+                        <input type="time" name="salida_invierno_{{ dia }}" id="salida_invierno_{{ dia }}" class="salida-invierno"
+                            value="{{ empresa['salida_invierno_' + dia] or '' }}" style="border:0px;cursor: pointer;">
+                        <input type="time" name="salida_verano_{{ dia }}" id="salida_verano_{{ dia }}" class="salida-verano"
+                            value="{{ empresa['salida_verano_' + dia] or '' }}" style="display: none;border:0px;cursor: pointer;">
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <table class="mx-2">
+            <tr>
+                <td class="label text-start">
+                    <i class="fas fa-calendar-alt"></i>
+                    <label for="jornada-selector">Seleccionar Jornada</label>
+                </td>
+                <td class="input">
+                    <select id="jornada-selector" class="custom-input" onchange="toggleJornadaFields()">
+                        <option value="invierno" selected>Invierno</option>
+                        <option value="verano">Verano</option>
+                    </select>
+                </td>
+            </tr>
+            <tr id="jornada-verano2">
+                <td class="label text-start">
+                    <i class="fas fa-calendar-alt"></i>
+                    <label>Horario de Verano</label>
+                </td>
+                <td class="input">
+                    <div style="display: flex; align-items: center; font-family: 'Roboto', sans-serif; font-size: 14px; font-weight: bold; justify-content:center">
+                        {{ form.fecha_inicio_verano(class="form-control custom-input w-auto") }}
+                        <i class="fa-solid fa-arrow-right mx-3"></i>
+                        {{ form.fecha_fin_verano(class="form-control custom-input w-auto") }}
+                        <button id="btn-vaciar-verano" class="btn m-0" onclick="vaciarVerano()">
+                            <i class="fas fa-trash-alt" style="font-size: 0.8rem;"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <div class="mb-5" style="display: flex; align-items: center;justify-content: center;margin-left:35px; margin-top:20px;">
+            <!-- Botones con iconos estilizados -->
+            <button type="button" class="custom-modal-button" data-bs-toggle="modal" data-bs-target="#usuariosModal" style="margin: 0 10px;"
+            title="Asignar Horario">
+                <i class="fa fa-clock-o m-0" aria-hidden="true"></i>
+                <span class="d-none d-xl-block">
+                    Asignar horario
+                </span>
+            </button>
+
+            <button type="button" class="custom-modal-button m-0" data-bs-toggle="modal" data-bs-target="#modalSeleccion"
+            title="Previsualizar">
+                <i class="fa fa-eye m-0" aria-hidden="true"></i>
+                <span class="d-none d-xl-block">
+                    Previsualizar
+                </span>
+            </button>
+
+            <button type="button" class="custom-modal-button" data-bs-toggle="modal" data-bs-target="#calendarModal" style="margin: 0 10px;"
+            title="Exportar Calendario">
+                <i class="fa-solid fa-download m-0"></i>
+                <span class="d-none d-xl-block">
+                    Exportar calendario
+                </span>
+            </button>
+        </div>
+
+        <div id="diasFestivos mb-3">
+            <p class="text-uppercase text-sm"><i class="fa-solid fa-umbrella-beach"></i> Días Festivos</p>
+            <div class="tags-container">
+                {% for festivo in festivos %}
+                    <span class="tag2">{{ festivo.dia }} de {{ festivo.mes }}</span>
+                {% endfor %}
+            </div>
+            <!-- Botón para abrir el modal de días festivos -->
+            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modalDiasFestivos" style="font-size: small;">
+                 <i class="fa fa-pencil" aria-hidden="true"></i> Editar Festivos
+            </button>
+        </div>
+    </div>
+
+    <button type="button" class="btn col-12" onclick="guardarEmpresa()" style="margin-bottom:20px; font-size: 16px;">
+        <i class="fas fa-save"></i> Guardar empresa
+    </button>
+</div>
+
+<!-- Modal de Información sobre Vacaciones -->
+<div class="modal fade" id="vacacionesModal" tabindex="-1" aria-labelledby="vacacionesModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="vacacionesModalLabel" style="display: flex; align-items: center; gap: 10px;">
+  <i class="fas fa-info-circle" style="color: #1565A8;"></i> Información sobre vacaciones</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark text-dark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Este campo solicita el número de vacaciones que otorga de media la empresa a cada empleado. Este dato se utiliza para calcular el calendario laboral de la empresa, que define los días de descanso y festivos para todos los empleados.</p>
+            </div>
+            <div class="modal-footer">
+                  <button type="button" class="custom-modal-button cerrar" data-bs-dismiss="modal"
+                        onclick="console.log('Modal cerrado desde Cancelar');">
+                    <i class="fa-solid fa-xmark text-dark"></i>
+                    <span class="capital-text">Cerrar</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Información sobre Tiempo de Cortesía -->
+<div class="modal fade" id="cortesiaModal" tabindex="-1" aria-labelledby="cortesiaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cortesiaModalLabel" style="display: flex; align-items: center; gap: 10px;">
+  <i class="fas fa-info-circle" style="color: #1565A8;"></i> Información sobre el tiempo de cortesía</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark text-dark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Este campo solicita cuánto tiempo desea la empresa permitir para que el empleado pueda fichar su entrada antes de la hora real de entrada. El tiempo que se seleccione se utilizará para el cálculo del horario, aunque se asignará la hora de entrada predeterminada, no la que haya fichado el empleado.</p>
+            </div>
+            <div class="modal-footer">
+                  <button type="button" class="custom-modal-button cerrar" data-bs-dismiss="modal"
+                        onclick="console.log('Modal cerrado desde Cancelar');">
+                    <i class="fa-solid fa-xmark text-dark"></i>
+                    <span class="capital-text">Cerrar</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Información sobre el Botón de Visualización de Vacaciones -->
+<div class="modal fade" id="botonModal" tabindex="-1" aria-labelledby="botonModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="botonModalLabel" style="display: flex; align-items: center; gap: 10px;">
+  <i class="fas fa-info-circle" style="color: #1565A8;"></i> Información sobre la visualización de vacaciones</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark text-dark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Este interruptor permite habilitar o deshabilitar la visualización de las vacaciones de los empleados.</p>
+                <p>Si está activado, los empleados podrán ver los días de vacaciones de sus compañeros.
+                   Si está desactivado, esta información será privada y solo accesible por los administradores.</p>
+                <p>Utilice esta configuración según la política de transparencia de la empresa respecto a la gestión de vacaciones.</p>
+            </div>
+            <div class="modal-footer">
+                  <button type="button" class="custom-modal-button cerrar" data-bs-dismiss="modal"
+                        onclick="console.log('Modal cerrado desde Cancelar');">
+                    <i class="fa-solid fa-xmark text-dark"></i>
+                    <span class="capital-text">Cancelar</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Información sobre el Botón de Visualización de Pausas -->
+<div class="modal fade" id="botonModal2" tabindex="-1" aria-labelledby="botonModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="botonModalLabel"><i class="fas fa-info-circle" style="color: #1565A8;"></i> Información sobre la Visualización de Pausas</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark text-dark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Este interruptor permite habilitar o deshabilitar el funcionamiento de las pausas.</p>
+                <p>Si está activado, los empleados podrán ver y realizar pausas en su jornada laboral.
+                   Si está desactivado, esta opción no se mostrará para ejecutarse y no se mostrará en las tablas de registros laborales.</p>
+                <p>Utilice esta configuración según la política de transparencia de la empresa respecto a la gestión de descansos.</p>
+            </div>
+            <div class="modal-footer">
+                  <button type="button" class="custom-modal-button cerrar" data-bs-dismiss="modal"
+                        onclick="console.log('Modal cerrado desde Cancelar');">
+                    <i class="fa-solid fa-xmark text-dark"></i>
+                    <span class="capital-text">Cancelar</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="calendarModal" tabindex="-1" role="dialog" aria-labelledby="calendarModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="calendarModalLabel">
+                    <i class="fas fa-calendar-alt me-2"></i>Exportar Calendario Laboral
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark text-dark" aria-hidden="true"></i>
+                </button>
+
+            </div>
+           <div class="modal-body">
+    <!-- Formulario para exportar el calendario -->
+    <form method="POST" action="{{ url_for('export_calendar') }}">
+        <label for="year" style="display: block; text-align: left; font-weight: bold; color: black;">
+    <i class="fa-regular fa-calendar"></i> Año:
+</label>
+        <select id="year" name="year" class="form-control mb-3" required>
+            <!-- Opción para el año anterior -->
+            <option value="{{ current_year - 1 }}">{{ current_year - 1 }}</option>
+            <!-- Opción para el año actual -->
+            <option value="{{ current_year }}" selected>{{ current_year }}</option>
+            <!-- Opción para el año siguiente -->
+            <option value="{{ current_year + 1 }}">{{ current_year + 1 }}</option>
+        </select>
+        <button type="submit" class="custom-modal-button" style="text-transform: none; font-size: 14px;">
+            <i class="fa-solid fa-download" style="margin-right: 5px;"></i> Exportar
+        </button>
+
+
+    </form>
+</div>
+
+
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Días Festivos -->
+<div class="modal fade" id="modalDiasFestivos" tabindex="-1" aria-labelledby="modalDiasFestivosLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalDiasFestivosLabel">
+                    <i class="fa-solid fa-calendar"></i> Gestionar días festivos
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark text-dark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formAgregarFestivo">
+                    <div class="mb-3">
+                        <label for="diaFestivo" class="form-label" style="display: block; text-align: left; color: black;">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            <strong>Día</strong>
+                        </label>
+                        <input type="number" class="form-control" id="diaFestivo" min="1" max="31" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="mesFestivo" class="form-label" style="display: block; text-align: left; color: black;">
+                            <i class="fa-solid fa-calendar-week"></i>
+                            <strong>Mes</strong>
+                        </label>
+                        <select class="form-control" id="mesFestivo" required>
+                            <option value="1">Enero</option>
+                            <option value="2">Febrero</option>
+                            <option value="3">Marzo</option>
+                            <option value="4">Abril</option>
+                            <option value="5">Mayo</option>
+                            <option value="6">Junio</option>
+                            <option value="7">Julio</option>
+                            <option value="8">Agosto</option>
+                            <option value="9">Septiembre</option>
+                            <option value="10">Octubre</option>
+                            <option value="11">Noviembre</option>
+                            <option value="12">Diciembre</option>
+                        </select>
+                    </div>
+                    <button type="button"
+        class="btn btn-primary"
+        onclick="agregarFestivo()"
+        style="background-color: #1565A8; border-color: #1565A8; text-transform: capitalize; font-size: 14px; color: white; border: none; transition: background-color 0.3s ease;"
+        onmouseover="this.style.backgroundColor='#0D4376'"
+        onmouseout="this.style.backgroundColor='#1565A8'">
+    <i class="fa-solid fa-floppy-disk" style="margin-right: 5px;"></i> Guardar
+</button>
+
+
+                </form>
+                <hr>
+              <h6 style="text-align: left;"><i class="fa-solid fa-trash"></i> Eliminar día festivo</h6>
+
+                <div class="tags-container" style="background-color:#f9f9f9" id="festivosContainer">
+                    <!-- Festivos se cargarán aquí -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para centros y departamentos -->
+<div class="modal fade" id="modalCentrosDepartamentos" tabindex="-1" aria-labelledby="modalCentrosDepartamentosLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalCentrosDepartamentosLabel"> <i class="fa-solid fa-building"></i> Centros de Trabajo y Departamentos</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fa-solid fa-xmark text-dark"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Tabla de Centros de Trabajo -->
+                            <div id="success-message" style="display: none; color: green;"></div>
+<div id="error-message" style="display: none; color: red;"></div>
+                            <table class="form-table" id="centros-trabajo-table">
+                           <tr>
+    <td colspan="4" class="label" style= "white-space: nowrap;"><i class="fas fa-map-marker-alt" ></i> Centros de Trabajo</td>
+</tr>
+
+                                {% for centro in empresa.centros_trabajo %}
+                                <tr>
+                                    <td class="input">
+                                        <input type="hidden" name="centro_trabajo" value="{{ centro.nombre }}">
+                                        {{ centro.nombre }}
+                                    </td>
+                                    <td class="input">
+                                        <button type="button" class="btn-x" onclick="removeCentroTrabajo(this, '{{ centro.id }}')">
+                                            <i class="fa-solid fa-xmark text-dark"></i>
+                                        </button>
+                                    </td>
+
+                                </tr>
+                                {% endfor %}
+                            </table>
+                            <button type="button" class="add-btn" onclick="addCentroTrabajo()"
+                                style="background-color: #1565A8; color: white; border: none; font-size: 14px; transition: background-color 0.3s ease;"
+                                onmouseover="this.style.backgroundColor='#0D4376'" onmouseout="this.style.backgroundColor='#1565A8'">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+
+
+                            <!-- Tabla de Departamentos -->
+                            <table class="form-table" id="departamentos-table">
+                                <tr>
+                                    <td colspan="2" class="label"><i class="fas fa-sitemap"></i> Departamentos</td>
+                                </tr>
+                                {% for departamento in empresa.departamentos %}
+                                <tr>
+                                    <td class="input">
+                                        <input type="hidden" name="departamento" value="{{ departamento.nombre }}">
+                                        {{ departamento.nombre }}
+                                    </td>
+                                    <td class="input">
+                                    <button type="button" class="btn-x" onclick="removeDepartamento(this, '{{ departamento.id }}')">
+                                        <i class="fa-solid fa-xmark text-dark"></i>
+                                    </button>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                           <button type="button" class="add-btn" onclick="addDepartamento()"
+                                style="background-color: #1565A8; color: white; border: none; font-size: 14px; transition: background-color 0.3s ease;"
+                                onmouseover="this.style.backgroundColor='#0D4376'" onmouseout="this.style.backgroundColor='#1565A8'">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+
+                        </div>
+                        <div class="modal-footer">
+    <button type="button"
+        class="btn btn-secondary"
+        data-bs-dismiss="modal"
+        style="font-size: 14px; text-transform: capitalize; background-color: #6c757d; color: white; border: none;">
+    <i class="fa fa-times" style="margin-right: 5px;"></i> Cerrar
+</button>
+
+
+    <button type="button"
+        class="btn btn-primary"
+        onclick="guardarCambios()"
+        style="background-color: #1565A8; color: white; border: none; font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: bold; text-transform: none; transition: background-color 0.3s ease;"
+        onmouseover="this.style.backgroundColor='#0D4376'"
+        onmouseout="this.style.backgroundColor='#1565A8'">
+    <i class="fa-solid fa-floppy-disk" style="margin-right: 5px;"></i> Guardar cambios
+</button>
+
+
+
+
+</div>
+
+                    </div>
+                </div>
+</div>
+
+<!-- Modal para logos -->
+<div class="modal fade" id="modalLogos" tabindex="-1" aria-labelledby="modalLogosLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLogosLabel"><i class="fa-solid fa-building"></i> Editar logos de la empresa</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark text-dark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{ url_for('guardar_logos', empresa_id=empresa.id) }}" enctype="multipart/form-data">
+
+
+                    <div class="form-group">
+                        <label class="file-label" for="logoFavicon"><i class="fa-solid fa-globe"></i> Logo favicon:</label>
+                        <div class="file-row">
+                            <button type="button" class="custom-file-button" onclick="document.getElementById('logoFavicon').click()">Seleccionar archivo</button>
+                            <input type="file" name="logo_favicon" id="logoFavicon" class="custom-file-input" accept="image/png, image/jpeg" onchange="updateFileName(this, 'fileNameFavicon')">
+                            <input type="text" id="fileNameFavicon" class="file-name-input" placeholder="Ningún archivo seleccionado" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="file-label" for="logoLogin"><i class="fa-solid fa-right-to-bracket"></i> Logo login:</label>
+                        <div class="file-row">
+                            <button type="button" class="custom-file-button" onclick="document.getElementById('logoLogin').click()">Seleccionar archivo</button>
+                            <input type="file" name="logo_login" id="logoLogin" class="custom-file-input" accept="image/png, image/jpeg" onchange="updateFileName(this, 'fileNameLogin')">
+                            <input type="text" id="fileNameLogin" class="file-name-input" placeholder="Ningún archivo seleccionado" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="file-label" for="logoMenu"><i class="fa-solid fa-bars"></i> Logo menú:</label>
+                        <div class="file-row">
+                            <button type="button" class="custom-file-button" onclick="document.getElementById('logoMenu').click()">Seleccionar archivo</button>
+                            <input type="file" name="logo_menu" id="logoMenu" class="custom-file-input" accept="image/png, image/jpeg" onchange="updateFileName(this, 'fileNameMenu')">
+                            <input type="text" id="fileNameMenu" class="file-name-input" placeholder="Ningún archivo seleccionado" readonly>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="custom-modal-button btn-close-modal" data-bs-dismiss="modal"
+                            style="background-color: #6c757d; color: white; border: none; font-size: 14px; text-transform: capitalize;">
+                            <i class="fa-solid fa-xmark text-dark"></i> Cerrar
+                        </button>
+
+                        <button type="submit" class="custom-modal-button btn-save-modal">
+                            <i class="fa-solid fa-floppy-disk"></i> Guardar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal para seleccionar el año -->
+<div class="modal fade" id="modalSeleccion" tabindex="-1" aria-labelledby="modalSeleccionLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title capital-text" id="modalSeleccionLabel" style="text-transform: none;">
+    <i class="fa-regular fa-calendar"></i> Seleccione el año
+</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        onclick="console.log('Modal cerrado');">
+                    <i class="fa-solid fa-xmark text-dark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <select id="yearSelect" class="form-control"
+                        onchange="console.log('Año seleccionado:', this.value)">
+                    <!-- Opciones de año generadas dinámicamente con JavaScript -->
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="custom-modal-button cerrar" data-bs-dismiss="modal"
+                        onclick="console.log('Modal cerrado desde Cancelar');">
+                    <i class="fa-solid fa-xmark text-dark"></i>
+                    <span class="capital-text">cancelar</span>
+                </button>
+                <button type="button" class="custom-modal-button" onclick="previsualizarCalendario(); console.log('Aceptar presionado');">
+                    <i class="fa-solid fa-check"></i>
+                    <span class="capital-text">aceptar</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Modal de previsualización -->
+<div class="modal fade" id="modalPreview" tabindex="-1" aria-labelledby="modalPreviewLabel" aria-hidden="true">
+        <div class="modal-dialog" style="max-width: 83%; margin-left: 15%;"> <!-- Ajuste personalizado del ancho -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title w-100 text-center" id="modalPreviewLabel"><i class="fa-regular fa-calendar"></i> Calendario Laboral</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fa-solid fa-xmark text-dark"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                    <table class="table table-bordered table-sm text-center">
+                        <thead class="table-dark">
+                            <tr>
+                                <th style="color:white;">Mes</th>
+                                <!-- Generar 31 celdas con números de días usando un bucle -->
+                                <script>
+                                    for (let i = 1; i <= 31; i++) {
+                                        document.write('<th style="color:white;">' + i + '</th>');
+                                    }
+                                </script>
+                            </tr>
+                        </thead>
+                        <tbody id="previewBody"></tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background-color: #6c757d; text-transform: none;">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="usuariosModal" tabindex="-1" aria-labelledby="usuariosModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="usuariosModalLabel">
+                    <i class="fa-solid fa-clock"></i> Asignar horarios a empleados
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark text-dark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul id="usuariosList" style="list-style-type: none; padding: 0;">
+                    <!-- Aquí se cargarán los usuarios con sus botones -->
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="custom-modal-button" id="asignarTodosBtn">
+                    <i class="fa-solid fa-clock"></i> Asignar horarios a todos
+                </button>
+                <button type="button" class="custom-modal-button" data-bs-dismiss="modal"
+                    style="background-color: #5A6268; color: white; border: none;">
+                    <i class="fa-solid fa-xmark text-dark"></i> Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+  </div>
+
+
+<!-- Modal de Información sobre Vacaciones (Móvil) -->
+<div class="modal fade" id="vacacionesModalmovil" tabindex="-1" aria-labelledby="vacacionesModalmovilLabel" aria-hidden="true" style="max-height: 450px;">
+    <div class="modal-dialog modal-dialog-scrollable modal-sm modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="vacacionesModalmovilLabel" style="display: flex; align-items: center; gap: 10px;">
+  <i class="fas fa-info-circle" style="color: #1565A8;"></i> Información sobre Vacaciones</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark text-dark"></i>
+                </button>
+            </div>
+            <div class="modal-body" style="max-height: 200px; overflow-y: auto;">
+                <p>Este campo solicita cuántos días de vacaciones desea asignar a cada empleado. Los días seleccionados serán usados para calcular el tiempo de vacaciones disponible, asegurando que se asignen correctamente los días de descanso para los empleados.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="custom-modal-button cerrar" data-bs-dismiss="modal"
+                        onclick="console.log('Modal cerrado desde Cancelar');">
+                    <i class="fa-solid fa-xmark text-dark"></i>
+                    <span class="capital-text">Cerrar</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Información sobre Tiempo de Cortesía (Móvil) -->
+<div class="modal fade" id="cortesiaModalmovil" tabindex="-1" aria-labelledby="cortesiaModalmovilLabel" aria-hidden="true" style="max-height: 450px;">
+    <div class="modal-dialog modal-dialog-scrollable modal-sm modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cortesiaModalmovilLabel" style="display: flex; align-items: center; gap: 10px;">
+  <i class="fas fa-info-circle" style="color: #1565A8;"></i> Información sobre el tiempo de cortesía</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark text-dark"></i>
+                </button>
+            </div>
+            <div class="modal-body" style="max-height: 200px; overflow-y: auto;">
+                <p>Este campo solicita cuánto tiempo desea la empresa permitir para que el empleado pueda fichar su entrada antes de la hora real de entrada. El tiempo que se seleccione se utilizará para el cálculo del horario, aunque se asignará la hora de entrada predeterminada, no la que haya fichado el empleado.</p>
+            </div>
+            <div class="modal-footer">
+                 <button type="button" class="custom-modal-button cerrar" data-bs-dismiss="modal"
+                        onclick="console.log('Modal cerrado desde Cancelar');">
+                    <i class="fa-solid fa-xmark text-dark"></i>
+                    <span class="capital-text">Cerrar</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- JS files -->
+<script src="/static/assets/js/core/popper.min.js"></script>
+<script src="/static/assets/js/core/bootstrap.min.js"></script>
+<script src="/static/assets/js/plugins/perfect-scrollbar.min.js"></script>
+<script src="/static/assets/js/plugins/smooth-scrollbar.min.js"></script>
+<script src="/static/assets/js/plugins/chartjs.min.js"></script>
+<script src="/static/assets/js/material-dashboard.min.js?v=3.1.0"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
+<script src="https://buttons.github.io/buttons.js" async defer></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+function vaciarVerano() {
+    if (!confirm("¿Estás seguro de que deseas vaciar el horario de verano?")) {
+        return;
+    }
+
+    // Suponiendo que tienes un input o select con id="empresa-id"
+    const empresaId = document.getElementById("empresa-id").value;
+
+
+    fetch("/vaciar_verano", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ empresa_id: empresaId })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert("Horario de verano vaciado con éxito.");
+            location.reload(); // Recarga la página para reflejar los cambios
+        } else {
+            alert("Error: " + data.error);
+        }
+    })
+    .catch(error => console.error("Error en la petición:", error));
+}
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    let yearSelect = document.getElementById("yearSelect");
+    let currentYear = new Date().getFullYear();
+
+    let years = [currentYear - 1, currentYear, currentYear + 1];
+
+    years.forEach(year => {
+        let option = document.createElement("option");
+        option.value = year;
+        option.textContent = year;
+        yearSelect.appendChild(option);
+    });
+
+    // Seleccionar el año actual por defecto
+    yearSelect.value = currentYear;
+});
+
+function previsualizarCalendario() {
+    let year = document.getElementById('yearSelect').value.trim();
+    console.log("Año seleccionado:", year); // Log del año seleccionado
+
+    if (!year) {
+        alert("Por favor, selecciona un año válido.");
+        return;
+    }
+
+    let modalSeleccionElement = document.getElementById('modalSeleccion');
+    let modalSeleccion = bootstrap.Modal.getInstance(modalSeleccionElement);
+    if (modalSeleccion) {
+        console.log("Cerrando el modal de selección...");
+        modalSeleccion.hide();
+        modalSeleccion.dispose();
+    }
+
+    setTimeout(() => {
+        console.log("Iniciando la petición fetch para obtener el calendario...");
+        fetch(`/preview_calendar?year=${year}`)
+            .then(response => {
+                console.log("Respuesta de la API recibida:", response);
+                return response.json();
+            })
+            .then(data => {
+                console.log("Datos recibidos:", data);
+
+                if (!Array.isArray(data)) {
+                    alert("Error al obtener los datos.");
+                    return;
+                }
+
+                let tbody = document.getElementById('previewBody');
+                tbody.innerHTML = "";
+
+                data.forEach((mes, mesIndex) => {
+                    console.log(`Procesando mes: ${mes.nombre}, índice: ${mesIndex}`);
+                    let row = `<tr><td>${mes.nombre}</td>`;
+                    for (let i = 1; i <= 31; i++) {
+                        let dia = mes.dias[i] || '';
+
+                        let fecha = new Date(year, mesIndex, i);
+                        let diaSemana = fecha.getDay();
+
+                        let backgroundColor = '';
+                        console.log(`Día: ${i}, Día de la semana: ${diaSemana}, Valor: ${dia}`);
+
+                        if (dia === 'F') {
+                            backgroundColor = '#ffcccc'; // Rojo pastel para festivos
+                        } else if (dia === '-' && (diaSemana === 0 || diaSemana === 6)) {
+                            backgroundColor = '#fff3b0'; // Amarillo pastel para sábados y domingos
+                        }
+
+                        row += `<td style="background-color:${backgroundColor}; font-size: 10px; padding: 2px; width: 3px; height: 3px; text-align: center; border: 1px solid #ddd;">${dia}</td>`;
+                    }
+                    row += `</tr>`;
+                    tbody.innerHTML += row;
+                });
+
+                console.log("Generación del calendario completada.");
+                let modalPreview = new bootstrap.Modal(document.getElementById('modalPreview'));
+                modalPreview.show();
+            })
+            .catch(error => console.error("Error en fetch:", error));
+    }, 300);
+}
+
+// Detectar la tecla Enter en el selector de año
+document.getElementById("yearSelect").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        console.log("Tecla Enter detectada, generando previsualización...");
+        previsualizarCalendario();
+    }
+});
+
+</script>
+
+
+
+
+<script>
+   document.addEventListener("DOMContentLoaded", function () {
+       const tipoJornada = document.getElementById("tipo_jornada");
+       const jornadaPartidaFields = document.querySelectorAll(".jornada-partida");
+
+       // Mostrar u ocultar campos según tipo de jornada
+       function toggleFields() {
+           const selectedValue = tipoJornada.value;
+           if (selectedValue === "partida") {
+               jornadaPartidaFields.forEach(field => field.style.display = "flex");
+           } else {
+               jornadaPartidaFields.forEach(field => field.style.display = "none");
+           }
+       }
+
+       if(tipoJornada){
+            tipoJornada.addEventListener("change", toggleFields);
+            toggleFields();
+       }
+
+   });
+
+   // Agregar un centro de trabajo
+   function addCentroTrabajo() {
+       const centroTrabajoTable = document.getElementById("centros-trabajo-table");
+       const newRow = document.createElement("tr");
+       newRow.innerHTML = `<td class="input"><input type="text" name="centro_trabajo" required></td>
+                           <td class="input"><button type="button" class="remove-btn" onclick="removeCentroTrabajo(this)">Eliminar</button></td>`;
+       centroTrabajoTable.appendChild(newRow);
+   }
+
+   // Eliminar un centro de trabajo
+   function removeCentroTrabajo(button, centroId = null) {
+    if (centroId) {
+        // Aquí puedes enviar una petición AJAX para eliminar el centro de trabajo
+        $.ajax({
+            method: "POST",
+            url: "/eliminar_centro_trabajo",  // Ruta correcta
+            data: { id: centroId },  // El ID del centro a eliminar
+            success: function(response) {
+                if (response.success) {
+                    button.closest("tr").remove();
+                } else {
+                    alert("Error al eliminar el centro de trabajo.");
+                }
+            },
+            error: function() {
+                alert("Error al realizar la solicitud.");
+            }
+        });
+    } else {
+        button.closest("tr").remove();
+    }
+}
+
+   // Agregar un departamento
+   function addDepartamento() {
+       const departamentoTable = document.getElementById("departamentos-table");
+       const newRow = document.createElement("tr");
+       newRow.innerHTML = `<td class="input"><input type="text" name="departamento" required></td>
+                           <td class="input"><button type="button" class="remove-btn" onclick="removeDepartamento(this)">Eliminar</button></td>`;
+       departamentoTable.appendChild(newRow);
+   }
+
+   // Eliminar un departamento
+  function removeDepartamento(button, departamentoId = null) {
+    if (departamentoId) {
+        // Aquí puedes enviar una petición AJAX para eliminar el departamento
+        $.ajax({
+            method: "POST",
+            url: "/eliminar_departamento",  // Ruta correcta
+            data: { id: departamentoId },  // El ID del departamento a eliminar
+            success: function(response) {
+                if (response.success) {
+                    button.closest("tr").remove();
+                } else {
+                    alert("Error al eliminar el departamento.");
+                }
+            },
+            error: function() {
+                alert("Error al realizar la solicitud.");
+            }
+        });
+    } else {
+        button.closest("tr").remove();
+    }
+}
+
+
+function getEmpresaIdFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('empresa_id');
+}
+
+
+   // Función para guardar los cambios en la empresa, incluyendo centros y departamentos
+function guardarCambios() {
+    const centros = [];
+    const departamentos = [];
+
+    // Obtener los centros de trabajo
+    const centroRows = document.querySelectorAll("#centros-trabajo-table tr");
+    centroRows.forEach(row => {
+        const input = row.querySelector("input[name='centro_trabajo']");
+        if (input && input.value.trim()) {
+            centros.push({ nombre: input.value.trim() });
+        }
+    });
+
+    // Obtener los departamentos
+    const departamentoRows = document.querySelectorAll("#departamentos-table tr");
+    departamentoRows.forEach(row => {
+        const input = row.querySelector("input[name='departamento']");
+        if (input && input.value.trim()) {
+            departamentos.push({ nombre: input.value.trim() });
+        }
+    });
+
+    // Obtener empresa_id desde la URL
+    // Obtener empresa_id desde la URL
+    const empresaId = document.getElementById('empresa-id')?.value;
+
+    if (!empresaId) {
+        alert('No se encontró empresa_id en el select.');
+        return;
+    }
+
+
+    // Crear el objeto con los datos
+    const data = {
+        empresa_id: parseInt(empresaId),
+        centros_trabajo: centros,
+        departamentos: departamentos
+    };
+
+    // Enviar los datos al servidor
+    fetch('/guardar_centros_departamentos', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Centros de trabajo y departamentos actualizados con éxito.');
+            location.reload();
+        } else {
+            alert('Hubo un error al guardar los cambios: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error al enviar los datos al servidor.');
+    });
+}
+
+
+
+
+
+
+</script>
+
+
+
+<script>
+   function toggleJornadaFields() {
+    const jornada = document.getElementById('jornada-selector').value;
+
+    // Días de la semana
+    const dias = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'];
+
+    dias.forEach(dia => {
+        // Construir los IDs de los elementos
+        const trabajaInputInvierno = document.getElementById(`trabaja_invierno_${dia}`);
+        const trabajaInputVerano = document.getElementById(`trabaja_verano_${dia}`);
+        const entradaInputInvierno = document.getElementById(`entrada_invierno_${dia}`);
+        const entradaInputVerano = document.getElementById(`entrada_verano_${dia}`);
+        const salidaComidaInputInvierno = document.getElementById(`salida_comida_invierno_${dia}`);
+        const salidaComidaInputVerano = document.getElementById(`salida_comida_verano_${dia}`);
+        const entradaComidaInputInvierno = document.getElementById(`entrada_comida_invierno_${dia}`);
+        const entradaComidaInputVerano = document.getElementById(`entrada_comida_verano_${dia}`);
+        const salidaInputInvierno = document.getElementById(`salida_invierno_${dia}`);
+        const salidaInputVerano = document.getElementById(`salida_verano_${dia}`);
+
+        // Verificar que todos los elementos existen en el DOM
+        if (trabajaInputInvierno && trabajaInputVerano && entradaInputInvierno && entradaInputVerano &&
+            salidaComidaInputInvierno && salidaComidaInputVerano && entradaComidaInputInvierno &&
+            entradaComidaInputVerano && salidaInputInvierno && salidaInputVerano) {
+
+            if (jornada === 'verano') {
+                if (entradaInputVerano) entradaInputVerano.style.display = '';
+                if (entradaInputInvierno) entradaInputInvierno.style.display = 'none';
+
+                if (salidaComidaInputVerano) salidaComidaInputVerano.style.display = '';
+                if (salidaComidaInputInvierno) salidaComidaInputInvierno.style.display = 'none';
+
+                if (entradaComidaInputVerano) entradaComidaInputVerano.style.display = '';
+                if (entradaComidaInputInvierno) entradaComidaInputInvierno.style.display = 'none';
+
+                if (salidaInputVerano) salidaInputVerano.style.display = '';
+                if (salidaInputInvierno) salidaInputInvierno.style.display = 'none';
+
+                if (trabajaInputVerano) trabajaInputVerano.style.display = '';
+                if (trabajaInputInvierno) trabajaInputInvierno.style.display = 'none';
+            } else {
+                if (entradaInputVerano) entradaInputVerano.style.display = 'none';
+                if (entradaInputInvierno) entradaInputInvierno.style.display = '';
+
+                if (salidaComidaInputVerano) salidaComidaInputVerano.style.display = 'none';
+                if (salidaComidaInputInvierno) salidaComidaInputInvierno.style.display = '';
+
+                if (entradaComidaInputVerano) entradaComidaInputVerano.style.display = 'none';
+                if (entradaComidaInputInvierno) entradaComidaInputInvierno.style.display = '';
+
+                if (salidaInputVerano) salidaInputVerano.style.display = 'none';
+                if (salidaInputInvierno) salidaInputInvierno.style.display = '';
+
+                if (trabajaInputVerano) trabajaInputVerano.style.display = 'none';
+                if (trabajaInputInvierno) trabajaInputInvierno.style.display = '';
+            }
+        } else {
+            console.error(`Elemento no encontrado para el día: ${dia}. Verifica los IDs generados en el HTML.`);
+        }
+    });
+}
+
+
+
+</script>
+
+
+<script>
+function obtenerHorarios(jornada) {
+    let horarios = [];
+    const dias = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'];
+
+    // Itera sobre cada día de la semana
+    dias.forEach(dia => {
+        const esInvierno = jornada === 'invierno';  // Verifica si la jornada es invierno o verano
+        const prefijo = esInvierno ? 'invierno' : 'verano';  // Define el prefijo según la jornada
+
+        // Verifica si el checkbox "trabaja" está marcado
+        const trabajaElement = document.getElementById(`trabaja_${prefijo}_${dia}`);
+        const trabaja = trabajaElement ? trabajaElement.checked : false;
+
+        // Obtén los valores de los campos de entrada de acuerdo al prefijo
+        const entradaId = `entrada_${prefijo}_${dia}`;
+        const salidaComidaId = `salida_comida_${prefijo}_${dia}`;
+        const entradaComidaId = `entrada_comida_${prefijo}_${dia}`;
+        const salidaId = `salida_${prefijo}_${dia}`;
+
+        const entradaElement = document.getElementById(entradaId);
+        const salidaComidaElement = document.getElementById(salidaComidaId);
+        const entradaComidaElement = document.getElementById(entradaComidaId);
+        const salidaElement = document.getElementById(salidaId);
+
+        // Asegúrate de que todos los elementos existen antes de intentar acceder a sus valores
+        if (entradaElement && salidaComidaElement && entradaComidaElement && salidaElement) {
+            const entrada = entradaElement.value || '';
+            const salidaComida = salidaComidaElement.value || '';
+            const entradaComida = entradaComidaElement.value || '';
+            const salida = salidaElement.value || '';
+
+            // Agregar la información del día al arreglo de horarios
+            horarios.push({
+                dia: dia,
+                trabaja: trabaja,
+                entrada: entrada,
+                salidaComida: salidaComida,
+                entradaComida: entradaComida,
+                salida: salida
+            });
+        } else {
+            console.error(`No se encontraron los elementos de horario para el día ${dia}.`);
+        }
+    });
+
+    return horarios;
+}
+
+function obtenerDatosFormulario() {
+    const jornadaSelector = document.getElementById("jornada-selector").value;  // Obtener el valor de jornada
+    const empresaId = document.querySelector('[name="empresa_id"]').value;  // Obtener el ID de la empresa seleccionada
+    const datosFormulario = {
+        empresa_id: empresaId,  // Agregar el ID de la empresa a los datos
+        nombre: document.querySelector('[name="nombre"]').value,
+        CIF: document.querySelector('[name="CIF"]').value,
+        Domicilio: document.querySelector('[name="Domicilio"]').value,
+        email: document.querySelector('[name="email"]').value,
+        Telefono: document.querySelector('[name="Telefono"]').value,
+        Localidad: document.querySelector('[name="Localidad"]').value,
+        Provincia: document.querySelector('[name="Provincia"]').value,
+        CP: document.querySelector('[name="CP"]').value,
+        ip_empresa: document.querySelector('[name="ip_empresa"]').value,
+        vacaciones: document.querySelector('[name="vacaciones"]').value,
+        tiempo_cortesia: document.querySelector('[name="tiempo_cortesia"]').value,
+        jornada: jornadaSelector,  // Jornada seleccionada (invierno/verano)
+        fecha_inicio_verano: document.querySelector('[name="fecha_inicio_verano"]').value,
+        fecha_fin_verano: document.querySelector('[name="fecha_fin_verano"]').value,
+        horarios: []  // Inicializamos el array de horarios
+
+    };
+
+        // Si la jornada es 'verano', obtener las fechas de inicio y fin
+    const fechaInicioVerano = document.querySelector('[name="fecha_inicio_verano"]').value;
+    console.log("Fecha de inicio de verano seleccionada:", fechaInicioVerano);
+
+    const fechaFinVerano = document.querySelector('[name="fecha_fin_verano"]').value;
+    console.log("Fecha de fin de verano seleccionada:", fechaFinVerano);
+
+    // Agregar las fechas al objeto
+    datosFormulario.fecha_inicio_verano = fechaInicioVerano;
+    datosFormulario.fecha_fin_verano = fechaFinVerano;
+
+    console.log("Objeto datosFormulario actualizado:", datosFormulario);
+
+
+    // Llenamos los horarios con los datos correspondientes a invierno y verano
+    const dias = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'];
+
+    dias.forEach(dia => {
+        // Para invierno
+        const horarioInvierno = {
+            dia: dia,
+            trabaja: document.getElementById(`trabaja_invierno_${dia}`).checked || false,
+            entrada: document.getElementById(`entrada_invierno_${dia}`).value || '',
+            salidaComida: document.getElementById(`salida_comida_invierno_${dia}`).value || '',
+            entradaComida: document.getElementById(`entrada_comida_invierno_${dia}`).value || '',
+            salida: document.getElementById(`salida_invierno_${dia}`).value || ''
+        };
+
+        // Para verano
+        const horarioVerano = {
+            dia: dia,
+            trabaja: document.getElementById(`trabaja_verano_${dia}`).checked || false,
+            entrada: document.getElementById(`entrada_verano_${dia}`).value || '',
+            salidaComida: document.getElementById(`salida_comida_verano_${dia}`).value || '',
+            entradaComida: document.getElementById(`entrada_comida_verano_${dia}`).value || '',
+            salida: document.getElementById(`salida_verano_${dia}`).value || ''
+        };
+
+        // Añadimos los horarios de invierno y verano al array de horarios
+        datosFormulario.horarios.push({
+            invierno: horarioInvierno,
+            verano: horarioVerano
+        });
+    });
+
+    console.log("Datos del formulario: ", datosFormulario);  // Mostrar los datos antes de enviarlos
+
+    return datosFormulario;
+}
+
+
+function guardarEmpresa() {
+    const datosFormulario = obtenerDatosFormulario();
+
+    // Log de los datos antes de enviarlos al backend
+    console.log("Enviando los siguientes datos al servidor:", datosFormulario);
+
+    fetch("/guardar_empresa_save", {  // Asegúrate de que la ruta sea correcta
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(datosFormulario)  // Enviar los datos al servidor en formato JSON
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert("Empresa guardada correctamente!");
+            location.reload();
+        } else {
+            alert("Hubo un error al guardar los datos.");
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Hubo un error en la conexión.");
+    });
+}
+</script>
+
+<script>
+    // Función para cargar los usuarios en el modal
+  function getEmpresaIdFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('empresa_id');
+}
+
+function cargarUsuarios() {
+    const empresaId = document.getElementById('empresa-id')?.value;
+
+    if (!empresaId) {
+        console.error("empresa_id no encontrado en la URL.");
+        return;
+    }
+
+    fetch(`/api/usuarios?empresa_id=${empresaId}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Error al obtener los usuarios");
+            }
+            return response.json();
+        })
+        .then(data => {
+            const usuariosList = document.getElementById('usuariosList');
+            usuariosList.innerHTML = '';  // Limpiar la lista actual
+
+            if (!data.usuarios) {
+                console.error("La respuesta no contiene 'usuarios'");
+                return;
+            }
+
+            data.usuarios.forEach(usuario => {
+                const li = document.createElement('li');
+                li.style.display = 'flex';
+                li.style.justifyContent = 'space-between';
+                li.style.alignItems = 'center';
+                li.style.marginBottom = '10px';
+
+                const contenedorNombre = document.createElement('span');
+                contenedorNombre.style.display = 'flex';
+                contenedorNombre.style.alignItems = 'center';
+                contenedorNombre.style.flex = '1';
+                contenedorNombre.style.textAlign = 'left';
+
+                const icono = document.createElement('i');
+                icono.className = 'fa-solid fa-user';
+                icono.style.marginRight = '8px';
+
+                const nombre = document.createElement('span');
+                nombre.textContent = `${usuario.nombre} ${usuario.primer_apellido}`;
+
+                contenedorNombre.appendChild(icono);
+                contenedorNombre.appendChild(nombre);
+
+                const button = document.createElement('button');
+                button.className = 'btn btn-primary';
+                button.style.backgroundColor = '#1565A8';
+                button.style.fontSize = '14px';
+                button.style.fontFamily = "'Roboto', sans-serif";
+                button.style.fontWeight = 'bold';
+                button.style.transition = 'background-color 0.3s ease';
+                button.onmouseover = () => button.style.backgroundColor = '#0D4376';
+                button.onmouseout = () => button.style.backgroundColor = '#1565A8';
+                button.onclick = () => asignarHorarioUsuario(usuario.id);
+
+                const iconoBoton = document.createElement('i');
+                iconoBoton.className = 'fa-solid fa-clock';
+                iconoBoton.style.marginRight = '5px';
+
+                const textoBoton = document.createElement('span');
+                textoBoton.textContent = 'Asignar Horario';
+
+                button.appendChild(iconoBoton);
+                button.appendChild(textoBoton);
+
+                li.appendChild(contenedorNombre);
+                li.appendChild(button);
+                usuariosList.appendChild(li);
+            });
+        })
+        .catch(error => {
+            console.error("Error al cargar usuarios:", error);
+        });
+}
+
+
+
+    // Llamar a cargar usuarios al abrir el modal
+    document.getElementById('usuariosModal').addEventListener('show.bs.modal', cargarUsuarios);
+
+    // Función para asignar el horario a un usuario
+    function asignarHorarioUsuario(userId) {
+    const jornada = document.getElementById('jornada-selector').value; // Obtener el valor seleccionado
+    const url = jornada === 'verano' ? `/asignar_horario_verano_usuario/${userId}` : `/asignar_horario_usuario/${userId}`; // Seleccionar la URL según la jornada
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ /* Datos que desees enviar al backend */ })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            console.log('Horario asignado correctamente');
+            alert(data.message);
+            location.reload();
+        } else {
+            console.error('Error:', data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error en la solicitud:', error);
+    });
+}
+
+    // Asignar horarios a todos los usuarios
+    // Asignar horarios a todos los usuarios
+document.getElementById('asignarTodosBtn').addEventListener('click', function () {
+    const jornada = document.getElementById('jornada-selector').value;
+    const url = jornada === 'verano' ? '/asignar_horario_verano_todos' : '/asignar_horario_todos';
+
+    const empresaId = new URLSearchParams(window.location.search).get("empresa_id");
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ empresa_id: empresaId })
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        location.reload();
+        cargarUsuarios();  // Recargar usuarios si es necesario
+    })
+    .catch(error => {
+        console.error('Error al asignar horarios:', error);
+    });
+});
+
+
+</script>
+
+
+
+<script>
+// Cargar festivos desde el servidor y mostrarlos en el modal
+function cargarFestivos() {
+    const festivosContainer = document.getElementById('festivosContainer');
+    festivosContainer.innerHTML = '';  // Limpiar el contenedor
+
+    const empresaId = document.getElementById('empresa-id').value;
+
+    fetch(`/festivos?empresa_id=${empresaId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                console.error('Error:', data.error);
+                return;
+            }
+
+            data.forEach(festivo => {
+                const festivoSpan = document.createElement('span');
+                festivoSpan.className = 'tag';
+                festivoSpan.innerHTML = `${festivo.dia} de ${festivo.mes} <span class="delete-festivo" onclick="eliminarFestivo(${festivo.id})">&times;</span>`;
+                festivosContainer.appendChild(festivoSpan);
+            });
+        })
+        .catch(error => {
+            console.error('Error al cargar los festivos:', error);
+        });
+}
+
+// Función para agregar un festivo
+function agregarFestivo() {
+    const dia = document.getElementById('diaFestivo').value;
+    const mes = document.getElementById('mesFestivo').value;
+    const empresaId = document.getElementById('empresa-id').value;  // Asegúrate de tener este input en tu HTML
+
+    fetch('/agregar_festivo', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ dia: dia, mes: mes, empresa_id: empresaId })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Festivo agregado correctamente');
+            location.reload();
+        } else {
+            alert('Hubo un error al agregar el festivo');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Hubo un error en la conexión.');
+    });
+}
+
+
+// Función para eliminar un festivo
+function eliminarFestivo(id) {
+    fetch('/eliminar_festivo', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: id })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Festivo eliminado correctamente');
+            location.reload();  // Recargar la página para ver los cambios
+        } else {
+            alert('Hubo un error al eliminar el festivo');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Hubo un error en la conexión.');
+    });
+}
+
+// Llamar a cargarFestivos cuando se abre el modal
+document.getElementById('modalDiasFestivos').addEventListener('show.bs.modal', function () {
+    // Asegurarse de que no se ha añadido antes
+    cargarFestivos();
+}, { once: true });
+
+</script>
+
+<script>
+$(document).ready(function() {
+    // Asegurar que el modal inicie cerrado
+    $('#calendarModal').modal('hide');
+
+    // Solo abre `#calendarModal` si se hace clic en su botón específico
+    $('#openCalendarModalButton').click(function() {
+        $('#calendarModal').modal('show');
+    });
+
+    // Cuando se envíe el formulario de `#calendarModal`, cerrarlo
+    $('#calendarModal form').submit(function(event) {
+        $('#calendarModal').modal('hide');
+
+        // Asegurar que el fondo gris desaparezca correctamente
+        setTimeout(() => {
+            $('.modal-backdrop').remove();
+        }, 500);
+    });
+});
+
+</script>
+
+<script>
+document.getElementById("ver_vacaciones_switch").addEventListener("change", function() {
+    let verVacaciones = this.checked ? 1 : 0;
+    const empresaId = document.getElementById('empresa-id').value;
+
+    fetch("/update_ver_vacaciones", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ver_vacaciones: verVacaciones, empresa_id: parseInt(empresaId) })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            console.log("Campo actualizado correctamente.");
+        } else {
+            console.error("Error al actualizar el campo.");
+        }
+    })
+    .catch(error => console.error("Error:", error));
+});
+
+</script>
+
+<script>
+document.getElementById("ver_pausas_switch").addEventListener("change", function() {
+    let verPausas = this.checked ? 1 : 0;
+    const empresaId = document.getElementById('empresa-id').value;
+
+    fetch("/update_ver_pausas", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ver_pausas: verPausas, empresa_id: parseInt(empresaId) })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            console.log("Campo actualizado correctamente.");
+        } else {
+            console.error("Error al actualizar el campo.");
+        }
+    })
+    .catch(error => console.error("Error:", error));
+});
+
+</script>
+
+<script>
+document.getElementById('nuevaEmpresaBtn').addEventListener('click', function () {
+    const nombre = prompt("Introduce el nombre de la nueva empresa:");
+    if (nombre) {
+        fetch('/crear_empresa_ajax', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+           // Si usas CSRF en Flask-WTF
+            },
+            body: JSON.stringify({ nombre: nombre })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Empresa creada correctamente");
+                location.reload();  // Recargar para que aparezca en el selector
+            } else {
+                alert("Error al crear empresa");
+            }
+        });
+    }
+});
+</script>
+<script>
+document.getElementById('eliminarEmpresaBtn').addEventListener('click', function () {
+    if (confirm("¿Estás seguro de que quieres eliminar esta empresa? Esta acción no se puede deshacer.")) {
+        fetch('/eliminar_empresa_ajax', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+
+            },
+            body: JSON.stringify({ empresa_id: {{ empresa.id }} })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Empresa eliminada correctamente");
+                window.location.href = "/guardar_empresa";  // O redirige a otra vista general
+            } else {
+                alert("Error al eliminar la empresa: " + data.message);
+            }
+        });
+    }
+});
+</script>
+</body>
+</html>

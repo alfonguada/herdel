@@ -1,0 +1,18 @@
+<!-- templates/partials/accepted_requests_table.html -->
+<tbody id="accepted-requests-body">
+    {% for request in accepted_requests.items %}
+        <tr>
+            <td>{{ request.user_name }} {{ request.user_apellido }}</td>
+            <td>{{ request.start_date }}</td>
+            <td>{{ request.end_date }}</td>
+            <td class="d-none d-md-table-cell">{{ request.dia_solicitud }}</td>
+            <td class="d-none d-md-table-cell">{{ request.dia_decision }}</td>
+            <td class="d-none d-md-table-cell">{{ request.centro }}</td>
+            <td class="d-none d-md-table-cell" style="text-align: center; vertical-align: middle;">
+                <a href="{{ url_for('cancel_request', request_id=request.id) }}" class="btn-cancel" style="display: inline-block; text-decoration: none; color: inherit;">
+                    <i class="fa fa-minus-circle"></i>
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+</tbody>

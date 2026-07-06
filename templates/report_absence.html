@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informar de Ausencia - Gestionaempresa</title>
+    <link rel="icon" href="{{ url_for('static', filename='logo_empresa.png') }}" type="image/png">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <!-- Nucleo Icons -->
+  <link href="/static/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="/static/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <!-- CSS Files -->
+  <link id="pagestyle" href="/static/assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
+  <!-- Nepcha Analytics (nepcha.com) -->
+  <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
+
+
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Puedes enlazar tu archivo CSS para estilos aquí -->
+
+<script src="https://kit.fontawesome.com/3da862d4a6.js" crossorigin="anonymous"></script>
+ <style>
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+}
+
+
+.page-container {
+            padding-top: 100px; /* Baja todo el contenido dentro del contenedor */
+}
+
+#counter {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+
+    input, button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin-top: 1px;
+      margin-bottom:15px;
+    }
+
+
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700);
+
+
+
+ h3 {
+      text-align: center;
+margin-top: -75px;
+margin-bottom:65px;
+    }
+
+
+.embed-responsive {
+        position: relative;
+        padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+        background-color: #000;
+    }
+    .embed-responsive-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+.card {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column; /* Asegura que el contenido y el footer se alineen verticalmente */
+    height: 100%; /* Asegura que la tarjeta ocupe todo el alto disponible */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+        .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+padding: 15px; /* Asegura suficiente espacio alrededor del título */
+        }
+        .card-body {
+            padding: 15px;
+
+
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .footer-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .footer-link a {
+            color: #4C94E0;
+            text-decoration: none;
+        }
+        .footer-link a:hover {
+            text-decoration: underline;
+        }
+h3 {
+            margin-top:-15px;/* Ajusta el espacio debajo del título */
+        }
+.card-header h3 {
+            margin-bottom: 15px; /* Ajusta el espacio debajo del título */
+        }
+
+.events-card,
+.news-card,
+.prog-card {
+    position: relative;
+    max-height: 600px; /* Altura máxima para las tarjetas de eventos y noticias */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede la altura máxima */
+}
+.summary-card{
+    position: relative;
+    max-height: 400px; /* Altura máxima para las tarjetas de eventos y noticias */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede la altura máxima */
+}
+
+.footer-link {
+    position: relative; /* Necesario para que el footer se alinee al final del card */
+    text-align: center;
+    margin-top: auto; /* Empuja el footer al fondo de la tarjeta */
+    background-color: #f8f9fa; /* Fondo del footer */
+    padding: 10px;
+    border-top: 1px solid #e9ecef; /* Línea superior del footer */
+}
+        .footer-link a {
+            color: #6c6c6c;
+            text-decoration: none;
+        }
+        .footer-link a:hover {
+            text-decoration: underline;
+        }
+
+
+.card-body {
+    padding: 15px;
+    flex: 1; /* Esto hace que el cuerpo de la tarjeta ocupe todo el espacio disponible */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede el alto disponible */
+
+}
+
+
+/* Estilos para los contadores */
+.counter-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido verticalmente */
+    border: 1px solid #e0e0e0; /* Borde para separar los contadores */
+    border-radius: 8px; /* Esquinas redondeadas */
+    padding: 5px; /* Reducir el padding */
+    color: #ffffff; /* Color del texto */
+}
+
+.counter-header {
+    position: relative;
+    height: 50px; /* Reducir la altura del encabezado */
+    padding: 0;
+    overflow: hidden; /* Evita el desbordamiento */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
+.counter-body, .counter-body2 {
+    padding: 5px; /* Reducir el padding del cuerpo del contador */
+    text-align: center; /* Centra el texto en el cuerpo */
+}
+
+.counter-body h6, .counter-body2 h6 {
+    font-size: 14px; /* Reducir el tamaño de la fuente del título */
+}
+
+.counter-body p, .counter-body2 p {
+    font-size: 12px; /* Reducir el tamaño de la fuente del párrafo */
+}
+
+.bg-primary {
+    background-color: #4C94E0 !important; /* Azul */
+}
+.btn-primary3 {
+    background-color: #a965f5 !important; /* Morado */
+    color:white;
+}
+.btn-primary3:hover {
+    background-color: #a965f5 !important; /* Morado */
+    color:white;
+}
+
+.bg-success {
+    background-color: #28a745 !important; /* Verde */
+}
+
+.bg-info {
+    background-color: #17a2b8 !important; /* Azul claro */
+}
+
+.bg-warning {
+    background-color: #ffc107 !important; /* Amarillo */
+}
+
+  .card-global {
+            height: 450px; /* Ajusta según tus necesidades */
+            display: flex;
+            flex-direction: column;
+margin-top:-25px;
+        }
+
+        /* Clase para la tarjeta negra específica del gráfico */
+        .card-graph {
+            height: 130%; /* Ajusta según el espacio que quieras para el gráfico */
+            display: flex;
+            align-items: center; /* Centra el gráfico verticalmente */
+            justify-content: center; /* Centra el gráfico horizontalmente */
+        }
+
+        /* Estilo para el canvas dentro de la tarjeta negra */
+        .chart-canvas {
+            width: 100%;
+            height: 100%;
+}
+.custom-card-body {
+            margin-top: 100px; /* Ajusta el valor según tus necesidades */
+margin-left:20px;
+        }
+
+
+.recurso {
+            display: inline-block;
+            width: 30%;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        .recurso img {
+            max-width: 100px;
+            max-height: 100px;
+            margin-bottom: 10px;
+        }
+
+.embed-responsive {
+        position: relative;
+        padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+        background-color: #000;
+    }
+    .embed-responsive-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+ .toast-center-center {
+            top: 50%;
+            left: 70%;
+            transform: translate(-50%, -50%);
+            min-width: 800px; /* Más grande */
+min-height: 800px; /* Más grande */
+            opacity: 1; /* Menos transparente */
+        }
+        .toast-success .toast-message {
+            color: green;
+        }
+        .toast-error .toast-message {
+            color: red;
+        }
+        .toast {
+            font-size: 1.2em; /* Tamaño de fuente más grande */
+            padding: 20px; /* Más relleno */
+        }
+
+.btn-mark-as-read {
+            padding: 5px 10px;
+            font-size: 12px;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            color: #333;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .btn-mark-as-read:hover {
+            background-color: #e0e0e0;
+            color: white !important;
+        }
+
+        /* Estilos para la pantalla de carga */
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+
+.notificaciones {
+    position: relative; /* o 'absolute' o 'fixed' si es necesario */
+    z-index: 9999999; /* Valor alto para asegurarte de que está por encima de otros elementos */
+}
+/* Estilo del ícono de campana */
+.nav-item .fa-bell {
+    position: relative;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-bell:hover {
+    color: #495057;
+}
+
+/* Badge de notificaciones */
+.nav-item .badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    border-radius: 50%;
+    background-color: #f44336;
+    color: #fff;
+}
+
+/* Dropdown */
+.dropdown-menu {
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Estilo de cada notificación */
+.dropdown-item {
+    border-radius: 0.375rem;
+    transition: background-color 0.2s ease;
+    padding: 12px 15px;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* Estilo del texto de la notificación */
+.text-sm {
+    font-size: 0.875rem;
+    color: #343a40;
+    font-weight: 600;
+}
+
+.text-xs {
+    font-size: 0.75rem;
+    color: #6c757d;
+}
+
+/* Botón para marcar como leída */
+.btn-mark-as-read {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-mark-as-read:hover {
+    background: #0056b3;
+}
+
+/* Sin notificaciones */
+.text-center span {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+/* Posiciona el badge a la izquierda */
+.nav-item .badge {
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    border-radius: 50%;
+    background-color: #f44336;
+    color: #fff;
+    margin-right: 10px; /* Separa el badge del icono */
+}
+
+/* Ajuste de icono de campana */
+.nav-item .fa-bell {
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-bell:hover {
+    color: #495057;
+}
+/* Estilo del ícono de cerrar sesión */
+.nav-item .fa-sign-out {
+    position: relative;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-sign-out:hover {
+    color: #495057;
+}
+/* Estilos para los mensajes flash */
+.flash-messages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    position: fixed;
+    top: 20px;
+    width: 100%;
+    z-index: 1000;
+}
+
+.flash-messages .alert {
+    animation: fadeInOut 5s forwards;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+        background-color: #d4edda;
+    }
+    10% {
+        opacity: 1;
+        transform: translateY(0);
+        background-color: #d4edda;
+    }
+    90% {
+        opacity: 1;
+        transform: translateY(0);
+        background-color: #d4edda;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-20px);
+        background-color: #d4edda;
+    }
+}
+
+.flash {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.flash.success {
+    background-color: #d4edda; /* Color de fondo para mensajes de éxito */
+    color: #d4edda; /* Color del texto para mensajes de éxito */
+    border: 1px solid #c3e6cb;
+}
+
+.flash.error {
+    background-color: #f8d7da; /* Color de fondo para mensajes de error */
+    color: #721c24; /* Color del texto para mensajes de error */
+    border: 1px solid #f5c6cb;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+}
+
+
+
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+.form-box {
+    border: 1px solid #ccc; /* Color y grosor del borde */
+    padding: 20px; /* Espacio interno */
+    border-radius: 5px; /* Esquinas redondeadas */
+    background-color: #f9f9f9; /* Color de fondo */
+    margin-top: 20px; /* Espacio superior */
+}
+
+@media (max-width: 768px) { /* Pantallas con ancho menor o igual a 768px */
+    .breadcrumb {
+        display: flex;
+        flex-direction: column; /* Apila los elementos en columna si hay otros hijos */
+        align-items: center;    /* Centra horizontalmente */
+        justify-content: center; /* Centra verticalmente si hay espacio */
+        text-align: center;     /* Centra el texto */
+        margin-left: 20%;         /* Asegura el centrado horizontal */
+    }
+
+    .breadcrumb h5 {
+        text-align: center; /* Centra específicamente el texto del <h5> */
+        display:none;
+    }
+    .logo-spinner{
+
+        display:none;
+    }
+    .form-container {
+            margin-top: 0 !important;
+            max-width:95% !important;
+
+        }
+}
+
+@media (max-width: 768px) {
+    select[name="absence_type"],
+    input[type="file"] {
+        width: 100%; /* Asegura que se adapte al contenedor */
+        max-width: 300px; /* Reduce el ancho máximo */
+        font-size: 14px; /* Opcional: Ajusta el tamaño del texto */
+    }
+
+    input[type="file"] {
+        padding: 8px; /* Reduce el padding para ocupar menos espacio */
+    }
+}
+
+form {
+    font-size: 12px;
+}
+
+label {
+    font-size: 12px;
+}
+
+input, textarea, select, button {
+    font-size: 12px;
+}
+
+.btn-mark-as-read {
+    background: #1565a8;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-mark-as-read:hover {
+    background: #0d4376;
+}
+
+.dropdown-item {
+    border-radius: 0.375rem;
+    transition: background-color 0.2s ease;
+    padding: 1px 15px !important;
+    margin-top:0px;
+}
+
+
+
+
+
+
+
+.custom-width-modal {
+  max-width: 600px; /* o el ancho que prefieras */
+}
+
+.btn-mark-as-read {
+  min-width: 28px !important;
+  padding: 3px 3px;
+}
+/* Modal tipo barra lateral derecha */
+.modal-side-right {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 0;
+  height: 100%;
+  max-width: 500px;
+  width: 100%;
+  z-index: 1055;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+/* Cuando el modal se muestra */
+.modal.show .modal-side-right {
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+/* Evitamos que Bootstrap lo sobrescriba */
+.modal.fade .modal-dialog {
+  transition: none !important;
+  transform: none !important;
+}
+
+/* Ajustes al contenido del modal */
+.modal-side-right .modal-content {
+  height: 100%;
+  border-radius: 0;
+  text-align: left;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+}
+/* Estilo del texto de la notificación */
+.text-sm {
+    font-size: 0.75rem !important;
+    color: #000;
+    font-weight: 600;
+}
+
+.text-xs {
+    font-size: 0.70rem !important;
+    color: #6c757d;
+}
+
+
+
+.btn-primary3 {
+  background-color: #1565a8 !important;
+  color: white;
+  font-size: 0.75rem;
+  text-transform: none; /* evita mayúsculas automáticas */
+  margin-left:10px;
+}
+
+.btn-primary3:hover {
+  background-color: #0d4b80 !important; /* un tono más oscuro para el hover */
+}
+
+
+
+  @media (max-width: 576px) {
+    .dropdown-menu-mobile-half {
+      width: 50vw !important;
+      right: 0 !important;
+      left: auto !important;
+    }
+  }
+
+  .dropdown-menu-mobile-half {
+    width: 50vw !important; /* Ajusta al 50% del ancho de la ventana */
+    max-width: 400px;        /* Máximo ancho opcional */
+    min-width: 250px;        /* Mínimo opcional */
+    padding: 1rem;
+}
+
+.dropdown-menu-mobile-half .dropdown-item {
+    white-space: normal; /* Permite que el texto se ajuste a múltiples líneas */
+    word-wrap: break-word;
+    width: 100%;
+}
+
+.dropdown-menu-mobile-half .btn-mark-as-read {
+
+    padding: 0 5px;
+    font-size: 0.9rem;
+}
+
+
+
+</style>
+
+</head>
+
+<body class="g-sidenav-show  bg-gray-200">
+
+
+
+<!-- Menu HTML añadido de otro .html -->
+
+    {% include 'menu_user.html' %}
+
+
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg w-100">
+
+
+    <!-- Navbar -->
+  <!-- Navbar -->
+   <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+    <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                <h5 class="font-weight-bolder mb-0">
+                    <i class="fas fa-calendar-times me-2" style="color: #000;"></i> <!-- Icono de vacaciones con espacio -->
+                    Informar de Ausencia
+                </h5>
+            </ol>
+            <div class="centered-message">
+
+            </div>
+        </nav>
+
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <div class="input-group input-group-outline"></div>
+            </div>
+            <ul class="navbar-nav justify-content-end">
+                <li class="nav-item d-flex align-items-center">
+
+
+
+
+</li>
+
+
+
+
+
+                <li class="nav-item px-3 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-body p-0"></a>
+                </li>
+                <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                        <div class="sidenav-toggler-inner" style="margin-right:10px;">
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                        </div>
+                    </a>
+                </li>
+<li class="nav-item dropdown pe-2 d-flex align-items-center">
+    <a href="javascript:;" class="nav-link text-body p-0 d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#notificacionesModal">
+        {% if notificaciones %}
+            <span class="badge bg-danger me-2">{{ notificaciones|length }}</span>
+        {% endif %}
+        <i class="fa fa-bell cursor-pointer" style="font-size: 1.5rem;"></i>
+    </a>
+</li>
+          <li class="nav-item d-flex align-items-center">
+              <a href="/cerrar_sesion" class="nav-link text-body font-weight-bold px-0">
+                <i class="fa fa-sign-out"style="font-size: 1.5rem;"></i>
+    </a>
+</li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+
+<!-- Modal -->
+<div class="modal fade" id="notificacionesModal" tabindex="-1" aria-labelledby="notificacionesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-side-right">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="notificacionesModalLabel">
+          <i class="fa fa-bell cursor-pointer" style="font-size: 1.5rem;"></i> Notificaciones
+        </h5>
+        <button type="button" class="btn m-0" data-bs-dismiss="modal" aria-label="Cerrar">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="modal-body text-start">
+        <form action="{{ url_for('marcar_notificaciones_leidas') }}" method="post">
+          <button type="submit" class="btn btn-primary3 btn-sm mb-3">Marcar todas como leídas</button>
+        </form>
+
+        {% for notificacion in notificaciones %}
+        <div class="mb-3 border-bottom pb-2">
+          <h6 class="text-sm font-weight-normal mb-1">
+            {{ notificacion.concepto }}
+            {% if not notificacion.leida %}
+              <button class="btn btn-link btn-mark-as-read ms-2" style="min-width: 32px;" data-id="{{ notificacion.id }}">
+                <i class="fa-solid fa-check" style="font-size: 1.2rem;"></i>
+              </button>
+            {% endif %}
+          </h6>
+          <p class="text-xs text-secondary mb-0">
+            <i class="fa fa-clock me-1"></i>
+            {{ notificacion.fecha_hora.strftime('%d/%m/%Y %H:%M') }}
+          </p>
+        </div>
+        {% endfor %}
+
+        {% if notificaciones|length == 0 %}
+        <div class="text-start">
+          <span class="text-sm">No tienes notificaciones</span>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<h5 class="font-weight-bolder mb-0 d-md-none text-start">
+                    <i class="fas fa-calendar-times me-2" style="color: #000; margin-left:5px;"></i> <!-- Icono de vacaciones con espacio -->
+                    Informar de Ausencia
+                </h5>
+<!-- Cuerpo del HTML -->
+<div class="form-container" style="display: flex; flex-direction: column; align-items: center; padding: 20px; background-color: #f8f9fa; border-radius: 10px; width: 100%; max-width: 1000px; margin: 0 auto; margin-top: 100px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+
+  <!-- Mostrar mensajes flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages" style="display: flex; justify-content: center; align-items: center; margin-bottom: 20px; position: fixed; top: 20px; width: 100%; z-index: 1000;">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}" style="
+                        padding: 15px;
+                        border-radius: 5px;
+                        {% if category == 'success' %}
+                            background-color: #fff !important;
+                            color: #fff;
+                            border: 1px solid #c3e6cb;
+                        {% elif category == 'error' %}
+                            background-color: #f8d7da;
+                            color: #721c24;
+                            border: 1px solid #f5c6cb;
+                        {% elif category == 'warning' %}
+                            background-color: #fff3cd;
+                            color: #856404;
+                            border: 1px solid #ffeeba;
+                        {% elif category == 'info' %}
+                            background-color: #d1ecf1;
+                            color: #0c5460;
+                            border: 1px solid #bee5eb;
+                        {% endif %}
+                        animation: fadeInOut 5s forwards;
+                    ">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    <form method="POST" action="{{ url_for('report_absence') }}" enctype="multipart/form-data" style="display: flex; flex-wrap: wrap; gap: 15px; font-size: 14px; width: 100%;">
+
+        <div style="flex: 1 1 45%; display: flex; flex-direction: column;">
+            <label for="start_date" style="font-weight: bold; color: #343a40; display: flex; align-items: center;">
+                <i class="fas fa-calendar-day" style="margin-right: 8px;"></i> Día de Inicio:
+            </label>
+            <input type="date" name="start_date" required style="padding: 10px; border: 1px solid #ced4da; border-radius: 5px;">
+            <label for="end_date" style="font-weight: bold; color: #343a40; display: flex; align-items: center; margin-top: 10px;">
+        <i class="fas fa-calendar-day" style="margin-right: 8px;"></i> Día de finalización:
+    </label>
+    <input type="date" name="end_date" required style="padding: 10px; border: 1px solid #ced4da; border-radius: 5px;">
+
+
+            <label for="description" style="font-weight: bold; color: #343a40; display: flex; align-items: center;">
+                <i class="fas fa-align-left" style="margin-right: 8px;"></i> Descripción:
+            </label>
+            <textarea name="description" rows="12" style="padding: 15px; border: 1px solid #ced4da; border-radius: 5px; resize: vertical; width: 100%;" required></textarea>
+        </div>
+
+        <div style="flex: 1 1 45%; display: flex; flex-direction: column;">
+            <label for="absence_type" style="font-weight: bold; color: #343a40; display: flex; align-items: center;">
+                <i class="fas fa-question-circle" style="margin-right: 8px;"></i> Motivo:
+            </label>
+            <select name="absence_type" required style="padding: 10px; border: 1px solid #ced4da; border-radius: 5px; margin-bottom: 15px;">
+                <option value="Consulta médica">Consulta médica</option>
+                <option value="Baja laboral">Baja laboral</option>
+                <option value="Otras causas">Otras causas</option>
+                <option value="Causa fuerza mayor">Causa de fuerza mayor</option>
+            </select>
+
+            <label for="start_time" style="font-weight: bold; color: #343a40; display: flex; align-items: center;">
+                <i class="fas fa-clock" style="margin-right: 8px;"></i> Hora de inicio:
+            </label>
+            <input type="time" name="start_time" step="60" style="padding: 10px; border: 1px solid #ced4da; border-radius: 5px;">
+
+            <label for="end_time" style="font-weight: bold; color: #343a40; display: flex; align-items: center;">
+                <i class="fas fa-clock" style="margin-right: 8px;"></i> Hora de fin:
+            </label>
+            <input type="time" name="end_time" step="60" style="padding: 10px; border: 1px solid #ced4da; border-radius: 5px;">
+
+            <div style="display: flex; flex-direction: column; gap: 5px;">
+    <label for="file" style="font-weight: bold; color: #343a40; display: flex; align-items: center; font-size: 12px;">
+        <i class="fas fa-paperclip" style="margin-right: 8px;"></i> Justificante:
+    </label>
+
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <input type="file" name="file" id="file"
+               style="display: none;"
+               onchange="updateFileName(this); validateFileSize(this)">
+
+        <input type="text" id="file-name" value="Seleccionar archivo..."
+               readonly style="flex: 1; padding: 10px; border: 1px solid #ced4da; border-radius: 5px; background-color: #f8f9fa; cursor: not-allowed;">
+
+        <button type="button" onclick="document.getElementById('file').click()"
+                style="background-color: #1565A8; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">
+            <i class="fas fa-upload"></i>
+        </button>
+    </div>
+
+    <p style="font-size: 12px; font-style: italic; color: #1565A8; margin-top: 5px;">
+        Tipos de archivos soportados: .pdf, .docx, .txt, .jpg y .png (Máx. 5 MB)
+    </p>
+    <p id="file-size-warning" style="color: red; font-size: 12px; font-weight: bold; display: none;">
+        El archivo supera el límite de 5 MB.
+    </p>
+</div>
+        </div>
+
+        <div style="width: 100%; display: flex; justify-content: center;">
+    <button id="informar-ausencia-btn" type="submit" style="background-color: #1565A8; color: white; font-weight: bold; border: none; padding: 10px; border-radius: 5px; cursor: pointer; transition: background-color 0.3s;">
+  <i class="fa-solid fa-paper-plane" style="margin-right: 9px;"></i> Enviar
+</button>
+
+</div>
+
+    </form>
+</div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    let flashMessages = document.querySelectorAll('.flash-messages .alert-success');
+    flashMessages.forEach(function(message) {
+        message.style.backgroundColor = '#fff';  // Color de fondo para mensajes de éxito
+        message.style.color = '#fff';            // Color de texto para mensajes de éxito
+        message.style.border = '1px solid #c3e6cb'; // Color del borde para mensajes de éxito
+    });
+
+    setTimeout(function() {
+        flashMessages.forEach(function(message) {
+            message.style.display = 'none';
+        });
+    }, 5000); // 5000ms = 5s
+});
+
+</script>
+  <script src="/static/assets/js/core/popper.min.js"></script>
+    <script src="/static/assets/js/core/bootstrap.min.js"></script>
+    <script src="/static/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="/static/assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="/static/assets/js/plugins/chartjs.min.js"></script>
+    <script src="/static/assets/js/material-dashboard.min.js?v=3.1.0"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" defer></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
+    <script src="https://buttons.github.io/buttons.js" async defer></script>
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+
+ <script>
+        $(document).ready(function() {
+            $('.btn-mark-as-read').on('click', function() {
+                var notificacionId = $(this).data('id');
+                var $notificationDiv = $('#notificacion-' + notificacionId);
+
+                $.ajax({
+                    url: '/marcar_leida/' + notificacionId,
+                    type: 'POST',
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            // Elimina la notificación del DOM
+                            $notificationDiv.remove();
+                             location.reload();
+                        }
+                        // No hay necesidad de manejar el caso de error aquí, ya que se puede manejar en el backend
+                    },
+                    error: function(xhr, status, error) {
+                        // Opcional: manejar errores en la solicitud
+                        console.error('Error al marcar la notificación como leída:', error);
+                    }
+                });
+            });
+        });
+    </script>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var dropdownToggle = document.querySelectorAll('[data-bs-toggle="dropdown"]');
+    dropdownToggle.forEach(function(dropdown) {
+      dropdown.addEventListener('click', function(event) {
+        event.preventDefault();
+        var dropdownMenu = new bootstrap.Dropdown(dropdown);
+        dropdownMenu.toggle();
+      });
+    });
+  });
+</script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script>
+        // Custom script to close the dropdown when clicking outside
+        $(document).on('click', function(event) {
+            var $trigger = $("#dropdownMenuButton");
+            if($trigger !== event.target && !$trigger.has(event.target).length){
+                $('.dropdown-menu').removeClass('show');
+            }
+        });
+
+        // Ensure dropdown stays open when clicking inside
+        $('#dropdownMenuButton').on('click', function(event) {
+            event.stopPropagation();
+            var $menu = $(this).next('.dropdown-menu');
+            $menu.toggleClass('show');
+        });
+
+        // Close the dropdown if clicking inside the dropdown menu
+        $('.dropdown-menu').on('click', function(event) {
+            event.stopPropagation();
+        });
+    </script>
+
+
+
+<script>
+function updateFileName() {
+    const fileInput = document.getElementById('file');
+    const fileNameField = document.getElementById('file-name');
+
+    if (fileInput.files.length > 0) {
+        fileNameField.value = fileInput.files[0].name;
+    } else {
+        fileNameField.value = "Seleccionar archivo...";
+    }
+}
+
+function validateFileSize() {
+    const fileInput = document.getElementById('file');
+    const warningMessage = document.getElementById('file-size-warning');
+
+    if (fileInput.files.length > 0) {
+        const fileSize = fileInput.files[0].size / 1024 / 1024; // Convertir a MB
+        warningMessage.style.display = fileSize > 5 ? "block" : "none";
+    }
+}
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Mostrar u ocultar las horas según el motivo
+    const motivoSelect = document.querySelector("select[name='absence_type']");
+    const horaContainer = document.getElementById("hora-container");
+    if (!horaContainer) return;
+
+    motivoSelect.addEventListener("change", function () {
+        const selectedMotivo = motivoSelect.value;
+        horaContainer.style.display = selectedMotivo === "Otras causas" ? "none" : "block";
+    });
+
+    motivoSelect.dispatchEvent(new Event("change"));
+});
+
+
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const motivoSelect = document.querySelector("select[name='absence_type']");
+    const horaInicio = document.querySelector("input[name='start_time']");
+    const horaFin = document.querySelector("input[name='end_time']");
+
+    // Agrupamos los campos de hora en un contenedor para ocultarlos fácilmente
+    const horaInicioLabel = horaInicio.previousElementSibling;
+    const horaFinLabel = horaFin.previousElementSibling;
+
+    function actualizarHoras() {
+        const selectedMotivo = motivoSelect.value;
+
+        if (selectedMotivo === "Baja laboral") {
+            // Ocultar campos de hora
+            horaInicio.style.display = "none";
+            horaFin.style.display = "none";
+            horaInicioLabel.style.display = "none";
+            horaFinLabel.style.display = "none";
+
+            // Asignar horas completas del día
+            horaInicio.value = "00:00";
+            horaFin.value = "23:59";
+        } else {
+            // Mostrar campos
+            horaInicio.style.display = "block";
+            horaFin.style.display = "block";
+            horaInicioLabel.style.display = "flex";
+            horaFinLabel.style.display = "flex";
+
+            // Puedes decidir si limpiar o mantener valores
+            if (horaInicio.value === "00:00" && horaFin.value === "23:59") {
+                horaInicio.value = "";
+                horaFin.value = "";
+            }
+        }
+    }
+
+    // Escuchar cambios en el select
+    motivoSelect.addEventListener("change", actualizarHoras);
+
+    // Ejecutar una vez al cargar para ajustar el estado inicial
+    actualizarHoras();
+
+    // --- Código para el envío AJAX del formulario ---
+    $(document).ready(function() {
+        $('form').submit(function(event) {
+            event.preventDefault();  // Evita el envío normal
+
+            var boton = document.getElementById('informar-ausencia-btn');
+            boton.innerHTML = 'Cargando...';
+            boton.disabled = true;
+
+            var formData = new FormData(this);
+
+            $.ajax({
+                url: this.action,
+                method: this.method,
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    if (data.status === "success") {
+                        alert(data.message);
+                        window.location.href = "{{ url_for('user_page') }}";
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                },
+                error: function(error) {
+                    console.error('🚨 Error en Ajax:', error.statusText, error);
+                    console.error('Respuesta completa:', error.responseText);
+                    alert('Hubo un error al enviar el formulario');
+                },
+                complete: function() {
+                    boton.innerHTML = '<i class="fa-solid fa-paper-plane" style="margin-right: 8px;"></i> Enviar';
+                    boton.disabled = false;
+                }
+            });
+        });
+    });
+});
+</script>
+
+
+
+</body>
+</html>

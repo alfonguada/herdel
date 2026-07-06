@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Métricas Empleados - Gestionaempresa</title>
+    <link rel="icon" href="{{ url_for('static', filename='logo_empresa.png') }}" type="image/png">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <!-- Nucleo Icons -->
+  <link href="/static/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="/static/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <!-- CSS Files -->
+  <link id="pagestyle" href="/static/assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
+  <!-- Nepcha Analytics (nepcha.com) -->
+  <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
+
+
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Puedes enlazar tu archivo CSS para estilos aquí -->
+<script src="https://kit.fontawesome.com/3da862d4a6.js" crossorigin="anonymous"></script>
+
+    <style>
+        /* Estilos para el menú del inicio */
+        html {
+    font-family: 'open sans', sans-serif;
+}
+
+
+
+/* Estilos profesionales para el contenido de la página */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    margin-top: 150px;
+}
+
+
+
+button {
+    padding: 10px 15px;
+    font-size: 14px;
+    text-align: center;
+	align-items:center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #d9534f;
+    border: 1px solid #d9534f;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #c9302c;
+    border-color: #c9302c;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+
+
+.content-section a {
+    display: block;
+    padding: 10px 15px;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #5bc0de;
+    border: 1px solid #5bc0de;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+b {
+    display: block;
+    padding: 10px 15px;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 0px;
+}
+
+.content-section a:hover {
+    background-color: #46b8da;
+    border-color: #46b8da;
+}
+.content-section{
+
+}
+
+/* Estilos para pantallas grandes */
+@media only screen and (min-width: 901px) {
+    .menu-button {
+        display: none; /* Oculta el botón en pantallas grandes */
+    }
+
+    .menu-links {
+        display: flex; /* Muestra el menú en pantallas grandes */
+    }
+}
+
+
+
+}
+
+
+ .block-button {
+        background-color: #FFA537; /* Cambia este color al naranja que desees */
+        border: 1px solid #FFA537;
+    }
+
+    .block-button:hover {
+        background-color: #d17e00; /* Cambia este color al naranja que desees para el estado hover */
+        border-color: #d17e00;
+    }
+.block-button:disabled {
+        background-color: #ccc; /* Puedes cambiar este color al gris que desees */
+        border: 1px solid #ccc;
+        cursor: not-allowed;
+    }
+.eliminar:disabled {
+        background-color: #ccc; /* Puedes cambiar este color al gris que desees */
+        border: 1px solid #ccc;
+        cursor: not-allowed;
+    }
+    .email{
+        font-size:10px;
+    }
+
+
+.page-container {
+            padding-top: 100px; /* Baja todo el contenido dentro del contenedor */
+}
+
+#counter {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+
+    input, button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin-top: 10px;
+    }
+
+
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700);
+
+
+
+h3 {
+      text-align: center;
+margin-top: -75px;
+margin-bottom:65px;
+    }
+
+
+.embed-responsive {
+        position: relative;
+        padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+        background-color: #000;
+    }
+    .embed-responsive-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+.card {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column; /* Asegura que el contenido y el footer se alineen verticalmente */
+    height: 100%; /* Asegura que la tarjeta ocupe todo el alto disponible */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+        .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+padding: 15px; /* Asegura suficiente espacio alrededor del título */
+        }
+        .card-body {
+            padding: 15px;
+
+
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .footer-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .footer-link a {
+            color: #4C94E0;
+            text-decoration: none;
+        }
+        .footer-link a:hover {
+            text-decoration: underline;
+        }
+h3 {
+            margin-top:-15px;/* Ajusta el espacio debajo del título */
+        }
+.card-header h3 {
+            margin-bottom: 15px; /* Ajusta el espacio debajo del título */
+        }
+
+.events-card,
+.news-card,
+.prog-card {
+    position: relative;
+    max-height: 600px; /* Altura máxima para las tarjetas de eventos y noticias */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede la altura máxima */
+}
+.summary-card{
+    position: relative;
+    max-height: 400px; /* Altura máxima para las tarjetas de eventos y noticias */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede la altura máxima */
+}
+
+.footer-link {
+    position: relative; /* Necesario para que el footer se alinee al final del card */
+    text-align: center;
+    margin-top: auto; /* Empuja el footer al fondo de la tarjeta */
+    background-color: #f8f9fa; /* Fondo del footer */
+    padding: 10px;
+    border-top: 1px solid #e9ecef; /* Línea superior del footer */
+}
+        .footer-link a {
+            color: #6c6c6c;
+            text-decoration: none;
+        }
+        .footer-link a:hover {
+            text-decoration: underline;
+        }
+
+
+.card-body {
+    padding: 15px;
+    flex: 1; /* Esto hace que el cuerpo de la tarjeta ocupe todo el espacio disponible */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede el alto disponible */
+
+}
+
+
+/* Estilos para los contadores */
+.counter-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido verticalmente */
+    border: 1px solid #e0e0e0; /* Borde para separar los contadores */
+    border-radius: 8px; /* Esquinas redondeadas */
+    padding: 5px; /* Reducir el padding */
+    color: #ffffff; /* Color del texto */
+}
+
+.counter-header {
+    position: relative;
+    height: 50px; /* Reducir la altura del encabezado */
+    padding: 0;
+    overflow: hidden; /* Evita el desbordamiento */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
+.counter-body, .counter-body2 {
+    padding: 5px; /* Reducir el padding del cuerpo del contador */
+    text-align: center; /* Centra el texto en el cuerpo */
+}
+
+.counter-body h6, .counter-body2 h6 {
+    font-size: 14px; /* Reducir el tamaño de la fuente del título */
+}
+
+.counter-body p, .counter-body2 p {
+    font-size: 12px; /* Reducir el tamaño de la fuente del párrafo */
+}
+
+.bg-primary {
+    background-color: #4C94E0 !important; /* Azul */
+}
+.btn-primary3 {
+    background-color: #a965f5 !important; /* Morado */
+    color:white;
+}
+.btn-primary3:hover {
+    background-color: #a965f5 !important; /* Morado */
+    color:white;
+}
+
+.bg-success {
+    background-color: #28a745 !important; /* Verde */
+}
+
+.bg-info {
+    background-color: #17a2b8 !important; /* Azul claro */
+}
+
+.bg-warning {
+    background-color: #ffc107 !important; /* Amarillo */
+}
+
+  .card-global {
+            height: 450px; /* Ajusta según tus necesidades */
+            display: flex;
+            flex-direction: column;
+margin-top:-25px;
+        }
+
+        /* Clase para la tarjeta negra específica del gráfico */
+        .card-graph {
+            height: 130%; /* Ajusta según el espacio que quieras para el gráfico */
+            display: flex;
+            align-items: center; /* Centra el gráfico verticalmente */
+            justify-content: center; /* Centra el gráfico horizontalmente */
+        }
+
+        /* Estilo para el canvas dentro de la tarjeta negra */
+        .chart-canvas {
+            width: 100%;
+            height: 100%;
+}
+.custom-card-body {
+            margin-top: 100px; /* Ajusta el valor según tus necesidades */
+margin-left:20px;
+        }
+
+
+.recurso {
+            display: inline-block;
+            width: 30%;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        .recurso img {
+            max-width: 100px;
+            max-height: 100px;
+            margin-bottom: 10px;
+        }
+
+.embed-responsive {
+        position: relative;
+        padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+        background-color: #000;
+    }
+    .embed-responsive-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+.toast-center-center {
+            top: 50%;
+            left: 70%;
+            transform: translate(-50%, -50%);
+            min-width: 800px; /* Más grande */
+min-height: 800px; /* Más grande */
+            opacity: 1; /* Menos transparente */
+        }
+        .toast-success .toast-message {
+            color: green;
+        }
+        .toast-error .toast-message {
+            color: red;
+        }
+        .toast {
+            font-size: 1.2em; /* Tamaño de fuente más grande */
+            padding: 20px; /* Más relleno */
+        }
+
+.btn-mark-as-read {
+            padding: 5px 10px;
+            font-size: 12px;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            color: #333;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .btn-mark-as-read:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Estilos para la pantalla de carga */
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+
+.notificaciones {
+    position: relative; /* o 'absolute' o 'fixed' si es necesario */
+    z-index: 9999999; /* Valor alto para asegurarte de que está por encima de otros elementos */
+}
+/* Estilo del ícono de campana */
+.nav-item .fa-bell {
+    position: relative;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-bell:hover {
+    color: #495057;
+}
+
+/* Badge de notificaciones */
+.nav-item .badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    border-radius: 50%;
+    background-color: #f44336;
+    color: #fff;
+}
+
+/* Dropdown */
+.dropdown-menu {
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Estilo de cada notificación */
+.dropdown-item {
+    border-radius: 0.375rem;
+    transition: background-color 0.2s ease;
+    padding: 12px 15px;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* Estilo del texto de la notificación */
+.text-sm {
+    font-size: 0.875rem;
+    color: #343a40;
+    font-weight: 600;
+}
+
+.text-xs {
+    font-size: 0.75rem;
+    color: #6c757d;
+}
+
+/* Botón para marcar como leída */
+.btn-mark-as-read {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-mark-as-read:hover {
+    background: #0056b3;
+}
+
+/* Sin notificaciones */
+.text-center span {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+/* Posiciona el badge a la izquierda */
+.nav-item .badge {
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    border-radius: 50%;
+    background-color: #f44336;
+    color: #fff;
+    margin-right: 10px; /* Separa el badge del icono */
+}
+
+/* Ajuste de icono de campana */
+.nav-item .fa-bell {
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-bell:hover {
+    color: #495057;
+}
+/* Estilo del ícono de cerrar sesión */
+.nav-item .fa-sign-out {
+    position: relative;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-sign-out:hover {
+    color: #495057;
+}
+    /* Estilos para los mensajes flash */
+.flash-messages {
+    margin-bottom: 20px;
+}
+
+.flash {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.flash.success {
+    background-color: #d4edda; /* Color de fondo para mensajes de éxito */
+    color: #155724; /* Color del texto para mensajes de éxito */
+    border: 1px solid #c3e6cb;
+}
+
+.flash.error {
+    background-color: #f8d7da; /* Color de fondo para mensajes de error */
+    color: #721c24; /* Color del texto para mensajes de error */
+    border: 1px solid #f5c6cb;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+}
+
+
+.flash-messages {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        width: 300px;
+        z-index: 1000;
+    }
+    .user-item {
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-item table {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.user-item table td {
+    padding: 5px;
+}
+
+.user-item .email {
+    margin-bottom: 10px;
+}
+
+.btn {
+    margin: 5px 0;
+}
+
+a.btn {
+    display: block;
+    margin: 5px 0;
+}
+
+.btn-editar {
+    background-color: #45A049;
+    color: white;
+    width: 150px;
+    height: 40px;
+    text-align: center;
+    display: inline-block;
+    line-height: 50px; /* Igual a la altura para centrar verticalmente */
+    padding: 0;
+    font-size: 16px; /* Ajusta el tamaño del texto si es necesario */
+    box-sizing: border-box; /* Asegura que el tamaño no cambie con el padding */
+}
+.btn-editar:hover{
+   background-color: #45A049;
+    color: #f8f9fa;
+    text-decoration: none;
+}
+
+.btn-ver-ficha {
+    background-color: #4C94E0;
+    color: white;
+}
+.btn-ver-ficha:hover {
+     background-color: #4C94E0;
+    color: #f8f9fa;
+    text-decoration: none;
+}
+
+.btn-uniforme {
+    width: 150px; /* Ajusta el ancho según tus necesidades */
+    height: 40px; /* Ajusta la altura según tus necesidades */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px; /* Tamaño del texto */
+    padding: 0; /* Asegura que el tamaño no se expanda */
+}
+
+.btn-container {
+    display: flex;
+    flex-direction: column; /* Coloca los botones uno encima del otro */
+    align-items: center; /* Centra los botones horizontalmente */
+    gap: 10px; /* Espacio entre los botones */
+    margin-top: 10px; /* Espacio superior opcional */
+}
+
+.user-details {
+    text-align: left;
+}
+
+.user-details p {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.user-details i {
+    margin-right: 8px;
+    color: #000; /* Ajusta el color del icono si lo deseas */
+}
+
+.user-details strong {
+    margin-right: 5px;
+}
+    .custom-table {
+        width: 100%;
+        max-width: 400px;
+        margin: 0px auto;
+        background-color: #f8f9fa;
+        border: 0px solid #dee2e6;
+        border-radius: 8px;
+    }
+
+    .custom-table td {
+        padding: 10px 15px;
+        border-top: 0px solid #dee2e6;
+    }
+    .custom-table th {
+
+        border: 0px;
+    }
+    .custom-table td {
+
+        border: 0px;
+    }
+
+    .custom-table td:first-child {
+        font-weight: bold;
+        color: #495057;
+    }
+
+    .custom-table i {
+        color: #000000;  /* Icono en color negro */
+        margin-right: 8px;
+    }
+    table, th, td {
+    border: 0px solid #ddd;
+}
+
+@media (max-width: 768px) { /* Pantallas con ancho menor o igual a 768px */
+    .breadcrumb {
+        display: flex;
+        flex-direction: column; /* Apila los elementos en columna si hay otros hijos */
+        align-items: center;    /* Centra horizontalmente */
+        justify-content: center; /* Centra verticalmente si hay espacio */
+        text-align: center;     /* Centra el texto */
+        margin-left: 20%;         /* Asegura el centrado horizontal */
+    }
+
+    .breadcrumb h5 {
+        text-align: center; /* Centra específicamente el texto del <h5> */
+        min-width:130px;
+
+
+    }
+    .logo-spinner{
+
+        display:none;
+    }
+    .container {
+            margin-top: 0 !important;
+            max-width:95% !important;
+
+        }
+
+    .table{
+        max-width:80%;
+
+    }
+    .table>tbody{
+        max-width:80%;
+
+    }
+
+</style>
+</head>
+<body class="g-sidenav-show  bg-gray-200">
+
+<!-- Menu HTML añadido de otro .html -->
+
+    {% include 'menu_admin.html' %}
+
+
+ <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg w-100">
+
+
+    <!-- Navbar -->
+<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+    <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                <h5 class="font-weight-bolder mb-0">
+                    <i class="fas fa-calendar-check me-2" style="color: #000;"></i> <!-- Icono de vacaciones con espacio -->
+                    Empleados
+                </h5>
+            </ol>
+            <div class="centered-message">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="flash-messages">
+                            {% for category, message in messages %}
+                                <div class="flash {{ category }}">{{ message }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </nav>
+
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <div class="input-group input-group-outline"></div>
+            </div>
+            <ul class="navbar-nav justify-content-end">
+                <!-- Botón de "Crear Usuario" -->
+                <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                        <div class="sidenav-toggler-inner" style="margin-right:10px;">
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                        </div>
+                    </a>
+                </li>
+               <li class="nav-item dropdown pe-2 d-flex align-items-center">
+    <a href="javascript:;" class="nav-link text-body p-0 d-flex align-items-center" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+        {% if notificaciones %}
+            <span class="badge bg-danger me-2">{{ notificaciones|length }}</span> <!-- Muestra la cantidad de notificaciones -->
+        {% endif %}
+        <i class="fa fa-bell cursor-pointer" style="font-size: 1.5rem;"></i>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+        <form action="{{ url_for('marcar_notificaciones_leidas') }}" method="post">
+  <button type="submit" class="btn btn-primary3 btn-sm">Marcar todas leidas</button>
+
+</form>
+
+        {% for notificacion in notificaciones %}
+        <li class="mb-2">
+            <a class="dropdown-item border-radius-md" href="javascript:;">
+                <div class="d-flex py-1">
+
+                    <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                            {{ notificacion.concepto }}
+                            {% if not notificacion.leida %}
+                                <button class="btn-mark-as-read" data-id="{{ notificacion.id }}">Marcar como leída</button>
+                            {% endif %}
+                        </h6>
+                        <p class="text-xs text-secondary mb-0">
+                            <i class="fa fa-clock me-1"></i>
+                            {{ notificacion.fecha_hora.strftime('%d %b %Y %H:%M') }}
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </li>
+        {% endfor %}
+        {% if notificaciones|length == 0 %}
+        <li class="mb-2 text-center">
+            <span class="text-sm">No tienes notificaciones</span>
+        </li>
+        {% endif %}
+    </ul>
+</li>
+
+          <li class="nav-item d-flex align-items-center">
+              <a href="/cerrar_sesion" class="nav-link text-body font-weight-bold px-0">
+                <i class="fa fa-sign-out"style="font-size: 1.5rem;"></i>
+    </a>
+</li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+<!-- End Navbar -->
+
+<style>
+    *,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+</style>
+
+<!-- Contenido de la página -->
+<div class="container justify-content-center">
+    <input type="text" id="searchUser" class="form-control mb-3 w-100" placeholder="Buscar usuario por nombre...">
+
+    <div id="usersContainer" class="row gap-2 w-100 justify-content-around" >
+        {% for user in users %}
+            <div class="user-item col-xl-3 col-md-5 col-12 text-center user-wrapper rounded-2 mb-4 p-3">
+
+                    <div>
+                        <strong class="ver-ficha-btn" data-user-id="{{ user.id }}" style="cursor: pointer;">
+                            {{ user.nombre }} {{ user.primer_apellido }}
+                        </strong>
+                        <div class="email">{{ user.email }}</div>
+                        {% if user.role == 'admin' %}
+                            (Admin)
+                        {% endif %}
+                    </div>
+                    <div>
+                        <table class="table custom-table" style="font-size: 12px;">
+                            <tr>
+                                <td><i class="fas fa-calendar-day"></i> Días de vacaciones:</td>
+                                <td>{{ user.dias_restantes_este }}</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa fa-clock-o"></i> Horas esperadas:</td>
+                                <td>
+                                    {% set jornada_irregular = jornada_irregular_por_usuario[user.id] %}
+                                    {{ jornada_irregular.total_horas_esperadas|round(2) }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa fa-check"></i> Horas trabajadas:</td>
+                                <td>
+                                    {% set jornada_irregular = jornada_irregular_por_usuario[user.id] %}
+                                    {{ jornada_irregular.total_horas_trabajadas|round(2) }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa fa-pie-chart"></i> Jornada irregular (h):</td>
+                                <td>
+                                    {% set jornada_irregular = jornada_irregular_por_usuario[user.id] %}
+                                    {{ jornada_irregular.jornada_irregular_horas|round(2) }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa fa-line-chart"></i> Jornada irregular %:</td>
+                                <td>
+                                    {% set jornada_irregular = jornada_irregular_por_usuario[user.id] %}
+                                    {{ jornada_irregular.porcentaje_irregular|round(2) }}%
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+<div class="btn-container">
+    <a href="{{ url_for('ver_metricas_user', user_id=user.id) }}" class="btn btn-info"
+       style="background-color: #1565A8;
+              text-transform: none;
+              color: white;
+              padding: 8px 16px;
+              border-radius: 5px;
+              text-decoration: none;
+              font-size: 14px;
+              font-weight: bold;">
+        <i class="fa fa-pencil" aria-hidden="true"></i> Ver métricas
+    </a>
+</div>
+
+
+            </div>
+        {% endfor %}
+
+<style>
+    /* Reduce el ancho de la tabla */
+
+
+/* Asegura que las celdas no ocupen demasiado espacio */
+.custom-table td {
+    white-space: nowrap;
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+
+
+</style>
+
+<!-- VERSIÓN PARA MOVIL-->
+
+
+
+
+
+</div>
+
+
+
+<!-- Modal HTML -->
+<div id="userDetailsPopup" class="popup" style="display: none;">
+    <div class="popup-content">
+        <span class="close-btn">&times;</span>
+        <div class="user-details">
+            <h3 style="margin-top: 20px;">
+             <i class="fas fa-user"></i> Detalles del Empleado
+            </h3>
+            <p><i class="fas fa-envelope"></i> <strong>Email:</strong> <span id="popupEmail"></span></p>
+            <p><i class="fas fa-user"></i> <strong>Nombre:</strong> <span id="popupNombre"></span></p>
+            <p><i class="fas fa-users"></i> <strong>Apellidos:</strong> <span id="popupApellidos"></span></p>
+            <p><i class="fas fa-id-card"></i> <strong>DNI:</strong> <span id="popupDNI"></span></p>
+            <p><i class="fas fa-home"></i> <strong>Domicilio:</strong> <span id="popupDomicilio"></span></p>
+            <p><i class="fas fa-map-marker-alt"></i> <strong>Provincia:</strong> <span id="popupProvincia"></span></p>
+            <p><i class="fas fa-city"></i> <strong>Localidad:</strong> <span id="popupLocalidad"></span></p>
+            <p><i class="fas fa-mail-bulk"></i> <strong>Código postal:</strong> <span id="popupCP"></span></p>
+            <p><i class="fas fa-phone"></i> <strong>Teléfono:</strong> <span id="popupTelefono"></span></p>
+            <p><i class="fas fa-birthday-cake"></i> <strong>Fecha de nacimiento:</strong> <span id="popupFechaNacimiento"></span></p>
+            <p><i class="fas fa-briefcase"></i> <strong>Centro de trabajo:</strong> <span id="popupCentroTrabajo"></span></p>
+        </div>
+    </div>
+</div>
+
+<!-- Minified and consolidated JS files -->
+    <script src="/static/assets/js/core/popper.min.js"></script>
+    <script src="/static/assets/js/core/bootstrap.min.js"></script>
+    <script src="/static/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="/static/assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="/static/assets/js/plugins/chartjs.min.js"></script>
+    <script src="/static/assets/js/material-dashboard.min.js?v=3.1.0"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" defer></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
+    <script src="https://buttons.github.io/buttons.js" async defer></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+
+
+<script>
+    document.querySelector('.menu-button').addEventListener('click', function() {
+        document.querySelector('.menu-container').classList.toggle('active');
+    });
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Añadir evento de clic para los botones "Ver Ficha"
+    document.querySelectorAll('.ver-ficha-btn').forEach(function (button) {
+        button.addEventListener('click', function () {
+            var userId = button.dataset.userId;
+            verFicha(userId);
+        });
+    });
+
+    // Evento para cerrar el modal
+    document.querySelector('.close-btn').addEventListener('click', function () {
+        document.getElementById('userDetailsPopup').style.display = 'none';
+    });
+
+    // Función para mostrar los detalles del usuario en el modal
+    function verFicha(userId) {
+        var user = users.find(u => u.id == userId); // Encuentra el usuario en la lista de usuarios
+
+        if (user) {
+            document.getElementById('popupEmail').textContent = user.email;
+            document.getElementById('popupNombre').textContent = user.nombre;
+            document.getElementById('popupApellidos').textContent = `${user.primer_apellido} ${user.segundo_apellido}`;
+            document.getElementById('popupDNI').textContent = user.DNI;
+            document.getElementById('popupDomicilio').textContent = user.Domicilio;
+            document.getElementById('popupProvincia').textContent = user.Provincia;
+            document.getElementById('popupLocalidad').textContent = user.Localidad;
+            document.getElementById('popupCP').textContent = user.CP;
+            document.getElementById('popupTelefono').textContent = user.Telefono;
+
+            // Formatear la fecha de nacimiento en formato DD/MM/AAAA
+            const fechaNacimiento = new Date(user.Fecha_nacimiento);
+            const dia = fechaNacimiento.getDate().toString().padStart(2, '0');
+            const mes = (fechaNacimiento.getMonth() + 1).toString().padStart(2, '0'); // Los meses en JavaScript van de 0 a 11
+            const anio = fechaNacimiento.getFullYear();
+            document.getElementById('popupFechaNacimiento').textContent = `${dia}/${mes}/${anio}`;
+
+            document.getElementById('popupCentroTrabajo').textContent = user.Centro_trabajo;
+
+            document.getElementById('userDetailsPopup').style.display = 'flex';
+        } else {
+            console.error("Usuario no encontrado.");
+        }
+    }
+});
+
+
+</script>
+<script>
+    var users = [
+        {% for user in users %}
+        {
+            "id": {{ user.id }},
+            "email": "{{ user.email }}",
+            "nombre": "{{ user.nombre }}",
+            "primer_apellido": "{{ user.primer_apellido }}",
+            "segundo_apellido": "{{ user.segundo_apellido }}",
+            "DNI": "{{ user.DNI }}",
+            "Domicilio": "{{ user.Domicilio }}",
+            "Provincia": "{{ user.Provincia }}",
+            "Localidad": "{{ user.Localidad }}",
+            "CP": "{{ user.CP }}",
+            "Telefono": "{{ user.Telefono }}",
+            "Fecha_nacimiento": "{{ user.Fecha_nacimiento }}",
+            "Centro_trabajo": "{{ user.Centro_trabajo }}"
+        },
+        {% endfor %}
+    ];
+</script>
+    <script>
+        // Custom script to close the dropdown when clicking outside
+        $(document).on('click', function(event) {
+            var $trigger = $("#dropdownMenuButton");
+            if($trigger !== event.target && !$trigger.has(event.target).length){
+                $('.dropdown-menu').removeClass('show');
+            }
+        });
+
+        // Ensure dropdown stays open when clicking inside
+        $('#dropdownMenuButton').on('click', function(event) {
+            event.stopPropagation();
+            var $menu = $(this).next('.dropdown-menu');
+            $menu.toggleClass('show');
+        });
+
+        // Close the dropdown if clicking inside the dropdown menu
+        $('.dropdown-menu').on('click', function(event) {
+            event.stopPropagation();
+        });
+    </script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var dropdownToggle = document.querySelectorAll('[data-bs-toggle="dropdown"]');
+    dropdownToggle.forEach(function(dropdown) {
+      dropdown.addEventListener('click', function(event) {
+        event.preventDefault();
+        var dropdownMenu = new bootstrap.Dropdown(dropdown);
+        dropdownMenu.toggle();
+      });
+    });
+  });
+</script>
+ <script>
+        $(document).ready(function() {
+            $('.btn-mark-as-read').on('click', function() {
+                var notificacionId = $(this).data('id');
+                var $notificationDiv = $('#notificacion-' + notificacionId);
+
+                $.ajax({
+                    url: '/marcar_leida/' + notificacionId,
+                    type: 'POST',
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            // Elimina la notificación del DOM
+                            $notificationDiv.remove();
+                             location.reload();
+                        }
+                        // No hay necesidad de manejar el caso de error aquí, ya que se puede manejar en el backend
+                    },
+                    error: function(xhr, status, error) {
+                        // Opcional: manejar errores en la solicitud
+                        console.error('Error al marcar la notificación como leída:', error);
+                    }
+                });
+            });
+        });
+    </script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    let searchInput = document.getElementById('searchUser');
+
+    if (searchInput) {
+        searchInput.addEventListener('keyup', function() {
+            console.log("Tecla presionada, ejecutando filterUsers...");
+            filterUsers();
+        });
+    } else {
+        console.log("No se encontró el input de búsqueda");
+    }
+});
+
+function filterUsers() {
+    let input = document.getElementById('searchUser').value.toLowerCase();
+    console.log("Valor ingresado en búsqueda:", input);
+
+    let userItems = document.querySelectorAll('.user-wrapper');
+    console.log("Usuarios encontrados en el DOM:", userItems.length);
+
+    let visibleCount = 0;
+
+    userItems.forEach(item => {
+        let userName = item.querySelector('.ver-ficha-btn').textContent.toLowerCase();
+        let email = item.querySelector('.email').textContent.toLowerCase();
+
+        console.log("Evaluando usuario:", userName, "| Email:", email);
+
+        if (userName.includes(input) || email.includes(input)) {
+            console.log("Coincidencia encontrada, mostrando:", userName);
+            item.style.display = 'block';
+            visibleCount++;
+        } else {
+            console.log("No coincide, ocultando:", userName);
+            item.style.display = 'none';
+
+        }
+    });
+
+    console.log("Usuarios visibles después del filtro:", visibleCount);
+}
+
+</script>
+</body>
+</html>

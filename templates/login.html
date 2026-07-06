@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceder al sitio - Gestionaempresa</title>
+    <link rel="icon" href="{{ url_for('static', filename='logo_empresa.png') }}" type="image/png">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <!-- Puedes enlazar tu archivo CSS para estilos aquí -->
+<script src="https://kit.fontawesome.com/3da862d4a6.js" crossorigin="anonymous"></script>
+    <style>
+    html {
+    font-family: 'open sans', sans-serif;
+}
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+.login-container {
+            text-align: center;
+        }
+
+        .login-container img {
+            max-width: 200px; /* Ajusta el tamaño máximo según tus necesidades */
+            height: auto;
+            margin: 20px 0; /* Espaciado alrededor del logo */
+        }
+
+        .login-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .login-form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        p {
+            margin-top: 16px;
+            color: #777;
+        }
+
+        a {
+            color: #4C94E0;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            z-index: -1;
+filter: blur(0px);
+        }
+        .login-container {
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.65);
+            padding: 20px;
+            max-width: 400px;
+            margin: auto;
+            top: 50%;
+            transform: translateY(-50%);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+margin-bottom: 400px;
+        }
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .login-form {
+            display: flex;
+            flex-direction: column;
+        }
+        .login-form label {
+            margin-bottom: 5px;
+        }
+        .login-form input {
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .login-form button {
+            padding: 10px;
+            background-color: #6c0092;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .login-form button:hover {
+            background-color: #52006f;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+
+
+ @font-face {
+            font-family: 'NucleoIcons';
+            src: url('static/assets/fonts/nucleo-icons.woff2') format('woff2'),
+                 url('static/assets/fonts/nucleo-icons.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'NucleoIcons', sans-serif;
+        }
+ @media (max-width: 550px) {
+            .video-bg {
+                min-height: 110%; /* 90% de la altura de la ventana de visualización */
+                 /* Añadir una barra de desplazamiento si el contenido es más alto */
+            }
+        }
+
+    /* Estilos para los mensajes flash */
+.flash-messages {
+    margin-bottom: 20px;
+}
+
+.flash {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.flash.success {
+    background-color: #d4edda; /* Color de fondo para mensajes de éxito */
+    color: #155724; /* Color del texto para mensajes de éxito */
+    border: 1px solid #c3e6cb;
+}
+
+.flash.error {
+    background-color: #f8d7da; /* Color de fondo para mensajes de error */
+    color: #721c24; /* Color del texto para mensajes de error */
+    border: 1px solid #f5c6cb;
+}
+/* Estilos del botón */
+.btn-login {
+  background-color: #4CAF50; /* Color inicial del botón */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.3s ease; /* Transición suave */
+  display: inline-block;
+  text-align: center;
+  width: 100%; /* Hace que el botón ocupe todo el ancho del formulario */
+}
+
+.btn-login:hover {
+  background-color: #45a049; /* Cambio de color al pasar el mouse */
+  transform: scale(1.05); /* Ligeramente más grande */
+}
+
+.btn-login:active {
+  background-color: #388e3c; /* Color al hacer clic */
+  transform: scale(1); /* Evita que el botón se haga más grande cuando se hace clic */
+}
+
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $(".login-form").submit(function(e) {
+            e.preventDefault(); // Evitar que el formulario se envíe de forma tradicional
+
+            // Realizar solicitud AJAX al servidor
+            $.ajax({
+                type: "POST",
+                url: "{{ url_for('login') }}",
+                data: $(this).serialize(),
+                success: function(response) {
+                    if (response.status === "success") {
+                        window.location.href = response.redirect_url; // Reemplaza con la URL correcta
+                    } else if (response.status === "2fa_required") {
+                        // Si 2FA es requerido, mostrar el campo de código 2FA
+                        $("#otp-field").show();
+                    } else {
+                        $(".error-message").text(response.message).css("color", "red");
+                    }
+                },
+                error: function(error) {
+                    console.error("Error en la solicitud AJAX", error);
+                }
+            });
+        });
+
+        // Manejo de la solicitud para reenviar el QR de 2FA
+        $("#resend-qr").click(function(e) {
+            e.preventDefault();
+            // Confirmar si el usuario está seguro de reenviar el código QR
+            if (confirm("¿Estás seguro de que deseas recibir el código QR nuevamente por correo?")) {
+                let email = $("input[name='email']").val(); // Obtener el correo directamente del formulario
+                fetch('/resend_2fa_qr', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email: email })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("Te hemos enviado el QR por correo.");
+                    } else {
+                        alert("Hubo un error al enviar el QR. Inténtalo nuevamente.");
+                    }
+                })
+                .catch(error => {
+                    alert("Hubo un error al enviar el QR.");
+                    console.error(error);
+                });
+            } else {
+                console.log("El usuario canceló el reenvío del QR.");
+            }
+        });
+    });
+</script>
+</head>
+<body>
+    <video class="video-bg" autoplay muted loop style="max-height:100%;">
+        <source src="{{ url_for('static', filename='fondo_login4.mp4') }}" type="video/mp4">
+        Tu navegador no soporta la etiqueta de video.
+    </video>
+
+    <!-- Mensajes Flash -->
+
+    <div class="login-container"style="min-width:320px;">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='logo_empresa.png') }}" alt="Logo de tu empresa">
+<style>
+  .bienvenida p {
+    font-family: 'Beyonders', sans-serif;
+    font-size: 1.1em;
+    margin-top: 10px;
+    color: #2b2b2b;
+  }
+</style>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+    .bienvenida p {
+      font-size: 1.5em;
+    }
+    .bienvenida b {
+      font-weight: 700;
+    }
+    label {
+      color: black;
+      font-size: 0.8em;
+    }
+    .login-form input {
+      display: block;
+      margin-bottom: 15px;
+      width: 100%;
+    }
+    .btn-login {
+      background-color: #4C94E0;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+    .bienvenida p {
+      font-size: 1.2em; /* Reducido para hacerlo más pequeño */
+    }
+    .bienvenida b {
+      font-weight: 700;
+    }
+    label {
+      color: black;
+      font-size: 0.8em;
+    }
+    .login-form input {
+      display: block;
+      margin-bottom: 15px;
+      width: 100%;
+    }
+    .btn-login {
+      background-color: #4C94E0;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bienvenida">
+    <p><b><i class="fas fa-user"></i> Bienvenido</b></p>
+  </div>
+
+  <form method="POST" action="{{ url_for('login') }}" class="login-form">
+    <div style="text-align: left;">
+      <label for="email">
+        <b><i class="fas fa-envelope"></i> Correo electrónico:</b>
+      </label>
+      <input type="email" name="email" required>
+
+      <label for="password">
+        <b><i class="fas fa-lock"></i> Contraseña:</b>
+      </label>
+      <input type="password" name="password" required>
+    </div>
+
+    <div id="otp-field" style="display: none;">
+      <label for="otp_code">
+        <b><i class="fas fa-key"></i> Código 2FA:</b>
+      </label>
+      <input type="text" name="otp_code" placeholder="Introduce el código 2FA">
+
+      <a href="#" id="resend-qr" style="font-size: 0.9em; color: #4C94E0;">
+        <i class="fas fa-sync-alt"></i> Recuperar QR
+      </a>
+    </div>
+
+    <p style="color:black;font-size: 0.8em;">
+      ¿Has olvidado la contraseña? <a href="{{ url_for('forgot_password') }}" style="color:purple;">Recuperar</a>
+    </p>
+
+    <button type="submit" name="role" value="admin" class="btn-login">
+      <i class="fas fa-sign-in-alt"></i> acceder
+    </button>
+  </form>
+
+  <div class="error-message"></div>
+
+    <script>
+        if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+            alert("Lo sentimos, Firefox no es compatible con esta aplicación. Disculpe las molestias, Utilice otro buscador como Chrome, Edge...");
+            window.location.href = "https://www.google.com"; // Redirigir a otra página
+        }
+    </script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    document.getElementById('login-form').addEventListener('submit', function (e) {
+        e.preventDefault(); // Prevenir envío inicial
+        const form = e.target;
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "2fa_required") {
+                // Mostrar el campo para el código 2FA
+                document.getElementById('otp-field').style.display = 'block';
+            } else if (data.status === "success") {
+                window.location.href = data.redirect_url;
+            } else {
+                // Mostrar mensaje de error
+                alert(data.message);
+            }
+        })
+        .catch(err => console.error("Error:", err));
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancelar Solicitud de Vacaciones - Gestionaempresa</title>
+    <link rel="icon" href="{{ url_for('static', filename='logo_empresa.png') }}" type="image/png">
+    <!-- Incluye aquí tus archivos CSS como Bootstrap si es necesario -->
+<script src="https://kit.fontawesome.com/3da862d4a6.js" crossorigin="anonymous"></script>
+<style>
+    html {
+    font-family: 'open sans', sans-serif;
+}
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: vertical;
+        }
+
+        .btn-danger {
+            background-color: #ff4646;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #e53935;
+        }
+
+        a {
+            display: block;
+            color: #3498db;
+            text-decoration: none;
+            margin-top: 15px;
+            justify-content: center;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<!-- Incluye Roboto y Font Awesome -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<div class="container text-center" style="font-family: 'Roboto', sans-serif; max-width: 600px; margin-top: 40px;">
+
+    <!-- Título principal con icono -->
+    <h3 class="mb-4">
+        <i class="fas fa-ban me-2"></i> Cancelar solicitud de vacaciones
+    </h3>
+
+    <!-- Formulario -->
+    <form action="{{ url_for('request_cancellation', request_id=request.id) }}" method="POST">
+
+        <!-- Subtítulo con icono -->
+        <h5 class="mb-3">
+            <i class="fas fa-pen me-2"></i> Motivo de cancelación
+        </h5>
+
+        <div class="form-group mb-4">
+            <textarea class="form-control" id="cancel_reason" name="cancel_reason" rows="3" required></textarea>
+        </div>
+
+        <!-- Botón de confirmar -->
+        <button type="submit" class="btn btn-danger mb-3">
+            <i class="fas fa-check me-2"></i> Confirmar cancelación
+        </button>
+
+
+    <!-- Botón de volver -->
+    <a href="{{ url_for('user_history') }}" class="btn btn-success">
+        <i class="fas fa-arrow-left me-2"></i> Volver al historial
+    </a>
+    </form>
+</div>
+</body>
+</html>

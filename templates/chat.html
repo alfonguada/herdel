@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionaempresa</title>
+    <link rel="icon" href="{{ url_for('static', filename='logo_empresa.png') }}" type="image/png">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <!-- Nucleo Icons -->
+  <link href="/static/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="/static/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <!-- CSS Files -->
+  <link id="pagestyle" href="/static/assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
+  <!-- Nepcha Analytics (nepcha.com) -->
+  <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
+
+
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Puedes enlazar tu archivo CSS para estilos aquí -->
+<script src="https://kit.fontawesome.com/3da862d4a6.js" crossorigin="anonymous"></script>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            background-color:#fafafa;
+            /* background: #7F7FD5;
+            background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
+            background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);*/
+        }
+        .chat {
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+        .card {
+            height: 750px;
+
+            border-radius: 15px !important;
+            background-color: rgba(0, 0, 0, 0.4) !important;
+        }
+        .contacts_body {
+            padding: 0.75rem 0 !important;
+            overflow-y: auto;
+            white-space: nowrap;
+        }
+        .msg_card_body {
+            overflow-y: auto;
+        }
+        .card-header {
+            border-radius: 15px 15px 0 0 !important;
+            border-bottom: 0 !important;
+        }
+        .card-footer {
+            border-radius: 0 0 15px 15px !important;
+            border-top: 0 !important;
+        }
+        .container {
+            align-content: center;
+        }
+        .search {
+            border-radius: 15px 0 0 15px !important;
+            background-color: rgba(0, 0, 0, 0.3) !important;
+            border: 0 !important;
+            color: white !important;
+        }
+        .search:focus {
+            box-shadow: none !important;
+            outline: 0px !important;
+        }
+        .type_msg {
+            background-color: rgba(0, 0, 0, 0.3) !important;
+            border: 0 !important;
+            color: white !important;
+            height: 60px !important;
+            overflow-y: auto;
+        }
+        .type_msg:focus {
+            box-shadow: none !important;
+            outline: 0px !important;
+        }
+        .attach_btn {
+            border-radius: 15px 0 0 15px !important;
+            background-color: rgba(0, 0, 0, 0.3) !important;
+            border: 0 !important;
+            color: white !important;
+            cursor: pointer;
+        }
+        .send_btn {
+            border-radius: 0 15px 15px 0 !important;
+            background-color: rgba(0, 0, 0, 0.3) !important;
+            border: 0 !important;
+            color: white !important;
+            cursor: pointer;
+        }
+        .search_btn {
+            border-radius: 0 15px 15px 0 !important;
+            background-color: rgba(0, 0, 0, 0.3) !important;
+            border: 0 !important;
+            color: white !important;
+            cursor: pointer;
+        }
+        .contacts {
+            list-style: none;
+            padding: 0;
+        }
+        .contacts li {
+            width: 100% !important;
+            padding: 5px 10px;
+            margin-bottom: 15px !important;
+        }
+        .active {
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+        .user_img {
+            height: 60px;
+            width: 60px;
+            border: 1.5px solid #f5f6fa;
+        }
+        .user_img_msg {
+            height: 40px;
+            width: 40px;
+            border: 1.5px solid #f5f6fa;
+        }
+        .img_cont {
+            position: relative;
+            height: 70px;
+            width: 70px;
+        }
+        .img_cont_msg {
+            height: 40px;
+            width: 40px;
+        }
+        .online_icon {
+            position: absolute;
+            height: 15px;
+            width: 15px;
+            background-color: #4cd137;
+            border-radius: 50%;
+            bottom: 13px;
+            right: 13px;
+            border: 1.5px solid white;
+        }
+        .offline {
+            background-color: #c23616 !important;
+        }
+        .user_info {
+            margin-top: auto;
+            margin-bottom: auto;
+            margin-left: 15px;
+        }
+        .user_info span {
+            font-size: 20px;
+            color: white;
+        }
+        .user_info p {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .msg_cotainer {
+            margin-top: auto;
+            margin-bottom: auto;
+            margin-left: 10px;
+            border-radius: 25px;
+            background-color: #82ccdd;
+            padding: 10px;
+            position: relative;
+min-width: 80px;
+        }
+        .msg_cotainer_send {
+            margin-top: auto;
+            margin-bottom: auto;
+            margin-right: 10px;
+            border-radius: 25px;
+            background-color: #78e08f;
+            padding: 10px;
+            position: relative;
+min-width: 80px;
+        }
+        .msg_time {
+            position: absolute;
+            right: 0;
+            bottom: -15px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 9px;
+
+
+        }
+        .msg_time_send {
+            position: absolute;
+            right: 0;
+            bottom: -15px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 9px;
+
+        }
+        .msg_head {
+            position: relative;
+        }
+        #action_menu_btn {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            color: white;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        .action_menu {
+            z-index: 1;
+            position: absolute;
+            padding: 15px 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border-radius: 15px;
+            top: 30px;
+            right: 15px;
+            display: none;
+        }
+        .action_menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .action_menu ul li {
+            width: 100%;
+            padding: 10px 15px;
+            margin-bottom: 5px;
+        }
+        .action_menu ul li i {
+            padding-right: 10px;
+        }
+        .action_menu ul li:hover {
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+  .toast-center-center {
+            top: 50%;
+            left: 70%;
+            transform: translate(-50%, -50%);
+            min-width: 800px; /* Más grande */
+min-height: 800px; /* Más grande */
+            opacity: 1; /* Menos transparente */
+        }
+        .toast-success .toast-message {
+            color: green;
+        }
+        .toast-error .toast-message {
+            color: red;
+        }
+        .toast {
+            font-size: 1.2em; /* Tamaño de fuente más grande */
+            padding: 20px; /* Más relleno */
+        }
+
+
+
+ @font-face {
+            font-family: 'NucleoIcons';
+            src: url('static/assets/fonts/nucleo-icons.woff2') format('woff2'),
+                 url('static/assets/fonts/nucleo-icons.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'NucleoIcons', sans-serif;
+        }
+/* Estilo del ícono de campana */
+.nav-item .fa-bell {
+    position: relative;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-bell:hover {
+    color: #495057;
+}
+
+/* Badge de notificaciones */
+.nav-item .badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    border-radius: 50%;
+    background-color: #f44336;
+    color: #fff;
+}
+
+/* Dropdown */
+.dropdown-menu {
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Estilo de cada notificación */
+.dropdown-item {
+    border-radius: 0.375rem;
+    transition: background-color 0.2s ease;
+    padding: 12px 15px;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+.btn-primary3 {
+    background-color: #a965f5 !important; /* Morado */
+    color:white !important;
+}
+.btn-primary3:hover {
+    background-color: #a965f5 !important; /* Morado */
+    color:white !important;
+}
+
+/* Estilo del texto de la notificación */
+.text-sm {
+    font-size: 0.875rem;
+    color: #343a40;
+    font-weight: 600;
+}
+
+.text-xs {
+    font-size: 0.75rem;
+    color: #6c757d;
+}
+
+/* Botón para marcar como leída */
+.btn-mark-as-read {
+    background: #00000;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-mark-as-read:hover {
+    background: #0056b3;
+}
+
+/* Sin notificaciones */
+.text-center span {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+/* Posiciona el badge a la izquierda */
+.nav-item .badge {
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    border-radius: 50%;
+    background-color: #f44336;
+    color: #fff;
+    margin-right: 10px; /* Separa el badge del icono */
+}
+
+/* Ajuste de icono de campana */
+.nav-item .fa-bell {
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-bell:hover {
+    color: #495057;
+}
+/* Estilo del ícono de cerrar sesión */
+.nav-item .fa-sign-out {
+    position: relative;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-sign-out:hover {
+    color: #495057;
+}
+.btn-white {
+    background-color: white;
+    color: #000;
+    border: 1px solid #ced4da; /* Bordes gris claro */
+    border-radius: 5px; /* Esquinas redondeadas */
+}
+
+.btn-white:hover {
+    background-color: #f8f9fa; /* Color de fondo en hover */
+    color: #000; /* Color del texto en hover */
+}
+
+.btn-white:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Sombra de enfoque */
+}
+/* Estilo para los mensajes no leidos */
+
+.badge {
+    margin-left: 5px; /* Espacio entre el nombre y el contador */
+    font-size: 0.75rem; /* Tamaño del texto del badge */
+}
+
+
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700);
+
+
+
+h3 {
+      text-align: center;
+margin-top: -75px;
+margin-bottom:65px;
+    }
+
+
+
+.footer-link {
+    position: relative; /* Necesario para que el footer se alinee al final del card */
+    text-align: center;
+    margin-top: auto; /* Empuja el footer al fondo de la tarjeta */
+    background-color: #f8f9fa; /* Fondo del footer */
+    padding: 10px;
+    border-top: 1px solid #e9ecef; /* Línea superior del footer */
+}
+        .footer-link a {
+            color: #6c6c6c;
+            text-decoration: none;
+        }
+        .footer-link a:hover {
+            text-decoration: underline;
+        }
+
+
+
+
+
+.toast-center-center {
+            top: 50%;
+            left: 70%;
+            transform: translate(-50%, -50%);
+            min-width: 800px; /* Más grande */
+min-height: 800px; /* Más grande */
+            opacity: 1; /* Menos transparente */
+        }
+        .toast-success .toast-message {
+            color: green;
+        }
+        .toast-error .toast-message {
+            color: red;
+        }
+        .toast {
+            font-size: 1.2em; /* Tamaño de fuente más grande */
+            padding: 20px; /* Más relleno */
+        }
+
+.btn-mark-as-read {
+            padding: 5px 10px;
+            font-size: 12px;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            color: #333;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .btn-mark-as-read:hover {
+            background-color: #e0e0e0;
+        }
+
+
+
+.notificaciones {
+    position: relative; /* o 'absolute' o 'fixed' si es necesario */
+    z-index: 9999999; /* Valor alto para asegurarte de que está por encima de otros elementos */
+}
+/* Estilo del ícono de campana */
+.nav-item .fa-bell {
+    position: relative;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-bell:hover {
+    color: #495057;
+}
+
+/* Badge de notificaciones */
+.nav-item .badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    border-radius: 50%;
+    background-color: #f44336;
+    color: #fff;
+}
+
+/* Dropdown */
+.dropdown-menu {
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Estilo de cada notificación */
+.dropdown-item {
+    border-radius: 0.375rem;
+    transition: background-color 0.2s ease;
+    padding: 12px 15px;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* Estilo del texto de la notificación */
+.text-sm {
+    font-size: 0.875rem;
+    color: #343a40;
+    font-weight: 600;
+}
+
+.text-xs {
+    font-size: 0.75rem;
+    color: #6c757d;
+}
+
+/* Botón para marcar como leída */
+.btn-mark-as-read {
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-mark-as-read:hover {
+    background: #0056b3;
+}
+
+/* Sin notificaciones */
+.text-center span {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+/* Posiciona el badge a la izquierda */
+.nav-item .badge {
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    border-radius: 50%;
+    background-color: #f44336;
+    color: #fff;
+    margin-right: 10px; /* Separa el badge del icono */
+}
+
+/* Ajuste de icono de campana */
+.nav-item .fa-bell {
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-bell:hover {
+    color: #495057;
+}
+/* Estilo del ícono de cerrar sesión */
+.nav-item .fa-sign-out {
+    position: relative;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-sign-out:hover {
+    color: #495057;
+}
+
+
+.navbar-brand {
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+}
+body {
+    font-family: 'Roboto', sans-serif;
+}
+#searchUser {
+    border-radius: 0;
+    outline: none; /* Elimina el borde azul en la mayoría de los navegadores */
+}
+
+#searchUser:focus {
+    outline: none; /* Asegura que al hacer focus no aparezca la línea azul */
+    box-shadow: none; /* Elimina cualquier sombra que pueda añadir el navegador */
+}
+#messageInput {
+    outline: none; /* Elimina el borde azul en la mayoría de los navegadores */
+    box-shadow: none; /* Elimina cualquier sombra que pueda añadir el navegador */
+    border: 1px solid #ced4da; /* Asegura un borde definido sin cambios en el foco */
+    border-radius: 0; /* Bordes cuadrados */
+}
+
+#messageInput:focus {
+    outline: none;
+    box-shadow: none;
+}
+</style>
+</head>
+<body>
+
+<body class="g-sidenav-show  bg-gray-200">
+
+
+
+
+
+<!-- Menu HTML añadido de otro .html -->
+
+    {% include 'menu_user.html' %}
+
+
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+   <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+    <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+               <h5 class="font-weight-bolder mb-0">
+                   <i class="fa fa-commenting" aria-hidden="true"></i> <!-- Icono de usuario con espacio -->
+                   Mis Chats
+               </h5>
+            </ol>
+            <div class="centered-message">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="flash-messages">
+                            {% for category, message in messages %}
+                                <div class="flash {{ category }}">{{ message }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </nav>
+
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <div class="input-group input-group-outline"></div>
+            </div>
+            <ul class="navbar-nav justify-content-end">
+                <li class="nav-item d-flex align-items-center">
+
+
+
+
+</li>
+
+
+
+
+
+                <li class="nav-item px-3 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-body p-0"></a>
+                </li>
+                <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                        <div class="sidenav-toggler-inner">
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                        </div>
+                    </a>
+                </li>
+<li class="nav-item dropdown pe-2 d-flex align-items-center">
+    <a href="javascript:;" class="nav-link text-body p-0 d-flex align-items-center" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+        {% if notificaciones %}
+            <span class="badge bg-danger me-2">{{ notificaciones|length }}</span> <!-- Muestra la cantidad de notificaciones -->
+        {% endif %}
+        <i class="fa fa-bell cursor-pointer" style="font-size: 1.5rem;"></i>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+        <form action="{{ url_for('marcar_notificaciones_leidas') }}" method="post">
+  <button type="submit" class="btn btn-primary3 btn-sm">Marcar todas leidas</button>
+
+</form>
+
+        {% for notificacion in notificaciones %}
+        <li class="mb-2">
+            <a class="dropdown-item border-radius-md" href="javascript:;">
+                <div class="d-flex py-1">
+
+                    <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                            {{ notificacion.concepto }}
+                            {% if not notificacion.leida %}
+                                <button class="btn-mark-as-read" data-id="{{ notificacion.id }}">Marcar como leída</button>
+                            {% endif %}
+                        </h6>
+                        <p class="text-xs text-secondary mb-0">
+                            <i class="fa fa-clock me-1"></i>
+                            {{ notificacion.fecha_hora.strftime('%d %b %Y %H:%M') }}
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </li>
+        {% endfor %}
+        {% if notificaciones|length == 0 %}
+        <li class="mb-2 text-center">
+            <span class="text-sm">No tienes notificaciones</span>
+        </li>
+        {% endif %}
+    </ul>
+</li>
+
+          <li class="nav-item d-flex align-items-center">
+              <a href="/cerrar_sesion" class="nav-link text-body font-weight-bold px-0">
+                <i class="fa fa-sign-out"style="font-size: 1.5rem;"></i>
+    </a>
+</li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+
+<div class="container-fluid h-100" style="margin-left:0px;">
+    <div class="row justify-content-center h-100">
+        <!-- Lista de usuarios -->
+        <div class="col-md-5 col-xl-4 chat">
+            <div class="card mb-sm-3 mb-md-0 contacts_card shadow-sm rounded-lg">
+                <div class="card-header" style="background-color: #929292;">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Buscar usuario..." id="searchUser" onkeyup="searchUsers()" aria-label="Buscar usuario" style="border-radius: 0;">
+                        <div class="input-group-append">
+                            <button class="btn btn-light" type="button" id="searchButton" onclick="searchUsers()" style="border-radius: 0; display: flex; align-items: center; justify-content: center;">
+    <i class="fas fa-search" style="color: black;"></i> Buscar
+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body contacts_body p-2">
+                    <ul class="contacts list-unstyled" id="userList">
+                        {% for usuario in usuarios %}
+                            <li class="{{ 'active' if destinatario and destinatario.id == usuario.id else '' }}">
+                                <a href="{{ url_for('chats', usuario_id=usuario.id) }}" class="d-flex align-items-center py-2 px-3 rounded-lg hover-shadow">
+                                    <div class="img_cont">
+                                        {% if usuario.imagen %}
+                                            <img class="rounded-circle" src="{{ url_for('static', filename=usuario.imagen) }}" alt="Imagen del recurso" style="max-height: 50px; max-width: 50px;">
+                                        {% else %}
+                                            <img class="rounded-circle" src="{{ url_for('static', filename='assets/img/placeholder.jpg') }}" alt="Imagen de Placeholder" style="max-height: 50px; max-width: 50px;">
+                                        {% endif %}
+                                    </div>
+                                    <div class="user_info ml-3">
+                                        <span class="font-weight-bold" style="color: black;">{{ usuario.nombre }}</span> <!-- Nombre en color negro -->
+                                        {% if usuario.mensajes_no_leidos > 0 %}
+                                            <span class="badge badge-danger">{{ usuario.mensajes_no_leidos }}</span>
+                                        {% endif %}
+                                        <p class="small text-muted">{{ usuario.status }}</p>
+                                    </div>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat principal -->
+        <div class="col-md-8 col-xl-6 chat">
+            <div class="card shadow-sm rounded-lg">
+                {% if destinatario %}
+                    <div class="card-header msg_head bg-light d-flex justify-content-between align-items-center rounded-top">
+                        <div class="d-flex align-items-center">
+                            <div class="img_cont">
+                                {% if destinatario.imagen %}
+                                    <img class="rounded-circle" src="{{ url_for('static', filename=destinatario.imagen) }}" alt="Imagen del recurso" style="max-height: 50px; max-width: 50px;">
+                                {% else %}
+                                    <img class="rounded-circle" src="{{ url_for('static', filename='assets/img/placeholder.jpg') }}" alt="Imagen de Placeholder" style="max-height: 50px; max-width: 50px;">
+                                {% endif %}
+                            </div>
+                            <div class="user_info ml-3">
+                                <span class="font-weight-bold" style="color: black;">{{ destinatario.nombre }}</span> <!-- Nombre en color negro -->
+                                <p class="small text-muted">{{ mensajes|length }} Mensajes</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cuerpo de los mensajes -->
+                    <div class="card-body msg_card_body p-3" id="msgCardBody" style="overflow-y: auto; max-height: 500px;">
+                        {% for mensaje in mensajes %}
+                            {% if mensaje.remitente_id == current_user.id %}
+                                <div class="d-flex justify-content-end mb-4">
+                                    <div class="msg_cotainer_send bg-primary text-white p-2 rounded-lg">
+                                        <span class="mensaje-texto">{{ mensaje.contenido | safe }}</span>
+                                        <span class="msg_time_send d-block text-right small">{{ mensaje.fecha_envio }}</span>
+                                    </div>
+                                    <div class="img_cont_msg ml-2">
+                                        {% if current_user.imagen %}
+                                            <img class="rounded-circle" src="{{ url_for('static', filename=current_user.imagen) }}" alt="Imagen del recurso" style="max-height: 40px; max-width: 40px;">
+                                        {% else %}
+                                            <img class="rounded-circle" src="{{ url_for('static', filename='assets/img/placeholder.jpg') }}" alt="Imagen de Placeholder" style="max-height: 40px; max-width: 40px;">
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="d-flex justify-content-start mb-4">
+                                    <div class="img_cont_msg mr-2">
+                                        {% if destinatario.imagen %}
+                                            <img class="rounded-circle" src="{{ url_for('static', filename=destinatario.imagen) }}" alt="Imagen del recurso" style="max-height: 40px; max-width: 40px;">
+                                        {% else %}
+                                            <img class="rounded-circle" src="{{ url_for('static', filename='assets/img/placeholder.jpg') }}" alt="Imagen de Placeholder" style="max-height: 40px; max-width: 40px;">
+                                        {% endif %}
+                                    </div>
+                                    <div class="msg_cotainer bg-light p-2 rounded-lg">
+                                        <span class="mensaje-texto">{{ mensaje.contenido | safe }}</span>
+                                        <span class="msg_time d-block text-right small">{{ mensaje.fecha_envio }}</span>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                    <!-- Formulario para enviar mensaje -->
+                    <div class="card-footer bg-light rounded-bottom">
+                        <form method="POST" action="{{ url_for('send_message') }}" id="messageForm">
+                            <div class="input-group">
+                                <textarea name="contenido" class="form-control rounded-lg" placeholder="Escribe un mensaje..." style="height: 80px; font-size: 1.1em; flex-grow: 1;"></textarea>
+                                <input type="hidden" name="usuario_id" value="{{ destinatario.id }}">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-dark rounded-lg" style="font-size: 1.5em; padding: 15px; height: 80px; flex-shrink: 0;"> <!-- Botón en negro -->
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                {% else %}
+                    <div class="card-body msg_card_body text-center p-5">
+                        <p>Selecciona un usuario para iniciar una conversación.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var destinatarioId = "{{ destinatario.id }}";  // El ID del destinatario actual
+        if (destinatarioId) {
+            marcarMensajesLeidos(destinatarioId);
+        }
+    });
+
+    function marcarMensajesLeidos(destinatarioId) {
+        fetch('/marcar_leidos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ destinatario_id: destinatarioId })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                console.log('Mensajes marcados como leídos');
+            } else {
+                console.error('Error al marcar mensajes como leídos');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+</script>
+
+ <script src="/static/assets/js/core/popper.min.js"></script>
+  <script src="/static/assets/js/core/bootstrap.min.js"></script>
+  <script src="/static/assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="/static/assets/js/plugins/smooth-scrollbar.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+
+<script>
+    function scrollToBottom() {
+        var msgCardBody = document.querySelector('.msg_card_body');
+        msgCardBody.scrollTop = msgCardBody.scrollHeight;
+    }
+
+    async function fetchMessages() {
+        const response = await fetch(`/get_messages/${destinatarioId}`);
+        const messages = await response.json();
+
+        const msgCardBody = document.getElementById('msgCardBody');
+        msgCardBody.innerHTML = '';
+
+        messages.forEach(message => {
+            const messageElement = document.createElement('div');
+            messageElement.className = message.remitente_id == currentUserId ? 'd-flex justify-content-end mb-4' : 'd-flex justify-content-start mb-4';
+
+            const imgSrc = message.remitente_id == currentUserId ? currentUserImageUrl : destinatarioImageUrl;
+
+            messageElement.innerHTML = `
+                <div class="img_cont_msg">
+                    <img class="card-img-top rounded-circle mx-auto d-block" src="${imgSrc}" alt="Imagen del recurso" style="max-height: 100px; max-width: 100px; margin-top: 5px;" class="rounded-circle user_img">
+                </div>
+                <div class="msg_cotainer${message.remitente_id == currentUserId ? '_send' : ''}">
+                    ${message.contenido}
+                    <span class="msg_time${message.remitente_id == currentUserId ? '_send' : ''}">${message.fecha_envio}</span>
+                </div>
+            `;
+            msgCardBody.appendChild(messageElement);
+        });
+
+        scrollToBottom();
+    }
+
+    document.getElementById('messageForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+        const form = event.target;
+        const formData = new FormData(form);
+
+        await fetch(form.action, {
+            method: form.method,
+            body: formData
+        });
+
+        form.reset();
+        fetchMessages();
+    });
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        scrollToBottom();
+        fetchMessages(); // Fetch initial messages
+        setInterval(fetchMessages, 3000); // Then start fetching every 3 seconds
+    });
+
+    // Pasar variables de contexto a JavaScript
+    const destinatarioId = {{ destinatario.id }};
+    const currentUserId = {{ current_user.id }};
+    const currentUserImageUrl = "{{ current_user_image_url }}";
+    const destinatarioImageUrl = "{{ destinatario_image_url }}";
+</script>
+
+<script>
+    document.getElementById('messageInput').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            document.getElementById('messageForm').submit();
+        }
+    });
+</script>
+<script>
+        $(document).ready(function() {
+            $('.btn-mark-as-read').on('click', function() {
+                var notificacionId = $(this).data('id');
+                var $notificationDiv = $('#notificacion-' + notificacionId);
+
+                $.ajax({
+                    url: '/marcar_leida/' + notificacionId,
+                    type: 'POST',
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            // Elimina la notificación del DOM
+                            $notificationDiv.remove();
+                             location.reload();
+                        }
+                        // No hay necesidad de manejar el caso de error aquí, ya que se puede manejar en el backend
+                    },
+                    error: function(xhr, status, error) {
+                        // Opcional: manejar errores en la solicitud
+                        console.error('Error al marcar la notificación como leída:', error);
+                    }
+                });
+            });
+        });
+
+function searchUsers() {
+    const input = document.getElementById('searchUser');
+    const filter = input.value.toLowerCase();
+    const ul = document.getElementById('userList');
+    const li = ul.getElementsByTagName('li');
+
+    for (let i = 0; i < li.length; i++) {
+        const userName = li[i].getElementsByClassName('user_info')[0].getElementsByTagName('span')[0].textContent;
+        if (userName.toLowerCase().indexOf(filter) > -1) {
+            li[i].style.display = '';
+        } else {
+            li[i].style.display = 'none';
+        }
+    }
+}
+
+    </script>
+
+
+
+</body>
+</html>

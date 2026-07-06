@@ -1,0 +1,3034 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Horario - Gestionaempresa</title>
+    <link rel="icon" href="{{ url_for('static', filename='logo_empresa.png') }}" type="image/png">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <!-- Nucleo Icons -->
+  <link href="/static/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="/static/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <!-- CSS Files -->
+  <link id="pagestyle" href="/static/assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
+  <!-- Nepcha Analytics (nepcha.com) -->
+  <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
+
+
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <!-- Enlace a Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Puedes enlazar tu archivo CSS para estilos aquí -->
+
+<script src="https://kit.fontawesome.com/3da862d4a6.js" crossorigin="anonymous"></script>
+ <style>
+
+body {
+    font-family: 'Roboto', sans-serif; /* Cambiar a Roboto */
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center; /* Centrar el texto */
+}
+
+
+.page-container {
+            padding-top: 100px; /* Baja todo el contenido dentro del contenedor */
+}
+
+#counter {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+
+    input, button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin-top: 10px;
+    }
+
+
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700);
+
+
+#prog-bar-cont {
+
+  background: gainsboro;
+  width: 75vw;
+  height: 2.5em;
+  padding: 0.5em;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  border-radius: 50px;
+  box-sizing: border-box;
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.75) inset, 0 0 4px 0 rgba(0, 0, 0, 0.5);
+}
+#prog-bar-cont #prog-bar {
+  background: #000;
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset, 0 0 1px 3px rgba(255, 255, 255, 0.75) inset;
+  background: transparent;
+}
+#prog-bar-cont #prog-bar:before {
+  border-radius: 50px;
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3) inset, 0 0 5px 2px rgba(255, 255, 255, 0.8) inset;
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+}
+#prog-bar-cont #prog-bar:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 2px;
+  width: 96%;
+  left: 50%;
+  margin-left: -48%;
+  border-radius: 20px;
+  height: 10px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.85) 30%, transparent 120%);
+}
+#prog-bar-cont #prog-bar #background {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(-90deg, violet, #30b3fc, #70dc23, yellow, orange, #ff1076);
+  -webkit-clip-path: inset(0 100% 0 0);
+  clip-path: inset(0 100% 0 0);
+  transition: all 3s;
+  -webkit-transition: all 3s;
+}
+#prog-bar-cont #prog-bar #background:before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background-image: repeating-linear-gradient(-45deg, transparent, transparent 10px, #000 10px, #000 20px);
+  opacity: 0.75;
+  mix-blend-mode: overlay;
+  border-radius: 50px;
+}
+#prog-bar-cont:hover #prog-bar #background {
+  -webkit-clip-path: inset(0 0 0 0);
+  clip-path: inset(0 0 0 0);
+}
+
+
+ #prog-bar-cont {
+margin-top:40px;
+      position: relative;
+      width: 80%;
+      height: 40px; /* Altura de la barra de progreso */
+margin-bottom:100px;
+    }
+
+    #prog-bar {
+
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background-color: #e0e0e0;
+    }
+
+    #background {
+    height: 100%;
+    background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+    clip-path: inset(0 100% 0 0); /* Inicialmente escondido */
+    -webkit-clip-path: inset(0 100% 0 0);
+    transition: clip-path 0.5s, -webkit-clip-path 0.5s;
+}
+
+    #trophy {
+      position: absolute;
+      top: -100px; /* Ajusta esto según sea necesario */
+      left: 50%; /* Centrar la imagen horizontalmente */
+      transform: translateX(-50%);
+      width: 100px; /* Ajusta el tamaño según sea necesario */
+      height: 100px;
+}
+
+#all{
+margin-top: 80px;
+margin-bottom:-20px;
+
+}
+
+
+ h3 {
+      text-align: center;
+margin-top: -75px;
+margin-bottom:65px;
+    }
+
+
+.embed-responsive {
+        position: relative;
+        padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+        background-color: #000;
+    }
+    .embed-responsive-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+.card {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column; /* Asegura que el contenido y el footer se alineen verticalmente */
+    height: 100%; /* Asegura que la tarjeta ocupe todo el alto disponible */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+        .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+padding: 15px; /* Asegura suficiente espacio alrededor del título */
+        }
+        .card-body {
+            padding: 15px;
+
+
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .footer-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .footer-link a {
+            color: #4C94E0;
+            text-decoration: none;
+        }
+        .footer-link a:hover {
+            text-decoration: underline;
+        }
+h3 {
+            margin-top:-15px;/* Ajusta el espacio debajo del título */
+        }
+.card-header h3 {
+            margin-bottom: 15px; /* Ajusta el espacio debajo del título */
+        }
+
+.events-card,
+.news-card,
+.prog-card {
+    position: relative;
+    max-height: 600px; /* Altura máxima para las tarjetas de eventos y noticias */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede la altura máxima */
+}
+.summary-card{
+    position: relative;
+    max-height: 400px; /* Altura máxima para las tarjetas de eventos y noticias */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede la altura máxima */
+}
+
+.footer-link {
+    position: relative; /* Necesario para que el footer se alinee al final del card */
+    text-align: center;
+    margin-top: auto; /* Empuja el footer al fondo de la tarjeta */
+    background-color: #f8f9fa; /* Fondo del footer */
+    padding: 10px;
+    border-top: 1px solid #e9ecef; /* Línea superior del footer */
+}
+        .footer-link a {
+            color: #6c6c6c;
+            text-decoration: none;
+        }
+        .footer-link a:hover {
+            text-decoration: underline;
+        }
+
+
+.card-body {
+    padding: 15px;
+    flex: 1; /* Esto hace que el cuerpo de la tarjeta ocupe todo el espacio disponible */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede el alto disponible */
+
+}
+
+
+#user-distribution-card {
+    height: 450px; /* Ajusta la altura total de la tarjeta */
+}
+
+#user-distribution-card .card-header {
+    height: 350px; /* Ajusta la altura del encabezado de la tarjeta para dejar espacio al gráfico */
+    padding: 0; /* Elimina el relleno para ajustar el tamaño */
+    overflow: hidden; /* Asegura que el contenido no se desborde */
+}
+
+#user-distribution-card .card-body {
+    height: calc(100% - 150px); /* Ajusta la altura del cuerpo de la tarjeta */
+    padding: 10px; /* Espacio interno del cuerpo de la tarjeta */
+    overflow: auto; /* Agrega desplazamiento si el contenido excede la altura disponible */
+margin-left:10px;
+}
+
+#user-distribution-card .chart {
+    height: 100%; /* Ajusta la altura del contenedor del gráfico */
+    width: 100%; /* Ajusta el ancho del contenedor del gráfico */
+}
+
+#user-distribution-card .chart-canvas {
+    height: 100% !important; /* Asegura que el gráfico ocupe el 100% del contenedor */
+    width: 100% !important; /* Asegura que el gráfico ocupe el 100% del contenedor */
+}
+
+#user-distribution-card .chart {
+    height: 300px; /* Ajusta la altura del contenedor del gráfico */
+    width: 300px; /* Ajusta el ancho del contenedor del gráfico */
+    display: flex; /* Utiliza flexbox para centrar el gráfico */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+margin-left:80px;
+}
+
+
+
+/* Estilos para la tarjeta de resumen */
+#summary-card {
+    display: flex;
+    flex-direction: column;
+    height: 600px; /* Ajusta la altura total de la tarjeta */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative; /* Necesario para el posicionamiento absoluto del pie de página */
+margin-top:-20px;
+
+}
+
+#summary-card .card-body {
+    flex: 1; /* Ocupa el espacio disponible */
+
+    overflow-y: auto; /* Desplazamiento vertical si es necesario */
+}
+
+#summary-card .card-footer {
+    background-color: #f8f9fa; /* Fondo del pie de página */
+    padding: 10px; /* Espacio interno del pie de página */
+    border-top: 1px solid #e9ecef; /* Línea superior del pie de página */
+ /* Centra el texto en el pie de página */
+    margin-top: auto; /* Empuja el pie de página hacia el fondo */
+}
+
+/* Estilos para los contadores */
+.counter-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido verticalmente */
+    border: 1px solid #e0e0e0; /* Borde para separar los contadores */
+    border-radius: 8px; /* Esquinas redondeadas */
+    padding: 5px; /* Reducir el padding */
+    color: #ffffff; /* Color del texto */
+}
+
+.counter-header {
+    position: relative;
+    height: 50px; /* Reducir la altura del encabezado */
+    padding: 0;
+    overflow: hidden; /* Evita el desbordamiento */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
+.counter-body, .counter-body2 {
+    padding: 5px; /* Reducir el padding del cuerpo del contador */
+    text-align: center; /* Centra el texto en el cuerpo */
+}
+
+.counter-body h6, .counter-body2 h6 {
+    font-size: 14px; /* Reducir el tamaño de la fuente del título */
+}
+
+.counter-body p, .counter-body2 p {
+    font-size: 12px; /* Reducir el tamaño de la fuente del párrafo */
+}
+
+.bg-primary {
+    background-color: #4C94E0 !important; /* Azul */
+}
+.btn-primary3 {
+    background-color: #a965f5 !important; /* Morado */
+    color:white;
+}
+.btn-primary3:hover {
+    background-color: #a965f5 !important; /* Morado */
+    color:white;
+}
+
+.bg-success {
+    background-color: #28a745 !important; /* Verde */
+}
+
+.bg-info {
+    background-color: #17a2b8 !important; /* Azul claro */
+}
+
+.bg-warning {
+    background-color: #ffc107 !important; /* Amarillo */
+}
+
+  .card-global {
+            height: 450px; /* Ajusta según tus necesidades */
+            display: flex;
+            flex-direction: column;
+margin-top:-25px;
+        }
+
+        /* Clase para la tarjeta negra específica del gráfico */
+        .card-graph {
+            height: 130%; /* Ajusta según el espacio que quieras para el gráfico */
+            display: flex;
+            align-items: center; /* Centra el gráfico verticalmente */
+            justify-content: center; /* Centra el gráfico horizontalmente */
+        }
+
+        /* Estilo para el canvas dentro de la tarjeta negra */
+        .chart-canvas {
+            width: 100%;
+            height: 100%;
+}
+.custom-card-body {
+            margin-top: 100px; /* Ajusta el valor según tus necesidades */
+margin-left:20px;
+        }
+
+
+.recurso {
+            display: inline-block;
+            width: 30%;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        .recurso img {
+            max-width: 100px;
+            max-height: 100px;
+            margin-bottom: 10px;
+        }
+
+.embed-responsive {
+        position: relative;
+        padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+        background-color: #000;
+    }
+    .embed-responsive-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+ .toast-center-center {
+            top: 50%;
+            left: 70%;
+            transform: translate(-50%, -50%);
+            min-width: 800px; /* Más grande */
+min-height: 800px; /* Más grande */
+            opacity: 1; /* Menos transparente */
+        }
+        .toast-success .toast-message {
+            color: green;
+        }
+        .toast-error .toast-message {
+            color: red;
+        }
+        .toast {
+            font-size: 1.2em; /* Tamaño de fuente más grande */
+            padding: 20px; /* Más relleno */
+        }
+
+.btn-mark-as-read {
+            padding: 5px 10px;
+            font-size: 12px;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            color: #333;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .btn-mark-as-read:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Estilos para la pantalla de carga */
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+.container{
+   margin-bottom: 70px; /* Añadir margen inferior a la sección de ranking */
+margin-top:-20px;
+width: 100%; /* Ocupa el 100% del ancho disponible */
+   max-width: 100%; /* Asegúrate de que el ancho máximo sea 100% */
+
+}
+.ranking-container {
+
+    max-height: 250px; /* Ajusta la altura según sea necesario */
+    overflow-y: auto;
+overflow-x: hidden;
+    padding-right: 15px; /* Ajusta el padding para que no corte el contenido */
+
+}
+
+/* Opcional: Estilos para la barra de desplazamiento */
+.ranking-container::-webkit-scrollbar {
+    width: 12px;
+}
+
+.ranking-container::-webkit-scrollbar-track {
+    background: #9f9f9f;
+background-image: linear-gradient(195deg, #9f9f9f 50%, #fff 150%)
+}
+
+.ranking-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.ranking-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+ .table {
+    max-width: 1600px; /* Aumenta el ancho máximo */
+    min-width: 720px; /* Mantén este valor si deseas un ancho mínimo */
+    table-layout: fixed; /* Asegura que se respete el ancho máximo */
+}
+
+.table td, .table th {
+    overflow: hidden; /* Oculta el contenido que excede el ancho */
+    text-overflow: ellipsis; /* Muestra puntos suspensivos para el texto que excede */
+    white-space: nowrap; /* Previene el salto de línea */
+}
+
+.table th {
+    background-color: #f2f2f2; /* Color de fondo para encabezados */
+    font-weight: bold; /* Negrita para los encabezados */
+}
+
+.tabla-container {
+    overflow-x: auto; /* Permitir desplazamiento horizontal si es necesario */
+}
+
+
+
+
+.card {
+
+
+    background-clip: padding-box !important;
+}
+.h4{
+text-align:center;
+align-items:center;
+}
+h5 {
+    text-align: center;
+}
+.centered-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+
+            font-weight: bold;
+
+        }
+.btn-link {
+    color: #4C94E0; /* Color inicial del enlace */
+    text-decoration: none; /* Opcional: quitar subrayado del enlace */
+    transition: color 0.3s; /* Suavizar la transición del color */
+}
+
+/* Estilo de hover para el enlace de eventos */
+.btn-link:hover {
+    color: #6f42c1; /* Color morado en hover */
+    text-decoration: underline; /* Opcional: añadir subrayado en hover */
+}
+
+
+
+        #chartdiv {
+            width: 150%;
+            height: 100px;
+        }
+
+.notificaciones {
+    position: relative; /* o 'absolute' o 'fixed' si es necesario */
+    z-index: 9999999; /* Valor alto para asegurarte de que está por encima de otros elementos */
+}
+/* Estilo del ícono de campana */
+.nav-item .fa-bell {
+    position: relative;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-bell:hover {
+    color: #495057;
+}
+
+/* Badge de notificaciones */
+.nav-item .badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    border-radius: 50%;
+    background-color: #f44336;
+    color: #fff;
+}
+
+/* Dropdown */
+.dropdown-menu {
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Estilo de cada notificación */
+.dropdown-item {
+    border-radius: 0.375rem;
+    transition: background-color 0.2s ease;
+    padding: 12px 15px;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* Estilo del texto de la notificación */
+.text-sm {
+    font-size: 0.875rem;
+    color: #343a40;
+    font-weight: 600;
+}
+
+.text-xs {
+    font-size: 0.75rem;
+    color: #6c757d;
+}
+
+/* Botón para marcar como leída */
+.btn-mark-as-read {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-mark-as-read:hover {
+    background: #0056b3;
+}
+
+/* Sin notificaciones */
+.text-center span {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+/* Posiciona el badge a la izquierda */
+.nav-item .badge {
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    border-radius: 50%;
+    background-color: #f44336;
+    color: #fff;
+    margin-right: 10px; /* Separa el badge del icono */
+}
+
+/* Ajuste de icono de campana */
+.nav-item .fa-bell {
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-bell:hover {
+    color: #495057;
+}
+/* Estilo del ícono de cerrar sesión */
+.nav-item .fa-sign-out {
+    position: relative;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-sign-out:hover {
+    color: #495057;
+}
+    /* Estilos para los mensajes flash */
+.flash-messages {
+    margin-bottom: 20px;
+}
+
+.flash {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.flash.success {
+    background-color: #d4edda; /* Color de fondo para mensajes de éxito */
+    color: #155724; /* Color del texto para mensajes de éxito */
+    border: 1px solid #c3e6cb;
+}
+
+.flash.error {
+    background-color: #f8d7da; /* Color de fondo para mensajes de error */
+    color: #721c24; /* Color del texto para mensajes de error */
+    border: 1px solid #f5c6cb;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+}
+
+.calendar {
+    margin-left: -20px;
+    margin-top: 300px;
+}
+
+.calendar ul {
+    margin-left: -40px;
+}
+
+.punto {
+    width: 10px;
+    height: 5px;
+    border-radius: 50%;
+    margin-right: 1px;
+}
+
+.calendar-container {
+    justify-content:center;
+    border: 1px solid #949BFF;
+    border-radius: 8px;
+    padding: 0px;
+    max-height: 400px;
+    overflow: hidden;
+}
+
+.fc {
+    font-size: 12px;
+}
+
+.fc-toolbar-title {
+    font-size: 14px;
+}
+
+.fc-daygrid-day.fc-day .fc-daygrid-day-top {
+    height: 15px; /* Ajusta la altura de las celdas del calendario */
+    width: 30px; /* Ajusta el ancho de las celdas del calendario */
+    font-size: 14px; /* Ajusta el tamaño de la fuente de los números de día */
+    text-align: center; /* Centra el texto horizontalmente */
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+color: black !important;
+
+}
+
+
+
+.fc-event {
+    background-color: green; /* Color para eventos aceptados */
+}
+.fc-day-red {
+    background-color: #FF6F6F !important;
+
+}
+.volver-button {
+    padding: 12px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #5fbd63;
+    border: 1px solid #5fbd63;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.volver-button:hover {
+    background-color: #58A15B;
+    border-color: #58A15B;
+}
+
+.volver-button:active {
+    background-color: #58A15B;
+    border-color: #58A15B;
+}
+
+.fc-daygrid-day-number {
+    color: black; /* Cambia el color de los números de los días a negro */
+}
+
+.fc-daygrid-day.fc-day.fc-day-sun .fc-daygrid-day-number,
+   .fc-daygrid-day.fc-day.fc-day-mon .fc-daygrid-day-number,
+   .fc-daygrid-day.fc-day.fc-day-tue .fc-daygrid-day-number,
+    .fc-daygrid-day.fc-day.fc-day-wed .fc-daygrid-day-number,
+    .fc-daygrid-day.fc-day.fc-day-thu .fc-daygrid-day-number,
+    .fc-daygrid-day.fc-day.fc-day-fri .fc-daygrid-day-number,
+    .fc-daygrid-day.fc-day.fc-day-sat .fc-daygrid-day-number {
+     color: black !important; /* Cambia el color de los números de los días de la semana a negro */
+}
+
+.container {
+   margin-top: -150px;
+ /* Puedes ajustar el valor según lo necesites */
+   margin-bottom:50px;
+}
+
+.fc-day-red {
+  background-color: #ffdddd;
+}
+
+/* Estilo para hacer el texto de los eventos transparente (invisible) */
+.fc-event-title {
+    color: transparent !important;
+}
+
+.fc-daygrid-event .fc-event-main {
+    visibility: hidden;
+}
+
+.user-modal {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    display: none; /* inicialmente oculto */
+}
+
+.user-modal-content {
+    max-width: 200px; /* ancho máximo del globo */
+}
+
+ .fc-day-red {
+
+        }
+
+           .popup {
+            position: absolute;
+            background-color: #333; /* Fondo negro */
+            color: #fff; /* Letras blancas */
+            border: 1px solid #555; /* Borde ligeramente más claro */
+            padding: 10px;
+            border-radius: 5px; /* Bordes redondeados */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar un efecto de elevación */
+            z-index: 1000;
+            display: none;
+            font-family: 'Open Sans', sans-serif; /* Fuente profesional */
+        }
+
+        .popup p {
+            margin: 0;
+            padding: 2px 0; /* Espaciado interno para separar los nombres */
+        }
+        .popup p:last-child {
+            border-bottom: none;
+        }
+.fc-event-pending {
+    background-color: orange !important; /* Color de fondo naranja para eventos pendientes */
+    color: white !important; /* Color del texto blanco para eventos pendientes */
+}
+
+.fc-daygrid-event .fc-event-main {
+    visibility: hidden; /* Oculta el texto de los eventos en las casillas del calendario */
+}
+
+
+.fc-day-orange {
+    background-color: orange; /* Estilo para eventos pendientes */
+}
+
+
+
+.solicitudes-container {
+    margin: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+
+}
+
+.solicitudes-list {
+    margin-top: 10px;
+height:170px;
+
+}
+
+.solicitud-item {
+margin-top:-25px;
+    padding: 2px;
+    margin-bottom: 0px;
+    background-color: white;
+    font-size:12px;
+
+
+}
+.contenedores-leyenda-solicitudes {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.solicitudes-container {
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+font-size:16px;
+margin-top:-20px;
+    /* Tus estilos existentes más cualquier ajuste para que se muestren bien juntos */
+    flex-basis: calc(50% - 40px); /* Ajusta según sea necesario */
+    margin: 20px;
+width:30%;
+overflow: hidden;
+}
+
+.solicitudes-container {
+font-family: 'open sans', sans-serif;
+  flex: 1; /* Esto permite que las cajas ocupen el espacio disponible */
+  margin: 10px; /* Asegúrate de que haya un poco de espacio entre las cajas */
+  box-sizing: border-box; /* Incluye el padding y border dentro del ancho total */
+}
+
+/* Si deseas que cada caja tenga un ancho máximo específico, puedes usar esto */
+
+.solicitudes-container {
+    font-family: 'open sans', sans-serif;
+    max-width: 50%; /* Esto asigna un máximo del 50% del ancho del contenedor padre a cada caja */
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Definir la sombra con un desplazamiento x, un desplazamiento y, un radio de desenfoque y un color RGBA */
+}
+
+
+.solicitudes-list {
+margin-bottom:20px;
+margin-top:30px;
+height:162px;
+  background-color:#fff /* Esto asigna un máximo del 48% del ancho del contenedor padre a cada caja */
+}
+.solicitudes-container h2 {
+margin-bottom:10px;
+font-family: 'open sans', sans-serif;
+margin-bottom:25px;
+font-size:28px;
+max-height:40px;
+}
+
+.solicitudes-container h2 {
+
+font-size:25px;
+}
+.button-container {
+max-heigth:20px;
+margin-top:-80px;
+  width: 100%; /* Ocupa todo el ancho del contenedor padre */
+  display: flex;
+  justify-content: space-around; /* Espacio distribuido alrededor de los botones */
+}
+
+.button-container button {
+  flex: 1; /* Los botones ocupan un espacio flexible y equitativo */
+  margin: 0 10px; /* Espacio entre botones */
+
+}
+
+.icono {
+        max-width: 20px; /* Ajusta el ancho según lo necesites */
+        max-height: 20px; /* Ajusta la altura según lo necesites */
+min-width: 20px; /* Ajusta el ancho según lo necesites */
+        min-height: 20px;
+    }
+
+/* Estilos para el botón de color rojo */
+.btn-danger {
+    background-color: #ff2525;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-bottom:30px;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.btn-danger2 {
+    background-color: #ff2525;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+
+}
+
+.btn-danger2:hover {
+    background-color: #c82333;
+}
+@media (max-width: 900px) {
+    .container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+margin-top:50px;
+    }
+}
+
+/* Estilo general del contenedor del calendario */
+.container-menu {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+    padding: 20px;
+    background-color: transparent;
+    margin-top: -50px;
+}
+
+/* Estilo general del contenedor del calendario */
+.container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+    padding: 20px;
+    background-color: transparent;
+    margin-top: -200px;
+}
+
+/* Estilo de cada contenedor de mes */
+.calendar-container {
+    background-color: #fff;
+    border: 2px solid #dcdcdc;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Estilo al hacer hover en los meses */
+.calendar-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Título de cada mes */
+.calendar-container h2 {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Estilo de las fechas dentro del calendario */
+.calendar-container .date {
+    font-size: 1rem;
+    text-align: center;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: #e2e2e2;
+    color: #666;
+    margin: 5px;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    transition: background-color 0.2s ease;
+}
+
+/* Efecto hover en las fechas */
+.calendar-container .date:hover {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.flash-messages {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        width: 300px;
+        z-index: 1000;
+    }
+    .alert {
+    width: 300px; /* Cambia el ancho según lo desees */
+    margin: 10px auto; /* Margen superior/inferior para separación */
+    opacity: 0.9; /* Transparente */
+    transition: opacity 0.5s ease-in-out; /* Transición de desvanecimiento */
+}
+
+.alert-success {
+    background-color: rgba(40, 167, 69, 0.8); /* Color verde con transparencia */
+    color: white;
+}
+
+.alert-danger {
+    background-color: rgba(220, 53, 69, 0.8); /* Color rojo con transparencia */
+    color: white;
+}
+
+.hide {
+    opacity: 0; /* Ocultar el mensaje */
+}
+
+        .contenido {
+            max-width: 1600px;
+            margin: 0 auto;
+
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .filtro-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+            color: #555;
+        }
+
+        select {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+            flex: 1; /* Para que el select ocupe el espacio disponible */
+        }
+
+        button {
+            padding: 8px 15px;
+            background-color: #4C94E0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button2 {
+            padding: 8px 15px;
+            background-color: transparent;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button2:hover {
+            background-color: transparent;
+        }
+
+        .tabla-container {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%; /* Hace que la tabla ocupe todo el ancho disponible */
+            border-collapse: collapse; /* Combina los bordes de las celdas */
+        }
+
+        th, td {
+            padding: 8px; /* Añade un espacio uniforme alrededor del contenido de las celdas */
+             /* Añade bordes a las celdas */
+            text-align: left; /* Alinea el texto a la izquierda */
+        }
+
+        th {
+            color: #212529;
+        }
+
+        .observaciones-column {
+            position: relative; /* Necesario para posicionar el popup */
+        }
+
+        .popup {
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            display: none; /* Oculto por defecto */
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .titulo-seccion {
+            margin-top: 30px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .blanco {
+            background-color: #ffffff; /* Ejemplo de clase adicional */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .boton {
+            padding: 8px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .boton:hover {
+            background-color: #218838;
+        }
+
+        .location-icon {
+    width: 24px; /* Ajusta el ancho de la imagen */
+    height: 24px; /* Ajusta la altura de la imagen */
+    object-fit: contain; /* Asegura que la imagen mantenga su aspecto */
+}
+
+
+
+/* Centrado de contenido en la pantalla */
+.centro-pantalla {
+    display: flex;
+    justify-content: center;   /* Centrado horizontal */
+    align-items: center;       /* Centrado vertical */
+
+}
+
+.highlight-duration {
+    background-color: #f5f970;
+    color: #000;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+#graficoMensual {
+    width: 300px !important;  /* Forzar tamaño */
+    height: 300px !important; /* Forzar tamaño */
+    margin: 0 auto; /* Centrado horizontal */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#graficoSemanas {
+    width: 300px !important;  /* Forzar tamaño */
+    height: 300px !important; /* Forzar tamaño */
+    margin: 0 auto; /* Centrado horizontal */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; /* Ajusta este valor si necesitas más o menos espacio */
+    font-size: 14px; /* Ajusta el tamaño del texto si es necesario */
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #1564a8;
+    border-color: #1564a8;
+    color: white;
+}
+
+.pagination a, .pagination span {
+    margin: 0 5px; /* Espaciado horizontal entre elementos */
+    padding: 8px 12px;
+    text-decoration: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #333;
+}
+
+.pagination a:hover {
+    background-color: #f0f0f0;
+}
+
+.pagination .current {
+    font-weight: bold;
+    background-color: #ddd;
+    border-color: #bbb;
+}
+
+.pagination .disabled {
+    color: #aaa;
+    pointer-events: none; /* Desactiva el clic en los elementos deshabilitados */
+}
+
+.edited {
+    /*background-color: #ffbf48;   Color naranja */
+    color: black;  /* Cambiar el color del texto a blanco para mejor contraste */
+}
+
+
+@media (max-width: 767px) {
+    .filtro-container {
+        margin-top: 0 !important;
+    }
+}
+
+.popup {
+    position: fixed; /* Fijo en la pantalla */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centrado */
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    display: none; /* Se oculta por defecto */
+    z-index: 1000; /* Asegurar que esté por encima de otros elementos */
+    color:#000 !important;
+}
+
+.btn-custom {
+  background-color: #1565A8;
+  border-color: #1565A8;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.btn-custom:hover {
+  background-color: #1565A8;
+  border-color: #1565A8;
+}
+
+  .filtro-button {
+    background-color: #1565A8;
+    color: white;
+    font-weight: bold;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .filtro-button:hover {
+    background-color: #0e4c83;
+  }
+
+     #filtro-formulario select.form-select {
+        background-color: white !important;
+    }
+
+  @media (max-width: 767.98px) {
+    #filtro-formulario label,
+    #filtro-formulario select,
+    #filtro-formulario button {
+      font-size: 14px !important;
+    }
+  }
+
+
+
+.btn-mark-as-read {
+    background: #1565a8;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-mark-as-read:hover {
+    background: #0d4376;
+}
+
+.dropdown-item {
+    border-radius: 0.375rem;
+    transition: background-color 0.2s ease;
+    padding: 1px 15px !important;
+    margin-top:0px;
+}
+
+
+
+
+
+
+
+.custom-width-modal {
+  max-width: 600px; /* o el ancho que prefieras */
+}
+
+.btn-mark-as-read {
+  min-width: 28px !important;
+  padding: 3px 3px;
+}
+/* Modal tipo barra lateral derecha */
+.modal-side-right {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 0;
+  height: 100%;
+  max-width: 500px;
+  width: 100%;
+  z-index: 1055;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+/* Cuando el modal se muestra */
+.modal.show .modal-side-right {
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+/* Evitamos que Bootstrap lo sobrescriba */
+.modal.fade .modal-dialog {
+  transition: none !important;
+  transform: none !important;
+}
+
+/* Ajustes al contenido del modal */
+.modal-side-right .modal-content {
+  height: 100%;
+  border-radius: 0;
+  text-align: left;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+}
+/* Estilo del texto de la notificación */
+.text-sm {
+    font-size: 0.75rem !important;
+    color: #000;
+    font-weight: 600;
+}
+
+.text-xs {
+    font-size: 0.70rem !important;
+    color: #6c757d;
+}
+
+
+
+.btn-primary3 {
+  background-color: #1565a8 !important;
+  color: white;
+  font-size: 0.75rem;
+  text-transform: none; /* evita mayúsculas automáticas */
+  margin-left:10px;
+}
+
+.btn-primary3:hover {
+  background-color: #0d4b80 !important; /* un tono más oscuro para el hover */
+}
+
+
+
+  @media (max-width: 576px) {
+    .dropdown-menu-mobile-half {
+      width: 50vw !important;
+      right: 0 !important;
+      left: auto !important;
+    }
+  }
+
+  .dropdown-menu-mobile-half {
+    width: 50vw !important; /* Ajusta al 50% del ancho de la ventana */
+    max-width: 400px;        /* Máximo ancho opcional */
+    min-width: 250px;        /* Mínimo opcional */
+    padding: 1rem;
+}
+
+.dropdown-menu-mobile-half .dropdown-item {
+    white-space: normal; /* Permite que el texto se ajuste a múltiples líneas */
+    word-wrap: break-word;
+    width: 100%;
+}
+
+.dropdown-menu-mobile-half .btn-mark-as-read {
+
+    padding: 0 5px;
+    font-size: 0.9rem;
+}
+
+</style>
+
+</head>
+
+<body class="g-sidenav-show  bg-gray-200">
+
+ <div class="modal fade" id="welcomeModal" tabindex="-1" role="dialog" aria-labelledby="welcomeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="welcomeModalLabel">Bienvenido</h5>
+                </div>
+                <div class="modal-body" id="welcomeMessage">
+                    <!-- El mensaje de bienvenida se establecerá mediante JavaScript -->
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<!-- Menu HTML añadido de otro .html -->
+
+
+
+{% if rol == 'inspector_role' %}
+
+        {% include 'menu_inspector.html' %}
+    {% else %}
+        {% include 'menu_admin.html' %}
+    {% endif %}
+
+
+ <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg w-100">
+
+
+<!-- Navbar -->
+<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+    <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                <h5 class="font-weight-bolder mb-0 d-none d-sm-block">
+                    <i class="fas fa-calendar-check me-2" style="color: #000;"></i> <!-- Icono de vacaciones con espacio -->
+                    Control de Horario
+                </h5>
+            </ol>
+            <div class="centered-message">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="flash-messages">
+                            {% for category, message in messages %}
+                                <div class="flash {{ category }}">{{ message }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </nav>
+
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <div class="input-group input-group-outline"></div>
+            </div>
+            <ul class="navbar-nav justify-content-end">
+<!-- Botón de "Más información" -->
+<li class="nav-item d-flex align-items-center">
+    <button type="button" class="btn btn-info ms-3 d-none d-md-inline-block" data-bs-toggle="modal" data-bs-target="#infoModal"
+        style="font-family: 'Roboto', sans-serif; font-weight: bold; color: white;
+               background: linear-gradient(90deg, #1565A8, #1565A8);
+               border: none;
+               margin-right: 40px;
+               margin-top: 15px;
+               text-transform: none;">
+        <i class="fas fa-info-circle"></i> Más información
+    </button>
+</li>
+                </li>
+<li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                        <div class="sidenav-toggler-inner" style="margin-right:10px;">
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                        </div>
+                    </a>
+                </li>
+
+             <li class="nav-item dropdown pe-2 d-flex align-items-center">
+    <a href="javascript:;" class="nav-link text-body p-0 d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#notificacionesModal">
+        {% if notificaciones %}
+            <span class="badge bg-danger me-2">{{ notificaciones|length }}</span>
+        {% endif %}
+        <i class="fa fa-bell cursor-pointer" style="font-size: 1.5rem;"></i>
+    </a>
+</li>
+
+          <li class="nav-item d-flex align-items-center">
+              <a href="/cerrar_sesion" class="nav-link text-body font-weight-bold px-0">
+                <i class="fa fa-sign-out"style="font-size: 1.5rem;"></i>
+    </a>
+</li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+<!-- Modal -->
+<div class="modal fade" id="notificacionesModal" tabindex="-1" aria-labelledby="notificacionesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-side-right">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="notificacionesModalLabel">
+          <i class="fa fa-bell cursor-pointer" style="font-size: 1.5rem;"></i> Notificaciones
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body text-start">
+        <form action="{{ url_for('marcar_notificaciones_leidas') }}" method="post">
+          <button type="submit" class="btn btn-primary3 btn-sm mb-3">Marcar todas como leídas</button>
+        </form>
+
+        {% for notificacion in notificaciones %}
+        <div class="mb-3 border-bottom pb-2">
+          <h6 class="text-sm font-weight-normal mb-1">
+            {{ notificacion.concepto }}
+            {% if not notificacion.leida %}
+              <button class="btn btn-link btn-mark-as-read ms-2" style="min-width: 32px;" data-id="{{ notificacion.id }}">
+                <i class="fa-solid fa-check" style="font-size: 1.2rem;"></i>
+              </button>
+            {% endif %}
+          </h6>
+          <p class="text-xs text-secondary mb-0">
+            <i class="fa fa-clock me-1"></i>
+            {{ notificacion.fecha_hora.strftime('%d/%m/%Y %H:%M') }}
+          </p>
+        </div>
+        {% endfor %}
+
+        {% if notificaciones|length == 0 %}
+        <div class="text-start">
+          <span class="text-sm">No tienes notificaciones</span>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+    <h5 class="font-weight-bolder mb-0 d-md-none text-start">
+                    <i class="fas fa-calendar-check me-2" style="color: #000; margin-left:5px;"></i> <!-- Icono de vacaciones con espacio -->
+                    Control de Horario
+                </h5>
+
+<!-- End Navbar -->
+
+<!--Cuerpo de la Web -->
+<div class="centro-pantalla">
+    <div class="filtro-container" style="margin-top: 100px;">
+
+<form id="filtro-formulario2" class="d-none d-md-flex align-items-center flex-wrap" style="gap: 10px;">
+
+    <!-- Filtro por Usuario -->
+    <i class="fas fa-user"></i>
+    <label for="usuario-filtro" class="mb-0" style="color: black; font-weight: bold;">Empleado:</label>
+    <select id="usuario-filtro" name="usuario" class="form-control form-control-sm">
+        <option value="">Todos</option>
+        {% for usuario in users %}
+            <option value="{{ usuario.id }}" {% if usuario.id == request.args.get('usuario') %}selected{% endif %}>
+                {{ usuario.nombre }} {{ usuario.primer_apellido }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <!-- Filtro por Mes -->
+    <i class="fas fa-calendar-alt"></i>
+    <label for="mes-filtro" class="mb-0" style="color: black; font-weight: bold;">Mes:</label>
+    <select id="mes-filtro" name="mess" class="form-control form-control-sm">
+        <option value="">Todos</option>
+        {% for m in range(1, 13) %}
+            <option value="{{ m }}" {% if mes == m %}selected{% endif %}>{{ ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'][m-1] }}</option>
+        {% endfor %}
+    </select>
+
+    <!-- Filtro por Año -->
+    <i class="fas fa-calendar-year"></i>
+    <label for="anio-filtro" class="mb-0" style="color: black; font-weight: bold;">Año:</label>
+    <select id="anio-filtro" name="anio" class="form-control form-control-sm">
+        <option value="">Todos</option>
+        <option value="2024" {% if anio == 2024 %}selected{% endif %}>2024</option>
+        <option value="2025" {% if anio == 2025 %}selected{% endif %}>2025</option>
+    </select>
+
+    <!-- Filtro por Centro de Trabajo -->
+    <i class="fas fa-building"></i>
+    <label for="centro-trabajo-filtro" class="mb-0" style="color: black; font-weight: bold;">Centro de trabajo:</label>
+    <select id="centro-trabajo-filtro" name="centro_trabajo" class="form-control form-control-sm">
+        <option value="">Todos</option>
+        {% for centro in centros_trabajo %}
+            <option value="{{ centro.id }}" {% if request.args.get('centro_trabajo')|int == centro.id %}selected{% endif %}>
+                {{ centro.nombre }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <!-- Registros por Página -->
+    <i class="fas fa-list"></i>
+    <label for="per_page" class="mb-0" style="color: black; font-weight: bold;">Registros por página:</label>
+    <select id="per_page" name="per_page" class="form-control form-control-sm">
+        <option value="10" {% if request.args.get('per_page') == '10' %}selected{% endif %}>10</option>
+        <option value="20" {% if request.args.get('per_page') == '20' %}selected{% endif %}>20</option>
+        <option value="50" {% if request.args.get('per_page') == '50' %}selected{% endif %}>50</option>
+    </select>
+
+    <!-- Botón de Filtrar -->
+    <button type="submit" class="filtro-button btn btn-sm" style="background-color: #1565A8; color: white; font-weight: bold;">
+        <i class="fas fa-filter" style="font-size:1.2rem;"></i>
+    </button>
+</form>
+
+
+<form id="filtro-formulario" class="container mt-3 d-inline-block d-md-none" style="margin-top:0px;">
+    <div class="row g-2 align-items-center">
+        <!-- Filtro por Usuario -->
+        <div class="col-md-4">
+            <label for="usuario-filtro" class="form-label" style="color: black; font-weight: bold;"><i class="fas fa-user me-2"></i>Empleado:</label>
+            <select id="usuario-filtro" name="usuario" class="form-select">
+                <option value="">Todos</option>
+                {% for usuario in users %}
+                <option value="{{ usuario.id }}" {% if usuario.id == request.args.get('usuario') %}selected{% endif %}>
+                    {{ usuario.nombre }} {{ usuario.primer_apellido }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Filtro por Mes -->
+        <div class="col-md-4">
+            <label for="mes-filtro" class="form-label" style="color: black; font-weight: bold;"><i class="fas fa-calendar-alt me-2"></i>Mes:</label>
+            <select id="mes-filtro" name="mess" class="form-select">
+                <option value="">Todos</option>
+                {% for i in range(1, 13) %}
+                <option value="{{ i }}" {% if mes == i %}selected{% endif %}>{{ ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"][i-1] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+
+        <!-- Filtro por Año con Ícono -->
+        <div class="col-md-4">
+            <label for="anio-filtro" class="form-label" style="color: black; font-weight: bold;"><i class="fas fa-calendar-year me-2"></i>Año:</label>
+            <select id="anio-filtro" name="anio" class="form-select">
+                <option value="">Todos</option>
+                <option value="2024" {% if anio == 2024 %}selected{% endif %}>2024</option>
+                <option value="2025" {% if anio == 2025 %}selected{% endif %}>2025</option>
+            </select>
+        </div>
+
+
+
+
+        <!-- Registros por página -->
+        <div class="col-md-4">
+            <label for="per_page" class="form-label" style="color: black; font-weight: bold;"><i class="fas fa-list me-2"></i>Registros por página:</label>
+            <select id="per_page" name="per_page" class="form-select">
+                <option value="10" {% if request.args.get('per_page') == '10' %}selected{% endif %}>10</option>
+                <option value="20" {% if request.args.get('per_page') == '20' %}selected{% endif %}>20</option>
+                <option value="50" {% if request.args.get('per_page') == '50' %}selected{% endif %}>50</option>
+            </select>
+        </div>
+
+
+        <!-- Botón de Filtrar -->
+        <div class="col-md-4 d-flex align-items-end">
+            <button type="submit" class="btn w-100" style="background-color: #1565A8; border-color: #1565A8; color: white; font-weight: bold; font-size: 14px;">
+                <i class="fas fa-filter me-2"></i>
+            </button>
+        </div>
+    </div>
+</form>
+
+    </div>
+</div>
+
+<div id="area_tabla">
+    <div class="tabla-container d-none d-md-inline-block">
+<table class="table" style="color:#000; width: 100%; font-size: 14px; border-collapse: collapse;">
+    <thead>
+        <tr style="font-size: 12px;">
+            <th style="vertical-align: middle; border-bottom: 1px solid #ccc;"><i class="fas fa-user" style="margin-right: 8px;"></i>Nombre</th>
+            <th style="vertical-align: middle; text-align: center; border-bottom: 1px solid #ccc;"><i class="fas fa-calendar-day" style="margin-right: 8px;"></i>Fecha entrada</th>
+            <th style="vertical-align: middle; text-align: center; border-bottom: 1px solid #ccc;"><i class="fas fa-map-marker-alt" style="margin-right: 8px;"></i>Ubicación E.</th>
+            <th style="vertical-align: middle; text-align: center; border-bottom: 1px solid #ccc;"><i class="fas fa-calendar-day" style="margin-right: 8px;"></i>Fecha salida</th>
+            <th style="vertical-align: middle; text-align: center; border-bottom: 1px solid #ccc;"><i class="fas fa-map-marker-alt" style="margin-right: 8px;"></i>Ubicación S.</th>
+            <th style="width: 8%; vertical-align: middle; text-align: center; border-bottom: 1px solid #ccc;"><i class="fas fa-clock" style="margin-right: 8px;"></i>Duración</th>
+            <th style="width: 8%; vertical-align: middle; text-align: center; border-bottom: 1px solid #ccc;"><i class="fas fa-clock" style="margin-right: 8px;"></i>Centro</th>
+            {% if empresa.ver_pausas %}
+            <th style="width: 8%; vertical-align: middle; text-align: center; border-bottom: 1px solid #ccc;"><i class="fas fa-pause" style="margin-right: 8px;"></i>Pausas</th>
+            {% endif %}
+            <th style="width: 15%; vertical-align: middle; text-align: center; border-bottom: 1px solid #ccc;"><i class="fas fa-comment-dots" style="margin-right: 8px;"></i>Observaciones</th>
+            <th><i class="fas fa-edit" style="margin-right: 8px;"></i>Editar</th>
+        </tr>
+    </thead>
+    <tbody style="font-size: 12px;">
+        {% for registro in registros %}
+            <tr class="{% if registro.modificado %}edited{% endif %}" style="height: 30px;">
+                <td style="padding: 5px; vertical-align: middle;">
+<span class=""
+      data-registro-id="{{ registro.id }}"
+      data-user-id="{{ registro.user_id }}"
+      style="cursor:pointer; color:#007bff;">
+    {{ obtener_nombre_usuario_por_id(registro.user_id) }}
+</span>
+
+
+</td>
+
+
+       <!-- Fecha entrada -->
+<td style="padding: 5px; vertical-align: middle; text-align: center; cursor:pointer; color:#007bff;"
+    class="editable-hora"
+    data-registro-id="{{ registro.id }}"
+    data-campo="entrada"
+    data-fecha="{{ registro.entrada.strftime('%Y-%m-%dT%H:%M') }}">
+    {{ registro.entrada.strftime('%d-%m-%Y %H:%M') }}
+    {% if not registro.aprobado_modificacion and registro.campo_modificado == 'entrada' %}
+        <i class="fas fa-hourglass-half text-warning" title="Pendiente de validación"></i>
+    {% endif %}
+</td>
+                <td style="text-align: center; padding: 5px; vertical-align: middle;  ">
+                    <span>{{ registro.ip_address_entrada }}</span>
+                    <button class="show-location-button" data-lat="{{ registro.latitud }}" data-lng="{{ registro.longitud }}" style="background-color:transparent; border: none;color:black;">
+                        <i class="fas fa-map-marker-alt" style="color: black;"></i>
+                    </button>
+                </td>
+<!-- Fecha salida -->
+<td style="padding: 5px; vertical-align: middle; text-align: center; cursor:pointer; color:#007bff;"
+    class="editable-hora"
+    data-registro-id="{{ registro.id }}"
+    data-campo="salida"
+    data-fecha="{{ registro.salida.strftime('%Y-%m-%dT%H:%M') if registro.salida else '' }}">
+    {{ registro.salida.strftime('%d-%m-%Y %H:%M') if registro.salida else '' }}
+    {% if not registro.aprobado_modificacion and registro.campo_modificado == 'salida' %}
+        <i class="fas fa-hourglass-half text-warning" title="Pendiente de validación"></i>
+    {% endif %}
+</td>
+                <td style="text-align: center; padding: 5px; vertical-align: middle;  ">
+                    <span>{{ registro.ip_address_salida }}</span>
+                    <button class="show-location-button" data-lat="{{ registro.latitud_salida }}" data-lng="{{ registro.longitud_salida }}" style="background-color:transparent; border: none;color:black;">
+                        <i class="fas fa-map-marker-alt" style="color: black;"></i>
+                    </button>
+                </td>
+                <td style="width: 8%; padding: 5px; vertical-align: middle; text-align: center;  ">
+                    <span class="highlight-duration">{{ registro.duracion_formateada[:5] }}</span>
+                </td>
+                <td style="width: 8%; padding: 5px; vertical-align: middle; text-align: center;  ">
+                    <span class="">{{ registro.centro_trabajo.nombre }}</span>
+                </td>
+                {% if empresa.ver_pausas %}
+                <td style="width: 12%; padding: 5px; vertical-align: middle; text-align: center;  ">
+                    <button class="pause-details-button" data-registro-id="{{ registro.id }}" style="background-color:transparent; border: none; color:#4C94E0; font-size: 12px;">
+                        <i class="fas fa-info-circle"></i> Ver Pausas
+                    </button>
+                </td>
+                 {% endif %}
+
+                   <td class="observaciones-column overflow-visible">
+            <span id="observaciones{{ registro.id }}">{{ registro.observaciones if registro.observaciones else "" }}</span>
+            <textarea id="observacionesTextarea{{ registro.id }}" style="display:none;">{{ registro.observaciones if registro.observaciones else "" }}</textarea>
+            <div class="popup" id="popup{{ registro.id }}">{{ registro.observaciones if registro.observaciones else "" }}</div>
+        </td>
+       <td>
+    <button id="edit-button-{{ registro.id }}" class="edit-button rounded-3 bg-transparent" onclick="editObservaciones({{ registro.id }})">
+        <i class="fas fa-edit" style="color: black;"></i>
+    </button>
+    <button id="save-button-{{ registro.id }}" class="save-button bg-transparent" style="display:none;" onclick="saveObservaciones({{ registro.id }})">
+        <i class="fas fa-save" style="color: black;"></i>
+    </button>
+</td>
+
+            </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot style="border-top: none;">
+        <tr>
+            <td colspan="6" class="highlight-duration" style="text-align: right; padding: 10px; border-top: none;">
+                <i class="fas fa-clock" style="margin-right: 8px;"></i>
+                Duración total del mes: <span style="background-color: #f5f970; color: #000; padding: 2px 4px;">{{ total_horas_mes_actual_completa }}</span>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+
+
+
+{% if registros_paginados.pages > 1 %}
+<nav aria-label="Page navigation">
+  <ul class="pagination justify-content-center">
+
+    {% set total_pages = registros_paginados.pages %}
+    {% set current_page = registros_paginados.page %}
+    {% set max_visible_pages = 8 %}
+
+    <!-- Página anterior -->
+    {% if registros_paginados.has_prev %}
+      <li class="page-item">
+        <a class="page-link" href="{{ url_for('obtener_registros', page=1, mess=mes, anio=anio, usuario=usuario) }}" aria-label="First">&lt;&lt;</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="{{ url_for('obtener_registros', page=registros_paginados.prev_num, mess=mes, anio=anio, usuario=usuario) }}" aria-label="Previous">&laquo;</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled"><span class="page-link">&lt;&lt;</span></li>
+      <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+    {% endif %}
+
+    <!-- Números de página -->
+    {% if total_pages <= max_visible_pages %}
+        {% for p in range(1, total_pages + 1) %}
+          {% if p == current_page %}
+            <li class="page-item active"><span class="page-link">{{ p }}</span></li>
+          {% else %}
+            <li class="page-item">
+              <a class="page-link" href="{{ url_for('obtener_registros', page=p, mess=mes, anio=anio, usuario=usuario) }}">{{ p }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+    {% else %}
+        {% if current_page <= max_visible_pages // 2 %}
+          {% for p in range(1, max_visible_pages) %}
+            {% if p == current_page %}
+              <li class="page-item active"><span class="page-link">{{ p }}</span></li>
+            {% else %}
+              <li class="page-item">
+                <a class="page-link" href="{{ url_for('obtener_registros', page=p, mess=mes, anio=anio, usuario=usuario) }}">{{ p }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
+          <li class="page-item disabled"><span class="page-link">...</span></li>
+          <li class="page-item">
+            <a class="page-link" href="{{ url_for('obtener_registros', page=total_pages, mess=mes, anio=anio, usuario=usuario) }}">{{ total_pages }}</a>
+          </li>
+        {% elif current_page > total_pages - (max_visible_pages // 2) %}
+          <li class="page-item">
+            <a class="page-link" href="{{ url_for('obtener_registros', page=1, mess=mes, anio=anio, usuario=usuario) }}">1</a>
+          </li>
+          <li class="page-item disabled"><span class="page-link">...</span></li>
+          {% for p in range(total_pages - max_visible_pages + 1, total_pages + 1) %}
+            {% if p == current_page %}
+              <li class="page-item active"><span class="page-link">{{ p }}</span></li>
+            {% else %}
+              <li class="page-item">
+                <a class="page-link" href="{{ url_for('obtener_registros', page=p, mess=mes, anio=anio, usuario=usuario) }}">{{ p }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <li class="page-item">
+            <a class="page-link" href="{{ url_for('obtener_registros', page=1, mess=mes, anio=anio, usuario=usuario) }}">1</a>
+          </li>
+          <li class="page-item disabled"><span class="page-link">...</span></li>
+          {% for p in range(current_page - 3, current_page + 4) %}
+            {% if p == current_page %}
+              <li class="page-item active"><span class="page-link">{{ p }}</span></li>
+            {% else %}
+              <li class="page-item">
+                <a class="page-link" href="{{ url_for('obtener_registros', page=p, mess=mes, anio=anio, usuario=usuario) }}">{{ p }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
+          <li class="page-item disabled"><span class="page-link">...</span></li>
+          <li class="page-item">
+            <a class="page-link" href="{{ url_for('obtener_registros', page=total_pages, mess=mes, anio=anio, usuario=usuario) }}">{{ total_pages }}</a>
+          </li>
+        {% endif %}
+    {% endif %}
+
+    <!-- Página siguiente -->
+    {% if registros_paginados.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="{{ url_for('obtener_registros', page=registros_paginados.next_num, mess=mes, anio=anio, usuario=usuario) }}" aria-label="Next">&raquo;</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="{{ url_for('obtener_registros', page=total_pages, mess=mes, anio=anio, usuario=usuario) }}" aria-label="Last">&gt;&gt;</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+      <li class="page-item disabled"><span class="page-link">&gt;&gt;</span></li>
+    {% endif %}
+
+  </ul>
+</nav>
+{% endif %}
+
+    </div>
+</div>
+
+
+<table class="table2 d-inline-block d-md-none" border="1" style="color:#000; width: 98%; font-size: 14px; margin-left:1%;">
+    <thead style="background-color:transparent;">
+        <tr style="font-size: 14px;background-color:transparent;">
+            <th style="background-color:transparent;">
+                <i class="fas fa-calendar-day" style="margin-right: 8px;"></i>Fecha entrada
+            </th>
+            <th style="background-color:transparent;">
+                <i class="fas fa-calendar-day" style="margin-right: 8px;"></i>Fecha salida
+            </th>
+            <th style="background-color:transparent;">
+                <i class="fas fa-clock" style="margin-right: 8px;"></i>Duración
+            </th>
+        </tr>
+    </thead>
+    <tbody style="text-align: center; font-size: 14px;">
+        {% for registro in registros %}
+        <tr>
+            <td>{{ registro.entrada.strftime('%d-%m-%Y %H:%M') }}</td>
+            <td>{{ registro.salida.strftime('%d-%m-%Y %H:%M') if registro.salida else "" }}</td>
+            <td>
+                <span class="highlight-duration">{{ registro.duracion_formateada[:5] }}</span>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Paginación para la Segunda Tabla -->
+<div class="pagination d-md-none" style="text-align: center; margin-top: 10px;">
+{% if registros_paginados.pages > 1 %}
+<nav aria-label="Page navigation">
+  <ul class="pagination justify-content-center">
+
+    {% set total_pages = registros_paginados.pages %}
+    {% set current_page = registros_paginados.page %}
+    {% set max_visible_pages = 8 %}
+
+    <!-- Página anterior -->
+    {% if registros_paginados.has_prev %}
+      <li class="page-item">
+        <a class="page-link" href="{{ url_for('obtener_registros', page=1, mess=mes, anio=anio, usuario=usuario) }}" aria-label="First">&lt;&lt;</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="{{ url_for('obtener_registros', page=registros_paginados.prev_num, mess=mes, anio=anio, usuario=usuario) }}" aria-label="Previous">&laquo;</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled"><span class="page-link">&lt;&lt;</span></li>
+      <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+    {% endif %}
+
+    <!-- Números de página -->
+    {% if total_pages <= max_visible_pages %}
+        {% for p in range(1, total_pages + 1) %}
+          {% if p == current_page %}
+            <li class="page-item active"><span class="page-link">{{ p }}</span></li>
+          {% else %}
+            <li class="page-item">
+              <a class="page-link" href="{{ url_for('obtener_registros', page=p, mess=mes, anio=anio, usuario=usuario) }}">{{ p }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+    {% else %}
+        {% if current_page <= max_visible_pages // 2 %}
+          {% for p in range(1, max_visible_pages) %}
+            {% if p == current_page %}
+              <li class="page-item active"><span class="page-link">{{ p }}</span></li>
+            {% else %}
+              <li class="page-item">
+                <a class="page-link" href="{{ url_for('obtener_registros', page=p, mess=mes, anio=anio, usuario=usuario) }}">{{ p }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
+          <li class="page-item disabled"><span class="page-link">...</span></li>
+          <li class="page-item">
+            <a class="page-link" href="{{ url_for('obtener_registros', page=total_pages, mess=mes, anio=anio, usuario=usuario) }}">{{ total_pages }}</a>
+          </li>
+        {% elif current_page > total_pages - (max_visible_pages // 2) %}
+          <li class="page-item">
+            <a class="page-link" href="{{ url_for('obtener_registros', page=1, mess=mes, anio=anio, usuario=usuario) }}">1</a>
+          </li>
+          <li class="page-item disabled"><span class="page-link">...</span></li>
+          {% for p in range(total_pages - max_visible_pages + 1, total_pages + 1) %}
+            {% if p == current_page %}
+              <li class="page-item active"><span class="page-link">{{ p }}</span></li>
+            {% else %}
+              <li class="page-item">
+                <a class="page-link" href="{{ url_for('obtener_registros', page=p, mess=mes, anio=anio, usuario=usuario) }}">{{ p }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <li class="page-item">
+            <a class="page-link" href="{{ url_for('obtener_registros', page=1, mess=mes, anio=anio, usuario=usuario) }}">1</a>
+          </li>
+          <li class="page-item disabled"><span class="page-link">...</span></li>
+          {% for p in range(current_page - 3, current_page + 4) %}
+            {% if p == current_page %}
+              <li class="page-item active"><span class="page-link">{{ p }}</span></li>
+            {% else %}
+              <li class="page-item">
+                <a class="page-link" href="{{ url_for('obtener_registros', page=p, mess=mes, anio=anio, usuario=usuario) }}">{{ p }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
+          <li class="page-item disabled"><span class="page-link">...</span></li>
+          <li class="page-item">
+            <a class="page-link" href="{{ url_for('obtener_registros', page=total_pages, mess=mes, anio=anio, usuario=usuario) }}">{{ total_pages }}</a>
+          </li>
+        {% endif %}
+    {% endif %}
+
+    <!-- Página siguiente -->
+    {% if registros_paginados.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="{{ url_for('obtener_registros', page=registros_paginados.next_num, mess=mes, anio=anio, usuario=usuario) }}" aria-label="Next">&raquo;</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="{{ url_for('obtener_registros', page=total_pages, mess=mes, anio=anio, usuario=usuario) }}" aria-label="Last">&gt;&gt;</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+      <li class="page-item disabled"><span class="page-link">&gt;&gt;</span></li>
+    {% endif %}
+
+  </ul>
+</nav>
+{% endif %}
+
+</div>
+
+<!-- Modal para editar usuario -->
+<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document" style="margin-top: 10px;">
+    <div class="modal-content">
+      <form method="POST" action="/editar_usuario_registro">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editUserModalLabel">Editar Usuario del Registro</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <input type="text" class="form-control mb-2" id="userSearch" placeholder="Buscar usuario...">
+
+          <select class="form-control" id="userSelect" name="user_id" size="8">
+            {% for usuario in usuarios %}
+              <option value="{{ usuario.id }}">{{ usuario.nombre }} {{ usuario.primer_apellido }}</option>
+            {% endfor %}
+          </select>
+
+          <input type="hidden" name="registro_id" id="modalRegistroId">
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Modal para mostrar el mapa -->
+<div class="modal fade" id="mapModal" tabindex="-1" aria-labelledby="mapModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="mapModalLabel">
+          <i class="fas fa-map-marked-alt" style="margin-right: 8px;"></i>
+          Ubicación registro del empleado
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="mapContainer"></div> <!-- Contenedor para el mapa -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de resumen de horas -->
+<div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true" style="font-family: 'Roboto', sans-serif;">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center w-100">
+          <i class="fas fa-clipboard-list"></i> Resumen de Registro de fichaje laboral
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <h5 class="mb-4" style="color: #4CAF50;">
+          <i class="fas fa-calendar-alt"></i> Resumen del año y mes actual
+        </h5>
+
+<div class="row justify-content-center">
+  <div class="col-12 col-md-8 text-center"> <!-- Cambié text-start a text-center -->
+    <p style="font-size:15px;">
+      <i class="fas fa-calendar-check"></i>
+      <strong>Nº de horas trabajadas en el año:</strong>
+      <strong><span style="background-color: yellow; border-radius: 5px; padding: 2px 5px;">{{ total_horas_anuales }}</span> horas</strong>
+    </p>
+
+    <p style="font-size:15px;">
+      <i class="fas fa-calendar-day"></i>
+      <strong>Nº de horas trabajadas en el mes actual:</strong>
+      <strong><span style="background-color: yellow; border-radius: 5px; padding: 2px 5px;">{{ total_horas_mes_actual }}</span> horas</strong>
+    </p>
+
+    <p style="font-size:15px;">
+      <i class="fas fa-calendar-week"></i>
+      <strong>Nº de horas trabajadas en la semana actual:</strong>
+      <strong><span style="background-color: yellow; border-radius: 5px; padding: 2px 5px;">{{ total_horas_semana_actual }}</span> horas</strong>
+    </p>
+  </div>
+</div>
+
+
+        <hr class="my-4">
+
+        <h5 class="mb-4" style="color: #4CAF50;">
+          <i class="fas fa-chart-line"></i> Resumen del mes seleccionado
+        </h5>
+
+         <p style="font-size:15px;">
+      <i class="fas fa-clock"></i>
+       <strong>Nº de horas trabajadas en el mes seleccionado:</strong>
+      <strong><span style="background-color: yellow; border-radius: 5px; padding: 2px 5px;">{{ total_horas_mes }}</span> horas</strong>
+    </p>
+
+        <div class="row">
+          <div class="col-md-6">
+            <h5><i class="fas fa-chart-bar"></i> Gráfico de horas por semana</h5>
+            <canvas id="graficoSemanas"></canvas>
+          </div>
+          <div class="col-md-6">
+            <h5><i class="fas fa-chart-pie"></i> Gráfico de horas mensuales</h5>
+            <canvas id="graficoMensual"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Formulario para generar PDF -->
+<div id="formulario" class="d-none d-md-inline-block" style="display: flex; justify-content: center; align-items: center; flex-direction: column; gap: 20px; margin-top: 20px;margin-bottom: 20px;">
+    <h5 class="titulo-seccion" style="color: black; text-align: center; display: flex; align-items: center; gap: 10px;">
+    <i class="fas fa-file-pdf" style="font-size: 16px;"></i> Generar informe
+</h5>
+    <form style="display: flex; gap: 20px; align-items: center; justify-content: center;">
+        <!-- Desplegable de Usuario con icono -->
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <i class="fas fa-user" style="font-size: 20px;"></i>
+            <label for="usuario" style="margin: 0; color: black; font-weight: bold;">Empleado:</label>
+            <select name="usuario" id="usuario" style="...">
+    <option value="todos">Todos</option> <!-- NUEVA OPCIÓN -->
+    {% for user in users %}
+        <option value="{{ user.id }}">{{ user.nombre }} {{ user.primer_apellido }}</option>
+    {% endfor %}
+</select>
+        </div>
+        <!-- Desplegable de Centro de Trabajo con icono -->
+<div style="display: flex; align-items: center; gap: 10px;">
+    <i class="fas fa-building" style="font-size: 20px;"></i>
+    <label for="centro" style="margin: 0; color: black; font-weight: bold;">Centro:</label>
+   <select name="centro" id="centro" style="...">
+    <option value="todos">Todos</option> <!-- NUEVA OPCIÓN -->
+    {% for centro in centros %}
+        <option value="{{ centro.id }}">{{ centro.nombre }}</option>
+    {% endfor %}
+</select>
+</div>
+
+
+        <!-- Desplegable de Año con icono -->
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <i class="fas fa-calendar-year" style="font-size: 20px;"></i>
+            <label for="año" style="margin: 0; color: black; font-weight: bold;">Año:</label>
+            <select name="año" id="año" style="padding: 12px; font-size: 16px; width: 200px; border-radius: 4px;">
+                <!-- Asegúrate de que el año esté actualizado. Aquí un ejemplo para el año actual y el siguiente -->
+                <option value="{{ current_year }}">{{ current_year }}</option>
+                <option value="{{ current_year - 1}}">{{ current_year - 1 }}</option>
+            </select>
+        </div>
+
+        <!-- Desplegable de Mes con icono -->
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <i class="fas fa-calendar-alt" style="font-size: 20px;"></i>
+            <label for="mes" style="margin: 0; color: black; font-weight: bold;">Selecciona un mes:</label>
+            <select name="mesmes" id="mesmes" style="padding: 12px; font-size: 16px; width: 200px; border-radius: 4px;">
+                <option value="01">Enero</option>
+                <option value="02">Febrero</option>
+                <option value="03">Marzo</option>
+                <option value="04">Abril</option>
+                <option value="05">Mayo</option>
+                <option value="06">Junio</option>
+                <option value="07">Julio</option>
+                <option value="08">Agosto</option>
+                <option value="09">Septiembre</option>
+                <option value="10">Octubre</option>
+                <option value="11">Noviembre</option>
+                <option value="12">Diciembre</option>
+            </select>
+        </div>
+
+        <!-- Botón Generar -->
+        <div>
+            <button type="button" id="abrir-modal" class="boton" style="padding: 12px 20px; font-size: 16px; background-color: #1565A8; color: white; border-radius: 4px; display: flex; align-items: center;">
+                <i class="fas fa-file-pdf" style="margin-right: 8px; font-size: 16px;"></i>Generar informe
+            </button>
+        </div>
+    </form>
+</div>
+
+
+<div class="d-flex justify-content-center">
+    <button type="button" class="btn btn-info ms-3 d-inline d-md-none" data-bs-toggle="modal" data-bs-target="#infoModal"
+        style="font-family: 'Roboto', sans-serif; font-weight: bold; color: white;
+               background: linear-gradient(90deg, #1565A8, #1565A8);
+               border: none;
+               margin-top: 15px;">
+        <i class="fas fa-info-circle"></i> Más Información
+    </button>
+</div>
+
+<!-- Modal Generar Informe -->
+<div id="modal-opciones" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center;">
+    <div style="background: white; padding: 20px; border-radius: 8px; text-align: center; width: 80%; max-width: 900px;">
+        <h4 style="margin-bottom: 20px;">Selecciona el formato</h4>
+        <!-- Dentro de #form-pdf -->
+
+
+<!-- Dentro de #form-csv -->
+
+
+        <form id="form-pdf" action="/generar_pdf" method="POST" target="_blank">
+            <input type="hidden" name="centro" id="centro-pdf">
+            <input type="hidden" name="usuario" id="usuario-pdf">
+            <input type="hidden" name="mes" id="mes-pdf">
+            <input type="hidden" name="año" id="año-pdf">
+            <button type="submit" style="padding: 8px 16px; background-color: #dc3545; color: white; border: none; border-radius: 4px; margin: 5px; font-size: 14px; font-weight: bold;">
+                <i class="fa-solid fa-file-pdf" style="margin-right: 6px;"></i> Generar PDF
+            </button>
+        </form>
+
+        <form id="form-csv" action="/generar_csv" method="POST">
+            <input type="hidden" name="usuario" id="usuario-csv">
+            <input type="hidden" name="centro" id="centro-csv">
+            <input type="hidden" name="mes" id="mes-csv">
+            <input type="hidden" name="año" id="año-csv">
+            <button type="submit" style="padding: 8px 16px; background-color: #28a745; color: white; border: none; border-radius: 4px; margin: 5px; font-size: 14px; font-weight: bold;">
+                <i class="fa-solid fa-file-csv" style="margin-right: 6px;"></i> Generar CSV
+            </button>
+        </form>
+
+        <!-- Nuevo botón de previsualización -->
+        <button id="preview-pdf" style="padding: 8px 16px; background-color: #007bff; color: white; border: none; border-radius: 4px; margin: 5px; font-size: 14px; font-weight: bold;">
+            <i class="fa-solid fa-eye" style="margin-right: 6px;"></i> Previsualizar PDF
+        </button>
+
+        <!-- Contenedor para la previsualización del PDF -->
+        <div id="pdf-preview" style="margin-top: 20px; display: none; text-align: center;">
+            <iframe id="pdf-iframe" style="width: 100%; height: 500px; border: none;" src=""></iframe>
+        </div>
+
+        <!-- Botones en columna -->
+        <div style="display: flex; flex-direction: column; align-items: center; margin-top: 20px;">
+            <button id="cerrar-modal" style="padding: 8px 16px; background-color: #6c757d; color: white; border: none; border-radius: 4px; margin: 5px; font-size: 14px; font-weight: bold;">
+                <i class="fa-solid fa-circle-xmark" style="margin-right: 6px;"></i> Cancelar
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal para mostrar detalles de las pausas -->
+<div class="modal fade" id="pauseDetailsModal" tabindex="-1" aria-labelledby="pauseDetailsModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="pauseDetailsModalLabel">Detalles de Pausas</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="pauseDetailsContent"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal para editar hora -->
+<div class="modal fade" id="editarHoraModal" tabindex="-1" role="dialog" aria-labelledby="editarHoraModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content shadow-lg border-0">
+      <div class="modal-header text-white" style="background-color:#1565A8;">
+        <h5 class="modal-title" id="editarHoraModalLabel">
+          <i class="fas fa-clock me-2"></i>Editar fecha y hora
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <form id="editarHoraForm">
+          <input type="hidden" id="registroId" name="registroId">
+          <input type="hidden" id="campo" name="campo">
+
+          <!-- Campo Fecha y Hora -->
+          <div class="mb-3">
+            <label for="nuevaHora" class="form-label">
+              <i class="fas fa-calendar-alt me-2 text-primary"></i>Fecha y hora rectificada
+            </label>
+            <div class="input-group">
+              <span class="input-group-text bg-light"><i class="fas fa-clock text-secondary"></i></span>
+              <input type="datetime-local" id="nuevaHora" name="nuevaHora" class="form-control" required>
+            </div>
+          </div>
+
+          <!-- Campo Observaciones -->
+          <div class="mb-3">
+            <label for="observacion" class="form-label">
+              <i class="fas fa-comment-dots me-2 text-primary"></i>Observaciones (opcional)
+            </label>
+            <div class="input-group">
+              <span class="input-group-text bg-light"><i class="fas fa-pencil-alt text-secondary"></i></span>
+              <textarea id="observacion" name="observacion" class="form-control" rows="3" placeholder="Motivo del cambio..."></textarea>
+            </div>
+          </div>
+
+          <!-- Botones -->
+          <div class="text-end mt-4">
+            <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">
+              <i class="fas fa-times me-1"></i>Cancelar
+            </button>
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-save me-1"></i>Guardar cambios
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Minified and consolidated JS files -->
+    <script src="/static/assets/js/core/popper.min.js"></script>
+    <script src="/static/assets/js/core/bootstrap.min.js"></script>
+    <script src="/static/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="/static/assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="/static/assets/js/plugins/chartjs.min.js"></script>
+    <script src="/static/assets/js/material-dashboard.min.js?v=3.1.0"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" defer></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
+    <script src="https://buttons.github.io/buttons.js" async defer></script>
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+
+
+<script>
+        // Función para llamar a la exportación a PDF
+        function exportarPDF() {
+            window.location.href = "{{ url_for('generar_pdf') }}";
+        }
+    </script>
+
+    <script>
+        document.querySelector('.menu-button').addEventListener('click', function() {
+            document.querySelector('.menu-container').classList.toggle('active');
+        });
+    </script>
+
+
+
+
+<script>
+document.querySelectorAll('.show-location-button').forEach(button => {
+    button.addEventListener('click', () => {
+        const latitud = parseFloat(button.dataset.lat);
+        const longitud = parseFloat(button.dataset.lng);
+
+        if (!isNaN(latitud) && !isNaN(longitud)) {
+            // Hacer una solicitud al servidor para generar el mapa con folium
+            fetch(`/mostrar_mapa_user?latitud=${latitud}&longitud=${longitud}`)
+                .then(response => response.text())  // Obtener el HTML del mapa
+                .then(mapaHtml => {
+                    // Insertar el mapa dentro del modal
+                    document.getElementById('mapContainer').innerHTML = mapaHtml;
+                    // Mostrar el modal
+                    const myModal = new bootstrap.Modal(document.getElementById('mapModal'));
+                    myModal.show();
+                })
+                .catch(error => {
+                    alert('Hubo un error al cargar el mapa.');
+                });
+        } else {
+            alert('No hay coordenadas disponibles.');
+        }
+    });
+});
+
+</script>
+<script>
+    function showPopup(id) {
+        var popup = document.getElementById('popup' + id);
+        var observaciones = document.getElementById('observaciones' + id);
+        popup.innerHTML = observaciones.innerText;
+        popup.style.display = 'block';
+    }
+
+    function hidePopup(id) {
+        var popup = document.getElementById('popup' + id);
+        popup.style.display = 'none';
+    }
+
+    function editObservaciones(id) {
+        document.getElementById('observaciones' + id).style.display = 'none';
+        document.getElementById('observacionesTextarea' + id).style.display = 'block';
+        document.querySelector('#edit-button-' + id).style.display = 'none';
+        document.querySelector('#save-button-' + id).style.display = 'inline-block';
+
+        // Coloca el cursor en el campo de texto
+        document.getElementById('observacionesTextarea' + id).focus();
+    }
+
+    function saveObservaciones(id) {
+        var observacionesEditadas = document.getElementById('observacionesTextarea' + id).value;
+
+        // Verifica qué valor se está enviando
+        console.log("Enviando observaciones:", observacionesEditadas);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/actualizar_registro", true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    document.getElementById('observaciones' + id).innerText = observacionesEditadas;
+                    document.getElementById('observaciones' + id).style.display = 'block';
+                    document.getElementById('observacionesTextarea' + id).style.display = 'none';
+                    document.getElementById('edit-button-' + id).style.display = 'inline-block'; // Vuelve a mostrar el botón de editar
+                    document.getElementById('save-button-' + id).style.display = 'none';
+                } else {
+                    console.error("Error al actualizar el registro:", xhr.statusText);
+                }
+            }
+        };
+        xhr.send(JSON.stringify({ id: id, observaciones: observacionesEditadas }));
+        location.reload();
+    }
+
+    var spans = document.querySelectorAll('.observaciones-column span');
+    spans.forEach(function(span) {
+        span.addEventListener('mouseover', function() {
+            var id = this.id.replace('observaciones', '');
+            showPopup(id);
+        });
+        span.addEventListener('mouseout', function() {
+            var id = this.id.replace('observaciones', '');
+            hidePopup(id);
+        });
+    });
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var pauseButtons = document.querySelectorAll('.pause-details-button');
+    pauseButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            var registroId = this.getAttribute('data-registro-id');
+            // Realiza una llamada AJAX para obtener los detalles de las pausas
+            fetch(`/get_pause_details/${registroId}`)
+                .then(response => response.json())
+                .then(data => {
+                    var pauseDetailsContent = document.getElementById('pauseDetailsContent');
+                    // Limpia el contenido anterior
+                    pauseDetailsContent.innerHTML = '';
+                    // Crea el contenido dinámicamente
+                    if (data.pausas.length > 0) {
+                        var content = '<ul>';
+                        data.pausas.forEach(function (pausa) {
+                            content += `<li>${pausa.tipo}: ${pausa.inicio} - ${pausa.fin}</li>`;
+                        });
+                        content += '</ul>';
+                        pauseDetailsContent.innerHTML = content;
+                    } else {
+                        pauseDetailsContent.innerHTML = '<p>No hay pausas registradas.</p>';
+                    }
+                })
+                .catch(error => console.error('Error al obtener los detalles de las pausas:', error));
+        });
+    });
+});
+</script>
+
+
+
+
+<!-- script modal horas-->
+<script>
+  document.getElementById('semanasTrabajadas').addEventListener('change', function() {
+    var semanaSeleccionada = this.value;
+    var horasSemana = {{ semanas_mes | tojson }};  // Transforma las semanas y sus horas a un objeto JS
+
+    if (semanaSeleccionada && horasSemana[semanaSeleccionada]) {
+      var horas = horasSemana[semanaSeleccionada];
+      document.getElementById('horasSemana').innerHTML =
+        'Horas trabajadas en la semana ' + semanaSeleccionada + ': ' + horas.toFixed(2) + ' horas';
+    } else {
+      document.getElementById('horasSemana').innerHTML = 'Selecciona una semana para ver más detalles.';
+    }
+  });
+</script>
+
+
+
+
+
+<script>
+    document.querySelectorAll('.pause-details-button').forEach(button => {
+        button.addEventListener('click', function() {
+            const registroId = this.getAttribute('data-registro-id');
+            fetch(`/get_pause_details/${registroId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const pauseDetailsContent = document.getElementById('pauseDetailsContent');
+                    pauseDetailsContent.innerHTML = `
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Fecha Inicio</th>
+                                    <th>Fecha Fin</th>
+                                    <th>Duración</th>
+                                    <th>Motivo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${data.pausas.map(pausa => `
+                                    <tr>
+                                        <td>${pausa.fecha_inicio}</td>
+                                        <td>${pausa.fecha_fin}</td>
+                                        <td>${pausa.duracion}</td>
+                                        <td>${pausa.motivo}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    `;
+                    const pauseDetailsModal = new bootstrap.Modal(document.getElementById('pauseDetailsModal'));
+                    pauseDetailsModal.show();
+                })
+                .catch(error => console.error('Error fetching pause details:', error));
+        });
+    });
+
+    // Lógica para mostrar la ventana modal con el mapa
+    document.querySelectorAll('.show-location-button').forEach(button => {
+        button.addEventListener('click', function() {
+            const lat = this.getAttribute('data-lat');
+            const lng = this.getAttribute('data-lng');
+            const mapContainer = document.getElementById('mapContainer');
+            mapContainer.innerHTML = '<div id="map" style="height: 400px;"></div>';
+
+            const map = L.map('map').setView([lat, lng], 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+            }).addTo(map);
+            L.marker([lat, lng]).addTo(map);
+
+            const mapModal = new bootstrap.Modal(document.getElementById('mapModal'));
+            mapModal.show();
+        });
+    });
+</script>
+
+<script>
+    // Obtener referencias a los elementos
+    const modal = document.getElementById('modal-opciones');
+    const abrirModal = document.getElementById('abrir-modal');
+    const cerrarModal = document.getElementById('cerrar-modal');
+    const previewPdfButton = document.getElementById('preview-pdf');
+    const pdfIframe = document.getElementById('pdf-iframe');
+    const pdfPreviewContainer = document.getElementById('pdf-preview');
+    const usuarioSelect = document.getElementById('usuario');
+    const añoSelect = document.getElementById('año');
+    const mesSelect = document.getElementById('mesmes');
+    const usuarioPdf = document.getElementById('usuario-pdf');
+    const mesPdf = document.getElementById('mes-pdf');
+    const añoPdf = document.getElementById('año-pdf');
+    const usuarioCsv = document.getElementById('usuario-csv');
+    const mesCsv = document.getElementById('mes-csv');
+    const añoCsv = document.getElementById('año-csv');
+    const centroSelect = document.getElementById('centro');
+    const centroPdf = document.getElementById('centro-pdf');
+    const centroCsv = document.getElementById('centro-csv');
+
+
+
+    // Mostrar el modal
+    abrirModal.addEventListener('click', () => {
+        // Asegurar el formato "YYYY-MM" para el mes
+        const formattedMonth = `${añoSelect.value}-${mesSelect.value}`;
+
+        // Pasar los valores seleccionados al modal
+        usuarioPdf.value = usuarioSelect.value;
+        mesPdf.value = formattedMonth; // Agregar año al mes
+        añoPdf.value = añoSelect.value;
+
+        centroPdf.value = centroSelect.value;
+        centroCsv.value = centroSelect.value;
+
+
+        usuarioCsv.value = usuarioSelect.value;
+        mesCsv.value = formattedMonth; // Agregar año al mes
+        añoCsv.value = añoSelect.value;
+
+        console.log(`Mes enviado: ${formattedMonth}`); // Debug para confirmar el formato
+        modal.style.display = 'flex';
+    });
+
+    // Cerrar el modal
+    cerrarModal.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    // Cerrar el modal al hacer clic fuera del contenido
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+
+    // Mostrar la previsualización del PDF
+    previewPdfButton.addEventListener('click', () => {
+        // Obtener la URL del PDF
+        const usuario = usuarioSelect.value;
+        const mes = mesSelect.value;
+        const año = añoSelect.value;
+        const centro = centroSelect.value;
+        const pdfUrl = `/previsualizar_pdf?usuario=${usuario}&mes=${año}-${mes}&año=${año}&centro=${centro}`;
+
+
+        // Establecer la URL del iframe
+        pdfIframe.src = pdfUrl;
+
+        // Mostrar el contenedor de previsualización
+        pdfPreviewContainer.style.display = 'block';
+    });
+</script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll(".observaciones-column span").forEach(span => {
+        let texto = span.textContent.trim();
+        if (texto.length > 20) {
+            span.dataset.fullText = texto;  // Guardamos el texto completo
+            span.textContent = texto.substring(0, 50) + "..."; // Truncamos el texto
+        }
+
+        // Mostrar popup con el texto completo al hacer hover
+        span.addEventListener("mouseenter", function() {
+            let popup = document.getElementById(`popup${span.id.replace("observaciones", "")}`);
+            popup.textContent = span.dataset.fullText;
+            popup.style.display = "block";
+        });
+
+        // Ocultar popup al salir del hover
+        span.addEventListener("mouseleave", function() {
+            let popup = document.getElementById(`popup${span.id.replace("observaciones", "")}`);
+            popup.style.display = "none";
+        });
+    });
+});
+
+
+</script>
+
+<script>
+    // Paso de datos desde el backend a JavaScript
+    var semanasMes = {{ semanas_mes | default({}) | tojson }};
+    var totalHorasMes = {{ total_horas_mes | default(0) }};
+
+    // Preparar datos para el gráfico semanal
+    const labelsSemanas = Object.keys(semanasMes).map(semana => `Semana ${semana}`);
+    const dataHorasSemanas = Object.values(semanasMes);
+
+    // Crear gráfico de horas semanales como gráfico tipo "quesito"
+
+const ctxSemanas = document.getElementById('graficoSemanas').getContext('2d');
+
+// Verifica que el elemento del canvas exista
+if (!ctxSemanas) {
+    console.error("❌ Error: No se encontró el elemento 'graficoSemanas'");
+} else {
+    console.log("✅ Elemento 'graficoSemanas' encontrado.");
+}
+
+// Verifica que las variables de datos existen
+console.log("📊 Labels de semanas:", labelsSemanas);
+console.log("⏳ Horas trabajadas por semana:", dataHorasSemanas);
+
+// Verifica si los datos están vacíos
+if (!labelsSemanas || labelsSemanas.length === 0) {
+    console.warn("⚠️ Advertencia: labelsSemanas está vacío.");
+}
+if (!dataHorasSemanas || dataHorasSemanas.length === 0) {
+    console.warn("⚠️ Advertencia: dataHorasSemanas está vacío.");
+}
+
+// Inicializa el gráfico solo si hay datos
+if (labelsSemanas.length > 0 && dataHorasSemanas.length > 0) {
+    new Chart(ctxSemanas, {
+        type: 'pie',
+        data: {
+            labels: labelsSemanas,
+            datasets: [{
+                label: 'Horas trabajadas por semana',
+                data: dataHorasSemanas,
+                backgroundColor: [
+                    'rgba(75, 192, 192, 0.6)',
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(54, 162, 235, 0.6)',
+                    'rgba(153, 102, 255, 0.6)',
+                    'rgba(255, 159, 64, 0.6)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top'
+                }
+            }
+        }
+    });
+} else {
+    console.error("❌ No se puede generar el gráfico: los datos están vacíos.");
+}
+
+    // Preparar datos para el gráfico mensual
+    const ctxMensual = document.getElementById('graficoMensual').getContext('2d');
+
+    // Forzar tamaño de gráfico desde JavaScript
+    const canvasMensual = document.getElementById('graficoMensual');
+    canvasMensual.width = 200;  // Establece el ancho del gráfico
+    canvasMensual.height = 100; // Establece la altura del gráfico
+
+    new Chart(ctxMensual, {
+        type: 'pie',
+        data: {
+            labels: ['Horas trabajadas', 'Horas restantes del mes'],
+            datasets: [{
+                label: 'Distribución Mensual',
+                data: [totalHorasMes, (160 - totalHorasMes)], // 160 horas = 20 días laborales (ajusta si es necesario)
+                backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(255, 99, 132, 0.6)'],
+                borderWidth: 1
+            }]
+        }
+    });
+</script>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const registroIdInput = document.getElementById("modalRegistroId");
+    const userSelect = document.getElementById("userSelect");
+    const userSearch = document.getElementById("userSearch");
+
+    document.querySelectorAll(".edit-user-trigger").forEach(element => {
+        element.addEventListener("click", function () {
+            const registroId = this.getAttribute("data-registro-id");
+            const userId = this.getAttribute("data-user-id");
+
+            registroIdInput.value = registroId;
+
+            userSearch.value = '';
+            Array.from(userSelect.options).forEach(option => {
+                option.style.display = '';
+            });
+
+            userSelect.value = userId;
+
+            $('#editUserModal').modal('show'); // Bootstrap 4
+        });
+    });
+
+    userSearch.addEventListener("input", function () {
+        const filtro = this.value.toLowerCase();
+        Array.from(userSelect.options).forEach(option => {
+            const texto = option.text.toLowerCase();
+            option.style.display = texto.includes(filtro) ? '' : 'none';
+        });
+    });
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    let modal = new bootstrap.Modal(document.getElementById('editarHoraModal'));
+    let form = document.getElementById('editarHoraForm');
+
+    // Abrir modal al hacer clic en una celda editable
+    document.querySelectorAll('.editable-hora').forEach(el => {
+        el.addEventListener('click', function() {
+            let registroId = this.dataset.registroId;
+            let campo = this.dataset.campo;
+            let fecha = this.dataset.fecha;
+
+            document.getElementById('registroId').value = registroId;
+            document.getElementById('campo').value = campo;
+            document.getElementById('nuevaHora').value = fecha;
+            document.getElementById('observacion').value = '';
+
+            modal.show();
+        });
+    });
+
+    // Enviar formulario por AJAX
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        let registroId = document.getElementById('registroId').value;
+        let campo = document.getElementById('campo').value;
+        let nuevaHora = document.getElementById('nuevaHora').value;
+        let observacion = document.getElementById('observacion').value;
+
+        try {
+            const response = await fetch('/editar_hora', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    registroId,
+                    campo,
+                    nuevaHora,
+                    observacion
+                })
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                // Actualizar la celda directamente
+                const cell = document.querySelector(`.editable-hora[data-registro-id="${registroId}"][data-campo="${campo}"]`);
+                if (cell) {
+                    cell.textContent = data.nuevaHoraCompleta;
+                    // Añadir icono de pendiente de validación
+                    const icon = document.createElement('i');
+                    icon.className = 'fas fa-hourglass-half text-warning ms-2';
+                    icon.title = 'Pendiente de validación';
+                    cell.appendChild(icon);
+                }
+                modal.hide();
+            } else {
+                alert('Error: ' + data.error);
+            }
+        } catch (err) {
+            console.error('Error al enviar la solicitud:', err);
+            alert('Error al guardar la modificación.');
+        }
+    });
+});
+</script>
+
+
+
+</body>
+</html>

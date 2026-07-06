@@ -1,0 +1,2120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ausencias Empleados - Gestionaempresa</title>
+    <link rel="icon" href="{{ url_for('static', filename='logo_empresa.png') }}" type="image/png">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <!-- Nucleo Icons -->
+  <link href="/static/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="/static/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <!-- CSS Files -->
+  <link id="pagestyle" href="/static/assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/3da862d4a6.js" crossorigin="anonymous"></script>
+  <!-- Nepcha Analytics (nepcha.com) -->
+  <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
+
+
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Puedes enlazar tu archivo CSS para estilos aquí -->
+
+
+ <style>
+
+body {
+    font-family: 'Roboto', sans-serif; /* Cambiar a Roboto */
+    background-color: #F4F4F4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center; /* Centrar el texto */
+}
+
+
+.page-container {
+            padding-top: 100px; /* Baja todo el contenido dentro del contenedor */
+}
+
+#counter {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+
+    input, button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin-top: 10px;
+    }
+
+
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700);
+
+
+#prog-bar-cont {
+
+  background: gainsboro;
+  width: 75vw;
+  height: 2.5em;
+  padding: 0.5em;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  border-radius: 50px;
+  box-sizing: border-box;
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.75) inset, 0 0 4px 0 rgba(0, 0, 0, 0.5);
+}
+#prog-bar-cont #prog-bar {
+  background: #000;
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset, 0 0 1px 3px rgba(255, 255, 255, 0.75) inset;
+  background: transparent;
+}
+#prog-bar-cont #prog-bar:before {
+  border-radius: 50px;
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3) inset, 0 0 5px 2px rgba(255, 255, 255, 0.8) inset;
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+}
+#prog-bar-cont #prog-bar:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 2px;
+  width: 96%;
+  left: 50%;
+  margin-left: -48%;
+  border-radius: 20px;
+  height: 10px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.85) 30%, transparent 120%);
+}
+#prog-bar-cont #prog-bar #background {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(-90deg, violet, #30b3fc, #70dc23, yellow, orange, #ff1076);
+  -webkit-clip-path: inset(0 100% 0 0);
+  clip-path: inset(0 100% 0 0);
+  transition: all 3s;
+  -webkit-transition: all 3s;
+}
+#prog-bar-cont #prog-bar #background:before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background-image: repeating-linear-gradient(-45deg, transparent, transparent 10px, #000 10px, #000 20px);
+  opacity: 0.75;
+  mix-blend-mode: overlay;
+  border-radius: 50px;
+}
+#prog-bar-cont:hover #prog-bar #background {
+  -webkit-clip-path: inset(0 0 0 0);
+  clip-path: inset(0 0 0 0);
+}
+
+
+ #prog-bar-cont {
+margin-top:40px;
+      position: relative;
+      width: 80%;
+      height: 40px; /* Altura de la barra de progreso */
+margin-bottom:100px;
+    }
+
+    #prog-bar {
+
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background-color: #e0e0e0;
+    }
+
+    #background {
+    height: 100%;
+    background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+    clip-path: inset(0 100% 0 0); /* Inicialmente escondido */
+    -webkit-clip-path: inset(0 100% 0 0);
+    transition: clip-path 0.5s, -webkit-clip-path 0.5s;
+}
+
+    #trophy {
+      position: absolute;
+      top: -100px; /* Ajusta esto según sea necesario */
+      left: 50%; /* Centrar la imagen horizontalmente */
+      transform: translateX(-50%);
+      width: 100px; /* Ajusta el tamaño según sea necesario */
+      height: 100px;
+}
+
+#all{
+margin-top: 80px;
+margin-bottom:-20px;
+
+}
+
+
+ h3 {
+      text-align: center;
+margin-top: -75px;
+margin-bottom:65px;
+    }
+
+
+.embed-responsive {
+        position: relative;
+        padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+        background-color: #000;
+    }
+    .embed-responsive-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+.card {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column; /* Asegura que el contenido y el footer se alineen verticalmente */
+    height: 100%; /* Asegura que la tarjeta ocupe todo el alto disponible */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+        .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+padding: 15px; /* Asegura suficiente espacio alrededor del título */
+        }
+        .card-body {
+            padding: 15px;
+
+
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .footer-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .footer-link a {
+            color: #4C94E0;
+            text-decoration: none;
+        }
+        .footer-link a:hover {
+            text-decoration: underline;
+        }
+h3 {
+            margin-top:-15px;/* Ajusta el espacio debajo del título */
+        }
+.card-header h3 {
+            margin-bottom: 15px; /* Ajusta el espacio debajo del título */
+        }
+
+.events-card,
+.news-card,
+.prog-card {
+    position: relative;
+    max-height: 600px; /* Altura máxima para las tarjetas de eventos y noticias */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede la altura máxima */
+}
+.summary-card{
+    position: relative;
+    max-height: 400px; /* Altura máxima para las tarjetas de eventos y noticias */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede la altura máxima */
+}
+
+.footer-link {
+    position: relative; /* Necesario para que el footer se alinee al final del card */
+    text-align: center;
+    margin-top: auto; /* Empuja el footer al fondo de la tarjeta */
+    background-color: #f8f9fa; /* Fondo del footer */
+    padding: 10px;
+    border-top: 1px solid #e9ecef; /* Línea superior del footer */
+}
+        .footer-link a {
+            color: #6c6c6c;
+            text-decoration: none;
+        }
+        .footer-link a:hover {
+            text-decoration: underline;
+        }
+
+
+.card-body {
+    padding: 15px;
+    flex: 1; /* Esto hace que el cuerpo de la tarjeta ocupe todo el espacio disponible */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede el alto disponible */
+
+}
+
+
+#user-distribution-card {
+    height: 450px; /* Ajusta la altura total de la tarjeta */
+}
+
+#user-distribution-card .card-header {
+    height: 350px; /* Ajusta la altura del encabezado de la tarjeta para dejar espacio al gráfico */
+    padding: 0; /* Elimina el relleno para ajustar el tamaño */
+    overflow: hidden; /* Asegura que el contenido no se desborde */
+}
+
+#user-distribution-card .card-body {
+    height: calc(100% - 150px); /* Ajusta la altura del cuerpo de la tarjeta */
+    padding: 10px; /* Espacio interno del cuerpo de la tarjeta */
+    overflow: auto; /* Agrega desplazamiento si el contenido excede la altura disponible */
+margin-left:10px;
+}
+
+#user-distribution-card .chart {
+    height: 100%; /* Ajusta la altura del contenedor del gráfico */
+    width: 100%; /* Ajusta el ancho del contenedor del gráfico */
+}
+
+#user-distribution-card .chart-canvas {
+    height: 100% !important; /* Asegura que el gráfico ocupe el 100% del contenedor */
+    width: 100% !important; /* Asegura que el gráfico ocupe el 100% del contenedor */
+}
+
+#user-distribution-card .chart {
+    height: 300px; /* Ajusta la altura del contenedor del gráfico */
+    width: 300px; /* Ajusta el ancho del contenedor del gráfico */
+    display: flex; /* Utiliza flexbox para centrar el gráfico */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+margin-left:80px;
+}
+
+
+
+/* Estilos para la tarjeta de resumen */
+#summary-card {
+    display: flex;
+    flex-direction: column;
+    height: 600px; /* Ajusta la altura total de la tarjeta */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative; /* Necesario para el posicionamiento absoluto del pie de página */
+margin-top:-20px;
+
+}
+
+#summary-card .card-body {
+    flex: 1; /* Ocupa el espacio disponible */
+
+    overflow-y: auto; /* Desplazamiento vertical si es necesario */
+}
+
+#summary-card .card-footer {
+    background-color: #f8f9fa; /* Fondo del pie de página */
+    padding: 10px; /* Espacio interno del pie de página */
+    border-top: 1px solid #e9ecef; /* Línea superior del pie de página */
+ /* Centra el texto en el pie de página */
+    margin-top: auto; /* Empuja el pie de página hacia el fondo */
+}
+
+/* Estilos para los contadores */
+.counter-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido verticalmente */
+    border: 1px solid #e0e0e0; /* Borde para separar los contadores */
+    border-radius: 8px; /* Esquinas redondeadas */
+    padding: 5px; /* Reducir el padding */
+    color: #F4F4F4; /* Color del texto */
+}
+
+.counter-header {
+    position: relative;
+    height: 50px; /* Reducir la altura del encabezado */
+    padding: 0;
+    overflow: hidden; /* Evita el desbordamiento */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
+.counter-body, .counter-body2 {
+    padding: 5px; /* Reducir el padding del cuerpo del contador */
+    text-align: center; /* Centra el texto en el cuerpo */
+}
+
+.counter-body h6, .counter-body2 h6 {
+    font-size: 14px; /* Reducir el tamaño de la fuente del título */
+}
+
+.counter-body p, .counter-body2 p {
+    font-size: 12px; /* Reducir el tamaño de la fuente del párrafo */
+}
+
+.bg-primary {
+    background-color: #4C94E0 !important; /* Azul */
+}
+.btn-primary3 {
+    background-color: #a965f5 !important; /* Morado */
+    color:white;
+}
+.btn-primary3:hover {
+    background-color: #a965f5 !important; /* Morado */
+    color:white;
+}
+
+.bg-success {
+    background-color: #28a745 !important; /* Verde */
+}
+
+.bg-info {
+    background-color: #17a2b8 !important; /* Azul claro */
+}
+
+.bg-warning {
+    background-color: #ffc107 !important; /* Amarillo */
+}
+
+  .card-global {
+            height: 450px; /* Ajusta según tus necesidades */
+            display: flex;
+            flex-direction: column;
+margin-top:-25px;
+        }
+
+        /* Clase para la tarjeta negra específica del gráfico */
+        .card-graph {
+            height: 130%; /* Ajusta según el espacio que quieras para el gráfico */
+            display: flex;
+            align-items: center; /* Centra el gráfico verticalmente */
+            justify-content: center; /* Centra el gráfico horizontalmente */
+        }
+
+        /* Estilo para el canvas dentro de la tarjeta negra */
+        .chart-canvas {
+            width: 100%;
+            height: 100%;
+}
+.custom-card-body {
+            margin-top: 100px; /* Ajusta el valor según tus necesidades */
+margin-left:20px;
+        }
+
+
+.recurso {
+            display: inline-block;
+            width: 30%;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        .recurso img {
+            max-width: 100px;
+            max-height: 100px;
+            margin-bottom: 10px;
+        }
+
+.embed-responsive {
+        position: relative;
+        padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+        background-color: #000;
+    }
+    .embed-responsive-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+ .toast-center-center {
+            top: 50%;
+            left: 70%;
+            transform: translate(-50%, -50%);
+            min-width: 800px; /* Más grande */
+min-height: 800px; /* Más grande */
+            opacity: 1; /* Menos transparente */
+        }
+        .toast-success .toast-message {
+            color: green;
+        }
+        .toast-error .toast-message {
+            color: red;
+        }
+        .toast {
+            font-size: 1.2em; /* Tamaño de fuente más grande */
+            padding: 20px; /* Más relleno */
+        }
+
+.btn-mark-as-read {
+            padding: 5px 10px;
+            font-size: 12px;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            color: #333;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .btn-mark-as-read:hover {
+            background-color: #e0e0e0;
+            color: white !important;
+        }
+
+        /* Estilos para la pantalla de carga */
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+.container{
+   margin-bottom: 70px; /* Añadir margen inferior a la sección de ranking */
+margin-top:-20px;
+width: 100%; /* Ocupa el 100% del ancho disponible */
+   max-width: 100%; /* Asegúrate de que el ancho máximo sea 100% */
+
+}
+.ranking-container {
+
+    max-height: 250px; /* Ajusta la altura según sea necesario */
+    overflow-y: auto;
+overflow-x: hidden;
+    padding-right: 15px; /* Ajusta el padding para que no corte el contenido */
+
+}
+
+/* Opcional: Estilos para la barra de desplazamiento */
+.ranking-container::-webkit-scrollbar {
+    width: 12px;
+}
+
+.ranking-container::-webkit-scrollbar-track {
+    background: #9f9f9f;
+background-image: linear-gradient(195deg, #9f9f9f 50%, #fff 150%)
+}
+
+.ranking-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.ranking-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+ .table {
+    max-width: 1600px; /* Aumenta el ancho máximo */
+    min-width: 720px; /* Mantén este valor si deseas un ancho mínimo */
+    table-layout: fixed; /* Asegura que se respete el ancho máximo */
+}
+
+.table td, .table th {
+    overflow: hidden; /* Oculta el contenido que excede el ancho */
+    text-overflow: ellipsis; /* Muestra puntos suspensivos para el texto que excede */
+    white-space: nowrap; /* Previene el salto de línea */
+}
+
+.table th {
+    background-color: #f2f2f2; /* Color de fondo para encabezados */
+    font-weight: bold; /* Negrita para los encabezados */
+}
+
+.tabla-container {
+    overflow-x: auto; /* Permitir desplazamiento horizontal si es necesario */
+}
+
+
+
+
+.card {
+
+
+    background-clip: padding-box !important;
+}
+.h4{
+text-align:center;
+align-items:center;
+}
+h5 {
+    text-align: center;
+}
+.centered-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+
+            font-weight: bold;
+
+        }
+.btn-link {
+    color: #4C94E0; /* Color inicial del enlace */
+    text-decoration: none; /* Opcional: quitar subrayado del enlace */
+    transition: color 0.3s; /* Suavizar la transición del color */
+}
+
+/* Estilo de hover para el enlace de eventos */
+.btn-link:hover {
+    color: #6f42c1; /* Color morado en hover */
+    text-decoration: underline; /* Opcional: añadir subrayado en hover */
+}
+
+
+
+        #chartdiv {
+            width: 150%;
+            height: 100px;
+        }
+
+.notificaciones {
+    position: relative; /* o 'absolute' o 'fixed' si es necesario */
+    z-index: 9999999; /* Valor alto para asegurarte de que está por encima de otros elementos */
+}
+/* Estilo del ícono de campana */
+.nav-item .fa-bell {
+    position: relative;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-bell:hover {
+    color: #495057;
+}
+
+/* Badge de notificaciones */
+.nav-item .badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    border-radius: 50%;
+    background-color: #f44336;
+    color: #fff;
+}
+
+/* Dropdown */
+.dropdown-menu {
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Estilo de cada notificación */
+.dropdown-item {
+    border-radius: 0.375rem;
+    transition: background-color 0.2s ease;
+    padding: 12px 15px;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* Estilo del texto de la notificación */
+.text-sm {
+    font-size: 0.875rem;
+    color: #343a40;
+    font-weight: 600;
+}
+
+.text-xs {
+    font-size: 0.75rem;
+    color: #6c757d;
+}
+
+/* Botón para marcar como leída */
+.btn-mark-as-read {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-mark-as-read:hover {
+    background: #0056b3;
+}
+
+/* Sin notificaciones */
+.text-center span {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+/* Posiciona el badge a la izquierda */
+.nav-item .badge {
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    border-radius: 50%;
+    background-color: #f44336;
+    color: #fff;
+    margin-right: 10px; /* Separa el badge del icono */
+}
+
+/* Ajuste de icono de campana */
+.nav-item .fa-bell {
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-bell:hover {
+    color: #495057;
+}
+/* Estilo del ícono de cerrar sesión */
+.nav-item .fa-sign-out {
+    position: relative;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-sign-out:hover {
+    color: #495057;
+}
+    /* Estilos para los mensajes flash */
+.flash-messages {
+    margin-bottom: 20px;
+}
+
+.flash {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.flash.success {
+    background-color: #d4edda; /* Color de fondo para mensajes de éxito */
+    color: #155724; /* Color del texto para mensajes de éxito */
+    border: 1px solid #c3e6cb;
+}
+
+.flash.error {
+    background-color: #f8d7da; /* Color de fondo para mensajes de error */
+    color: #721c24; /* Color del texto para mensajes de error */
+    border: 1px solid #f5c6cb;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+}
+
+.calendar {
+    margin-left: -20px;
+    margin-top: 300px;
+}
+
+.calendar ul {
+    margin-left: -40px;
+}
+
+.punto {
+    width: 10px;
+    height: 5px;
+    border-radius: 50%;
+    margin-right: 1px;
+}
+
+.calendar-container {
+    justify-content:center;
+    border: 1px solid #949BFF;
+    border-radius: 8px;
+    padding: 0px;
+    max-height: 400px;
+    overflow: hidden;
+}
+
+.fc {
+    font-size: 12px;
+}
+
+.fc-toolbar-title {
+    font-size: 14px;
+}
+
+.fc-daygrid-day.fc-day .fc-daygrid-day-top {
+    height: 15px; /* Ajusta la altura de las celdas del calendario */
+    width: 30px; /* Ajusta el ancho de las celdas del calendario */
+    font-size: 14px; /* Ajusta el tamaño de la fuente de los números de día */
+    text-align: center; /* Centra el texto horizontalmente */
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+color: black !important;
+
+}
+
+
+
+.fc-event {
+    background-color: green; /* Color para eventos aceptados */
+}
+.fc-day-red {
+    background-color: #FF6F6F !important;
+
+}
+.volver-button {
+    padding: 12px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #5fbd63;
+    border: 1px solid #5fbd63;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.volver-button:hover {
+    background-color: #58A15B;
+    border-color: #58A15B;
+}
+
+.volver-button:active {
+    background-color: #58A15B;
+    border-color: #58A15B;
+}
+
+.fc-daygrid-day-number {
+    color: black; /* Cambia el color de los números de los días a negro */
+}
+
+.fc-daygrid-day.fc-day.fc-day-sun .fc-daygrid-day-number,
+   .fc-daygrid-day.fc-day.fc-day-mon .fc-daygrid-day-number,
+   .fc-daygrid-day.fc-day.fc-day-tue .fc-daygrid-day-number,
+    .fc-daygrid-day.fc-day.fc-day-wed .fc-daygrid-day-number,
+    .fc-daygrid-day.fc-day.fc-day-thu .fc-daygrid-day-number,
+    .fc-daygrid-day.fc-day.fc-day-fri .fc-daygrid-day-number,
+    .fc-daygrid-day.fc-day.fc-day-sat .fc-daygrid-day-number {
+     color: black !important; /* Cambia el color de los números de los días de la semana a negro */
+}
+
+.container {
+   margin-top: -150px;
+ /* Puedes ajustar el valor según lo necesites */
+   margin-bottom:50px;
+}
+
+.fc-day-red {
+  background-color: #ffdddd;
+}
+
+/* Estilo para hacer el texto de los eventos transparente (invisible) */
+.fc-event-title {
+    color: transparent !important;
+}
+
+.fc-daygrid-event .fc-event-main {
+    visibility: hidden;
+}
+
+.user-modal {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    display: none; /* inicialmente oculto */
+}
+
+.user-modal-content {
+    max-width: 200px; /* ancho máximo del globo */
+}
+
+ .fc-day-red {
+
+        }
+
+           .popup {
+            position: absolute;
+            background-color: #333; /* Fondo negro */
+            color: #fff; /* Letras blancas */
+            border: 1px solid #555; /* Borde ligeramente más claro */
+            padding: 10px;
+            border-radius: 5px; /* Bordes redondeados */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar un efecto de elevación */
+            z-index: 1000;
+            display: none;
+            font-family: 'Open Sans', sans-serif; /* Fuente profesional */
+        }
+
+        .popup p {
+            margin: 0;
+            padding: 2px 0; /* Espaciado interno para separar los nombres */
+        }
+        .popup p:last-child {
+            border-bottom: none;
+        }
+.fc-event-pending {
+    background-color: orange !important; /* Color de fondo naranja para eventos pendientes */
+    color: white !important; /* Color del texto blanco para eventos pendientes */
+}
+
+.fc-daygrid-event .fc-event-main {
+    visibility: hidden; /* Oculta el texto de los eventos en las casillas del calendario */
+}
+
+
+.fc-day-orange {
+    background-color: orange; /* Estilo para eventos pendientes */
+}
+
+
+
+.solicitudes-container {
+    margin: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+
+}
+
+.solicitudes-list {
+    margin-top: 10px;
+height:170px;
+
+}
+
+.solicitud-item {
+margin-top:-25px;
+    padding: 2px;
+    margin-bottom: 0px;
+    background-color: white;
+    font-size:12px;
+
+
+}
+.contenedores-leyenda-solicitudes {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.solicitudes-container {
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+font-size:16px;
+margin-top:-20px;
+    /* Tus estilos existentes más cualquier ajuste para que se muestren bien juntos */
+    flex-basis: calc(50% - 40px); /* Ajusta según sea necesario */
+    margin: 20px;
+width:30%;
+overflow: hidden;
+}
+
+.solicitudes-container {
+font-family: 'open sans', sans-serif;
+  flex: 1; /* Esto permite que las cajas ocupen el espacio disponible */
+  margin: 10px; /* Asegúrate de que haya un poco de espacio entre las cajas */
+  box-sizing: border-box; /* Incluye el padding y border dentro del ancho total */
+}
+
+/* Si deseas que cada caja tenga un ancho máximo específico, puedes usar esto */
+
+.solicitudes-container {
+    font-family: 'open sans', sans-serif;
+    max-width: 50%; /* Esto asigna un máximo del 50% del ancho del contenedor padre a cada caja */
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Definir la sombra con un desplazamiento x, un desplazamiento y, un radio de desenfoque y un color RGBA */
+}
+
+
+.solicitudes-list {
+margin-bottom:20px;
+margin-top:30px;
+height:162px;
+  background-color:#fff /* Esto asigna un máximo del 48% del ancho del contenedor padre a cada caja */
+}
+.solicitudes-container h2 {
+margin-bottom:10px;
+font-family: 'open sans', sans-serif;
+margin-bottom:25px;
+font-size:28px;
+max-height:40px;
+}
+
+.solicitudes-container h2 {
+
+font-size:25px;
+}
+.button-container {
+max-heigth:20px;
+margin-top:-80px;
+  width: 100%; /* Ocupa todo el ancho del contenedor padre */
+  display: flex;
+  justify-content: space-around; /* Espacio distribuido alrededor de los botones */
+}
+
+.button-container button {
+  flex: 1; /* Los botones ocupan un espacio flexible y equitativo */
+  margin: 0 10px; /* Espacio entre botones */
+
+}
+
+.icono {
+        max-width: 20px; /* Ajusta el ancho según lo necesites */
+        max-height: 20px; /* Ajusta la altura según lo necesites */
+min-width: 20px; /* Ajusta el ancho según lo necesites */
+        min-height: 20px;
+    }
+
+/* Estilos para el botón de color rojo */
+.btn-danger {
+    background-color: #ff2525;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-bottom:30px;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.btn-danger2 {
+    background-color: #ff2525;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+
+}
+
+.btn-danger2:hover {
+    background-color: #c82333;
+}
+@media (max-width: 900px) {
+    .container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+margin-top:50px;
+    }
+}
+
+/* Estilo general del contenedor del calendario */
+.container-menu {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+    padding: 20px;
+    background-color: transparent;
+    margin-top: -50px;
+}
+
+/* Estilo general del contenedor del calendario */
+.container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+    padding: 20px;
+    background-color: transparent;
+    margin-top: -200px;
+}
+
+/* Estilo de cada contenedor de mes */
+.calendar-container {
+    background-color: #fff;
+    border: 2px solid #dcdcdc;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Estilo al hacer hover en los meses */
+.calendar-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Título de cada mes */
+.calendar-container h2 {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Estilo de las fechas dentro del calendario */
+.calendar-container .date {
+    font-size: 1rem;
+    text-align: center;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: #e2e2e2;
+    color: #666;
+    margin: 5px;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    transition: background-color 0.2s ease;
+}
+
+/* Efecto hover en las fechas */
+.calendar-container .date:hover {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.flash-messages {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        width: 300px;
+        z-index: 1000;
+    }
+    .alert {
+    width: 300px; /* Cambia el ancho según lo desees */
+    margin: 10px auto; /* Margen superior/inferior para separación */
+    opacity: 0.9; /* Transparente */
+    transition: opacity 0.5s ease-in-out; /* Transición de desvanecimiento */
+}
+
+.alert-success {
+    background-color: rgba(40, 167, 69, 0.8); /* Color verde con transparencia */
+    color: white;
+}
+
+.alert-danger {
+    background-color: rgba(220, 53, 69, 0.8); /* Color rojo con transparencia */
+    color: white;
+}
+
+.hide {
+    opacity: 0; /* Ocultar el mensaje */
+}
+
+
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+
+
+        .tabla-container {
+            margin-top: 20px;
+            background: #f1f1f1;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 90%; /* Ajustar el ancho de la tabla al 90% del contenedor */
+            border-collapse: collapse;
+            margin-top: 10px;
+            color:#000;
+        }
+
+        th, td {
+            padding: 15px; /* Aumentar el padding para hacer las celdas más grandes */
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4C94E0;
+            color: #212529;
+        }
+
+        .observaciones-column {
+            position: relative; /* Necesario para posicionar el popup */
+        }
+
+        .popup {
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            display: none; /* Oculto por defecto */
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .titulo-seccion {
+            margin-top: 30px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .blanco {
+            background-color: #F4F4F4; /* Ejemplo de clase adicional */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .boton {
+            padding: 8px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .boton:hover {
+            background-color: #218838;
+        }
+
+
+
+
+
+
+
+
+
+
+
+    h1 {
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* Estilos de la tabla para pantallas grandes */
+    #area_tabla table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+
+    }
+
+    #area_tabla th {
+        padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+    background-color: #f2f2f2;
+    color: #333;
+    }
+
+    #area_tabla td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+    }
+
+    /* Estilos de la vista de tarjeta para pantallas pequeñas */
+    .ausencia-container {
+        background-color: #f3f3f3;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 16px;
+        margin-bottom: 20px;
+    }
+
+    .ausencia-container h2 {
+        color: #2980b9;
+        font-size: 1.2em;
+        margin: 0;
+    }
+
+    .ausencia-container p {
+        margin: 8px 0;
+        font-size: 0.95em;
+    }
+
+    /* Estilos de los botones de navegación */
+    .nav-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+
+    .nav-button {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1em;
+        transition: background-color 0.3s ease;
+    }
+
+    .nav-button:disabled {
+        background-color: #bdc3c7;
+        cursor: not-allowed;
+    }
+
+    .nav-button:hover:not(:disabled) {
+        background-color: #2980b9;
+    }
+
+    /* Estilos de menú */
+    .menu-container {
+        position: relative;
+    }
+
+    .menu-links.show {
+        display: flex;
+    }
+
+    .menu-links {
+        display: none;
+        flex-direction: column;
+        background-color: #ecf0f1;
+        border-radius: 4px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        position: absolute;
+        top: 40px;
+        right: 0;
+        padding: 10px;
+    }
+
+    .menu-links a {
+        color: #3498db;
+        padding: 8px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .menu-links a:hover {
+        background-color: #3498db;
+        color: white;
+        border-radius: 4px;
+    }
+
+.download-link {
+    color: #4C94E0; /* Cambia el color del texto y el icono, si lo deseas */
+    text-decoration: none; /* Elimina el subrayado */
+    font-weight: bold;
+}
+
+.download-link:hover {
+    color: #45a049; /* Cambia el color al pasar el cursor */
+}
+
+.justification-column {
+    text-align: center; /* Centra solo las celdas de justificación */
+    vertical-align: middle; /* Centra verticalmente */
+    align-items: center;
+    margin: auto;
+}
+
+.pagination .page-item.active .page-link {
+        background-color: #1564a8;
+        border-color: #1564a8;
+        color: white;
+    }
+
+    @media (max-width: 768px) {
+        form {
+            grid-template-columns: 1fr; /* Cambia a una sola columna en pantallas pequeñas */
+        }
+
+        button {
+            width: auto; /* Ajusta el tamaño del botón en dispositivos móviles */
+            margin-top: 10px; /* Separa un poco el botón de los campos */
+        }
+
+        label, select {
+            width: 100%; /* Asegura que los campos se ajusten al ancho disponible */
+        }
+    }
+
+</style>
+
+</head>
+<body class="g-sidenav-show  bg-gray-200">
+<style>
+    @media (max-width: 768px) { /* Pantallas con ancho menor o igual a 768px */
+    .breadcrumb {
+        display: flex;
+        flex-direction: column; /* Apila los elementos en columna si hay otros hijos */
+        align-items: center;    /* Centra horizontalmente */
+        justify-content: center; /* Centra verticalmente si hay espacio */
+        text-align: center;     /* Centra el texto */
+        margin-left: 20%;         /* Asegura el centrado horizontal */
+    }
+
+    .breadcrumb h5 {
+        text-align: center; /* Centra específicamente el texto del <h5> */
+        display:none !important;
+    }
+    .logo-spinner{
+
+        display:none;
+    }
+    table {
+            margin-top: 20px !important;
+        }
+
+}
+
+@media (max-width: 768px) {
+    th:nth-child(1), td:nth-child(1),
+    th:nth-child(5), td:nth-child(5), /* Descripción */
+    th:nth-child(6), td:nth-child(6), /* Duración */
+    th:nth-child(7), td:nth-child(7), /* Archivo Adjunto */
+    th:nth-child(8), td:nth-child(8)  /* Editar */
+    {
+        display: none;
+    }
+
+    /* Ajustar el ancho de la tabla */
+    table {
+        width: 100%;
+        margin-top:20px;
+    }
+
+    th, td {
+        font-size: 14px;
+        text-align: center; /* Centrar contenido */
+    }
+    .area_tabla{
+
+        margin-top:20px;
+    }
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; /* Ajusta este valor si necesitas más o menos espacio */
+    font-size: 14px; /* Ajusta el tamaño del texto si es necesario */
+}
+
+.pagination a, .pagination span {
+    margin: 0 5px; /* Espaciado horizontal entre elementos */
+    padding: 8px 12px;
+    text-decoration: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #333;
+}
+
+.pagination a:hover {
+    background-color: #f0f0f0;
+}
+
+.pagination .current {
+    font-weight: bold;
+    background-color: #ddd;
+    border-color: #bbb;
+}
+
+.pagination .disabled {
+    color: #aaa;
+    pointer-events: none; /* Desactiva el clic en los elementos deshabilitados */
+}
+
+    #area_tabla table {
+        font-size: 9px;
+    }
+
+.btn-archivo-adjunto {
+    background-color: #45A049;
+    color: white;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn-archivo-adjunto:hover {
+    background-color: #357c38; /* Color al pasar el ratón */
+    color: white; /* Mantén el mismo color del texto en hover */
+}
+
+
+
+.btn-mark-as-read {
+    background: #1565a8;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-mark-as-read:hover {
+    background: #0d4376;
+}
+
+.dropdown-item {
+    border-radius: 0.375rem;
+    transition: background-color 0.2s ease;
+    padding: 1px 15px !important;
+    margin-top:0px;
+}
+
+
+
+
+
+
+
+.custom-width-modal {
+  max-width: 600px; /* o el ancho que prefieras */
+}
+
+.btn-mark-as-read {
+  min-width: 28px !important;
+  padding: 3px 3px;
+}
+/* Modal tipo barra lateral derecha */
+.modal-side-right {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 0;
+  height: 100%;
+  max-width: 500px;
+  width: 100%;
+  z-index: 1055;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+/* Cuando el modal se muestra */
+.modal.show .modal-side-right {
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+/* Evitamos que Bootstrap lo sobrescriba */
+.modal.fade .modal-dialog {
+  transition: none !important;
+  transform: none !important;
+}
+
+/* Ajustes al contenido del modal */
+.modal-side-right .modal-content {
+  height: 100%;
+  border-radius: 0;
+  text-align: left;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+}
+/* Estilo del texto de la notificación */
+.text-sm {
+    font-size: 0.75rem !important;
+    color: #000;
+    font-weight: 600;
+}
+
+.text-xs {
+    font-size: 0.70rem !important;
+    color: #6c757d;
+}
+
+
+
+.btn-primary3 {
+  background-color: #1565a8 !important;
+  color: white;
+  font-size: 0.75rem;
+  text-transform: none; /* evita mayúsculas automáticas */
+  margin-left:10px;
+}
+
+.btn-primary3:hover {
+  background-color: #0d4b80 !important; /* un tono más oscuro para el hover */
+}
+
+
+
+
+  @media (max-width: 576px) {
+    .dropdown-menu-mobile-half {
+      width: 50vw !important;
+      right: 0 !important;
+      left: auto !important;
+    }
+  }
+
+  .dropdown-menu-mobile-half {
+    width: 50vw !important; /* Ajusta al 50% del ancho de la ventana */
+    max-width: 400px;        /* Máximo ancho opcional */
+    min-width: 250px;        /* Mínimo opcional */
+    padding: 1rem;
+}
+
+.dropdown-menu-mobile-half .dropdown-item {
+    white-space: normal; /* Permite que el texto se ajuste a múltiples líneas */
+    word-wrap: break-word;
+    width: 100%;
+}
+
+.dropdown-menu-mobile-half .btn-mark-as-read {
+
+    padding: 0 5px;
+    font-size: 0.9rem;
+}
+   .tag {
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-weight: 600;
+        color: #ffffff;
+    }
+
+    .tag_otras {
+        background-color: #475268;
+    }
+
+    .tag_fuerza {
+        background-color: #A1CED3;
+    }
+
+    .tag_consulta {
+        background-color: #FD9282;
+    }
+
+    .tag_default {
+        background-color: #6c757d;
+    }
+    td{
+        border-left: none !important;
+        border-right: none !important;
+    }
+
+
+
+</style>
+<!-- Menu HTML añadido de otro .html -->
+
+    {% include 'menu_admin.html' %}
+
+
+ <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg w-100">
+
+
+    <!-- Navbar -->
+   <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+    <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                <h5 class="font-weight-bolder mb-0">
+                    <i class="fas fa-calendar-times me-2" style="color: #000;"></i> <!-- Icono de vacaciones con espacio -->
+                    Ausencias de Empleados
+                </h5>
+            </ol>
+            <div class="centered-message">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="flash-messages">
+                            {% for category, message in messages %}
+                                <div class="flash {{ category }}">{{ message }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </nav>
+
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <div class="input-group input-group-outline"></div>
+            </div>
+            <ul class="navbar-nav justify-content-end">
+                <li class="nav-item d-flex align-items-center">
+
+
+
+
+</li>
+
+
+
+
+
+                <li class="nav-item px-3 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-body p-0"></a>
+                </li>
+                <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                        <div class="sidenav-toggler-inner" style="margin-right:10px;">
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                        </div>
+                    </a>
+                </li>
+<li class="nav-item dropdown pe-2 d-flex align-items-center">
+    <a href="javascript:;" class="nav-link text-body p-0 d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#notificacionesModal">
+        {% if notificaciones %}
+            <span class="badge bg-danger me-2">{{ notificaciones|length }}</span>
+        {% endif %}
+        <i class="fa fa-bell cursor-pointer" style="font-size: 1.5rem;"></i>
+    </a>
+</li>
+
+
+          <li class="nav-item d-flex align-items-center">
+              <a href="/cerrar_sesion" class="nav-link text-body font-weight-bold px-0">
+                <i class="fa fa-sign-out"style="font-size: 1.5rem;"></i>
+    </a>
+</li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+<h5 class="font-weight-bolder mb-0 d-md-none text-start">
+                    <i class="fas fa-calendar-times me-2" style="color: #000;margin-left:5px;"></i> <!-- Icono de vacaciones con espacio -->
+                    Ausencias de Empleados
+                </h5>
+<!--Cuerpo de la Web -->
+<style>
+     .contenido {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+            color: #555;
+        }
+
+        select {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+            flex: 1; /* Para que el select ocupe el espacio disponible */
+            color: black !important;
+        }
+
+        button {
+            padding: 8px 15px;
+            background-color: #4C94E0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button2 {
+            padding: 8px 15px;
+            background-color: transparent;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button2:hover {
+            background-color: transparent;
+        }
+</style>
+
+<!-- Modal -->
+<div class="modal fade" id="notificacionesModal" tabindex="-1" aria-labelledby="notificacionesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-side-right">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="notificacionesModalLabel">
+          <i class="fa fa-bell cursor-pointer" style="font-size: 1.5rem;"></i> Notificaciones
+        </h5>
+        <button type="button" class="btn m-0" data-bs-dismiss="modal" aria-label="Cerrar">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="modal-body text-start">
+        <form action="{{ url_for('marcar_notificaciones_leidas') }}" method="post">
+          <button type="submit" class="btn btn-primary3 btn-sm mb-3">Marcar todas como leídas</button>
+        </form>
+
+        {% for notificacion in notificaciones %}
+        <div class="mb-3 border-bottom pb-2">
+          <h6 class="text-sm font-weight-normal mb-1">
+            {{ notificacion.concepto }}
+            {% if not notificacion.leida %}
+              <button class="btn btn-link btn-mark-as-read ms-2" style="min-width: 32px;" data-id="{{ notificacion.id }}">
+                <i class="fa-solid fa-check" style="font-size: 1.2rem;"></i>
+              </button>
+            {% endif %}
+          </h6>
+          <p class="text-xs text-secondary mb-0">
+            <i class="fa fa-clock me-1"></i>
+            {{ notificacion.fecha_hora.strftime('%d/%m/%Y %H:%M') }}
+          </p>
+        </div>
+        {% endfor %}
+
+        {% if notificaciones|length == 0 %}
+        <div class="text-start">
+          <span class="text-sm">No tienes notificaciones</span>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="centro-pantalla">
+  <div class="filtro-container mb-4" style="margin-top: 100px;">
+
+    <form method="get" action="/admin/absence_view" class="row gx-3 gy-2 align-items-end justify-content-between mx-auto" style="max-width: 1000px;">
+
+      <!-- Filtro por Usuario -->
+      <div class="col-md-3">
+        <label for="usuario_id" class="form-label" style="color: black; font-weight: bold;">
+          <i class="fas fa-user me-1"></i> Empleado:
+        </label>
+        <select id="usuario_id" name="usuario_id" class="form-select" style="background-color: white; font-size: 16px; padding-left: 12px;">
+          <option value="">Seleccione empleado</option>
+          {% for usuario in usuarios %}
+            {% set nombre_completo = usuario.nombre ~ ' ' ~ usuario.primer_apellido %}
+            <option value="{{ usuario.id }}" {% if request.args.get('usuario_id') == usuario.id|string %} selected {% endif %}>
+              {{ nombre_completo }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- Filtro por Mes -->
+      <div class="col-md-3">
+        <label for="mes" class="form-label" style="color: black; font-weight: bold;">
+          <i class="fas fa-calendar-alt me-1"></i> Mes:
+        </label>
+        <select id="mes" name="mes" class="form-select" style="background-color: white; font-size: 16px; padding-left: 12px;">
+          <option value="">Todos</option>
+          {% for numero, nombre in [('01', 'Enero'), ('02', 'Febrero'), ('03', 'Marzo'), ('04', 'Abril'),
+                                     ('05', 'Mayo'), ('06', 'Junio'), ('07', 'Julio'), ('08', 'Agosto'),
+                                     ('09', 'Septiembre'), ('10', 'Octubre'), ('11', 'Noviembre'), ('12', 'Diciembre')] %}
+            <option value="{{ numero }}" {% if request.args.get('mes') == numero %} selected {% endif %}>{{ nombre }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- Filtro por Año con Ícono -->
+      <div class="col-md-3">
+        <label for="anio" class="form-label" style="color: black; font-weight: bold;">
+          <i class="fas fa-calendar"></i> Año:
+        </label>
+        <select id="anio" name="anio" class="form-select" style="background-color: white; font-size: 16px; padding-left: 12px;">
+          {% set current_year = 2024 %}
+          {% set last_year = current_year + 1 %}
+          <option value="">Todos</option>
+          {% for year in range(current_year, last_year + 1) %}
+            <option value="{{ year }}" {% if request.args.get('anio') == year|string %} selected {% endif %}>{{ year }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-md-3 d-flex align-items-end">
+  <button type="submit" class="btn m-0"
+    style="background-color: #1565A8; border-color: #1565A8; color: white;font-size: 19.2px; border-radius: 5px; margin-bottom: 6px;">
+    <i class="fas fa-filter"></i>
+  </button>
+
+
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="area_tabla">
+    <table style="border-collapse: collapse; width: 100%; border: none;">
+        <tr style="font-size: 12px;">
+            <th style="border-bottom: 1px solid #ddd; padding: 16px 8px;">Nombre</th>
+            <th style="border-bottom: 1px solid #ddd; padding: 16px 8px;">Fecha de Inicio</th>
+            <th style="border-bottom: 1px solid #ddd; padding: 16px 8px;">Fecha de Fin</th> <!-- NUEVO -->
+            <th style="border-bottom: 1px solid #ddd; padding: 16px 8px;">Motivo</th>
+            <th style="border-bottom: 1px solid #ddd; padding: 16px 8px;">Descripción</th>
+            <th style="border-bottom: 1px solid #ddd; padding: 16px 8px;">Duración</th>
+            <th style="border-bottom: 1px solid #ddd; padding: 16px 8px;">Justificante</th>
+        </tr>
+        {% for absence in absences %}
+        <tr style="font-size: 12px;">
+            <td>{{ absence.user.nombre }} {{ absence.user.primer_apellido }}</td>
+            <td>{{ absence.start_date.strftime('%d/%m/%Y') }}</td>
+            <td>{{ absence.end_date.strftime('%d/%m/%Y') }}</td> <!-- NUEVO -->
+
+            {% if absence.absence_type == 'Consulta médica' %}
+                <td><span class="tag tag_consulta">{{ absence.absence_type }}</span></td>
+            {% elif absence.absence_type == 'Otras causas' %}
+                <td><span class="tag tag_otras">{{ absence.absence_type }}</span></td>
+            {% elif absence.absence_type == 'Causa fuerza mayor' %}
+                <td><span class="tag tag_fuerza">{{ absence.absence_type }}</span></td>
+            {% else %}
+                <td><span class="tag tag_default">{{ absence.absence_type }}</span></td>
+            {% endif %}
+
+            <td class="description fw-bolder" title="{{ absence.description }}"
+                data-bs-toggle="modal"
+                data-bs-target="#descriptionModal{{ absence.id }}" style="cursor: pointer;">
+                <i class="fa-solid fa-eye pe-2"></i>{{ absence.description|truncate(30, True) }}
+            </td>
+
+            <div class="modal fade" id="descriptionModal{{ absence.id }}" tabindex="-1" aria-labelledby="descriptionModalLabel{{ absence.id }}">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="descriptionModalLabel{{ absence.id }}">
+                                <i class="fa-solid fa-tag me-1"></i>
+                                Descripción Completa</h5>
+                            <button type="button" class="btn m-0" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body" style="word-wrap: break-word; white-space: normal;">
+                            {{ absence.description }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <td>{{ absence.duration_hours }}</td>
+            <td class="justification-column">
+                {% if absence.file_name %}
+                    <a href="{{ url_for('view_absence_file', absence_id=absence.id) }}" target="_blank" class="btn-archivo-adjunto text-decoration-none">
+                        <i class="fas fa-file-alt"></i> JUSTIFICANTE
+                    </a>
+                {% else %}
+                    No hay archivo adjunto
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+</div>
+
+{% if pagination.pages > 1 %}
+<nav aria-label="Page navigation">
+  <ul class="pagination justify-content-center">
+
+    {% set total_pages = pagination.pages %}
+    {% set current_page = pagination.page %}
+    {% set max_visible_pages = 8 %}
+
+    <!-- Primera y anterior -->
+    {% if pagination.has_prev %}
+      <li class="page-item">
+        <a class="page-link" href="{{ url_for('admin_absence_view', page=1, mes=mes, anio=anio, nombre_apellido=usuario) }}">&lt;&lt;</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="{{ url_for('admin_absence_view', page=pagination.prev_num, mes=mes, anio=anio, nombre_apellido=usuario) }}">&laquo;</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled"><span class="page-link">&lt;&lt;</span></li>
+      <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+    {% endif %}
+
+    <!-- Números de página -->
+    {% if total_pages <= max_visible_pages %}
+        {% for p in range(1, total_pages + 1) %}
+          {% if p == current_page %}
+            <li class="page-item active"><span class="page-link">{{ p }}</span></li>
+          {% else %}
+            <li class="page-item">
+              <a class="page-link" href="{{ url_for('admin_absence_view', page=p, mes=mes, anio=anio, nombre_apellido=usuario) }}">{{ p }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+    {% else %}
+        {% if current_page <= max_visible_pages // 2 %}
+          {% for p in range(1, max_visible_pages) %}
+            {% if p == current_page %}
+              <li class="page-item active"><span class="page-link">{{ p }}</span></li>
+            {% else %}
+              <li class="page-item">
+                <a class="page-link" href="{{ url_for('admin_absence_view', page=p, mes=mes, anio=anio, nombre_apellido=usuario) }}">{{ p }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
+          <li class="page-item disabled"><span class="page-link">...</span></li>
+          <li class="page-item">
+            <a class="page-link" href="{{ url_for('admin_absence_view', page=total_pages, mes=mes, anio=anio, nombre_apellido=usuario) }}">{{ total_pages }}</a>
+          </li>
+        {% elif current_page > total_pages - (max_visible_pages // 2) %}
+          <li class="page-item">
+            <a class="page-link" href="{{ url_for('admin_absence_view', page=1, mes=mes, anio=anio, nombre_apellido=usuario) }}">1</a>
+          </li>
+          <li class="page-item disabled"><span class="page-link">...</span></li>
+          {% for p in range(total_pages - max_visible_pages + 1, total_pages + 1) %}
+            {% if p == current_page %}
+              <li class="page-item active"><span class="page-link">{{ p }}</span></li>
+            {% else %}
+              <li class="page-item">
+                <a class="page-link" href="{{ url_for('admin_absence_view', page=p, mes=mes, anio=anio, nombre_apellido=usuario) }}">{{ p }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <li class="page-item">
+            <a class="page-link" href="{{ url_for('admin_absence_view', page=1, mes=mes, anio=anio, nombre_apellido=usuario) }}">1</a>
+          </li>
+          <li class="page-item disabled"><span class="page-link">...</span></li>
+          {% for p in range(current_page - 3, current_page + 4) %}
+            {% if p == current_page %}
+              <li class="page-item active"><span class="page-link">{{ p }}</span></li>
+            {% else %}
+              <li class="page-item">
+                <a class="page-link" href="{{ url_for('admin_absence_view', page=p, mes=mes, anio=anio, nombre_apellido=usuario) }}">{{ p }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
+          <li class="page-item disabled"><span class="page-link">...</span></li>
+          <li class="page-item">
+            <a class="page-link" href="{{ url_for('admin_absence_view', page=total_pages, mes=mes, anio=anio, nombre_apellido=usuario) }}">{{ total_pages }}</a>
+          </li>
+        {% endif %}
+    {% endif %}
+
+    <!-- Siguiente y última -->
+    {% if pagination.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="{{ url_for('admin_absence_view', page=pagination.next_num, mes=mes, anio=anio, nombre_apellido=usuario) }}">&raquo;</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="{{ url_for('admin_absence_view', page=total_pages, mes=mes, anio=anio, nombre_apellido=usuario) }}">&gt;&gt;</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+      <li class="page-item disabled"><span class="page-link">&gt;&gt;</span></li>
+    {% endif %}
+
+  </ul>
+</nav>
+{% endif %}
+
+<script>
+    // Cambia el color al hacer hover
+    const btn = document.querySelector('button[type="submit"]');
+    if (btn){
+        btn.addEventListener('mouseover', () => btn.style.backgroundColor = '#0d4376');
+        btn.addEventListener('mouseout', () => btn.style.backgroundColor = '#1564a8');
+    }
+</script>
+
+<script>
+    let menu_button = document.querySelector('.menu-button');
+    if (menu_button){
+        document.querySelector('.menu-button').addEventListener('click', function() {
+            document.querySelector('.menu-container').classList.toggle('active');
+        });
+    }
+</script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="/static/assets/js/core/popper.min.js"></script>
+    <script src="/static/assets/js/core/bootstrap.min.js"></script>
+    <script src="/static/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="/static/assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="/static/assets/js/plugins/chartjs.min.js"></script>
+    <script src="/static/assets/js/material-dashboard.min.js?v=3.1.0"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" defer></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
+    <script src="https://buttons.github.io/buttons.js" async defer></script>
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+ <script>
+        $(document).ready(function() {
+            $('.btn-mark-as-read').on('click', function() {
+                var notificacionId = $(this).data('id');
+                var $notificationDiv = $('#notificacion-' + notificacionId);
+
+                $.ajax({
+                    url: '/marcar_leida/' + notificacionId,
+                    type: 'POST',
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            // Elimina la notificación del DOM
+                            $notificationDiv.remove();
+                             location.reload();
+                        }
+                        // No hay necesidad de manejar el caso de error aquí, ya que se puede manejar en el backend
+                    },
+                    error: function(xhr, status, error) {
+                        // Opcional: manejar errores en la solicitud
+                        console.error('Error al marcar la notificación como leída:', error);
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

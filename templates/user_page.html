@@ -1,0 +1,2837 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionaempresa</title>
+    <link rel="icon" href="{{ url_for('static', filename='logo_empresa.png') }}" type="image/png">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+
+    <!-- Nucleo Icons -->
+    <link href="/static/assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="/static/assets/css/nucleo-svg.css" rel="stylesheet" />
+
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+    <!-- CSS Files -->
+    <link id="pagestyle" href="/static/assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
+
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+
+    <!-- Bootstrap 5.1.3 CSS -->
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+    <!-- Additional Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.9/index.global.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.9/locales/es.min.js"></script>
+</head>
+
+
+<script src="https://kit.fontawesome.com/3da862d4a6.js" crossorigin="anonymous"></script>
+ <style>
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+}
+
+
+.page-container {
+            padding-top: 25px; /* Baja todo el contenido dentro del contenedor */
+            margin-top: -20px;
+}
+
+#counter {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+
+    input, button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin-top: 10px;
+    }
+
+
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700);
+
+
+#prog-bar-cont {
+
+  background: gainsboro;
+  width: 75vw;
+  height: 2.5em;
+  padding: 0.5em;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  border-radius: 50px;
+  box-sizing: border-box;
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.75) inset, 0 0 4px 0 rgba(0, 0, 0, 0.5);
+}
+#prog-bar-cont #prog-bar {
+  background: #000;
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset, 0 0 1px 3px rgba(255, 255, 255, 0.75) inset;
+  background: transparent;
+}
+#prog-bar-cont #prog-bar:before {
+  border-radius: 50px;
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3) inset, 0 0 5px 2px rgba(255, 255, 255, 0.8) inset;
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+}
+#prog-bar-cont #prog-bar:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 2px;
+  width: 96%;
+  left: 50%;
+  margin-left: -48%;
+  border-radius: 20px;
+  height: 10px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.85) 30%, transparent 120%);
+}
+#prog-bar-cont #prog-bar #background {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(-90deg, violet, #30b3fc, #70dc23, yellow, orange, #ff1076);
+  -webkit-clip-path: inset(0 100% 0 0);
+  clip-path: inset(0 100% 0 0);
+  transition: all 3s;
+  -webkit-transition: all 3s;
+}
+#prog-bar-cont #prog-bar #background:before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background-image: repeating-linear-gradient(-45deg, transparent, transparent 10px, #000 10px, #000 20px);
+  opacity: 0.75;
+  mix-blend-mode: overlay;
+  border-radius: 50px;
+}
+#prog-bar-cont:hover #prog-bar #background {
+  -webkit-clip-path: inset(0 0 0 0);
+  clip-path: inset(0 0 0 0);
+}
+
+
+ #prog-bar-cont {
+margin-top:40px;
+      position: relative;
+      width: 80%;
+      height: 40px; /* Altura de la barra de progreso */
+margin-bottom:100px;
+    }
+
+    #prog-bar {
+
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background-color: #e0e0e0;
+    }
+
+    #background {
+    height: 100%;
+    background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+    clip-path: inset(0 100% 0 0); /* Inicialmente escondido */
+    -webkit-clip-path: inset(0 100% 0 0);
+    transition: clip-path 0.5s, -webkit-clip-path 0.5s;
+}
+
+    #trophy {
+      position: absolute;
+      top: -100px; /* Ajusta esto según sea necesario */
+      left: 50%; /* Centrar la imagen horizontalmente */
+      transform: translateX(-50%);
+      width: 100px; /* Ajusta el tamaño según sea necesario */
+      height: 100px;
+}
+
+#all{
+margin-top: 80px;
+margin-bottom:-20px;
+
+}
+
+
+ h3 {
+      text-align: center;
+margin-top: -75px;
+margin-bottom:65px;
+    }
+
+
+.embed-responsive {
+        position: relative;
+        padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+        background-color: #000;
+    }
+    .embed-responsive-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+.card {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column; /* Asegura que el contenido y el footer se alineen verticalmente */
+    height: 100%; /* Asegura que la tarjeta ocupe todo el alto disponible */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+        .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+padding: 15px; /* Asegura suficiente espacio alrededor del título */
+        }
+        .card-body {
+            padding: 15px;
+
+
+        }
+        .container {
+            margin-top: -5px;
+        }
+        .footer-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .footer-link a {
+            color: #4C94E0;
+            text-decoration: none;
+        }
+        .footer-link a:hover {
+            text-decoration: underline;
+        }
+h3 {
+            margin-top:-15px;/* Ajusta el espacio debajo del título */
+        }
+.card-header h3 {
+            margin-bottom: 15px; /* Ajusta el espacio debajo del título */
+        }
+
+.events-card,
+.news-card,
+.prog-card {
+    position: relative;
+    max-height: 600px; /* Altura máxima para las tarjetas de eventos y noticias */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede la altura máxima */
+}
+.summary-card{
+    position: relative;
+    max-height: 400px; /* Altura máxima para las tarjetas de eventos y noticias */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede la altura máxima */
+}
+
+.footer-link {
+    position: relative; /* Necesario para que el footer se alinee al final del card */
+    text-align: center;
+    margin-top: auto; /* Empuja el footer al fondo de la tarjeta */
+    background-color: #f8f9fa; /* Fondo del footer */
+    padding: 10px;
+    border-top: 1px solid #e9ecef; /* Línea superior del footer */
+}
+        .footer-link a {
+            color: #6c6c6c;
+            text-decoration: none;
+        }
+        .footer-link a:hover {
+            text-decoration: underline;
+        }
+
+
+.card-body {
+    padding: 15px;
+    flex: 1; /* Esto hace que el cuerpo de la tarjeta ocupe todo el espacio disponible */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede el alto disponible */
+
+}
+
+
+#user-distribution-card {
+    height: 450px; /* Ajusta la altura total de la tarjeta */
+}
+
+#user-distribution-card .card-header {
+    height: 350px; /* Ajusta la altura del encabezado de la tarjeta para dejar espacio al gráfico */
+    padding: 0; /* Elimina el relleno para ajustar el tamaño */
+    overflow: hidden; /* Asegura que el contenido no se desborde */
+}
+
+#user-distribution-card .card-body {
+    height: calc(100% - 150px); /* Ajusta la altura del cuerpo de la tarjeta */
+    padding: 10px; /* Espacio interno del cuerpo de la tarjeta */
+    overflow: auto; /* Agrega desplazamiento si el contenido excede la altura disponible */
+margin-left:10px;
+}
+
+#user-distribution-card .chart {
+    height: 100%; /* Ajusta la altura del contenedor del gráfico */
+    width: 100%; /* Ajusta el ancho del contenedor del gráfico */
+}
+
+#user-distribution-card .chart-canvas {
+    height: 100% !important; /* Asegura que el gráfico ocupe el 100% del contenedor */
+    width: 100% !important; /* Asegura que el gráfico ocupe el 100% del contenedor */
+}
+
+#user-distribution-card .chart {
+    height: 300px; /* Ajusta la altura del contenedor del gráfico */
+    width: 300px; /* Ajusta el ancho del contenedor del gráfico */
+    display: flex; /* Utiliza flexbox para centrar el gráfico */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+margin-left:80px;
+}
+
+
+
+/* Estilos para la tarjeta de resumen */
+#summary-card {
+    display: flex;
+    flex-direction: column;
+    height: 600px; /* Ajusta la altura total de la tarjeta */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative; /* Necesario para el posicionamiento absoluto del pie de página */
+margin-top:-20px;
+
+}
+
+#summary-card .card-body {
+    flex: 1; /* Ocupa el espacio disponible */
+
+    overflow-y: auto; /* Desplazamiento vertical si es necesario */
+}
+
+#summary-card .card-footer {
+    background-color: #f8f9fa; /* Fondo del pie de página */
+    padding: 10px; /* Espacio interno del pie de página */
+    border-top: 1px solid #e9ecef; /* Línea superior del pie de página */
+ /* Centra el texto en el pie de página */
+    margin-top: auto; /* Empuja el pie de página hacia el fondo */
+}
+
+/* Estilos para los contadores */
+.counter-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido verticalmente */
+    border: 1px solid #e0e0e0; /* Borde para separar los contadores */
+    border-radius: 8px; /* Esquinas redondeadas */
+    padding: 5px; /* Reducir el padding */
+    color: #ffffff; /* Color del texto */
+}
+
+.counter-header {
+    position: relative;
+    height: 50px; /* Reducir la altura del encabezado */
+    padding: 0;
+    overflow: hidden; /* Evita el desbordamiento */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
+.counter-body, .counter-body2 {
+    padding: 5px; /* Reducir el padding del cuerpo del contador */
+    text-align: center; /* Centra el texto en el cuerpo */
+}
+
+.counter-body h6, .counter-body2 h6 {
+    font-size: 14px; /* Reducir el tamaño de la fuente del título */
+}
+
+.counter-body p, .counter-body2 p {
+    font-size: 12px; /* Reducir el tamaño de la fuente del párrafo */
+}
+
+.bg-primary {
+    background-color: #4C94E0 !important; /* Azul */
+}
+.btn-primary3 {
+    background-color: #a965f5 !important; /* Morado */
+    color:white;
+}
+.btn-primary3:hover {
+    background-color: #a965f5 !important; /* Morado */
+    color:white;
+}
+
+.bg-success {
+    background-color: #28a745 !important; /* Verde */
+}
+
+.bg-info {
+    background-color: #17a2b8 !important; /* Azul claro */
+}
+
+.bg-warning {
+    background-color: #ffc107 !important; /* Amarillo */
+}
+
+  .card-global {
+            height: 450px; /* Ajusta según tus necesidades */
+            display: flex;
+            flex-direction: column;
+margin-top:-25px;
+        }
+
+        /* Clase para la tarjeta negra específica del gráfico */
+        .card-graph {
+            height: 130%; /* Ajusta según el espacio que quieras para el gráfico */
+            display: flex;
+            align-items: center; /* Centra el gráfico verticalmente */
+            justify-content: center; /* Centra el gráfico horizontalmente */
+        }
+
+        /* Estilo para el canvas dentro de la tarjeta negra */
+        .chart-canvas {
+            width: 100%;
+            height: 100%;
+}
+.custom-card-body {
+            margin-top: 100px; /* Ajusta el valor según tus necesidades */
+margin-left:20px;
+        }
+
+
+.recurso {
+            display: inline-block;
+            width: 30%;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        .recurso img {
+            max-width: 100px;
+            max-height: 100px;
+            margin-bottom: 10px;
+        }
+
+.embed-responsive {
+        position: relative;
+        padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+        background-color: #000;
+    }
+    .embed-responsive-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+ .toast-center-center {
+            top: 50%;
+            left: 70%;
+            transform: translate(-50%, -50%);
+            min-width: 800px; /* Más grande */
+min-height: 800px; /* Más grande */
+            opacity: 1; /* Menos transparente */
+        }
+        .toast-success .toast-message {
+            color: green;
+        }
+        .toast-error .toast-message {
+            color: red;
+        }
+        .toast {
+            font-size: 1.2em; /* Tamaño de fuente más grande */
+            padding: 20px; /* Más relleno */
+        }
+
+.btn-mark-as-read {
+            padding: 5px 10px;
+            font-size: 12px;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            color: #333;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .btn-mark-as-read:hover {
+            background-color: #e0e0e0;
+            color: white !important;
+        }
+
+        /* Estilos para la pantalla de carga */
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+.container{
+   margin-bottom: 70px; /* Añadir margen inferior a la sección de ranking */
+margin-top:-20px;
+width: 100%; /* Ocupa el 100% del ancho disponible */
+   max-width: 100%; /* Asegúrate de que el ancho máximo sea 100% */
+
+}
+.ranking-container {
+
+    max-height: 250px; /* Ajusta la altura según sea necesario */
+    overflow-y: auto;
+overflow-x: hidden;
+    padding-right: 15px; /* Ajusta el padding para que no corte el contenido */
+
+}
+
+/* Opcional: Estilos para la barra de desplazamiento */
+.ranking-container::-webkit-scrollbar {
+    width: 12px;
+}
+
+.ranking-container::-webkit-scrollbar-track {
+    background: #9f9f9f;
+background-image: linear-gradient(195deg, #9f9f9f 50%, #fff 150%)
+}
+
+.ranking-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.ranking-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+  .table {
+        max-width: 720px; /* Limita el ancho máximo */
+min-width: 720px;
+        table-layout: fixed; /* Asegura que se respete el ancho máximo */
+    }
+
+    .table td, .table th {
+        overflow: hidden; /* Oculta el contenido que excede el ancho */
+        text-overflow: ellipsis; /* Muestra puntos suspensivos para el texto que excede */
+        white-space: nowrap; /* Previene el salto de línea */
+    }
+
+
+
+.card {
+
+
+    background-clip: padding-box !important;
+}
+.h4{
+text-align:center;
+align-items:center;
+}
+h5 {
+    text-align: center;
+}
+.centered-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+
+            font-weight: bold;
+
+        }
+.btn-link {
+    color: #4C94E0; /* Color inicial del enlace */
+    text-decoration: none; /* Opcional: quitar subrayado del enlace */
+    transition: color 0.3s; /* Suavizar la transición del color */
+}
+
+/* Estilo de hover para el enlace de eventos */
+.btn-link:hover {
+    color: #6f42c1; /* Color morado en hover */
+    text-decoration: underline; /* Opcional: añadir subrayado en hover */
+}
+
+
+
+        #chartdiv {
+            width: 150%;
+            height: 100px;
+        }
+
+.notificaciones {
+    position: relative; /* o 'absolute' o 'fixed' si es necesario */
+    z-index: 9999999; /* Valor alto para asegurarte de que está por encima de otros elementos */
+}
+/* Estilo del ícono de campana */
+.nav-item .fa-bell {
+    position: relative;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-bell:hover {
+    color: #495057;
+}
+
+/* Badge de notificaciones */
+.nav-item .badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    border-radius: 50%;
+    background-color: #f44336;
+    color: #fff;
+}
+
+/* Dropdown */
+.dropdown-menu {
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Estilo de cada notificación */
+.dropdown-item {
+    border-radius: 0.375rem;
+    transition: background-color 0.2s ease;
+    padding: 12px 15px;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* Estilo del texto de la notificación */
+.text-sm {
+    font-size: 0.875rem;
+    color: #343a40;
+    font-weight: 600;
+}
+
+.text-xs {
+    font-size: 0.75rem;
+    color: #6c757d;
+}
+
+/* Botón para marcar como leída */
+.btn-mark-as-read {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-mark-as-read:hover {
+    background: #0056b3;
+}
+
+/* Sin notificaciones */
+.text-center span {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+/* Posiciona el badge a la izquierda */
+.nav-item .badge {
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    border-radius: 50%;
+    background-color: #f44336;
+    color: #fff;
+    margin-right: 10px; /* Separa el badge del icono */
+}
+
+/* Ajuste de icono de campana */
+.nav-item .fa-bell {
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-bell:hover {
+    color: #495057;
+}
+/* Estilo del ícono de cerrar sesión */
+.nav-item .fa-sign-out {
+    position: relative;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-sign-out:hover {
+    color: #495057;
+}
+    /* Estilos para los mensajes flash */
+.flash-messages {
+    margin-bottom: 20px;
+}
+
+.flash {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.flash.success {
+    background-color: #d4edda; /* Color de fondo para mensajes de éxito */
+    color: #155724; /* Color del texto para mensajes de éxito */
+    border: 1px solid #c3e6cb;
+}
+
+.flash.error {
+    background-color: #f8d7da; /* Color de fondo para mensajes de error */
+    color: #721c24; /* Color del texto para mensajes de error */
+    border: 1px solid #f5c6cb;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+}
+
+.calendar {
+    margin-left: -20px;
+    margin-top: 150px;
+}
+
+.calendar ul {
+    margin-left: -40px;
+}
+
+.punto {
+    width: 10px;
+    height: 5px;
+    border-radius: 50%;
+    margin-right: 1px;
+}
+
+.calendar-container {
+    justify-content:center;
+    border-radius: 8px;
+    padding: 5px;
+    max-height: 400px;
+    overflow: hidden;
+}
+
+.volver-button {
+    padding: 12px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #5fbd63;
+    border: 1px solid #5fbd63;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.volver-button:hover {
+    background-color: #58A15B;
+    border-color: #58A15B;
+}
+
+.volver-button:active {
+    background-color: #58A15B;
+    border-color: #58A15B;
+}
+
+
+
+.container {
+   margin-top: -150px;
+ /* Puedes ajustar el valor según lo necesites */
+   margin-bottom:50px;
+}
+
+
+.user-modal {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    display: none; /* inicialmente oculto */
+}
+
+.user-modal-content {
+    max-width: 200px; /* ancho máximo del globo */
+}
+
+
+.solicitudes-container {
+    margin: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+
+}
+
+.solicitudes-list {
+    margin-top: 10px;
+height:170px;
+
+}
+
+.solicitud-item {
+margin-top:-25px;
+    padding: 2px;
+    margin-bottom: 0px;
+    background-color: white;
+    font-size:12px;
+
+
+}
+.contenedores-leyenda-solicitudes {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.solicitudes-container {
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+font-size:16px;
+margin-top:-20px;
+    /* Tus estilos existentes más cualquier ajuste para que se muestren bien juntos */
+    flex-basis: calc(50% - 40px); /* Ajusta según sea necesario */
+    margin: 20px;
+width:30%;
+overflow: hidden;
+}
+
+.solicitudes-container {
+font-family: 'open sans', sans-serif;
+  flex: 1; /* Esto permite que las cajas ocupen el espacio disponible */
+  margin: 10px; /* Asegúrate de que haya un poco de espacio entre las cajas */
+  box-sizing: border-box; /* Incluye el padding y border dentro del ancho total */
+}
+
+/* Si deseas que cada caja tenga un ancho máximo específico, puedes usar esto */
+
+.solicitudes-container {
+    font-family: 'open sans', sans-serif;
+    max-width: 50%; /* Esto asigna un máximo del 50% del ancho del contenedor padre a cada caja */
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Definir la sombra con un desplazamiento x, un desplazamiento y, un radio de desenfoque y un color RGBA */
+}
+
+
+.solicitudes-list {
+margin-bottom:20px;
+margin-top:30px;
+height:162px;
+  background-color:#fff /* Esto asigna un máximo del 48% del ancho del contenedor padre a cada caja */
+}
+.solicitudes-container h2 {
+margin-bottom:10px;
+font-family: 'open sans', sans-serif;
+margin-bottom:25px;
+font-size:28px;
+max-height:40px;
+}
+
+.solicitudes-container h2 {
+
+font-size:25px;
+}
+.button-container {
+max-heigth:20px;
+margin-top:-80px;
+  width: 100%; /* Ocupa todo el ancho del contenedor padre */
+  display: flex;
+  justify-content: space-around; /* Espacio distribuido alrededor de los botones */
+}
+
+.button-container button {
+  flex: 1; /* Los botones ocupan un espacio flexible y equitativo */
+  margin: 0 10px; /* Espacio entre botones */
+
+}
+
+.icono {
+        max-width: 20px; /* Ajusta el ancho según lo necesites */
+        max-height: 20px; /* Ajusta la altura según lo necesites */
+min-width: 20px; /* Ajusta el ancho según lo necesites */
+        min-height: 20px;
+    }
+
+/* Estilos para el botón de color rojo */
+.btn-danger {
+    background-color: #ff2525;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-bottom:30px;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.btn-danger2 {
+    background-color: #ff2525;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+
+}
+
+.btn-danger2:hover {
+    background-color: #c82333;
+}
+@media (max-width: 900px) {
+    .container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+margin-top:50px;
+    }
+}
+
+/* Estilo general del contenedor del calendario */
+.container-menu {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+    padding: 20px;
+    background-color: transparent;
+    margin-top: -50px;
+}
+
+/* Estilo general del contenedor del calendario */
+.container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+    padding: 20px;
+    background-color: transparent;
+
+}
+
+/* Estilo de cada contenedor de mes */
+.calendar-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+
+/* Título de cada mes */
+.calendar-container h2 {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Estilo de las fechas dentro del calendario */
+.calendar-container .date {
+    font-size: 1rem;
+    text-align: center;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: #e2e2e2;
+    color: #666;
+    margin: 5px;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    transition: background-color 0.2s ease;
+}
+
+/* Efecto hover en las fechas */
+.calendar-container .date:hover {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.flash-messages {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        width: 300px;
+        z-index: 1000;
+    }
+    .alert {
+    width: 300px; /* Cambia el ancho según lo desees */
+    margin: 10px auto; /* Margen superior/inferior para separación */
+    opacity: 0.9; /* Transparente */
+    transition: opacity 0.5s ease-in-out; /* Transición de desvanecimiento */
+}
+
+.alert-success {
+    background-color: rgba(40, 167, 69, 0.8); /* Color verde con transparencia */
+    color: white;
+}
+
+.alert-danger {
+    background-color: rgba(220, 53, 69, 0.8); /* Color rojo con transparencia */
+    color: white;
+}
+
+.hide {
+    opacity: 0; /* Ocultar el mensaje */
+}
+
+.btn-xl {
+    font-size: 24px; /* Tamaño de la fuente */
+    padding: 15px 40px; /* Tamaño del padding para hacer el botón más grande */
+}
+
+
+.caja-contenedora {
+        max-width: 400px;
+        margin: auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: all 0.3s ease;
+    }
+
+.caja-contenedora .text-center {
+        width: 100%;
+        margin-top: 2px;
+    }
+
+#registroBtn, #pausaBtn, #volverPausaBtn {
+    font-size: 0.9em; /* Tamaño de texto ligeramente más pequeño */
+    padding: 8px 16px; /* Reduce el padding para hacerlos más compactos */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+.greeting h3 {
+    margin-bottom: 5px; /* Ajusta el margen inferior para reducir el espacio */
+}
+
+
+  .container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: repeat(2, auto);
+            gap: 20px;
+            max-width: 90%;
+margin-left:5%;
+        }
+        .calendar-container {
+justify-content:center;
+            border-radius: 8px;
+            max-height: 550px;
+            overflow: hidden;
+
+
+        }
+
+
+
+
+/* Contenedor para los controles del calendario con flexbox */
+.calendar-controls {
+    display: flex;               /* Usamos flexbox */
+    align-items: center;         /* Centra los elementos verticalmente */
+    justify-content: center;     /* Centra los elementos horizontalmente */
+}
+
+/* Estilo específico para los botones dentro del contenedor calendar-controls */
+.calendar-controls button {
+    border: none;    /* Quita el borde */
+    background: none; /* Quita el fondo */
+    padding: 0;       /* Elimina el relleno */
+    cursor: pointer;  /* Asegura que el botón sea clickeable */
+}
+
+/* Estilo específico para los iconos dentro de calendar-controls */
+.calendar-icon {
+    font-size: 30px;   /* Tamaño del icono */
+    color: #1565A8;    /* Color del icono */
+    margin: 0 10px;    /* Añade un pequeño margen a los lados del icono */
+}
+
+/* Estilo para el año en negrita y con la fuente Roboto */
+.year-text {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    margin: 0 10px;    /* Añade un pequeño margen a los lados del texto */
+}
+
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 780px) {
+    .container {
+        grid-template-columns: 1fr;
+        margin-top:-140px;
+        margin-left:7%;
+    }
+    .page-container{
+
+        margin-top:-20%;
+
+    }
+}
+@media (max-width: 768px) { /* Pantallas con ancho menor o igual a 768px */
+    .breadcrumb {
+        display: flex;
+        flex-direction: column; /* Apila los elementos en columna si hay otros hijos */
+        align-items: center;    /* Centra horizontalmente */
+        justify-content: center; /* Centra verticalmente si hay espacio */
+        text-align: center;     /* Centra el texto */
+        margin-left: 20%;         /* Asegura el centrado horizontal */
+    }
+
+    .breadcrumb h5 {
+        text-align: center; /* Centra específicamente el texto del <h5> */
+        display:none;
+    }
+    .logo-spinner{
+
+        display:none;
+    }
+}
+
+@media (min-width: 500px) and (max-width: 1500px) {
+
+  .container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr) !important;
+            grid-template-rows: repeat(3, auto) !important;
+            gap: 20px;
+            max-width: 90%;
+            max-height: 300px;
+margin-left:5%;
+margin-bottom:800px;
+        }
+        .calendar-container {
+justify-content:center;
+            border-radius: 8px;
+            max-height: 350px;
+            overflow: hidden;
+
+
+        }
+
+
+/* Contenedor para los controles del calendario con flexbox */
+.calendar-controls {
+    display: flex;               /* Usamos flexbox */
+    align-items: center;         /* Centra los elementos verticalmente */
+    justify-content: center;     /* Centra los elementos horizontalmente */
+}
+
+/* Estilo específico para los botones dentro del contenedor calendar-controls */
+.calendar-controls button {
+    border: none;    /* Quita el borde */
+    background: none; /* Quita el fondo */
+    padding: 0;       /* Elimina el relleno */
+    cursor: pointer;  /* Asegura que el botón sea clickeable */
+}
+
+/* Estilo específico para los iconos dentro de calendar-controls */
+.calendar-icon {
+    font-size: 30px;   /* Tamaño del icono */
+    color: #4C94E0;    /* Color del icono */
+    margin: 0 10px;    /* Añade un pequeño margen a los lados del icono */
+}
+
+   .calendar-container:nth-last-child(-n+4) {
+        margin-bottom: 500px !important; /* Ajusta según la separación deseada */
+    }
+
+}
+
+.fc-event-pending {
+    background-color: orange !important; /* Color de fondo naranja para eventos pendientes */
+    color: white !important; /* Color del texto blanco para eventos pendientes */
+}
+
+.fc-day-orange {
+    background-color: orange; /* Estilo para eventos pendientes */
+}
+
+.fc .fc-daygrid-day-top {
+    justify-content: center;
+}
+
+.fc-event {
+    background-color: green; /* Color para eventos aceptados */
+}
+.fc-day-red {
+    background-color: #FF6F6F !important;
+}
+
+/* Estilo para el día actual */
+.fc .fc-daygrid-day.fc-day-today {
+    background-color: transparent; /* azul claro de fondo */
+  }
+
+
+
+.fc .fc-daygrid-day.fc-day-today .fc-daygrid-day-number {
+  background-color: #ffc107;
+  color: #000;
+  font-weight: bolder;
+}
+
+.fc-daygrid-day-number {
+  display: inline-flex;       /* Para alinear el texto */
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;         /* Ajusta según necesidad */
+  margin: auto;               /* Centra horizontalmente */
+  line-height: 1;             /* Asegura que no se desborde */
+}
+
+/* Quita bordes de las celdas del calendario */
+.fc td, .fc th {
+    border: none !important;
+  }
+
+  /* También puede ser útil eliminar el borde del grid general */
+  .fc .fc-daygrid-day-frame {
+    border: none !important;
+  }
+
+  /* Opcional: Quitar líneas de separación entre semanas */
+  .fc .fc-scrollgrid {
+    border: none !important;
+  }
+
+  .fc table{
+    font-size: 0.9em !important;
+  }
+
+.fc .fc-button {
+  font-size: 0.6rem;     /* Tamaño de texto más pequeño */
+  padding: 0.2rem 0.2rem; /* Menos espacio interior */
+}
+.fc-toolbar-title {
+    text-transform: capitalize !important;
+    font-size: 0.95rem !important; /* Cambia este valor según lo pequeño que quieras el texto */
+}
+.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
+    min-height: 0;
+}
+.fc .fc-daygrid-body-natural .fc-daygrid-day-events {
+    margin-bottom: 0;
+}
+.fc-day-number {
+    color: #000000 !important;
+}
+.fc-header-toolbar .fc-toolbar-title {
+    color: #000000;
+}
+
+.fc-header-toolbar{
+    margin-bottom: 0 !important;
+}
+
+.fc-col-header-cell {
+    color: #000000;
+}
+
+.fc-day {
+    color: #000000;
+}
+
+.fc-daygrid-day-number{
+    font-size: 0.6rem !important ;
+}
+
+@media (min-width: 1600px) {
+  .fc-daygrid-day-number {
+    font-size: 0.75rem !important;
+  }
+}
+
+    .highlighted-day {
+        background-color: #8bff98 !important;
+        border: 2px dashed black !important;
+    }
+    .highlighted-day:hover {
+        color: white;
+    }
+    .fc-daygrid-day.highlighted-day .fc-daygrid-day-number {
+      color: #ffffff; /* Cambia el color del número */
+      font-weight: bold;  /* Poner el número en negrita */
+    }
+</style>
+
+</head>
+
+<body class="g-sidenav-show  bg-gray-200">
+<!-- Spinner de carga -->
+<!-- Animación de carga con logo de la empresa -->
+<div id="logo-spinner" style=" position: fixed; top: 0; left: -50; width: 100%; height: 100%; background: #f9f9f9; z-index: 9999; display: flex; justify-content: center; align-items: center;display: none; margin-left:14%;">
+    <img src="/static/logo_empresa.png" id="logo-image" alt="Logo Empresa" style="width: 100px; height: 100px; margin-left:-15%;margin-top:-5%;">
+</div>
+
+
+<style>
+#logo-spinner {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 1);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+#logo-image {
+    width: 100px;
+    height: 100px;
+    transform: scale(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+#logo-spinner.show {
+    opacity: 1;
+}
+
+#logo-image.show {
+    transform: scale(1);
+}
+.switch-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+
+    }
+
+    .switch-description {
+        display: flex;
+        align-items: center;
+    }
+
+    .switch-description span {
+        margin: 0 10px;
+    }
+
+    .switch-button {
+        position: relative;
+        display: inline-block;
+        width: 80px; /* Ancho del switch */
+        height: 36px; /* Altura del switch */
+         /* Espacio entre el switch y el texto */
+    }
+
+    .switch-button__checkbox {
+        display: none; /* Ocultar el input checkbox */
+    }
+
+    .switch-button__label {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background-color: var(--color-red); /* Color de fondo del switch por defecto */
+        border-radius: 18px; /* Borde redondeado */
+        cursor: pointer;
+        transition: background-color 0.3s;
+        padding: 0 30px; /* Espacio para el icono */
+        box-sizing: border-box; /* Incluir padding en el ancho total */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+
+    .switch-button__icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 14px; /* Tamaño del icono */
+        color: var(--color-black); /* Color del icono */
+        opacity: 0; /* Ocultar el icono por defecto */
+        transition: opacity 0.3s ease;
+    }
+
+    .switch-button__checkbox:checked + .switch-button__label {
+        background-color: var(--color-green); /* Color de fondo del switch cuando está activado */
+    }
+
+    .switch-button__checkbox:checked + .switch-button__label .switch-button__icon-multiple {
+        opacity: 1; /* Mostrar el icono de múltiples usuarios cuando el switch está activado */
+    }
+
+    .switch-button__checkbox:not(:checked) + .switch-button__label .switch-button__icon-single {
+        opacity: 1; /* Mostrar el icono de usuario único cuando el switch está desactivado */
+    }
+
+.switch-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.switch-button__checkbox {
+    display: none; /* Oculta el input */
+}
+
+.switch-button__label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+            display: block;
+
+    width: 100%;
+        height: 100%;
+    border-radius: 18px; /* Borde redondeado */
+    cursor: pointer;
+    background-color: #1565A8 ; /* Color inicial (azul) */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: relative;
+}
+
+
+
+.switch-button__circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 23%;
+    height: 100%;
+    position: absolute;
+    border-radius: 100%;
+}
+
+.switch-button__icon {
+      position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    font-size: 15px;
+    color: black;
+    transition: opacity 0.3s ease;
+    color: var(--color-black);
+}
+
+.switch-button__icon-single {
+    opacity: 0;
+}
+
+.switch-button__icon-multiple {
+    opacity: 1;
+}
+
+/* Cambia el color y alterna los iconos cuando está activado */
+.switch-button__checkbox:checked + .switch-button__label {
+    background-color: #4d82e3; /* Color cuando está activado (verde) */
+}
+
+.switch-button__checkbox:checked + .switch-button__label .switch-button__icon-single {
+    opacity: 1;
+}
+
+.switch-button__checkbox:checked + .switch-button__label .switch-button__icon-multiple {
+    opacity: 0;
+}
+    .relojes-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 30px; /* Espacio entre los relojes */
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+    }
+
+    .reloj {
+        width: 100px;
+        height: 100px;
+        border: 4px solid black;
+        border-radius: 50%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: white;
+    }
+
+    .reloj-esfera {
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+    .manecilla {
+        position: absolute;
+        width: 50%;
+        height: 2px;
+        background: black;
+        top: 50%;
+        left: 50%;
+        transform-origin: 0% 50%;
+        transform: rotate(360deg);
+        transition: transform 0.5s cubic-bezier(0.4, 2.3, 0.3, 1);
+    }
+
+    .hora {
+        height: 4px;
+        width: 35%;
+        background: black;
+    }
+
+    .minuto {
+        height: 3px;
+        width: 45%;
+        background: gray;
+    }
+
+    .segundo {
+        height: 2px;
+        width: 50%;
+        background: red;
+    }
+
+
+    .reloj-texto {
+        text-align: center;
+        margin-top: 10px;
+        font-size: 14px;
+    }
+
+
+
+.btn-mark-as-read {
+    background: #1565a8;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-mark-as-read:hover {
+    background: #0d4376;
+}
+
+.dropdown-item {
+    border-radius: 0.375rem;
+    transition: background-color 0.2s ease;
+    padding: 1px 15px !important;
+    margin-top:0px;
+}
+
+
+
+
+
+
+
+.custom-width-modal {
+  max-width: 600px; /* o el ancho que prefieras */
+}
+
+.btn-mark-as-read {
+  min-width: 28px !important;
+  padding: 3px 3px;
+}
+/* Modal tipo barra lateral derecha */
+.modal-side-right {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 0;
+  height: 100%;
+  max-width: 500px;
+  width: 100%;
+  z-index: 1055;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+/* Cuando el modal se muestra */
+.modal.show .modal-side-right {
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+/* Evitamos que Bootstrap lo sobrescriba */
+.modal.fade .modal-dialog {
+  transition: none !important;
+  transform: none !important;
+}
+
+/* Ajustes al contenido del modal */
+.modal-side-right .modal-content {
+  min-height: 120% !important;
+  border-radius: 0;
+  text-align: left;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+}
+/* Estilo del texto de la notificación */
+.text-sm {
+    font-size: 0.75rem !important;
+    color: #000;
+    font-weight: 600;
+}
+
+.text-xs {
+    font-size: 0.70rem !important;
+    color: #6c757d;
+}
+
+
+
+.btn-primary3 {
+  background-color: #1565a8 !important;
+  color: white;
+  font-size: 0.75rem;
+  text-transform: none; /* evita mayúsculas automáticas */
+  margin-left:10px;
+}
+
+.btn-primary3:hover {
+  background-color: #0d4b80 !important; /* un tono más oscuro para el hover */
+}
+
+
+
+
+  @media (max-width: 576px) {
+    .dropdown-menu-mobile-half {
+      width: 50vw !important;
+      right: 0 !important;
+      left: auto !important;
+    }
+  }
+
+  .dropdown-menu-mobile-half {
+    width: 50vw !important; /* Ajusta al 50% del ancho de la ventana */
+    max-width: 400px;        /* Máximo ancho opcional */
+    min-width: 250px;        /* Mínimo opcional */
+    padding: 1rem;
+}
+
+.dropdown-menu-mobile-half .dropdown-item {
+    white-space: normal; /* Permite que el texto se ajuste a múltiples líneas */
+    word-wrap: break-word;
+    min-width: 120% !important;
+}
+
+.dropdown-menu-mobile-half .btn-mark-as-read {
+
+    padding: 0 5px;
+    font-size: 0.9rem;
+}
+
+/* ESTILOS PARA EL POPUP */
+         .popup {
+            display: flex;
+            min-height: 120px;
+            font-family: 'Open Sans', sans-serif;
+            box-sizing: border-box;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-container{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            background: transparent;
+            border: 0;
+        }
+
+        .profile-image{
+            width: 2rem;
+            height: 2rem;
+            background-color: white;
+            border-radius: 50%;
+            border: 1px solid black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-letter{
+            font-weight: bold;
+        }
+
+        .profile-name{
+            font-size: smaller;
+        }
+        .pl-blue{
+            background-color: rgb(138, 138, 248);
+        }
+.profile-container {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-container:hover {
+    transform: translateY(-5px);
+}
+
+</style>
+<!-- Menu HTML añadido de otro .html -->
+
+    {% include 'menu_user.html' %}
+
+
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+   <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+    <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+               <h5 class="font-weight-bolder mb-0">
+                   <i class="fas fa-user me-2"></i> <!-- Icono de usuario con espacio -->
+                   Mi Perfil de Empleado
+               </h5>
+             </ol>
+            <div class="centered-message">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="flash-messages">
+                            {% for category, message in messages %}
+                                <div class="flash {{ category }}">{{ message }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </nav>
+
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <div class="input-group input-group-outline"></div>
+            </div>
+            <ul class="navbar-nav justify-content-end">
+                <li class="nav-item d-flex align-items-center">
+
+
+
+
+</li>
+
+
+
+
+
+                <li class="nav-item px-3 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-body p-0"></a>
+                </li>
+                <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                        <div class="sidenav-toggler-inner"style="margin-right:10px;">
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                        </div>
+                    </a>
+                </li>
+<li class="nav-item dropdown pe-2 d-flex align-items-center">
+    <a href="javascript:;" class="nav-link text-body p-0 d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#notificacionesModal">
+        {% if notificaciones %}
+            <span class="badge bg-danger me-2">{{ notificaciones|length }}</span>
+        {% endif %}
+        <i class="fa fa-bell cursor-pointer" style="font-size: 1.5rem;"></i>
+    </a>
+</li>
+
+          <li class="nav-item d-flex align-items-center">
+              <a href="/cerrar_sesion" class="nav-link text-body font-weight-bold px-0">
+                <i class="fa fa-sign-out"style="font-size: 1.5rem;"></i>
+    </a>
+</li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+<!-- Modal -->
+<div class="modal fade" id="notificacionesModal" tabindex="-1" aria-labelledby="notificacionesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-side-right">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="notificacionesModalLabel">
+          <i class="fa fa-bell cursor-pointer" style="font-size: 1.5rem;"></i> Notificaciones
+        </h5>
+        <button type="button" class="btn m-0" data-bs-dismiss="modal" aria-label="Cerrar">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="modal-body text-start">
+        <form action="{{ url_for('marcar_notificaciones_leidas') }}" method="post">
+          <button type="submit" class="btn btn-primary3 btn-sm mb-3">Marcar todas como leídas</button>
+        </form>
+
+        {% for notificacion in notificaciones %}
+        <div class="mb-3 border-bottom pb-2">
+          <h6 class="text-sm font-weight-normal mb-1">
+            {{ notificacion.concepto }}
+            {% if not notificacion.leida %}
+              <button class="btn btn-link btn-mark-as-read ms-2" style="min-width: 32px;" data-id="{{ notificacion.id }}">
+                <i class="fa-solid fa-check" style="font-size: 1.2rem;"></i>
+              </button>
+            {% endif %}
+          </h6>
+          <p class="text-xs text-secondary mb-0">
+            <i class="fa fa-clock me-1"></i>
+            {{ notificacion.fecha_hora.strftime('%d/%m/%Y %H:%M') }}
+          </p>
+        </div>
+        {% endfor %}
+
+        {% if notificaciones|length == 0 %}
+        <div class="text-start">
+          <span class="text-sm">No tienes notificaciones</span>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="flash-messages">
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+
+
+<div class="page-container">
+    <!-- Caja contenedora principal -->
+    <div class="caja-contenedora">
+        <!-- Mostrar día y hora actuales -->
+        <center>
+            <div id="fechaHora" class="fecha-hora" style="font-size: 1em; color: #333; margin-bottom: 10px;"></div>
+        </center>
+        <br>
+
+        <!-- Saludo centrado -->
+        <center>
+            <div class="greeting">
+                <h3><strong>Hola {{ user.nombre }} {{ user.primer_apellido }}!</strong></h3>
+                <!--<h3><strong>horario de salida de hoy {{ hora_salida }}</strong></h3>-->
+            </div>
+        </center>
+
+         <center>
+             {% if hora_entrada %}
+                <i class="fa-solid fa-door-open" style="font-size:2rem;"></i>
+             {% else %}
+
+                <i class="fa-solid fa-door-closed" style="font-size:2rem;"></i>
+             {% endif %}
+
+        </center>
+
+        <div class="text-center">
+            <button id="registroBtn" class="btn btn-primary btn-xl me-3" onclick="toggleRegistro()" style="background-color: #1565A8; border-color: #1565A8; margin-left:5%;" disabled>
+                Entrada
+            </button>
+
+            <div class="alert alert-success d-none" id="successMessage" role="alert"></div>
+            <div class="alert alert-danger d-none" id="errorMessage" role="alert"></div>
+            <div id="processingMessage" class="d-none">Procesando...</div>
+        </div>
+
+        {% if hora_entrada %}
+        <div class="text-center">
+            <!-- Título Duración con icono y estilo -->
+            <div style="font-weight: bold; font-size: 18px; color: #333;">
+                <i class="fa fa-clock-o" aria-hidden="true" style="margin-right: 8px;"></i>Duración jornada laboral
+            </div>
+
+            <!-- Contador de duración -->
+            <div id="contadorDuracion" style="font-weight: bold; font-size: 2em; color: #333; margin-top: 10px;"></div>
+            {% if empresa.ver_pausas %}
+            <!-- Botón de Pausa -->
+            {% if pausa_activa %}
+                <!-- Si hay una pausa activa, mostrar el botón para terminar la pausa -->
+                <button id="volverPausaBtn" class="btn btn-success btn-xl" onclick="volverDePausa()">Volver a la jornada</button>
+            {% else %}
+                <!-- Si no hay pausa activa, mostrar el botón para iniciar la pausa -->
+                <button id="pausaBtn" class="btn btn-warning btn-xl" onclick="mostrarModalPausa()">Iniciar pausa</button>
+            {% endif %}
+            {% endif %}
+
+        </div>
+        {% endif %}
+
+        <!-- Modal para seleccionar tipo de pausa -->
+        <div class="modal fade" id="modalPausa" tabindex="-1" aria-labelledby="modalPausaLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalPausaLabel">
+                            <i class="fa-solid fa-pause"></i>
+                            Seleccionar Tipo de Pausa
+                        </h5>
+                        <button type="button" class="btn m-0" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formPausa">
+                            <div class="mb-3">
+                                <label for="tipoPausa" class="form-label">Tipo de Pausa</label>
+                                <select class="form-select px-2" id="tipoPausa" required>
+                                    <option value="">Seleccione un tipo de pausa</option>
+                                    <option value="comida">Comida</option>
+                                    <option value="descanso">Descanso</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary text-capitalize" data-bs-dismiss="modal">
+                            <i class="fa-solid fa-xmark me-1"></i>
+                            Cancelar
+                        </button>
+                        <button type="button" class="btn btn-primary text-capitalize" onclick="iniciarPausa()">Iniciar Pausa</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="popup container-fluid" id="event-popup"></div>
+
+<div class="calendar-controls" style="margin-bottom:20px;">
+    <button id="prev-year"><span class="material-icons calendar-icon">keyboard_arrow_left</span></button>
+    <span id="current-year" class="year-text">2024</span>
+    <button id="next-year"><span class="material-icons calendar-icon">keyboard_arrow_right</span></button>
+</div>
+
+{% if empresa.ver_vacaciones %}
+<div class="switch-container">
+    <div class="switch-description">
+        <div class="switch-button">
+            <input type="checkbox" name="switch-button" id="switch-label" class="switch-button__checkbox">
+            <label for="switch-label" class="switch-button__label">
+                <div class="switch-button__circle">
+                    <i class="fa-solid fa-users switch-button__icon switch-button__icon-multiple" style="color: white;"></i> <!-- Icono múltiples usuarios -->
+                    <i class="fas fa-user switch-button__icon switch-button__icon-single" style="color: white;"></i> <!-- Icono usuario único -->
+                </div>
+            </label>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div class="calendar">
+    <div class="container">
+        <!-- FullCalendar containers for each month -->
+        <div id="calendar-jan" class="calendar-container"></div>
+        <div id="calendar-feb" class="calendar-container"></div>
+        <div id="calendar-mar" class="calendar-container"></div>
+        <div id="calendar-apr" class="calendar-container"></div>
+        <div id="calendar-may" class="calendar-container"></div>
+        <div id="calendar-jun" class="calendar-container"></div>
+        <div id="calendar-jul" class="calendar-container"></div>
+        <div id="calendar-aug" class="calendar-container"></div>
+        <div id="calendar-sep" class="calendar-container"></div>
+        <div id="calendar-oct" class="calendar-container"></div>
+        <div id="calendar-nov" class="calendar-container"></div>
+        <div id="calendar-dec" class="calendar-container"></div>
+    </div>
+</div>
+
+<div class="popup" id="event-popup"></div>
+
+<div class="modal fade" id="horaDiferenteModal" tabindex="-1" aria-labelledby="horaDiferenteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+            <div class="modal-header" style="background-color: #fff; color: gray; padding: 15px; border-bottom: 2px solid #ddd;">
+                <h5 class="modal-title" id="horaDiferenteModalLabel" style="font-size: 18px; margin: 0;">¿Fue un error o tu horario ha sido diferente?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+
+                <!-- Contenedor de relojes -->
+                <div class="relojes-container">
+
+                    <!-- Reloj de la hora actual -->
+                    <div>
+                        <div class="reloj">
+                            <div class="reloj-esfera">
+                                <div class="manecilla hora" id="horaActual"></div>
+                                <div class="manecilla minuto" id="minutoActual"></div>
+                                <div class="manecilla segundo" id="segundoActual"></div>
+                            </div>
+                        </div>
+                        <!-- Hora actual en negrita -->
+                        <p class="reloj-texto" id="horaTexto"><b></b></p>
+                    </div>
+
+                    <!-- Reloj de la hora de salida -->
+                    <div>
+                        <div class="reloj">
+                            <div class="reloj-esfera">
+                                <div class="manecilla hora" id="horaSalida"></div>
+                                <div class="manecilla minuto" id="minutoSalida"></div>
+                            </div>
+                        </div>
+                        {% if hora_salida %}
+                        <!-- Hora de salida en negrita -->
+                        <p class="reloj-texto"><b>Hora salida: <span style="background-color: yellow; font-weight: bold; padding: 5px; border-radius: 8px;">{{ hora_salida_modal.strftime('%H:%M') }}</span></b></p>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+                <!-- Botones -->
+                <button id="errorButton" class="btn btn-danger" style="padding: 10px 20px; margin: 10px; border-radius: 5px; font-size: 16px; width: 100%; max-width: 200px;">Fue un error</button>
+                <button id="horarioDiferenteButton" class="btn btn-success" style="padding: 10px 20px; margin: 10px; border-radius: 5px; font-size: 16px; width: 100%; max-width: 200px;">Horario diferente</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal para Ingresar Comentarios -->
+<div class="modal fade" id="comentariosModal" tabindex="-1" role="dialog" aria-labelledby="comentariosModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="comentariosModalLabel">Registrar Comentarios</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Mensaje oculto -->
+                <p id="infoMensaje" style="display: none; font-size: 14px; color: gray;">
+                    Una vez relleno el campo inferior, se enviará una notificación al equipo de administración para que apruebe o rechace su solicitud de registro tardío, ya que según su horario debería haber salido antes.
+                </p>
+
+                <!-- Label con icono de interrogación -->
+                <label for="comentarios">
+                    Comentarios sobre la salida tardía:
+                    <span id="toggleInfo" style="cursor: pointer; color: blue; font-size: 18px;"><i class="fa-solid fa-circle-question"></i></span>
+                </label>
+
+                <textarea id="comentarios" class="form-control" rows="3"></textarea>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" id="guardarComentario" class="btn" style="background-color: #1565A8; color: white; font-weight: bold;">
+  <i class="fas fa-sign-out-alt"></i>Salida</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script para mostrar/ocultar el mensaje -->
+<script>
+    document.getElementById("toggleInfo").addEventListener("click", function() {
+        const infoMensaje = document.getElementById("infoMensaje");
+        infoMensaje.style.display = (infoMensaje.style.display === "none") ? "block" : "none";
+    });
+</script>
+
+
+
+
+<div id="hora_salida" data-hora="{{ hora_salida }}"></div>
+
+
+<script>
+    function actualizarFechaHora() {
+        const fechaHoraElem = document.getElementById('fechaHora');
+        const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const opcionesHora = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+        const ahora = new Date();
+
+        // Formatear fecha y hora
+        const fecha = ahora.toLocaleDateString('es-ES', opcionesFecha);
+        const hora = ahora.toLocaleTimeString('es-ES', opcionesHora);
+
+        fechaHoraElem.innerHTML = `${fecha} - ${hora}`;
+    }
+
+    // Actualizar fecha y hora cada segundo
+    actualizarFechaHora();
+    setInterval(actualizarFechaHora, 1000);
+
+    // Recargar la página cada 60 segundos
+    setInterval(() => {
+        location.reload();
+    }, 600000);
+</script>
+
+
+
+
+
+<script>
+    let menu_button = document.querySelector('.menu-button');
+    if (menu_button){
+        menu_button.addEventListener('click', function() {
+            document.querySelector('.menu-container').classList.toggle('active');
+        });
+    }
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+<!-- Minified and consolidated JS files -->
+    <script src="/static/assets/js/core/popper.min.js"></script>
+    <script src="/static/assets/js/core/bootstrap.min.js"></script>
+    <script src="/static/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="/static/assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="/static/assets/js/plugins/chartjs.min.js"></script>
+    <script src="/static/assets/js/material-dashboard.min.js?v=3.1.0"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" defer></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
+    <script src="https://buttons.github.io/buttons.js" async defer></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    function setClock(elementId, hour, minute, second = 0) {
+        const hourHand = document.getElementById(`hora${elementId}`);
+        const minuteHand = document.getElementById(`minuto${elementId}`);
+        const secondHand = document.getElementById(`segundo${elementId}`);
+
+        const hourDeg = (hour % 12) * 30 + minute * 0.5 - 90; // Corrige rotación
+        const minuteDeg = minute * 6 - 90;
+        const secondDeg = second * 6 - 90;
+
+        if (hourHand) hourHand.style.transform = `rotate(${hourDeg}deg)`;
+        if (minuteHand) minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
+        if (secondHand) secondHand.style.transform = `rotate(${secondDeg}deg)`;
+    }
+
+    // Hora actual
+    let now = new Date();
+    setClock("Actual", now.getHours(), now.getMinutes(), now.getSeconds());
+
+    // Hora de salida desde el dataset del modal
+    let salidaHora = parseInt(document.getElementById("horaDiferenteModal").dataset.salidaHora);
+    let salidaMinuto = parseInt(document.getElementById("horaDiferenteModal").dataset.salidaMinuto);
+    setClock("Salida", salidaHora, salidaMinuto);
+});
+
+function actualizarReloj() {
+    const ahora = new Date();
+    const horas = ahora.getHours();
+    const minutos = ahora.getMinutes();
+    const segundos = ahora.getSeconds();
+
+    const gradosHora = (horas % 12) * 30 + minutos * 0.5 - 90;
+    const gradosMinuto = minutos * 6 + segundos * 0.1 - 90;
+    const gradosSegundo = segundos * 6 - 90;
+
+    document.getElementById("horaActual").style.transform = `rotate(${gradosHora}deg)`;
+    document.getElementById("minutoActual").style.transform = `rotate(${gradosMinuto}deg)`;
+    document.getElementById("segundoActual").style.transform = `rotate(${gradosSegundo}deg)`;
+
+    document.getElementById("horaTexto").innerHTML = `<b>Hora actual: <span style="background-color: yellow; font-weight: bold; padding: 5px; border-radius: 8px;">${ahora.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}</span></b>`;
+
+
+}
+function actualizarRelojSalida(horaSalidaStr) {
+    if (!horaSalidaStr || horaSalidaStr.trim() === "") {
+        return; // No hace nada si la hora de salida no está definida
+    }
+
+    const [horas, minutos] = horaSalidaStr.split(":").map(num => parseInt(num));
+
+    const gradosHora = (horas % 12) * 30 + minutos * 0.5 - 90;
+    const gradosMinuto = minutos * 6 - 90;
+
+    document.getElementById("horaSalida").style.transform = `rotate(${gradosHora}deg)`;
+    document.getElementById("minutoSalida").style.transform = `rotate(${gradosMinuto}deg)`;
+}
+
+setInterval(actualizarReloj, 1000);
+actualizarReloj();
+
+window.onload = function () {
+    const horaSalida = "{{ hora_salida_modal.strftime('%H:%M') if hora_salida_modal else '' }}";
+    actualizarRelojSalida(horaSalida);
+};
+
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const boton = document.getElementById("registroBtn");
+
+    // Mostrar el spinner si fue solicitado
+    if (sessionStorage.getItem('mostrarSpinner') === 'true') {
+        mostrarLogoSpinner();
+        sessionStorage.removeItem('mostrarSpinner');
+    }
+
+    // Consultar el estado actual (entrada o salida)
+    fetch('/estado_registro', {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include'
+    })
+    .then(response => response.json())
+    .then(data => {
+        actualizarBoton(data.entrada_activa);
+    })
+    .catch(error => console.error("Error:", error));
+
+    // Añadir el listener al botón
+    boton.addEventListener('click', function (event) {
+        event.preventDefault();
+        boton.disabled = true;
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    registrarEntradaSalida(position.coords.latitude, position.coords.longitude);
+                },
+                () => {
+                    registrarEntradaSalida(null, null);
+                }
+            );
+        } else {
+            registrarEntradaSalida(null, null);
+        }
+    });
+});
+
+
+const hasActiveBaja = {{ has_active_baja|tojson }};  // true o false
+
+function registrarEntradaSalida(latitud, longitud) {
+    const boton = document.getElementById("registroBtn");
+    const successMessage = document.getElementById("successMessage");
+    const errorMessage = document.getElementById("errorMessage");
+
+    // ✅ Verificar si hay baja laboral activa
+    if (hasActiveBaja) {
+        errorMessage.textContent = "No puedes registrar entrada/salida porque tienes una baja laboral activa hoy.";
+        errorMessage.classList.remove("d-none");
+        boton.disabled = true;
+        return;  // Salir de la función
+    }
+
+    fetch('/registro', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ latitud, longitud })
+    })
+    .then(response => response.json())
+    .then(data => {
+        successMessage.classList.add("d-none");
+        errorMessage.classList.add("d-none");
+
+        if (data.error) {
+            errorMessage.textContent = data.error;
+            errorMessage.classList.remove("d-none");
+            boton.disabled = false;
+        } else {
+            successMessage.textContent = data.message;
+            successMessage.classList.remove("d-none");
+            actualizarBoton(data.entrada_activa);
+            boton.disabled = false;
+            window.location.reload();
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        errorMessage.textContent = "Hubo un problema al registrar. Intente nuevamente.";
+        errorMessage.classList.remove("d-none");
+        boton.disabled = false;
+    });
+}
+
+function actualizarBoton(entradaActiva) {
+    const boton = document.getElementById("registroBtn");
+    if (entradaActiva) {
+        boton.textContent = "Salida";
+        boton.classList.remove("btn-primary");
+        boton.classList.add("btn-danger");
+    } else {
+        boton.textContent = "Entrada";
+        boton.classList.remove("btn-danger");
+        boton.classList.add("btn-primary");
+    }
+}
+
+function mostrarLogoSpinner() {
+    const spinner = document.getElementById("logo-spinner");
+    const logoImage = document.getElementById("logo-image");
+
+    spinner.style.display = "flex";
+    setTimeout(() => {
+        spinner.classList.add("show");
+        logoImage.classList.add("show");
+    }, 10);
+
+    setTimeout(() => {
+        spinner.classList.remove("show");
+        logoImage.classList.remove("show");
+        setTimeout(() => {
+            spinner.style.display = "none";
+        }, 100);
+    }, 1000);
+}
+</script>
+
+<script>
+    const userSickLeaves = {{ sick_leave_events|tojson }};
+    console.log("DEBUG sick_leave_events:", userSickLeaves);
+
+    document.addEventListener('DOMContentLoaded', function() {
+
+        /* ---------------------------------------------------------
+            1. COLORES PASTEL EN USUARIOS
+        --------------------------------------------------------- */
+        function actualizar_colores_perfiles() {
+            const pastelColorsByLetter = {
+                A: "#FFB3BA", B: "#FFDFBA", C: "#FFFFBA", D: "#BAFFC9", E: "#BAE1FF",
+                F: "#E0BBE4", G: "#D5F4E6", H: "#F4E1D2", I: "#CBAACB", J: "#FFDAC1",
+                K: "#E2F0CB", L: "#B5EAD7", M: "#C7CEEA", N: "#FFCBC1", O: "#F6DFEB",
+                P: "#DAD6FF", Q: "#F0F4C3", R: "#FFD3B6", S: "#FFAAA5", T: "#AEC6CF",
+                U: "#FFF5BA", V: "#E6E6FA", W: "#F3E5F5", X: "#B2EBF2", Y: "#DCEDC1", Z: "#FBEEC1"
+            };
+
+            const profileImages = document.querySelectorAll('.profile-image');
+
+            profileImages.forEach(image => {
+                const letterEl = image.querySelector('.profile-letter');
+                if (!letterEl) return;
+
+                const letter = letterEl.textContent.trim().toUpperCase();
+                const color = pastelColorsByLetter[letter] || "#FFFFFF";
+                image.style.backgroundColor = color;
+            });
+        }
+
+        /* ---------------------------------------------------------
+            2. RESALTAR VACACIONES DE UN SOLO USUARIO
+        --------------------------------------------------------- */
+        function highlightVacationDaysForUser(userName) {
+            document.querySelectorAll('.highlighted-day').forEach(el => el.classList.remove('highlighted-day'));
+
+            const userEvents = filteredEvents.filter(event => event.title === userName);
+            userEvents.forEach(event => {
+                const start = new Date(event.start);
+                const end = new Date(event.end);
+                end.setDate(end.getDate() - 1);
+
+                for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+                    const dateStr = d.toISOString().split('T')[0];
+                    document.querySelectorAll(`[data-date='${dateStr}']`).forEach(el => {
+                        el.classList.add('highlighted-day');
+                    });
+                }
+            });
+        }
+
+        /* ---------------------------------------------------------
+            3. MEZCLAR VACACIONES + BAJAS LABORALES
+        --------------------------------------------------------- */
+        const allEvents = {{ events|tojson }};
+        const allEventsMerged = [...allEvents, ...userSickLeaves];  // ← AQUI LA FUSIÓN
+        console.log("DEBUG allEventsMerged:", allEventsMerged);
+
+        const non_workdays = {{ non_workdays|tojson }};
+        const currentUserID = {{ user.id }};
+
+        let filteredEvents = allEventsMerged;
+        let showCurrentUserEvents = false;
+
+        /* ---------------------------------------------------------
+            4. LISTA DE MESES
+        --------------------------------------------------------- */
+        const months = [
+            { id: 'calendar-jan', title: 'Enero', month: 0 },
+            { id: 'calendar-feb', title: 'Febrero', month: 1 },
+            { id: 'calendar-mar', title: 'Marzo', month: 2 },
+            { id: 'calendar-apr', title: 'Abril', month: 3 },
+            { id: 'calendar-may', title: 'Mayo', month: 4 },
+            { id: 'calendar-jun', title: 'Junio', month: 5 },
+            { id: 'calendar-jul', title: 'Julio', month: 6 },
+            { id: 'calendar-aug', title: 'Agosto', month: 7 },
+            { id: 'calendar-sep', title: 'Septiembre', month: 8 },
+            { id: 'calendar-oct', title: 'Octubre', month: 9 },
+            { id: 'calendar-nov', title: 'Noviembre', month: 10 },
+            { id: 'calendar-dec', title: 'Diciembre', month: 11 }
+        ];
+
+        let currentYear = new Date().getFullYear();
+
+        /* ---------------------------------------------------------
+            5. FILTRAR POR USUARIO
+        --------------------------------------------------------- */
+        function filterEvents() {
+            showCurrentUserEvents = document.getElementById('switch-label').checked;
+
+            if (showCurrentUserEvents) {
+                filteredEvents = allEventsMerged.filter(event => event.user_id === currentUserID);
+            } else {
+                filteredEvents = allEventsMerged;
+            }
+
+            renderCalendars();
+        }
+
+        /* ---------------------------------------------------------
+            6. RENDERIZAR CALENDARIOS
+        --------------------------------------------------------- */
+        function renderCalendars() {
+            months.forEach(function(month) {
+                var calendarEl = document.getElementById(month.id);
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    initialView: 'dayGridMonth',
+                    headerToolbar: { left: '', center: 'title', right: '' },
+                    fixedWeekCount: false,
+                    titleFormat: { month: 'long' },
+                    dayHeaderFormat: { weekday: 'narrow' },
+                    height: '100%',
+                    contentHeight: 'auto',
+                    locale: 'es',
+                    events: filteredEvents,
+                    firstDay: 1,
+                    eventBackgroundColor: 'green',
+                    eventDisplay: 'background',
+                    dayMaxEvents: true,
+                    eventContent: () => ({ domNodes: [] }),
+
+                    dayCellDidMount: function(info) {
+                        var cellDate = new Date(info.date);
+                        cellDate.setDate(cellDate.getDate() + 1);
+                        var cellDateString = cellDate.toISOString().split('T')[0];
+                        var currentMonth = info.view.currentStart.getMonth();
+
+                        if (info.date.getMonth() === currentMonth && non_workdays.includes(cellDateString)) {
+                            info.el.classList.add('fc-day-red');
+                        }
+                    },
+
+                    dateClick: function(info) {
+                        var selectedDate = info.date;
+                        selectedDate.setHours(6, 0, 0, 0);
+
+                        var eventsOnDate = filteredEvents.filter(function(event) {
+                            var eventStartDate = new Date(event.start);
+                            var eventEndDate = new Date(event.end);
+                            return (eventStartDate <= selectedDate && eventEndDate >= selectedDate);
+                        });
+
+                        var popup = document.getElementById('event-popup');
+
+                        if (eventsOnDate.length === 0) {
+                            popup.style.innerHTML = '';
+                            return;
+                        }
+
+                        const allUsers = [...new Set(eventsOnDate.map(e => e.title))];
+                        let eventNames = allUsers.map(name => {
+                            const parts = name.trim().split(' ');
+                            const inicial = name[0].toUpperCase();
+                            const firstName = parts[0];
+                            const lastInitial = parts[1] ? parts[1][0].toUpperCase() + '.' : '';
+                            return `<button class="profile-container user-highlight-btn" title="${name}" data-username="${name}">
+                                        <div class="profile-image">
+                                            <p class="profile-letter m-0">${inicial}</p>
+                                        </div>
+                                        <p class="profile-name">${firstName} ${lastInitial}</p>
+                                    </button>`;
+                        }).join('');
+
+                        popup.innerHTML = eventNames;
+
+                        popup.querySelectorAll('.user-highlight-btn').forEach(btn => {
+                            btn.addEventListener('click', function() {
+                                const selectedUser = this.getAttribute('data-username');
+                                highlightVacationDaysForUser(selectedUser);
+                            });
+                        });
+
+                        actualizar_colores_perfiles();
+                    }
+                });
+
+                calendar.gotoDate(new Date(currentYear, month.month, 1));
+                calendar.render();
+            });
+        }
+
+        /* ---------------------------------------------------------
+            7. INICIALIZACIÓN
+        --------------------------------------------------------- */
+        renderCalendars();
+
+        function updateYearDisplay() {
+            document.getElementById('current-year').textContent = currentYear;
+        }
+
+        updateYearDisplay();
+
+        document.getElementById('prev-year').addEventListener('click', function() {
+            currentYear--;
+            updateYearDisplay();
+            renderCalendars();
+        });
+
+        document.getElementById('next-year').addEventListener('click', function() {
+            currentYear++;
+            updateYearDisplay();
+            renderCalendars();
+        });
+
+        document.getElementById('switch-label').addEventListener('change', filterEvents);
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('#event-popup')) {
+                document.getElementById('event-popup').innerHTML = '';
+                document.querySelectorAll('.highlighted-day').forEach(el => el.classList.remove('highlighted-day'));
+            }
+        });
+    });
+</script>
+
+
+
+
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const horaEntradaStr = "{{ hora_entrada }}";
+    const hasActiveBaja = {{ has_active_baja|tojson }};
+
+    const contador = document.getElementById("contadorDuracion");
+    const registroBtn = document.getElementById("registroBtn");
+
+    console.log("DEBUG horaEntrada:", horaEntradaStr);
+    console.log("DEBUG hasActiveBaja:", hasActiveBaja);
+
+    if (!contador) {
+        console.error("❌ No existe contadorDuracion");
+        return;
+    }
+
+    if (hasActiveBaja) {
+        contador.textContent = "Tienes una baja laboral activa hoy";
+        contador.style.color = "red";
+        contador.style.fontSize = "1.4em";
+
+        if (registroBtn) {
+            registroBtn.disabled = true;
+        }
+        return;
+    }
+
+    if (!horaEntradaStr) {
+        contador.textContent = "No hay registro de entrada activo.";
+        if (registroBtn) {
+            registroBtn.disabled = true;
+        }
+        return;
+    }
+
+    // Convertir a formato ISO compatible
+    const horaEntradaISO = horaEntradaStr.replace(" ", "T");
+    const entradaDate = new Date(horaEntradaISO);
+
+    if (isNaN(entradaDate.getTime())) {
+        contador.textContent = "Error al calcular la hora de entrada";
+        console.error("❌ Fecha inválida:", horaEntradaISO);
+        return;
+    }
+
+    function actualizarContador() {
+        const ahora = new Date();
+        const diferencia = ahora - entradaDate;
+
+        if (diferencia < 0) {
+            contador.textContent =
+                `Tu jornada laboral iniciará a las ${entradaDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+            contador.style.color = "red";
+            contador.style.fontSize = "1.4em";
+
+            if (registroBtn) {
+                registroBtn.disabled = true;
+            }
+        } else {
+            const horas = Math.floor(diferencia / (1000 * 60 * 60));
+            const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+            contador.textContent =
+                `${horas.toString().padStart(2, '0')}:` +
+                `${minutos.toString().padStart(2, '0')}:` +
+                `${segundos.toString().padStart(2, '0')}`;
+
+            contador.style.color = "#333";
+            contador.style.fontSize = "2em";
+
+            if (registroBtn) {
+                registroBtn.disabled = false;
+            }
+        }
+    }
+
+    actualizarContador();
+    setInterval(actualizarContador, 1000);
+
+});
+</script>
+
+
+
+
+<script>
+    function mostrarModalPausa() {
+        var modal = new bootstrap.Modal(document.getElementById('modalPausa'));
+        modal.show();
+    }
+
+    function iniciarPausa() {
+        var tipoPausa = document.getElementById('tipoPausa').value;
+        if (!tipoPausa) {
+            alert("Por favor, seleccione un tipo de pausa.");
+            return;
+        }
+
+        // Llamada AJAX para guardar la pausa en el servidor
+        fetch('{{ url_for("iniciar_pausa") }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                tipo_pausa: tipoPausa
+            })
+        })
+        .then(response => response.json()) // Convertir la respuesta a JSON
+        .then(data => {
+            if (data.success) {
+                // Ocultar modal
+                var modal = bootstrap.Modal.getInstance(document.getElementById('modalPausa'));
+                modal.hide();
+
+                // Mostrar mensaje de éxito en la interfaz
+                alert(data.message); // Usamos un alert para mostrar el mensaje de éxito
+            } else {
+                alert(data.message);  // Mostrar el mensaje de error si falla
+            }
+            location.reload();
+        })
+        .catch(error => {
+            alert('Error: ' + error.message);  // Mostrar mensaje de error en caso de fallo de AJAX
+        });
+    }
+
+    function volverDePausa() {
+        // Llamada AJAX para registrar el fin de la pausa en el servidor
+        fetch('{{ url_for("finalizar_pausa") }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({})
+        })
+        .then(response => response.json()) // Convertir la respuesta a JSON
+        .then(data => {
+            if (data.success) {
+                // Mostrar mensaje de éxito en la interfaz
+                alert(data.message); // Usamos un alert para mostrar el mensaje de éxito
+            } else {
+                alert(data.message);  // Mostrar el mensaje de error si falla
+            }
+            location.reload();
+        })
+        .catch(error => {
+            alert('Error: ' + error.message);  // Mostrar mensaje de error en caso de fallo de AJAX
+        });
+    }
+</script>
+
+
+<!-- Bootstrap Bundle con Popper (al final del body) -->
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Hora de entrada y tiempo de cortesía proporcionados por el servidor
+        const horaEntrar = "{{ hora_entrar }}"; // Hora de entrada en formato "HH:mm"
+        const tiempoCortesia = {{ empresa.tiempo_cortesia }}; // Tiempo de cortesía en minutos
+
+        // Referencia al botón de registro
+        const registroBtn = document.getElementById("registroBtn");
+
+        function verificarTiempo() {
+            const ahora = new Date();
+
+            const [hora, minuto] = horaEntrar.split(":").map(Number);
+
+            // Crear un objeto Date para la hora de entrada
+            const entrada = new Date(ahora.getFullYear(), ahora.getMonth(), ahora.getDate(), hora, minuto);
+
+            // Calcular el tiempo límite para activar el botón
+            entrada.setMinutes(entrada.getMinutes() - tiempoCortesia);
+
+            // Habilitar el botón si la hora actual es igual o mayor al límite
+            if (ahora >= entrada) {
+                registroBtn.disabled = false;
+            } else {
+                registroBtn.disabled = true;
+            }
+        }
+
+        // Verificar el tiempo inicialmente
+        verificarTiempo();
+
+        // Repetir la verificación cada 30 segundos
+        setInterval(verificarTiempo, 30000);
+
+        // ==========================
+        // Recargar la página cada hora en punto
+        // ==========================
+        function recargarEnHoraEnPunto() {
+            const ahora = new Date();
+            const minutosRestantes = 60 - ahora.getMinutes();
+            const segundosRestantes = 60 - ahora.getSeconds();
+            const tiempoParaRecarga = (minutosRestantes * 60 + segundosRestantes) * 1000; // Convertir a milisegundos
+
+            setTimeout(() => {
+                location.reload();
+            }, tiempoParaRecarga);
+        }
+
+        // Ejecutar la función de recarga
+        recargarEnHoraEnPunto();
+    });
+</script>
+ <script>
+        $(document).ready(function() {
+            $('.btn-mark-as-read').on('click', function() {
+                var notificacionId = $(this).data('id');
+                var $notificationDiv = $('#notificacion-' + notificacionId);
+
+                $.ajax({
+                    url: '/marcar_leida/' + notificacionId,
+                    type: 'POST',
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            // Elimina la notificación del DOM
+                            $notificationDiv.remove();
+                             location.reload();
+                        }
+                        // No hay necesidad de manejar el caso de error aquí, ya que se puede manejar en el backend
+                    },
+                    error: function(xhr, status, error) {
+                        // Opcional: manejar errores en la solicitud
+                        console.error('Error al marcar la notificación como leída:', error);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

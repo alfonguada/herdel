@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración Empleado - Gestionaempresa</title>
+    <link rel="icon" href="{{ url_for('static', filename='logo_empresa.png') }}" type="image/png">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <!-- Nucleo Icons -->
+  <link href="/static/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="/static/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <!-- CSS Files -->
+  <link id="pagestyle" href="/static/assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
+  <!-- Nepcha Analytics (nepcha.com) -->
+  <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Puedes enlazar tu archivo CSS para estilos aquí -->
+<script src="https://kit.fontawesome.com/3da862d4a6.js" crossorigin="anonymous"></script>
+
+    <style>
+        /* Estilos para el menú del inicio */
+        html {
+    font-family: 'open sans', sans-serif;
+}
+
+
+
+/* Estilos profesionales para el contenido de la página */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    margin-top: 150px;
+}
+
+
+
+button {
+    padding: 10px 15px;
+    font-size: 14px;
+    text-align: center;
+	align-items:center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #d9534f;
+    border: 1px solid #d9534f;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #c9302c;
+    border-color: #c9302c;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+
+
+.content-section a {
+    display: block;
+    padding: 10px 15px;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #5bc0de;
+    border: 1px solid #5bc0de;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+b {
+    display: block;
+    padding: 10px 15px;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 0px;
+}
+
+.content-section a:hover {
+    background-color: #46b8da;
+    border-color: #46b8da;
+}
+.content-section{
+
+}
+
+/* Estilos para pantallas grandes */
+@media only screen and (min-width: 901px) {
+    .menu-button {
+        display: none; /* Oculta el botón en pantallas grandes */
+    }
+
+    .menu-links {
+        display: flex; /* Muestra el menú en pantallas grandes */
+    }
+}
+
+
+
+}
+
+.user-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px; /* Ajusta según sea necesario */
+
+}
+
+.user-item {
+    width: 90%; /* 33.33% del ancho total, ajusta según sea necesario */
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    height: 25rem;
+
+}
+
+ .block-button {
+        background-color: #FFA537; /* Cambia este color al naranja que desees */
+        border: 1px solid #FFA537;
+    }
+
+    .block-button:hover {
+        background-color: #d17e00; /* Cambia este color al naranja que desees para el estado hover */
+        border-color: #d17e00;
+    }
+.block-button:disabled {
+        background-color: #ccc; /* Puedes cambiar este color al gris que desees */
+        border: 1px solid #ccc;
+        cursor: not-allowed;
+    }
+.eliminar:disabled {
+        background-color: #ccc; /* Puedes cambiar este color al gris que desees */
+        border: 1px solid #ccc;
+        cursor: not-allowed;
+    }
+    .email{
+        font-size:10px;
+    }
+
+
+.page-container {
+            padding-top: 100px; /* Baja todo el contenido dentro del contenedor */
+}
+
+#counter {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+
+    input, button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin-top: 10px;
+    }
+
+
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700);
+
+
+
+h3 {
+      text-align: center;
+margin-top: -75px;
+margin-bottom:65px;
+    }
+
+
+.embed-responsive {
+        position: relative;
+        padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+        background-color: #000;
+    }
+    .embed-responsive-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+.card {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column; /* Asegura que el contenido y el footer se alineen verticalmente */
+    height: 100%; /* Asegura que la tarjeta ocupe todo el alto disponible */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+        .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+padding: 15px; /* Asegura suficiente espacio alrededor del título */
+        }
+        .card-body {
+            padding: 15px;
+
+
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .footer-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .footer-link a {
+            color: #4C94E0;
+            text-decoration: none;
+        }
+        .footer-link a:hover {
+            text-decoration: underline;
+        }
+h3 {
+            margin-top:-15px;/* Ajusta el espacio debajo del título */
+        }
+.card-header h3 {
+            margin-bottom: 15px; /* Ajusta el espacio debajo del título */
+        }
+
+.events-card,
+.news-card,
+.prog-card {
+    position: relative;
+    max-height: 600px; /* Altura máxima para las tarjetas de eventos y noticias */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede la altura máxima */
+}
+.summary-card{
+    position: relative;
+    max-height: 400px; /* Altura máxima para las tarjetas de eventos y noticias */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede la altura máxima */
+}
+
+.footer-link {
+    position: relative; /* Necesario para que el footer se alinee al final del card */
+    text-align: center;
+    margin-top: auto; /* Empuja el footer al fondo de la tarjeta */
+    background-color: #f8f9fa; /* Fondo del footer */
+    padding: 10px;
+    border-top: 1px solid #e9ecef; /* Línea superior del footer */
+}
+        .footer-link a {
+            color: #6c6c6c;
+            text-decoration: none;
+        }
+        .footer-link a:hover {
+            text-decoration: underline;
+        }
+
+
+.card-body {
+    padding: 15px;
+    flex: 1; /* Esto hace que el cuerpo de la tarjeta ocupe todo el espacio disponible */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede el alto disponible */
+
+}
+
+
+/* Estilos para los contadores */
+.counter-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido verticalmente */
+    border: 1px solid #e0e0e0; /* Borde para separar los contadores */
+    border-radius: 8px; /* Esquinas redondeadas */
+    padding: 5px; /* Reducir el padding */
+    color: #ffffff; /* Color del texto */
+}
+
+.counter-header {
+    position: relative;
+    height: 50px; /* Reducir la altura del encabezado */
+    padding: 0;
+    overflow: hidden; /* Evita el desbordamiento */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
+.counter-body, .counter-body2 {
+    padding: 5px; /* Reducir el padding del cuerpo del contador */
+    text-align: center; /* Centra el texto en el cuerpo */
+}
+
+.counter-body h6, .counter-body2 h6 {
+    font-size: 14px; /* Reducir el tamaño de la fuente del título */
+}
+
+.counter-body p, .counter-body2 p {
+    font-size: 12px; /* Reducir el tamaño de la fuente del párrafo */
+}
+
+.bg-primary {
+    background-color: #4C94E0 !important; /* Azul */
+}
+.btn-primary3 {
+    background-color: #a965f5 !important; /* Morado */
+    color:white;
+}
+.btn-primary3:hover {
+    background-color: #a965f5 !important; /* Morado */
+    color:white;
+}
+
+.bg-success {
+    background-color: #28a745 !important; /* Verde */
+}
+
+.bg-info {
+    background-color: #17a2b8 !important; /* Azul claro */
+}
+
+.bg-warning {
+    background-color: #ffc107 !important; /* Amarillo */
+}
+
+  .card-global {
+            height: 450px; /* Ajusta según tus necesidades */
+            display: flex;
+            flex-direction: column;
+margin-top:-25px;
+        }
+
+        /* Clase para la tarjeta negra específica del gráfico */
+        .card-graph {
+            height: 130%; /* Ajusta según el espacio que quieras para el gráfico */
+            display: flex;
+            align-items: center; /* Centra el gráfico verticalmente */
+            justify-content: center; /* Centra el gráfico horizontalmente */
+        }
+
+        /* Estilo para el canvas dentro de la tarjeta negra */
+        .chart-canvas {
+            width: 100%;
+            height: 100%;
+}
+.custom-card-body {
+            margin-top: 100px; /* Ajusta el valor según tus necesidades */
+margin-left:20px;
+        }
+
+
+.recurso {
+            display: inline-block;
+            width: 30%;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        .recurso img {
+            max-width: 100px;
+            max-height: 100px;
+            margin-bottom: 10px;
+        }
+
+.embed-responsive {
+        position: relative;
+        padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+        background-color: #000;
+    }
+    .embed-responsive-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+.toast-center-center {
+            top: 50%;
+            left: 70%;
+            transform: translate(-50%, -50%);
+            min-width: 800px; /* Más grande */
+min-height: 800px; /* Más grande */
+            opacity: 1; /* Menos transparente */
+        }
+        .toast-success .toast-message {
+            color: green;
+        }
+        .toast-error .toast-message {
+            color: red;
+        }
+        .toast {
+            font-size: 1.2em; /* Tamaño de fuente más grande */
+            padding: 20px; /* Más relleno */
+        }
+
+.btn-mark-as-read {
+            padding: 5px 10px;
+            font-size: 12px;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            color: #333;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .btn-mark-as-read:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Estilos para la pantalla de carga */
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+
+.notificaciones {
+    position: relative; /* o 'absolute' o 'fixed' si es necesario */
+    z-index: 9999999; /* Valor alto para asegurarte de que está por encima de otros elementos */
+}
+/* Estilo del ícono de campana */
+.nav-item .fa-bell {
+    position: relative;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-bell:hover {
+    color: #495057;
+}
+
+/* Badge de notificaciones */
+.nav-item .badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    border-radius: 50%;
+    background-color: #f44336;
+    color: #fff;
+}
+
+/* Dropdown */
+.dropdown-menu {
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Estilo de cada notificación */
+.dropdown-item {
+    border-radius: 0.375rem;
+    transition: background-color 0.2s ease;
+    padding: 12px 15px;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* Estilo del texto de la notificación */
+.text-sm {
+    font-size: 0.875rem;
+    color: #343a40;
+    font-weight: 600;
+}
+
+.text-xs {
+    font-size: 0.75rem;
+    color: #6c757d;
+}
+
+.btn-custom{
+    color: #7b809a !important;
+}
+
+.btn-custom:hover{
+    color:#000 !important;
+}
+
+/* Botón para marcar como leída */
+.btn-mark-as-read {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-mark-as-read:hover {
+    background: #0056b3;
+}
+
+/* Sin notificaciones */
+.text-center span {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+/* Posiciona el badge a la izquierda */
+.nav-item .badge {
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    border-radius: 50%;
+    background-color: #f44336;
+    color: #fff;
+    margin-right: 10px; /* Separa el badge del icono */
+}
+
+/* Ajuste de icono de campana */
+.nav-item .fa-bell {
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-bell:hover {
+    color: #495057;
+}
+/* Estilo del ícono de cerrar sesión */
+.nav-item .fa-sign-out {
+    position: relative;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-sign-out:hover {
+    color: #495057;
+}
+    /* Estilos para los mensajes flash */
+.flash-messages {
+    margin-bottom: 20px;
+}
+
+.flash {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.flash.success {
+    background-color: #d4edda; /* Color de fondo para mensajes de éxito */
+    color: #155724; /* Color del texto para mensajes de éxito */
+    border: 1px solid #c3e6cb;
+}
+
+.flash.error {
+    background-color: #f8d7da; /* Color de fondo para mensajes de error */
+    color: #721c24; /* Color del texto para mensajes de error */
+    border: 1px solid #f5c6cb;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+}
+
+
+
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.flash-messages {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        width: 300px;
+        z-index: 1000;
+    }
+    .user-item {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.user-item table {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.user-item table td {
+    padding: 5px;
+}
+
+.user-item .email {
+    margin-bottom: 10px;
+}
+
+.btn {
+    margin: 5px 0;
+}
+
+a.btn {
+    display: block;
+    margin: 5px 0;
+}
+
+.btn-editar {
+    background-color: #45A049;
+    color: white;
+    width: 150px;
+    height: 40px;
+    text-align: center;
+    display: inline-block;
+    line-height: 50px; /* Igual a la altura para centrar verticalmente */
+    padding: 0;
+    font-size: 16px; /* Ajusta el tamaño del texto si es necesario */
+    box-sizing: border-box; /* Asegura que el tamaño no cambie con el padding */
+}
+.btn-editar:hover{
+   background-color: #45A049;
+    color: #f8f9fa;
+    text-decoration: none;
+}
+
+.btn-ver-ficha {
+    background-color: #4C94E0;
+    color: white;
+}
+.btn-ver-ficha:hover {
+     background-color: #4C94E0;
+    color: #f8f9fa;
+    text-decoration: none;
+}
+
+.btn-uniforme {
+    width: 150px; /* Ajusta el ancho según tus necesidades */
+    height: 40px; /* Ajusta la altura según tus necesidades */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px; /* Tamaño del texto */
+    padding: 0; /* Asegura que el tamaño no se expanda */
+}
+
+.btn-container {
+    display: flex;
+    flex-direction: column; /* Coloca los botones uno encima del otro */
+    align-items: center; /* Centra los botones horizontalmente */
+    gap: 10px; /* Espacio entre los botones */
+    margin-top: 10px; /* Espacio superior opcional */
+}
+
+.user-details {
+    text-align: left;
+}
+
+.user-details p {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.user-details i {
+    margin-right: 8px;
+    color: #000; /* Ajusta el color del icono si lo deseas */
+}
+
+.user-details strong {
+    margin-right: 5px;
+}
+    .custom-table {
+        width: 100%;
+        max-width: 400px;
+        margin: 0px auto;
+        background-color: #f8f9fa;
+        border: 0px solid #dee2e6;
+        border-radius: 8px;
+    }
+
+    .custom-table td {
+        padding: 10px 15px;
+        border-top: 0px solid #dee2e6;
+    }
+    .custom-table th {
+
+        border: 0px;
+    }
+    .custom-table td {
+
+        border: 0px;
+    }
+
+    .custom-table td:first-child {
+        font-weight: bold;
+        color: #495057;
+    }
+
+    .custom-table i {
+        color: #000000;  /* Icono en color negro */
+        margin-right: 8px;
+    }
+    table, th, td {
+    border: 0px solid #ddd;
+}
+
+@media (max-width: 768px) { /* Pantallas con ancho menor o igual a 768px */
+    .breadcrumb {
+        display: flex;
+        flex-direction: column; /* Apila los elementos en columna si hay otros hijos */
+        align-items: center;    /* Centra horizontalmente */
+        justify-content: center; /* Centra verticalmente si hay espacio */
+        text-align: center;     /* Centra el texto */
+        margin-left: 20%;         /* Asegura el centrado horizontal */
+    }
+
+    .breadcrumb h5 {
+        text-align: center; /* Centra específicamente el texto del <h5> */
+        min-width:130px;
+
+
+    }
+    .logo-spinner{
+
+        display:none;
+    }
+    .container {
+            margin-top: 0 !important;
+            max-width:95% !important;
+
+        }
+
+    .table{
+        max-width:80%;
+
+    }
+    .table>tbody{
+        max-width:80%;
+
+    }
+    .user-item {
+    width: 100%; /* 33.33% del ancho total, ajusta según sea necesario */
+
+
+}
+
+.user-wrapper {
+    padding: 10px;
+    transition: all 0.3s ease;
+}
+
+.user-wrapper.hidden {
+    display: none !important; /* Asegura que el elemento desaparezca completamente */
+    opacity: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+}
+
+@media (min-width: 500px) and (max-width: 1500px) {
+
+
+.usersContainer{
+
+    max-width:80% !important;
+    min-width:0px !important;
+
+}
+
+}
+.usersContainer{
+
+    min-width: 1200px !important;
+
+
+
+
+}
+
+.usersContainer row{
+
+    min-width: 1200px !important;
+
+
+}
+
+
+
+
+
+
+
+.btn-mark-as-read {
+    background: #1565a8;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-mark-as-read:hover {
+    background: #0d4376;
+}
+
+.dropdown-item {
+    border-radius: 0.375rem;
+    transition: background-color 0.2s ease;
+    padding: 1px 15px !important;
+    margin-top:0px;
+}
+
+
+
+
+
+
+
+.custom-width-modal {
+  max-width: 600px; /* o el ancho que prefieras */
+}
+
+.btn-mark-as-read {
+  min-width: 28px !important;
+  padding: 3px 3px;
+}
+/* Modal tipo barra lateral derecha */
+.modal-side-right {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 0;
+  min-height: 100vh;
+  max-width: 500px;
+  width: 100%;
+  z-index: 1055;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+/* Cuando el modal se muestra */
+.modal.show .modal-side-right {
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+/* Evitamos que Bootstrap lo sobrescriba */
+.modal.fade .modal-dialog {
+  transition: none !important;
+  transform: none !important;
+}
+
+/* Ajustes al contenido del modal */
+.modal-side-right .modal-content {
+  min-height: 100%;
+  border-radius: 0;
+  text-align: left;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+}
+/* Estilo del texto de la notificación */
+.text-sm {
+    font-size: 0.75rem !important;
+    color: #000;
+    font-weight: 600;
+}
+
+.text-xs {
+    font-size: 0.70rem !important;
+    color: #6c757d;
+}
+
+
+
+.btn-primary3 {
+  background-color: #1565a8 !important;
+  color: white;
+  font-size: 0.75rem;
+  text-transform: none; /* evita mayúsculas automáticas */
+  margin-left:10px;
+}
+
+.btn-primary3:hover {
+  background-color: #0d4b80 !important; /* un tono más oscuro para el hover */
+}
+
+
+
+
+  @media (max-width: 576px) {
+    .dropdown-menu-mobile-half {
+      width: 50vw !important;
+      right: 0 !important;
+      left: auto !important;
+    }
+  }
+
+  .dropdown-menu-mobile-half {
+    width: 50vw !important; /* Ajusta al 50% del ancho de la ventana */
+    max-width: 400px;        /* Máximo ancho opcional */
+    min-width: 250px;        /* Mínimo opcional */
+    padding: 1rem;
+}
+
+.dropdown-menu-mobile-half .dropdown-item {
+    white-space: normal; /* Permite que el texto se ajuste a múltiples líneas */
+    word-wrap: break-word;
+    width: 100%;
+}
+
+.dropdown-menu-mobile-half .btn-mark-as-read {
+
+    padding: 0 5px;
+    font-size: 0.9rem;
+}
+.readonly {
+    background-color: #f0f0f0;
+    color: #888;
+    border: 1px solid #ccc;
+    pointer-events: none;
+}
+
+/* Estilo base para los recuadros */
+.contenedor-recuadros {
+    display: flex;
+    gap: 20px; /* Espacio entre los recuadros */
+    justify-content: space-between; /* Ajusta según tus necesidades */
+    margin-bottom: 20px; /* Espacio inferior */
+}
+
+.recuadro {
+    padding: 20px;
+    margin: 15px auto;
+    border: 0px solid #ccc; /* Borde gris claro */
+    border-radius: 10px; /* Bordes redondeados */
+    background-color: #fff; /* Fondo claro */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+.recuadro, .campo-tipo-jornada, .titulo, .dia-semana {
+    font-size: 14px; /* Ajusta el tamaño según lo necesites */
+}
+
+label, input {
+    font-size: 12px; /* Para los labels e inputs también */
+}
+
+/* Tamaño específico para el primer recuadro */
+.recuadro-vacaciones {
+    width: 500px; /* Tamaño del primer recuadro */
+    height: 400px; /* Establece la altura */
+    margin-top: 170px;
+    overflow-y: auto; /* Permite el desplazamiento vertical si el contenido excede la altura */
+}
+
+/* Tamaño específico para el segundo recuadro */
+.recuadro-horarios {
+    width: 1000px; /* Tamaño del segundo recuadro, más grande */
+    margin-top: 15px;
+}
+
+.input-custom{
+    width: 100%;
+    padding: 8px;
+    font-size: 12px;
+    border: 1px solid #ccc;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
+</style>
+</head>
+<body class="g-sidenav-show  bg-gray-200">
+
+<!-- Menu HTML añadido de otro .html -->
+
+    {% include 'menu_admin.html' %}
+
+
+ <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg w-100">
+
+
+    <!-- Navbar -->
+<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+    <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                <h5 class="font-weight-bolder mb-0">
+                    <i class="fa fa-cogs" aria-hidden="true" style="color: #000;"></i>
+                    Configuración Empleado
+                </h5>
+            </ol>
+            <div class="centered-message">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="flash-messages">
+                            {% for category, message in messages %}
+                                <div class="flash {{ category }}">{{ message }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </nav>
+
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <div class="input-group input-group-outline"></div>
+            </div>
+            <ul class="navbar-nav justify-content-end">
+                <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                        <div class="sidenav-toggler-inner" style="margin-right:10px;">
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                        </div>
+                    </a>
+                </li>
+   <li class="nav-item dropdown pe-2 d-flex align-items-center">
+    <a href="javascript:;" class="nav-link text-body p-0 d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#notificacionesModal">
+        {% if notificaciones %}
+            <span class="badge bg-danger me-2">{{ notificaciones|length }}</span>
+        {% endif %}
+        <i class="fa fa-bell cursor-pointer" style="font-size: 1.5rem;"></i>
+    </a>
+</li>
+          <li class="nav-item d-flex align-items-center">
+              <a href="/cerrar_sesion" class="nav-link text-body font-weight-bold px-0">
+                <i class="fa fa-sign-out"style="font-size: 1.5rem;"></i>
+    </a>
+</li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+<!-- End Navbar -->
+
+<div class="recuadro recuadro-horarios" style="margin-top:0px;">
+    <fieldset>
+
+    <!-- Contenedor principal: Izquierda y Derecha -->
+    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px;">
+
+        <!-- Columna izquierda: Datos del empleado -->
+        <div style="flex: 1; min-width: 300px;">
+            {% if 'admin' in current_user.roles %}
+            <h5><i class="fa-solid fa-address-card"></i> Datos del empleado</h5>
+
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                <!-- Empresa -->
+                <div>
+                    <label for="empresa_id" style="font-weight: bold; color: black; display: block; margin-bottom: 8px;">Empresa</label>
+                    <select id="empresa_id" name="empresa_id" style="width: 100%; padding: 8px; font-size: 12px; border: 1px solid #ccc; background-color: white;border-radius: 5px;box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+                        {% for empresa in empresas %}
+                            <option value="{{ empresa.id }}" {% if user.empresa_id == empresa.id %}selected{% endif %}>
+                                {{ empresa.nombre }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Rol -->
+                <div>
+                    <label for="role" style="font-weight: bold; color: black; display: block; margin-bottom: 8px;">Rol</label>
+                    <select id="role" name="role" style="width: 100%; padding: 8px; font-size: 12px; border: 1px solid #ccc; background-color: white;border-radius: 5px;box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+                        <option value="admin" {% if 'admin' in user_roles %}selected{% endif %}>Administrador</option>
+                        <option value="user" {% if 'user' in user_roles %}selected{% endif %}>Usuario</option>
+                        <option value="gestor" {% if 'gestor' in user_roles %}selected{% endif %}>Gestor</option>
+                        <option value="encargado" {% if 'encargado' in user_roles %}selected{% endif %}>Encargado</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Columna derecha: Vacaciones -->
+        <div style="flex: 1; min-width: 300px;">
+            <h5><i class="fa-solid fa-umbrella-beach"></i> Vacaciones del empleado</h5>
+
+            <label for="dias_restantes_este" class="label-estilo" style="font-weight: bold; color: black; margin-top: 0px; display: block; margin-bottom: 8px; font-size: 12px;">
+                Días de vacaciones asignados
+            </label>
+            <input type="number" id="dias_restantes_este" name="dias_restantes_este" value="{{ user.dias_restantes_este | int }}"
+                style="width: 80%; padding: 8px; font-size: 12px; text-align: center; border-radius: 5px; border: 1px solid #ccc; background-color: white;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); transition: border-color 0.3s, box-shadow 0.3s;">
+
+            {% if 'gestor' in user.roles %}
+            <div style="display: flex; justify-content: center; gap: 40px; margin-top: 20px; flex-wrap: wrap;">
+                <div style="text-align: center;">
+                    <i class="material-icons" style="font-size: 20px;">beach_access</i>
+                    <label class="switch" style="margin-top:0px;">
+                        <input type="checkbox" name="vacaciones" id="vacaciones_switch" {% if user.vacaciones %}checked{% endif %}>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div style="text-align: center;">
+                    <i class="material-icons" style="font-size: 20px;">add_card</i>
+                    <label class="switch" style="margin-top:0px;">
+                        <input type="checkbox" name="registros" id="registros_switch" {% if user.registros_horarios %}checked{% endif %}>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div style="text-align: center;">
+                    <i class="fa fa-ambulance" style="font-size: 16px;"></i>
+                    <label class="switch" style="margin-top:0px;">
+                        <input type="checkbox" name="ausencias" id="ausencias_switch" {% if user.ausencias %}checked{% endif %}>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+    {% endif %}
+
+        <h5 style="margin-top:20px;"><i class="fa-solid fa-clock"></i> Horario del empleado</h5>
+
+
+
+
+        <div class="campo-tipo-jornada" style="max-width: 300px; margin: 20px auto;">
+            <label for="tipo_jornada" style="font-weight: bold; color: black; display: block; margin-bottom: 8px;">Tipo de jornada</label>
+            <select id="tipo_jornada" name="tipo_jornada" style="width: 100%; padding: 8px; font-size: 12px; border: 1px solid #ccc; background-color: white; transition: border-color 0.3s, box-shadow 0.3s;">
+                <option value="invierno">Invierno</option>
+                <option value="verano">Verano</option>
+            </select>
+        </div>
+
+        <div class="horarios-container" style="max-width: 1000px; margin: 0 auto;">
+            <table id="tabla-horarios-invierno" style="width: 100%; margin: 0 auto;">
+                <thead>
+                    <tr>
+                        <th class="titulo" style="font-size: 12px; font-weight: bold;"><i class="fa-solid fa-calendar-week"></i></th>
+                        <th class="titulo" style="font-size: 12px; font-weight: bold;"><i class="fa-solid fa-person-chalkboard"></i> Trabaja</th>
+                        <th class="titulo" style="font-size: 12px; font-weight: bold;"><i class="fa-solid fa-battery-full" style="margin-left:10px;"></i> Entrada</th>
+                        <th class="titulo" style="font-size: 12px; font-weight: bold;"><i class="fa-solid fa-utensils" style="margin-left:10px;"></i> S. comida</th>
+                        <th class="titulo" style="font-size: 12px; font-weight: bold;"><i class="fa-solid fa-person-walking-arrow-loop-left" style="margin-left:10px;"></i> E. comida</th>
+                        <th class="titulo" style="font-size: 12px; font-weight: bold;"><i class="fa-solid fa-flag-checkered"></i> Salida</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for dia in ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'] %}
+                    <tr>
+                        <td class="dia-semana">{{ dia.capitalize() }}</td>
+                        <td>
+                            <input type="checkbox" name="trabaja_{{ dia }}" id="trabaja_{{ dia }}"
+                                   {% if user['trabaja_' + dia] %}checked{% endif %} style="border-radius:50px;">
+                        </td>
+                        <td style="margin-left:10px;">
+                            <input type="time" class="input-custom" name="entrada_{{ dia }}" id="entrada_{{ dia }}" value="{{ user['entrada_' + dia] or '' }}" >
+                        </td>
+                        <td style="margin-left:20px;">
+                            <input type="time" class="input-custom"  name="salida_comida_{{ dia }}" id="salida_comida_{{ dia }}" value="{{ user['salida_comida_' + dia] or '' }}" >
+                        </td>
+                        <td style="margin-left:20px;">
+                            <input type="time" class="input-custom" name="entrada_comida_{{ dia }}" id="entrada_comida_{{ dia }}" value="{{ user['entrada_comida_' + dia] or '' }}" >
+                        </td>
+                        <td>
+                            <input type="time" class="input-custom" name="salida_{{ dia }}" id="salida_{{ dia }}" value="{{ user['salida_' + dia] or '' }}">
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <table id="tabla-horarios-verano" style="width: 100%; margin: 0 auto; display: none;">
+                <thead>
+                    <tr>
+                        <th class="titulo" style="font-size: 12px; font-weight: bold;"><i class="fa-solid fa-calendar-week"></i></th>
+                        <th class="titulo" style="font-size: 12px; font-weight: bold;"><i class="fa-solid fa-person-chalkboard"></i> Trabaja</th>
+                        <th class="titulo" style="font-size: 12px; font-weight: bold;"><i class="fa-solid fa-battery-full" style="margin-left:10px;"></i> Entrada</th>
+                        <th class="titulo" style="font-size: 12px; font-weight: bold;"><i class="fa-solid fa-utensils" style="margin-left:10px;"></i> S. comida</th>
+                        <th class="titulo" style="font-size: 12px; font-weight: bold;"><i class="fa-solid fa-person-walking-arrow-loop-left" style="margin-left:10px;"></i> E. comida</th>
+                        <th class="titulo" style="font-size: 12px; font-weight: bold;"><i class="fa-solid fa-flag-checkered"></i> Salida</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for dia in ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'] %}
+                    <tr>
+                        <td class="dia-semana">{{ dia.capitalize() }}</td>
+                        <td>
+                            <input type="checkbox" name="trabaja_verano_{{ dia }}" id="trabaja_verano_{{ dia }}"
+                                   {% if user['trabaja_verano_' + dia] %}checked{% endif %}>
+                        </td>
+                        <td>
+                            <input type="time" class="input-custom" name="entrada_verano_{{ dia }}" id="entrada_verano_{{ dia }}" value="{{ user['entrada_verano_' + dia] or '' }}">
+                        </td>
+                        <td>
+                            <input type="time" class="input-custom" name="salida_comida_verano_{{ dia }}" id="salida_comida_verano_{{ dia }}" value="{{ user['salida_comida_verano_' + dia] or '' }}">
+                        </td>
+                        <td>
+                            <input type="time" class="input-custom" name="entrada_comida_verano_{{ dia }}" id="entrada_comida_verano_{{ dia }}" value="{{ user['entrada_comida_verano_' + dia] or '' }}" >
+                        </td>
+                        <td>
+                            <input type="time" class="input-custom" name="salida_verano_{{ dia }}" id="salida_verano_{{ dia }}" value="{{ user['salida_verano_' + dia] or '' }}">
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+        <!-- Validación de usuario -->
+        <div class="validar mt-4 mb-0" style="display: flex; justify-content: center; gap: 60px;">
+            <button type="button" class="btn btn-custom" id="validateBtn"
+                {% if user.approved and not user.bloqueado %}disabled{% endif %}>
+                {% if user.approved and not user.bloqueado %}
+                    <i class="fa-solid fa-check-circle"></i> Validado
+                {% elif user.bloqueado %}
+                    <i class="fa-solid fa-unlock"></i> Desbloquear
+                {% else %}
+                    <i class="fa-solid fa-check"></i> Validar
+                {% endif %}
+            </button>
+
+            <!-- Botones de acción -->
+            <div class="botones">
+                <button type="button" id="guardar-btn" class="btn btn-custom">
+                    <i class="fa-solid fa-save"></i> Guardar
+                </button>
+            </div>
+        </div>
+
+        <div id="success-message" style="display: none; color: #28a745; margin-top: 10px;">
+            Información guardada exitosamente.
+        </div>
+    </fieldset>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="notificacionesModal" tabindex="-1" aria-labelledby="notificacionesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-side-right">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="notificacionesModalLabel">
+          <i class="fa fa-bell cursor-pointer" style="font-size: 1.5rem;"></i> Notificaciones
+        </h5>
+        <button type="button" class="btn btn-custom" data-bs-dismiss="modal" aria-label="Cerrar">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="modal-body text-start">
+        <form action="{{ url_for('marcar_notificaciones_leidas') }}" method="post">
+          <button type="submit" class="btn btn-primary3 btn-sm mb-3">Marcar todas como leídas</button>
+        </form>
+
+        {% for notificacion in notificaciones %}
+        <div class="mb-3 border-bottom pb-2">
+          <h6 class="text-sm font-weight-normal mb-1">
+            {{ notificacion.concepto }}
+            {% if not notificacion.leida %}
+              <button class="btn btn-link btn-mark-as-read ms-2" style="min-width: 32px;" data-id="{{ notificacion.id }}">
+                <i class="fa-solid fa-check" style="font-size: 1.2rem;"></i>
+              </button>
+            {% endif %}
+          </h6>
+          <p class="text-xs text-secondary mb-0">
+            <i class="fa fa-clock me-1"></i>
+            {{ notificacion.fecha_hora.strftime('%d/%m/%Y %H:%M') }}
+          </p>
+        </div>
+        {% endfor %}
+
+        {% if notificaciones|length == 0 %}
+        <div class="text-start">
+          <span class="text-sm">No tienes notificaciones</span>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- Minified and consolidated JS files -->
+    <script src="/static/assets/js/core/popper.min.js"></script>
+    <script src="/static/assets/js/core/bootstrap.min.js"></script>
+    <script src="/static/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="/static/assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="/static/assets/js/plugins/chartjs.min.js"></script>
+    <script src="/static/assets/js/material-dashboard.min.js?v=3.1.0"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
+    <script src="https://buttons.github.io/buttons.js" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const tipoJornadaSelect = document.getElementById('tipo_jornada');
+
+        // Función para habilitar/deshabilitar campos según tipo de jornada y día trabajado
+        function actualizarCampos(prefijo) {
+            ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'].forEach(dia => {
+                const trabajaDiaCheckbox = document.getElementById(`${prefijo}_trabaja_${dia}`);
+                const trabajaDia = trabajaDiaCheckbox?.checked;
+
+                const entradaDia = document.getElementById(`${prefijo}_entrada_${dia}`);
+                const salidaDia = document.getElementById(`${prefijo}_salida_${dia}`);
+                if (entradaDia && salidaDia) {
+                    entradaDia.readOnly = !trabajaDia;
+                    salidaDia.readOnly = !trabajaDia;
+
+                    entradaDia.classList.toggle('readonly', entradaDia.readOnly);
+                    salidaDia.classList.toggle('readonly', salidaDia.readOnly);
+                }
+
+                const salidaComidaDia = document.getElementById(`${prefijo}_salida_comida_${dia}`);
+                const entradaComidaDia = document.getElementById(`${prefijo}_entrada_comida_${dia}`);
+                if (salidaComidaDia && entradaComidaDia) {
+                    salidaComidaDia.readOnly = !trabajaDia;
+                    entradaComidaDia.readOnly = !trabajaDia;
+
+                    salidaComidaDia.classList.toggle('readonly', salidaComidaDia.readOnly);
+                    entradaComidaDia.classList.toggle('readonly', entradaComidaDia.readOnly);
+                }
+            });
+        }
+
+        // Llama a la función para actualizar los campos al cargar la página
+        actualizarCampos('invierno');
+        actualizarCampos('verano');
+
+        // Función para actualizar la visibilidad de las tablas según el tipo de jornada
+        function actualizarVisibilidad() {
+            const tipoJornada = tipoJornadaSelect?.value;
+            const tablaInvierno = document.getElementById('tabla-horarios-invierno');
+            const tablaVerano = document.getElementById('tabla-horarios-verano');
+
+            if (tablaInvierno && tablaVerano) {
+                if (tipoJornada === 'invierno') {
+                    tablaInvierno.style.display = 'table';
+                    tablaVerano.style.display = 'none';
+                } else {
+                    tablaInvierno.style.display = 'none';
+                    tablaVerano.style.display = 'table';
+                }
+            }
+        }
+
+        // Actualiza la visibilidad al cargar la página
+        actualizarVisibilidad();
+
+        // Actualiza la visibilidad cuando cambia el tipo de jornada
+        if (tipoJornadaSelect) {
+            tipoJornadaSelect.addEventListener('change', () => {
+                console.log("cambio detectado");
+                actualizarVisibilidad();  // Cambia la visibilidad de las tablas
+            });
+        }
+
+        // Guardar datos al hacer clic en el botón guardar
+        document.getElementById('guardar-btn').addEventListener('click', function() {
+            const userId = {{ user.id }};
+            const datos = {
+                empresa_id: document.getElementById('empresa_id').value,
+                dias_restantes_este: document.getElementById('dias_restantes_este').value,
+                dias_restantes_pasado: 0,
+                tipo_jornada: document.getElementById('tipo_jornada').value,
+                rol: document.getElementById('role').value,
+
+                horarios_invierno: [],
+                horarios_verano: [],
+                vacaciones: document.querySelector('input[name="vacaciones"]')?.checked || false,
+                registros: document.querySelector('input[name="registros"]')?.checked || false,
+                ausencias: document.querySelector('input[name="ausencias"]')?.checked || false
+
+            };
+
+            // Recolectar los horarios de trabajo para cada día
+            const dias = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'];
+            dias.forEach(dia => {
+                // Horarios de invierno
+                const trabajaInviernoCheckbox = document.getElementById(`trabaja_${dia}`);
+                if (trabajaInviernoCheckbox && trabajaInviernoCheckbox.checked) {
+                    const entradaInvierno = document.getElementById(`entrada_${dia}`)?.value || '';
+                    const salidaComidaInvierno = document.getElementById(`salida_comida_${dia}`)?.value || '';
+                    const entradaComidaInvierno = document.getElementById(`entrada_comida_${dia}`)?.value || '';
+                    const salidaInvierno = document.getElementById(`salida_${dia}`)?.value || '';
+
+                    // Solo agrega el horario si "trabaja" está marcado
+                    datos.horarios_invierno.push({
+                        dia,
+                        trabaja: trabajaInviernoCheckbox.checked,
+                        entrada: entradaInvierno,
+                        salidaComida: salidaComidaInvierno,
+                        entradaComida: entradaComidaInvierno,
+                        salida: salidaInvierno
+                    });
+                }
+
+                // Horarios de verano
+                const trabajaVeranoCheckbox = document.getElementById(`trabaja_verano_${dia}`);
+                if (trabajaVeranoCheckbox && trabajaVeranoCheckbox.checked) {
+                    const entradaVerano = document.getElementById(`entrada_verano_${dia}`)?.value || '';
+                    const salidaComidaVerano = document.getElementById(`salida_comida_verano_${dia}`)?.value || '';
+                    const entradaComidaVerano = document.getElementById(`entrada_comida_verano_${dia}`)?.value || '';
+                    const salidaVerano = document.getElementById(`salida_verano_${dia}`)?.value || '';
+
+                    // Solo agrega el horario si "trabaja" está marcado
+                    datos.horarios_verano.push({
+                        dia,
+                        trabaja: trabajaVeranoCheckbox.checked,
+                        entrada: entradaVerano,
+                        salidaComida: salidaComidaVerano,
+                        entradaComida: entradaComidaVerano,
+                        salida: salidaVerano
+                    });
+                }
+            });
+
+            // Realizar la solicitud AJAX para guardar los datos en el servidor
+            fetch(`/admin/guardar_configure_user/${userId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(datos)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Datos guardados correctamente');
+                    location.reload()
+                } else {
+                    alert('Error al guardar los datos');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al guardar los datos');
+            });
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const validateBtn = document.getElementById('validateBtn');
+
+        // Verificamos si el botón existe antes de agregarle el evento
+        if (validateBtn) {
+            validateBtn.addEventListener('click', function () {
+                // Definir el ID del usuario y la URL
+                const userId = {{ user.id }};
+                const url = '/admin/validate_user/' + userId;
+
+                // Definir los datos a enviar (puedes agregar datos si es necesario)
+                const data = {
+                    'action': 'validate' // Puedes personalizar este dato si es necesario
+                };
+
+                // Usamos Fetch API para hacer la solicitud POST
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        // Actualizar el texto y el estado del botón basado en la respuesta
+                        if (data.approved) {
+                            validateBtn.disabled = true;
+                            validateBtn.textContent = 'USUARIO VALIDADO';
+                        } else {
+                            validateBtn.disabled = false;
+                            validateBtn.textContent = 'VALIDAR USUARIO';
+                        }
+
+                        if (data.bloqueado) {
+                            validateBtn.textContent = 'DESBLOQUEAR USUARIO';
+                        }
+
+                        alert(data.message);  // Mostrar mensaje de éxito
+                    } else {
+                        alert('Error al validar el usuario: ' + data.message);  // Mostrar mensaje de error
+                    }
+                })
+                .catch(error => {
+                    console.error('Error en la solicitud:', error);
+                    alert('Hubo un error al procesar la solicitud.');
+                });
+            });
+        }
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('.btn-mark-as-read').on('click', function() {
+            var notificacionId = $(this).data('id');
+            var $notificationDiv = $('#notificacion-' + notificacionId);
+            $.ajax({
+                url: '/marcar_leida/' + notificacionId,
+                type: 'POST',
+                success: function(response) {
+                    if (response.status === 'success') {
+                        // Elimina la notificación del DOM
+                        $notificationDiv.remove();
+                         location.reload();
+                    }
+                    // No hay necesidad de manejar el caso de error aquí, ya que se puede manejar en el backend
+                },
+                error: function(xhr, status, error) {
+                    // Opcional: manejar errores en la solicitud
+                    console.error('Error al marcar la notificación como leída:', error);
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var dropdownToggle = document.querySelectorAll('[data-bs-toggle="dropdown"]');
+        dropdownToggle.forEach(function(dropdown) {
+            dropdown.addEventListener('click', function(event) {
+                event.preventDefault();
+                var dropdownMenu = new bootstrap.Dropdown(dropdown);
+                dropdownMenu.toggle();
+            });
+        });
+    });
+</script>
+
+<script>
+    // Custom script to close the dropdown when clicking outside
+    $(document).on('click', function(event) {
+        var $trigger = $("#dropdownMenuButton");
+        if($trigger !== event.target && !$trigger.has(event.target).length){
+            $('.dropdown-menu').removeClass('show');
+        }
+    });
+    // Ensure dropdown stays open when clicking inside
+    $('#dropdownMenuButton').on('click', function(event) {
+        event.stopPropagation();
+        var $menu = $(this).next('.dropdown-menu');
+        $menu.toggleClass('show');
+    });
+    // Close the dropdown if clicking inside the dropdown menu
+    $('.dropdown-menu').on('click', function(event) {
+        event.stopPropagation();
+    });
+</script>
+</body>
+</html>

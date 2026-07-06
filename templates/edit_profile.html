@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Datos - Gestionaempresa</title>
+    <link rel="icon" href="{{ url_for('static', filename='logo_empresa.png') }}" type="image/png">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <!-- Nucleo Icons -->
+  <link href="/static/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="/static/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <!-- CSS Files -->
+  <link id="pagestyle" href="/static/assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
+  <!-- Nepcha Analytics (nepcha.com) -->
+  <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
+
+
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Puedes enlazar tu archivo CSS para estilos aquí -->
+
+<script src="https://kit.fontawesome.com/3da862d4a6.js" crossorigin="anonymous"></script>
+ <style>
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700);
+
+body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center; /* Centrar el texto */
+
+
+}
+
+.page-container {
+            padding-top: 100px; /* Baja todo el contenido dentro del contenedor */
+}
+
+#counter {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+
+    input, button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin-top: 10px;
+    }
+
+
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700);
+
+
+
+ h3 {
+      text-align: center;
+margin-top: -75px;
+margin-bottom:65px;
+    }
+
+
+.embed-responsive {
+        position: relative;
+        padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+        background-color: #000;
+    }
+    .embed-responsive-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+.card {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column; /* Asegura que el contenido y el footer se alineen verticalmente */
+    height: 100%; /* Asegura que la tarjeta ocupe todo el alto disponible */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+        .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+padding: 15px; /* Asegura suficiente espacio alrededor del título */
+        }
+        .card-body {
+            padding: 15px;
+
+
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .footer-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .footer-link a {
+            color: #4C94E0;
+            text-decoration: none;
+        }
+        .footer-link a:hover {
+            text-decoration: underline;
+        }
+h3 {
+            margin-top:-15px;/* Ajusta el espacio debajo del título */
+        }
+.card-header h3 {
+            margin-bottom: 15px; /* Ajusta el espacio debajo del título */
+        }
+
+.events-card,
+.news-card,
+.prog-card {
+    position: relative;
+    max-height: 600px; /* Altura máxima para las tarjetas de eventos y noticias */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede la altura máxima */
+}
+.summary-card{
+    position: relative;
+    max-height: 400px; /* Altura máxima para las tarjetas de eventos y noticias */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede la altura máxima */
+}
+
+.footer-link {
+    position: relative; /* Necesario para que el footer se alinee al final del card */
+    text-align: center;
+    margin-top: auto; /* Empuja el footer al fondo de la tarjeta */
+    background-color: #f8f9fa; /* Fondo del footer */
+    padding: 10px;
+    border-top: 1px solid #e9ecef; /* Línea superior del footer */
+}
+        .footer-link a {
+            color: #6c6c6c;
+            text-decoration: none;
+        }
+        .footer-link a:hover {
+            text-decoration: underline;
+        }
+
+
+.card-body {
+    padding: 15px;
+    flex: 1; /* Esto hace que el cuerpo de la tarjeta ocupe todo el espacio disponible */
+    overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede el alto disponible */
+
+}
+
+
+/* Estilos para los contadores */
+.counter-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido verticalmente */
+    border: 1px solid #e0e0e0; /* Borde para separar los contadores */
+    border-radius: 8px; /* Esquinas redondeadas */
+    padding: 5px; /* Reducir el padding */
+    color: #ffffff; /* Color del texto */
+}
+
+.counter-header {
+    position: relative;
+    height: 50px; /* Reducir la altura del encabezado */
+    padding: 0;
+    overflow: hidden; /* Evita el desbordamiento */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
+.counter-body, .counter-body2 {
+    padding: 5px; /* Reducir el padding del cuerpo del contador */
+    text-align: center; /* Centra el texto en el cuerpo */
+}
+
+.counter-body h6, .counter-body2 h6 {
+    font-size: 14px; /* Reducir el tamaño de la fuente del título */
+}
+
+.counter-body p, .counter-body2 p {
+    font-size: 12px; /* Reducir el tamaño de la fuente del párrafo */
+}
+
+.bg-primary {
+    background-color: #4C94E0 !important; /* Azul */
+}
+.btn-primary3 {
+    background-color: #a965f5 !important; /* Morado */
+    color:white;
+}
+.btn-primary3:hover {
+    background-color: #a965f5 !important; /* Morado */
+    color:white;
+}
+
+.bg-success {
+    background-color: #28a745 !important; /* Verde */
+}
+
+.bg-info {
+    background-color: #17a2b8 !important; /* Azul claro */
+}
+
+.bg-warning {
+    background-color: #ffc107 !important; /* Amarillo */
+}
+
+  .card-global {
+            height: 450px; /* Ajusta según tus necesidades */
+            display: flex;
+            flex-direction: column;
+margin-top:-25px;
+        }
+
+        /* Clase para la tarjeta negra específica del gráfico */
+        .card-graph {
+            height: 130%; /* Ajusta según el espacio que quieras para el gráfico */
+            display: flex;
+            align-items: center; /* Centra el gráfico verticalmente */
+            justify-content: center; /* Centra el gráfico horizontalmente */
+        }
+
+        /* Estilo para el canvas dentro de la tarjeta negra */
+        .chart-canvas {
+            width: 100%;
+            height: 100%;
+}
+.custom-card-body {
+            margin-top: 100px; /* Ajusta el valor según tus necesidades */
+margin-left:20px;
+        }
+
+
+.recurso {
+            display: inline-block;
+            width: 30%;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        .recurso img {
+            max-width: 100px;
+            max-height: 100px;
+            margin-bottom: 10px;
+        }
+
+.embed-responsive {
+        position: relative;
+        padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+        background-color: #000;
+    }
+    .embed-responsive-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+ .toast-center-center {
+            top: 50%;
+            left: 70%;
+            transform: translate(-50%, -50%);
+            min-width: 800px; /* Más grande */
+min-height: 800px; /* Más grande */
+            opacity: 1; /* Menos transparente */
+        }
+        .toast-success .toast-message {
+            color: green;
+        }
+        .toast-error .toast-message {
+            color: red;
+        }
+        .toast {
+            font-size: 1.2em; /* Tamaño de fuente más grande */
+            padding: 20px; /* Más relleno */
+        }
+
+.btn-mark-as-read {
+            padding: 5px 10px;
+            font-size: 12px;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            color: #333;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .btn-mark-as-read:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Estilos para la pantalla de carga */
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+
+.notificaciones {
+    position: relative; /* o 'absolute' o 'fixed' si es necesario */
+    z-index: 9999999; /* Valor alto para asegurarte de que está por encima de otros elementos */
+}
+/* Estilo del ícono de campana */
+.nav-item .fa-bell {
+    position: relative;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-bell:hover {
+    color: #495057;
+}
+
+/* Badge de notificaciones */
+.nav-item .badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    border-radius: 50%;
+    background-color: #f44336;
+    color: #fff;
+}
+
+/* Dropdown */
+.dropdown-menu {
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Estilo de cada notificación */
+.dropdown-item {
+    border-radius: 0.375rem;
+    transition: background-color 0.2s ease;
+    padding: 12px 15px;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* Estilo del texto de la notificación */
+.text-sm {
+    font-size: 0.875rem;
+    color: #343a40;
+    font-weight: 600;
+}
+
+.text-xs {
+    font-size: 0.75rem;
+    color: #6c757d;
+}
+
+/* Botón para marcar como leída */
+.btn-mark-as-read {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-mark-as-read:hover {
+    background: #0056b3;
+}
+
+/* Sin notificaciones */
+.text-center span {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+/* Posiciona el badge a la izquierda */
+.nav-item .badge {
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    border-radius: 50%;
+    background-color: #f44336;
+    color: #fff;
+    margin-right: 10px; /* Separa el badge del icono */
+}
+
+/* Ajuste de icono de campana */
+.nav-item .fa-bell {
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-bell:hover {
+    color: #495057;
+}
+/* Estilo del ícono de cerrar sesión */
+.nav-item .fa-sign-out {
+    position: relative;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.nav-item .fa-sign-out:hover {
+    color: #495057;
+}
+    /* Estilos para los mensajes flash */
+.flash-messages {
+    margin-bottom: 20px;
+}
+
+.flash {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.flash.success {
+    background-color: #d4edda; /* Color de fondo para mensajes de éxito */
+    color: #155724; /* Color del texto para mensajes de éxito */
+    border: 1px solid #c3e6cb;
+}
+
+.flash.error {
+    background-color: #f8d7da; /* Color de fondo para mensajes de error */
+    color: #721c24; /* Color del texto para mensajes de error */
+    border: 1px solid #f5c6cb;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+}
+
+
+
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.flash-messages {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        width: 300px;
+        z-index: 1000;
+    }
+
+.form-box {
+    border: 1px solid #ccc; /* Color y grosor del borde */
+    padding: 20px; /* Espacio interno */
+    border-radius: 5px; /* Esquinas redondeadas */
+    background-color: #f9f9f9; /* Color de fondo */
+    margin-top: 20px; /* Espacio superior */
+}
+
+.contenido {
+    margin: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.cont2 {
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+
+.btn-archivo-adjunto {
+    background-color: #689CBE;
+    color: white;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn-archivo-adjunto:hover {
+    background-color: #4a7f9c; /* Color al pasar el ratón */
+}
+
+.alert {
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.edit-btn {
+    background-color: #4C94E0;
+    border-color: #4C94E0;
+    color: white;
+    padding: 5px 10px;
+}
+
+.edit-btn:hover {
+    background-color: #0056b3; /* Color al pasar el ratón */
+}
+
+/* Estilos para los círculos de días restantes */
+.circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+
+
+
+
+
+
+
+
+    /* Estilo para hacer el select más pequeño y ajustado a la tabla */
+    .small-select {
+        max-width: 80%;  /* Se asegura de que el campo se ajuste al ancho de la celda */
+        width: auto;      /* Ajuste automático según el contenido */
+    }
+
+/* Estilo general para el formulario */
+.profile-form {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Contenedor general del formulario */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+    max-width: 1700px;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Contenedor de las tablas */
+.tables-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+/* Estilo para las tablas */
+.form-table {
+    width: 100%;
+    color: #333;
+    border-collapse: collapse;
+
+}
+
+/* Fila de la tabla */
+.form-table tr {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    border:0px;
+
+}
+
+/* Estilo para las celdas de las tablas */
+.form-table .label, .form-table .input {
+    padding: 10px;
+    border:0px;
+
+
+}
+
+ .form-table .input {
+     border:0px;
+
+ }
+
+#Telefono {
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    padding: 8px;
+    border: 0px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;  /* Fondo más claro */
+    color: #333;                /* Texto en color oscuro */
+    outline: none;              /* Elimina el contorno por defecto */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    margin-top:-3px;
+    max-width:250px;
+
+
+}
+
+label[for="Telefono"] {
+    font-size: 12px;        /* Tamaño de fuente más grande */
+    color: #000;         /* Color azul (puedes cambiarlo al que desees) */
+    font-family: 'Roboto', sans-serif; /* Tipo de letra */
+    margin-top:5px;
+    font-weight: bold;
+}
+#email {
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    padding: 8px;
+    border: 0px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;  /* Fondo más claro */
+    color: #333;                /* Texto en color oscuro */
+    outline: none;              /* Elimina el contorno por defecto */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    margin-top:-3px;
+    max-width:250px;
+
+}
+
+label[for="email"] {
+    font-size: 12px;        /* Tamaño de fuente más grande */
+    color: #000;         /* Color azul (puedes cambiarlo al que desees) */
+    font-family: 'Roboto', sans-serif; /* Tipo de letra */
+    margin-top:5px;
+    font-weight: bold;
+}
+#nombre {
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    padding: 8px;
+    border: 0px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;  /* Fondo más claro */
+    color: #333;                /* Texto en color oscuro */
+    outline: none;              /* Elimina el contorno por defecto */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    margin-top:-3px;
+    max-width:250px;
+
+}
+
+label[for="nombre"] {
+    font-size: 12px;        /* Tamaño de fuente más grande */
+    color: #000;         /* Color azul (puedes cambiarlo al que desees) */
+    font-family: 'Roboto', sans-serif; /* Tipo de letra */
+    margin-top:5px;
+    font-weight: bold;
+}
+
+#primer_apellido {
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    padding: 8px;
+    border: 0px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;  /* Fondo más claro */
+    color: #333;                /* Texto en color oscuro */
+    outline: none;              /* Elimina el contorno por defecto */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    margin-top:-3px;
+    max-width:250px;
+
+}
+
+label[for="primer_apellido"] {
+    font-size: 12px;        /* Tamaño de fuente más grande */
+    color: #000;         /* Color azul (puedes cambiarlo al que desees) */
+    font-family: 'Roboto', sans-serif; /* Tipo de letra */
+    margin-top:5px;
+    font-weight: bold;
+}
+#DNI {
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    padding: 8px;
+    border: 0px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;  /* Fondo más claro */
+    color: #333;                /* Texto en color oscuro */
+    outline: none;              /* Elimina el contorno por defecto */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    margin-top:-3px;
+    max-width:250px;
+
+}
+
+label[for="DNI"] {
+    font-size: 12px;        /* Tamaño de fuente más grande */
+    color: #000;         /* Color azul (puedes cambiarlo al que desees) */
+    font-family: 'Roboto', sans-serif; /* Tipo de letra */
+    margin-top:5px;
+    font-weight: bold;
+}
+#Fecha_nacimiento {
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    padding: 8px;
+    border: 0px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;  /* Fondo más claro */
+    color: #333;                /* Texto en color oscuro */
+    outline: none;              /* Elimina el contorno por defecto */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    margin-top:-3px;
+    max-width:250px;
+
+}
+
+label[for="Fecha_nacimiento"] {
+   font-size: 12px;        /* Tamaño de fuente más grande */
+    color: #000;         /* Color azul (puedes cambiarlo al que desees) */
+    font-family: 'Roboto', sans-serif; /* Tipo de letra */
+    margin-top:5px;
+    font-weight: bold;
+}
+#Domicilio {
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    padding: 8px;
+    border: 0px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;  /* Fondo más claro */
+    color: #333;                /* Texto en color oscuro */
+    outline: none;              /* Elimina el contorno por defecto */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    margin-top:-3px;
+    max-width:250px;
+
+}
+
+label[for="Domicilio"] {
+    font-size: 12px;        /* Tamaño de fuente más grande */
+    color: #000;         /* Color azul (puedes cambiarlo al que desees) */
+    font-family: 'Roboto', sans-serif; /* Tipo de letra */
+    margin-top:5px;
+    font-weight: bold;
+}
+#Localidad {
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    padding: 8px;
+    border: 0px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;  /* Fondo más claro */
+    color: #333;                /* Texto en color oscuro */
+    outline: none;              /* Elimina el contorno por defecto */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    margin-top:-3px;
+    max-width:250px;
+
+}
+
+label[for="Localidad"] {
+    font-size: 12px;        /* Tamaño de fuente más grande */
+    color: #000;         /* Color azul (puedes cambiarlo al que desees) */
+    font-family: 'Roboto', sans-serif; /* Tipo de letra */
+    margin-top:5px;
+    font-weight: bold;
+}
+#Provincia {
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    padding: 8px;
+    border: 0px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;  /* Fondo más claro */
+    color: #333;                /* Texto en color oscuro */
+    outline: none;              /* Elimina el contorno por defecto */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    margin-top:-3px;
+    max-width:250px;
+
+}
+
+label[for="Provincia"] {
+    font-size: 12px;        /* Tamaño de fuente más grande */
+    color: #000;         /* Color azul (puedes cambiarlo al que desees) */
+    font-family: 'Roboto', sans-serif; /* Tipo de letra */
+    margin-top:5px;
+    font-weight: bold;
+}
+#CP {
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    padding: 8px;
+    border: 0px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;  /* Fondo más claro */
+    color: #333;                /* Texto en color oscuro */
+    outline: none;              /* Elimina el contorno por defecto */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    margin-top:-3px;
+    max-width:250px;
+
+}
+
+label[for="CP"] {
+    font-size: 12px;        /* Tamaño de fuente más grande */
+    color: #000;         /* Color azul (puedes cambiarlo al que desees) */
+    font-family: 'Roboto', sans-serif; /* Tipo de letra */
+    margin-top:5px;
+    font-weight: bold;
+}
+#Centro_trabajo {
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    padding: 8px;
+    border: 0px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;  /* Fondo más claro */
+    color: #333;                /* Texto en color oscuro */
+    outline: none;              /* Elimina el contorno por defecto */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    margin-top:-3px;
+    max-width:250px;
+
+}
+
+label[for="Centro_trabajo"] {
+    font-size: 12px;        /* Tamaño de fuente más grande */
+    color: #000;         /* Color azul (puedes cambiarlo al que desees) */
+    font-family: 'Roboto', sans-serif; /* Tipo de letra */
+    margin-top:5px;
+    font-weight: bold;
+}
+
+#Departamento {
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    padding: 8px;
+    border: 0px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;  /* Fondo más claro */
+    color: #333;                /* Texto en color oscuro */
+    outline: none;              /* Elimina el contorno por defecto */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    margin-top:-3px;
+    max-width:250px;
+
+}
+
+label[for="Departamento"] {
+   font-size: 12px;        /* Tamaño de fuente más grande */
+    color: #000;         /* Color azul (puedes cambiarlo al que desees) */
+    font-family: 'Roboto', sans-serif; /* Tipo de letra */
+    margin-top:5px;
+    font-weight: bold;
+}
+
+/* Celdas de etiquetas (labels) */
+.form-table .label {
+    font-weight: bold;
+    width: 30%;
+    padding-right: 10px;
+    display: flex;
+    align-items: center;
+    color: #333;
+}
+
+/* Celdas de entradas (inputs) */
+.form-table .input {
+    width: 70%;
+}
+
+/* Iconos */
+.form-table .label i {
+    margin-right: 10px;
+}
+
+/* Estilo para el mensaje de éxito */
+.success-message {
+    display: none;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+    padding: 10px;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+/* Estilo para los botones */
+.form-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.submit-btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #45a049;
+}
+
+/* Estilo para la nota y cambio de contraseña */
+.note {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+}
+
+.change-password-btn {
+    display: inline-block;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    font-size: 16px;
+    color: #4C94E0;
+    text-decoration: none;
+}
+
+.change-password-btn:hover {
+    text-decoration: underline;
+}
+
+/* Estilo para los campos select (como Centro de trabajo) */
+.form-table select {
+    width: 100%;          /* Hace que el select ocupe el 100% del contenedor */
+    max-width: 100%;      /* Limita el tamaño máximo al contenedor */
+    box-sizing: border-box;  /* Asegura que el padding y border no influyan en el ancho */
+    overflow: hidden;     /* Evita el desbordamiento de contenido */
+    text-overflow: ellipsis; /* Añade "..." al final de los textos largos */
+}
+
+/* Estilo específico para el select de Centro de Trabajo */
+.form-table .Centro_trabajo {
+    max-width: 250px; /* Ajusta el ancho máximo que deseas para el combo */
+    width: auto; /* Permite que se ajuste si es necesario */
+}
+
+
+/* Estilo específico para el select de Centro de Trabajo */
+.form-table .Departamento {
+    max-width: 250px; /* Ajusta el ancho máximo que deseas para el combo */
+    width: auto; /* Permite que se ajuste si es necesario */
+}
+
+
+
+
+/* Estilo general para los select dentro de las tablas */
+.form-table select {
+    width: 100%;              /* Hace que el select ocupe el 100% del contenedor */
+    max-width: 100%;          /* Limita el tamaño máximo al contenedor */
+    box-sizing: border-box;   /* Asegura que el padding y border no influyan en el ancho */
+    padding: 8px;             /* Agrega un poco de padding para mejorar la apariencia */
+    font-size: 16px;          /* Ajusta el tamaño de la fuente */
+    font-family: 'Roboto', sans-serif; /* Asegura que el tipo de letra sea consistente */
+    border: 1px solid #ccc;   /* Establece un borde suave */
+    border-radius: 4px;       /* Bordes redondeados */
+}
+
+/* Estilo específico para el campo select de Provincias */
+.form-table .Provincia {
+    max-width: 100%;          /* Asegura que no se expanda más allá de su contenedor */
+    width: 100%;              /* Hace que el select ocupe el 100% del ancho disponible */
+    font-family: 'Roboto', sans-serif; /* Asegura que el tipo de letra sea consistente */
+    font-size: 16px;          /* Igual tamaño de letra */
+}
+
+    @media (max-width: 768px) { /* Pantallas con ancho menor o igual a 768px */
+    .breadcrumb {
+        display: flex;
+        flex-direction: column; /* Apila los elementos en columna si hay otros hijos */
+        align-items: center;    /* Centra horizontalmente */
+        justify-content: center; /* Centra verticalmente si hay espacio */
+        text-align: center;     /* Centra el texto */
+        margin-left: 20%;         /* Asegura el centrado horizontal */
+    }
+
+    .breadcrumb h5 {
+        text-align: center; /* Centra específicamente el texto del <h5> */
+        display:none !important;
+    }
+    .logo-spinner{
+
+        display:none;
+    }
+    table {
+            margin-top: 0 !important;
+        }
+
+   .tables-container {
+        flex-direction: column; /* Apila las tablas en columna */
+        align-items: center; /* Centra las tablas */
+    }
+
+    .form-table {
+        width: 90%; /* Ajusta el ancho de las tablas en móviles */
+        max-width: none; /* Quita el límite de tamaño */
+    }
+
+    td.label {
+        text-align: left; /* Ajustar alineación si es necesario */
+    }
+
+    td.input {
+        text-align: right; /* Ajustar alineación si es necesario */
+        min-width:120px;
+        max-width:160px;
+        margin-left:50px;
+    }
+    .form-container{
+        margin-top:0px !important;
+
+    }
+
+}
+
+
+
+.btn-mark-as-read {
+    background: #1565a8;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-mark-as-read:hover {
+    background: #0d4376;
+}
+
+.dropdown-item {
+    border-radius: 0.375rem;
+    transition: background-color 0.2s ease;
+    padding: 1px 15px !important;
+    margin-top:0px;
+}
+
+
+
+
+
+
+
+.custom-width-modal {
+  max-width: 600px; /* o el ancho que prefieras */
+}
+
+.btn-mark-as-read {
+  min-width: 28px !important;
+  padding: 3px 3px;
+}
+/* Modal tipo barra lateral derecha */
+.modal-side-right {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 0;
+  height: 100%;
+  max-width: 500px;
+  width: 100%;
+  z-index: 1055;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+/* Cuando el modal se muestra */
+.modal.show .modal-side-right {
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+/* Evitamos que Bootstrap lo sobrescriba */
+.modal.fade .modal-dialog {
+  transition: none !important;
+  transform: none !important;
+}
+
+/* Ajustes al contenido del modal */
+.modal-side-right .modal-content {
+  height: 100%;
+  border-radius: 0;
+  text-align: left;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+}
+/* Estilo del texto de la notificación */
+.text-sm {
+    font-size: 0.75rem !important;
+    color: #000;
+    font-weight: 600;
+}
+
+.text-xs {
+    font-size: 0.70rem !important;
+    color: #6c757d;
+}
+
+
+
+.btn-primary3 {
+  background-color: #1565a8 !important;
+  color: white;
+  font-size: 0.75rem;
+  text-transform: none; /* evita mayúsculas automáticas */
+  margin-left:10px;
+}
+
+.btn-primary3:hover {
+  background-color: #0d4b80 !important; /* un tono más oscuro para el hover */
+}
+
+
+
+
+  @media (max-width: 576px) {
+    .dropdown-menu-mobile-half {
+      width: 50vw !important;
+      right: 0 !important;
+      left: auto !important;
+    }
+  }
+
+  .dropdown-menu-mobile-half {
+    width: 50vw !important; /* Ajusta al 50% del ancho de la ventana */
+    max-width: 400px;        /* Máximo ancho opcional */
+    min-width: 250px;        /* Mínimo opcional */
+    padding: 1rem;
+}
+
+.dropdown-menu-mobile-half .dropdown-item {
+    white-space: normal; /* Permite que el texto se ajuste a múltiples líneas */
+    word-wrap: break-word;
+    width: 100%;
+}
+
+.dropdown-menu-mobile-half .btn-mark-as-read {
+
+    padding: 0 5px;
+    font-size: 0.9rem;
+}
+
+
+
+
+
+</style>
+
+</head>
+
+<body class="g-sidenav-show  bg-gray-200">
+
+ <div class="modal fade" id="welcomeModal" tabindex="-1" role="dialog" aria-labelledby="welcomeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="welcomeModalLabel">Bienvenido</h5>
+                </div>
+                <div class="modal-body" id="welcomeMessage">
+                    <!-- El mensaje de bienvenida se establecerá mediante JavaScript -->
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<!-- Menu HTML añadido de otro .html -->
+
+    {% include 'menu_user.html' %}
+
+
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg w-100">
+
+
+    <!-- Navbar -->
+   <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+    <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                <h5 class="font-weight-bolder mb-0">
+                    <i class="fas fa-user-circle me-2" style="color: #000;"></i> <!-- Icono de vacaciones con espacio -->
+                    Mi Perfil de Empleado
+                </h5>
+            </ol>
+            <div class="centered-message">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="flash-messages">
+                            {% for category, message in messages %}
+                                <div class="flash {{ category }}">{{ message }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </nav>
+
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <div class="input-group input-group-outline"></div>
+            </div>
+            <ul class="navbar-nav justify-content-end">
+                <li class="nav-item d-flex align-items-center">
+
+
+
+
+</li>
+            {% if current_user.two_factor_enabled %}
+
+                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#disable2faModal" style="margin-right:10px; background-color:#ff914d; text-transform: capitalize;">
+  <i class="fa fa-unlock-alt" aria-hidden="true"></i> Deshabilitar 2FA
+</button>
+{% else %}
+  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#enable2faModal" style="margin-right:10px; background-color:#1565A8; text-transform: capitalize;">
+    <i class="fas fa-lock"></i> Habilitar 2FA
+  </button>
+{% endif %}
+
+
+
+<!-- Modal para habilitar 2FA -->
+<div class="modal fade" id="enable2faModal" tabindex="-1" aria-labelledby="enable2faModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="enable2faModalLabel">
+  <i class="fas fa-lock"></i> Habilitar Autenticación de Dos Factores</h5>
+                <button type="button" class="btn m-0" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Escanea el código QR con tu aplicación de autenticación (por ejemplo, Google Authenticator).</p>
+                <div class="text-center">
+                    <img src="{{ url_for('enable_2fa') }}" alt="Código QR para habilitar 2FA" style="max-width:200px; height:auto;">
+                </div>
+                <form id="enable2faForm" method="POST" action="{{ url_for('verify_2fa') }}">
+                    <div class="mb-3">
+                        <label for="otp_code" class="form-label" style="color: black; font-weight: bold;">Escanea el código de verificación</label>
+                        <input type="text" name="otp_code" id="otp_code" class="form-control" placeholder="Introduzca el código" required>
+                    </div>
+                    <button type="submit" class="btn" style="background-color: #1565A8; color: white; text-transform: capitalize;">
+  <i class="fas fa-check"></i> Habilitar
+</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para deshabilitar 2FA -->
+<div class="modal fade" id="disable2faModal" tabindex="-1" aria-labelledby="disable2faModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="disable2faModalLabel">
+                    <i class="fas fa-lock me-2"></i> Deshabilitar Autenticación de Dos Factores
+                </h5>
+                <button type="button" class="btn m-0" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas deshabilitar la autenticación de dos factores? Esto reducirá la seguridad de tu cuenta.</p>
+                <form id="disable2faForm" method="POST" action="{{ url_for('disable_2fa') }}">
+                    <button type="submit" class="btn btn-danger" style="text-transform: capitalize;">
+                        <i class="fa fa-unlock-alt me-2"></i> Deshabilitar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('enable2faForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const form = event.target;
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => {
+        if (response.redirected) {
+            window.location.href = response.url;
+        } else {
+            return response.json();
+        }
+    })
+    .then(data => {
+        if (data && data.status !== 'success') {
+            alert(data.message);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+document.getElementById('disable2faForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const form = event.target;
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => {
+        if (response.redirected) {
+            window.location.href = response.url;
+        } else {
+            return response.json();
+        }
+    })
+    .then(data => {
+        if (data && data.status !== 'success') {
+            alert(data.message);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+});
+</script>
+
+
+
+
+
+
+
+                <li class="nav-item px-3 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-body p-0"></a>
+                </li>
+                <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                        <div class="sidenav-toggler-inner" style="margin-right:10px;">
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                        </div>
+                    </a>
+                </li>
+<li class="nav-item dropdown pe-2 d-flex align-items-center">
+    <a href="javascript:;" class="nav-link text-body p-0 d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#notificacionesModal">
+        {% if notificaciones %}
+            <span class="badge bg-danger me-2">{{ notificaciones|length }}</span>
+        {% endif %}
+        <i class="fa fa-bell cursor-pointer" style="font-size: 1.5rem;"></i>
+    </a>
+</li>
+
+          <li class="nav-item d-flex align-items-center">
+              <a href="/cerrar_sesion" class="nav-link text-body font-weight-bold px-0">
+                <i class="fa fa-sign-out"style="font-size: 1.5rem;"></i>
+    </a>
+</li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+<!-- Modal -->
+<div class="modal fade" id="notificacionesModal" tabindex="-1" aria-labelledby="notificacionesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-side-right">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="notificacionesModalLabel">
+          <i class="fa fa-bell cursor-pointer" style="font-size: 1.5rem;"></i> Notificaciones
+        </h5>
+        <button type="button" class="btn m-0" data-bs-dismiss="modal" aria-label="Cerrar">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="modal-body text-start">
+        <form action="{{ url_for('marcar_notificaciones_leidas') }}" method="post">
+          <button type="submit" class="btn btn-primary3 btn-sm mb-3">Marcar todas como leídas</button>
+        </form>
+
+        {% for notificacion in notificaciones %}
+        <div class="mb-3 border-bottom pb-2">
+          <h6 class="text-sm font-weight-normal mb-1">
+            {{ notificacion.concepto }}
+            {% if not notificacion.leida %}
+              <button class="btn btn-link btn-mark-as-read ms-2" style="min-width: 32px;" data-id="{{ notificacion.id }}">
+                <i class="fa-solid fa-check" style="font-size: 1.2rem;"></i>
+              </button>
+            {% endif %}
+          </h6>
+          <p class="text-xs text-secondary mb-0">
+            <i class="fa fa-clock me-1"></i>
+            {{ notificacion.fecha_hora.strftime('%d/%m/%Y %H:%M') }}
+          </p>
+        </div>
+        {% endfor %}
+
+        {% if notificaciones|length == 0 %}
+        <div class="text-start">
+          <span class="text-sm">No tienes notificaciones</span>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+    <h5 class="font-weight-bolder mb-0 d-md-none text-start">
+                    <i class="fas fa-user-circle me-2" style="color: #000; margin-left:5px;"></i> <!-- Icono de vacaciones con espacio -->
+                    Mi Perfil de Empleado
+                </h5>
+    <!-- End Navbar -->
+
+    <!-- Cuerpo del HTML -->
+
+<form method="POST" action="{{ url_for('edit_profile') }}" class="profile-form d-none d-md-inline-block" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+
+    <div class="form-container" style="min-width: 1000px;">
+        <div class="tables-container">
+            <!-- Tabla 1 -->
+            <table class="form-table">
+                <tr>
+                    <td class="label"><i class="fas fa-user"></i> {{ form.nombre.label }}</td>
+                    <td class="input">{{ form.nombre }}</td>
+                </tr>
+                <tr>
+                    <td class="label"><i class="fas fa-users"></i> {{ form.primer_apellido.label }}</td>
+                    <td class="input">{{ form.primer_apellido }}</td>
+                </tr>
+
+                <tr>
+                    <td class="label"><i class="fas fa-id-card"></i> {{ form.DNI.label }}</td>
+                    <td class="input">{{ form.DNI }}</td>
+                </tr>
+                <tr>
+                    <td class="label"><i class="fas fa-calendar-alt"></i> {{ form.Fecha_nacimiento.label }}</td>
+                    <td class="input">{{ form.Fecha_nacimiento }}</td>
+                </tr>
+               <tr>
+    <td class="label"><i class="fas fa-envelope"></i> {{ form.email.label }}</td>
+    <td class="input">
+        {{ form.email(class="form-control bg-light", disabled=True) }}
+    </td>
+</tr>
+
+                <tr>
+                    <td class="label"><i class="fas fa-phone"></i> {{ form.Telefono.label }}</td>
+                    <td class="input">{{ form.Telefono }}</td>
+                </tr>
+            </table>
+
+            <!-- Tabla 2 -->
+            <table class="form-table">
+                <tr>
+                    <td class="label"><i class="fas fa-home"></i> {{ form.Domicilio.label }}</td>
+                    <td class="input">{{ form.Domicilio }}</td>
+                </tr>
+                <tr>
+                    <td class="label"><i class="fas fa-city"></i> {{ form.Localidad.label }}</td>
+                    <td class="input">{{ form.Localidad }}</td>
+                </tr>
+                <tr>
+    <td class="label"><i class="fas fa-map-marker-alt"></i> {{ form.Provincia.label }}</td>
+    <td class="input">
+        <select name="Provincia" id="Provincia" class="form-control Provincia">
+            <option value="">Selecciona una provincia</option>
+            <option value="Álava">Álava</option>
+            <option value="Albacete">Albacete</option>
+            <option value="Alicante">Alicante</option>
+            <option value="Almería">Almería</option>
+            <option value="Asturias">Asturias</option>
+            <option value="Ávila">Ávila</option>
+            <option value="Badajoz">Badajoz</option>
+            <option value="Barcelona">Barcelona</option>
+            <option value="Burgos">Burgos</option>
+            <option value="Cáceres">Cáceres</option>
+            <option value="Cádiz">Cádiz</option>
+            <option value="Cantabria">Cantabria</option>
+            <option value="Castellón">Castellón</option>
+            <option value="Ceuta">Ceuta</option>
+            <option value="Ciudad Real">Ciudad Real</option>
+            <option value="Córdoba">Córdoba</option>
+            <option value="La Coruña">La Coruña</option>
+            <option value="Cuenca">Cuenca</option>
+            <option value="Gerona">Gerona</option>
+            <option value="Granada">Granada</option>
+            <option value="Guadalajara">Guadalajara</option>
+            <option value="Guipúzcoa">Guipúzcoa</option>
+            <option value="Huelva">Huelva</option>
+            <option value="Huesca">Huesca</option>
+            <option value="Islas Baleares">Islas Baleares</option>
+            <option value="Jaén">Jaén</option>
+            <option value="La Rioja">La Rioja</option>
+            <option value="Las Palmas">Las Palmas</option>
+            <option value="León">León</option>
+            <option value="Lérida">Lérida</option>
+            <option value="Madrid">Madrid</option>
+            <option value="Malaga">Málaga</option>
+            <option value="Murcia">Murcia</option>
+            <option value="Navarra">Navarra</option>
+            <option value="Ourense">Ourense</option>
+            <option value="Palencia">Palencia</option>
+            <option value="Pontevedra">Pontevedra</option>
+            <option value="Salamanca">Salamanca</option>
+            <option value="Segovia">Segovia</option>
+            <option value="Sevilla">Sevilla</option>
+            <option value="Soria">Soria</option>
+            <option value="Tarragona">Tarragona</option>
+            <option value="Teruel">Teruel</option>
+            <option value="Toledo">Toledo</option>
+            <option value="Valencia">Valencia</option>
+            <option value="Valladolid">Valladolid</option>
+            <option value="Vizcaya">Vizcaya</option>
+            <option value="Zamora">Zamora</option>
+            <option value="Zaragoza">Zaragoza</option>
+        </select>
+    </td>
+</tr>
+
+                <tr>
+                    <td class="label"><i class="fas fa-envelope"></i> {{ form.CP.label }}</td>
+                    <td class="input">{{ form.CP }}</td>
+                </tr>
+                <tr>
+    <td class="label"><i class="fas fa-building"></i> {{ form.Centro_trabajo.label }}</td>
+    <td class="input">
+        {{ form.Centro_trabajo(class="form-control bg-light") }}
+    </td>
+</tr>
+<tr>
+    <td class="label"><i class="fa fa-briefcase" aria-hidden="true"></i> {{ form.Departamento.label }}</td>
+    <td class="input">
+        {{ form.Departamento(class="form-control bg-light") }}
+    </td>
+</tr>
+
+</tr>
+{% if user.empresa %}
+<tr>
+    <td class="label" style="   font-size: 12px;        /* Tamaño de fuente más grande */
+    color: #000;         /* Color azul (puedes cambiarlo al que desees) */
+    font-family: 'Roboto', sans-serif; /* Tipo de letra */
+    margin-top:5px;
+    font-weight: bold;"><i class="fa-solid fa-ranking-star"></i> Empresa</td>
+    <td class="input">
+        <input type="text" class="form-control" value="{{ user.empresa.nombre }}" readonly style="    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    padding: 8px;
+    border: 0px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;  /* Fondo más claro */
+    color: #333;                /* Texto en color oscuro */
+    outline: none;              /* Elimina el contorno por defecto */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    margin-top:-3px;
+    max-width:250px;">
+    </td>
+</tr>
+{% endif %}
+
+
+
+            </table>
+        </div>
+
+        <!-- Mensaje de éxito -->
+        <div id="success-message" class="success-message">
+            <!-- El mensaje de éxito se mostrará aquí -->
+        </div>
+
+        <!-- Botones y nota -->
+        <div class="form-actions">
+            <button type="submit" class="submit-btn"><i class="fas fa-save"></i> Guardar cambios</button>
+        </div>
+
+        <p class="note">*Todos los campos deben estar rellenos antes de guardar.</p>
+
+        <a href="{{ url_for('edit_password') }}" class="change-password-btn">
+            <i class="fas fa-key"></i> Cambiar contraseña
+        </a>
+    </div>
+</form>
+
+<form method="POST" action="{{ url_for('edit_profile') }}" class="profile-form d-inline d-md-none">
+    {{ form.hidden_tag() }}
+
+    <div class="form-container">
+        <div class="tables-container">
+            <!-- Tabla 1 -->
+            <table class="form-table">
+                <tr>
+                    <td class="label"><i class="fas fa-user"></i> {{ form.nombre.label }}</td>
+                    <td class="input">{{ form.nombre }}</td>
+                </tr>
+                <tr>
+                    <td class="label"><i class="fas fa-users"></i> {{ form.primer_apellido.label }}</td>
+                    <td class="input">{{ form.primer_apellido }}</td>
+                </tr>
+
+                <tr>
+                    <td class="label"><i class="fas fa-id-card"></i> {{ form.DNI.label }}</td>
+                    <td class="input">{{ form.DNI }}</td>
+                </tr>
+                <tr>
+                    <td class="label"><i class="fas fa-calendar-alt"></i> {{ form.Fecha_nacimiento.label }}</td>
+                    <td class="input">{{ form.Fecha_nacimiento }}</td>
+                </tr>
+                <tr>
+                    <td class="label"><i class="fas fa-envelope"></i> {{ form.email.label }}</td>
+                    <td class="input">{{ form.email }}</td>
+                </tr>
+                <tr>
+                    <td class="label"><i class="fas fa-phone"></i> {{ form.Telefono.label }}</td>
+                    <td class="input">{{ form.Telefono }}</td>
+                </tr>
+
+
+            <!-- Tabla 2 -->
+
+                <tr>
+                    <td class="label"><i class="fas fa-home"></i> {{ form.Domicilio.label }}</td>
+                    <td class="input">{{ form.Domicilio }}</td>
+                </tr>
+                <tr>
+                    <td class="label"><i class="fas fa-city"></i> {{ form.Localidad.label }}</td>
+                    <td class="input">{{ form.Localidad }}</td>
+                </tr>
+                <tr>
+    <td class="label"><i class="fas fa-map-marker-alt"></i> {{ form.Provincia.label }}</td>
+    <td class="input">
+        <select name="Provincia" id="Provincia" class="form-control Provincia">
+            <option value="">Selecciona una provincia</option>
+            <option value="Álava">Álava</option>
+            <option value="Albacete">Albacete</option>
+            <option value="Alicante">Alicante</option>
+            <option value="Almería">Almería</option>
+            <option value="Asturias">Asturias</option>
+            <option value="Ávila">Ávila</option>
+            <option value="Badajoz">Badajoz</option>
+            <option value="Barcelona">Barcelona</option>
+            <option value="Burgos">Burgos</option>
+            <option value="Cáceres">Cáceres</option>
+            <option value="Cádiz">Cádiz</option>
+            <option value="Cantabria">Cantabria</option>
+            <option value="Castellón">Castellón</option>
+            <option value="Ceuta">Ceuta</option>
+            <option value="Ciudad Real">Ciudad Real</option>
+            <option value="Córdoba">Córdoba</option>
+            <option value="La Coruña">La Coruña</option>
+            <option value="Cuenca">Cuenca</option>
+            <option value="Gerona">Gerona</option>
+            <option value="Granada">Granada</option>
+            <option value="Guadalajara">Guadalajara</option>
+            <option value="Guipúzcoa">Guipúzcoa</option>
+            <option value="Huelva">Huelva</option>
+            <option value="Huesca">Huesca</option>
+            <option value="Islas Baleares">Islas Baleares</option>
+            <option value="Jaén">Jaén</option>
+            <option value="La Rioja">La Rioja</option>
+            <option value="Las Palmas">Las Palmas</option>
+            <option value="León">León</option>
+            <option value="Lérida">Lérida</option>
+            <option value="Madrid">Madrid</option>
+            <option value="Malaga">Málaga</option>
+            <option value="Murcia">Murcia</option>
+            <option value="Navarra">Navarra</option>
+            <option value="Ourense">Ourense</option>
+            <option value="Palencia">Palencia</option>
+            <option value="Pontevedra">Pontevedra</option>
+            <option value="Salamanca">Salamanca</option>
+            <option value="Segovia">Segovia</option>
+            <option value="Sevilla">Sevilla</option>
+            <option value="Soria">Soria</option>
+            <option value="Tarragona">Tarragona</option>
+            <option value="Teruel">Teruel</option>
+            <option value="Toledo">Toledo</option>
+            <option value="Valencia">Valencia</option>
+            <option value="Valladolid">Valladolid</option>
+            <option value="Vizcaya">Vizcaya</option>
+            <option value="Zamora">Zamora</option>
+            <option value="Zaragoza">Zaragoza</option>
+        </select>
+    </td>
+</tr>
+
+                <tr>
+                    <td class="label"><i class="fas fa-envelope"></i> {{ form.CP.label }}</td>
+                    <td class="input">{{ form.CP }}</td>
+                </tr>
+                <tr>
+                <td class="label"><i class="fas fa-building"></i> {{ form.Centro_trabajo.label }}</td>
+                <td class="input">
+                {{ form.Centro_trabajo(class="Centro_trabajo") }}
+                </td>
+                <tr>
+                 <td class="label"><i class="fa fa-briefcase" aria-hidden="true"></i> {{ form.Departamento.label }}</td>
+                <td class="input">
+                {{ form.Departamento(class="Departamento") }}
+                </td>
+                </tr>
+</tr>
+            </table>
+        </div>
+
+        <!-- Botones y nota -->
+        <div class="form-actions">
+            <button type="submit" class="submit-btn"><i class="fas fa-save"></i> Guardar Cambios</button>
+        </div>
+
+        <p class="note">*Todos los campos deben estar rellenos antes de guardar.</p>
+
+        <a href="{{ url_for('edit_password') }}" class="change-password-btn">
+            <i class="fas fa-key"></i> Cambiar contraseña
+        </a>
+    </div>
+</form>
+
+
+
+
+  <script src="/static/assets/js/core/popper.min.js"></script>
+  <script src="/static/assets/js/core/bootstrap.min.js"></script>
+  <script src="/static/assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="/static/assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="/static/assets/js/material-dashboard.min.js?v=3.1.0"></script>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function(){
+        // Captura el evento de envío del formulario
+        $('form').submit(function(event) {
+            event.preventDefault();
+
+            var formData = new FormData(this);
+
+            // Realiza la solicitud Ajax
+            $.ajax({
+                url: this.action,
+                method: this.method,
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    // Verifica que la respuesta sea un objeto y contenga la propiedad 'status'
+                    if (data && data.status === "success") {
+                        // Muestra el mensaje de éxito en algún lugar de la página
+                        $('#success-message').text(data.message || 'Operación exitosa').show();
+                    } else {
+                        // Muestra un mensaje de error si la respuesta no es válida o el status no es "success"
+                        console.error(data?.message || 'Hubo un error en la operación.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // Maneja el error de la solicitud Ajax
+                    console.error('Error en la solicitud Ajax:', error);
+                }
+            });
+        });
+
+        // Oculta el mensaje de éxito después de un tiempo (opcional)
+        setTimeout(function() {
+            $('#success-message').hide();
+        }, 5000);  // El mensaje se ocultará después de 5 segundos (ajusta según tus necesidades)
+    });
+</script>
+<script>
+        $(document).ready(function() {
+            $('.btn-mark-as-read').on('click', function() {
+                var notificacionId = $(this).data('id');
+                var $notificationDiv = $('#notificacion-' + notificacionId);
+
+                $.ajax({
+                    url: '/marcar_leida/' + notificacionId,
+                    type: 'POST',
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            // Elimina la notificación del DOM
+                            $notificationDiv.remove();
+                             location.reload();
+                        }
+                        // No hay necesidad de manejar el caso de error aquí, ya que se puede manejar en el backend
+                    },
+                    error: function(xhr, status, error) {
+                        // Opcional: manejar errores en la solicitud
+                        console.error('Error al marcar la notificación como leída:', error);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
