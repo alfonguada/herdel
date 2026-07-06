@@ -3625,7 +3625,15 @@ def admin_users():
 
     print(jornada_irregular_por_usuario)
 
-    return render_template('admin_users.html', users=users, current_user_email=current_user_email, notificaciones=notificaciones,  jornada_irregular_por_usuario=jornada_irregular_por_usuario, active_menu='combo_config')
+    excedencias_por_usuario = {}
+    for user in users:
+        excedencias_por_usuario[user.id] = Absence.query.filter(
+            Absence.user_id == user.id,
+            Absence.absence_type == 'Excedencia',
+            Absence.end_date >= date.today()
+        ).order_by(Absence.start_date).first()
+
+    return render_template('admin_users.html', users=users, current_user_email=current_user_email, notificaciones=notificaciones,  jornada_irregular_por_usuario=jornada_irregular_por_usuario, excedencias_por_usuario=excedencias_por_usuario, active_menu='combo_config')
 
 
 @app.route('/admin/usuarios_bloqueados')
@@ -10737,6 +10745,19 @@ def asignar_excedencia(user_id):
         return jsonify({'error': 'La fecha de fin no puede ser anterior a la fecha de inicio'}), 400
 
     descripcion = tipo + (f": {motivo}" if motivo else "")
+
+    excedencia_existente = Absence.query.filter(
+        Absence.user_id == user.id,
+        Absence.absence_type == 'Excedencia',
+        Absence.end_date >= date.today()
+    ).order_by(Absence.start_date).first()
+
+    if excedencia_existente:
+        excedencia_existente.start_date = fecha_inicio
+        excedencia_existente.end_date = fecha_fin
+        excedencia_existente.description = descripcion
+        db.session.commit()
+        return jsonify({'success': True})
 
     nueva_excedencia = Absence(
         start_date=fecha_inicio,

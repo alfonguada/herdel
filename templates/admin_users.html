@@ -169,7 +169,7 @@ b {
     border-radius: 5px;
     padding: 20px;
     margin-bottom: 20px;
-    height: 25rem;
+    min-height: 25rem;
 
 }
 
@@ -1296,14 +1296,23 @@ a.btn {
                 </div>
             </div>
         </div>
+        {% set excedencia = excedencias_por_usuario.get(user.id) %}
         <div class="row mt-2">
-            <div class="col-12 d-flex align-items-center">
+            <div class="col-12 d-flex align-items-center flex-wrap">
                 <i class="fas fa-person-walking-arrow-right me-2"></i> Excedencia
+                {% if excedencia %}
+                    <span class="badge ms-2" style="background-color: #8e44ad;">
+                        {{ excedencia.start_date.strftime('%d/%m/%Y') }} - {{ excedencia.end_date.strftime('%d/%m/%Y') }}
+                    </span>
+                {% endif %}
                 <button type="button" class="btn btn-custom btn-sm ms-auto abrir-excedencia"
                         data-user-id="{{ user.id }}"
                         data-user-nombre="{{ user.nombre }} {{ user.primer_apellido }}"
+                        data-fecha-inicio="{{ excedencia.start_date.strftime('%Y-%m-%d') if excedencia else '' }}"
+                        data-fecha-fin="{{ excedencia.end_date.strftime('%Y-%m-%d') if excedencia else '' }}"
+                        data-descripcion="{{ excedencia.description if excedencia else '' }}"
                         data-bs-toggle="modal" data-bs-target="#excedenciaModal">
-                    Asignar
+                    {{ 'Editar' if excedencia else 'Asignar' }}
                 </button>
             </div>
         </div>
@@ -2312,14 +2321,27 @@ document.getElementById('descargarTodosQRBtn').addEventListener('click', () => {
 </script>
 
 <script>
+    const TIPOS_EXCEDENCIA = ['Excedencia voluntaria', 'Excedencia por cuidado de hijos y familiares', 'Excedencia forzosa'];
+
     document.querySelectorAll('.abrir-excedencia').forEach(function(btn) {
         btn.addEventListener('click', function() {
             document.getElementById('excedenciaUserId').value = this.dataset.userId;
             document.getElementById('excedenciaUserNombre').textContent = this.dataset.userNombre;
-            document.getElementById('excedenciaFechaInicio').value = '';
-            document.getElementById('excedenciaFechaFin').value = '';
-            document.getElementById('excedenciaMotivo').value = '';
+            document.getElementById('excedenciaFechaInicio').value = this.dataset.fechaInicio || '';
+            document.getElementById('excedenciaFechaFin').value = this.dataset.fechaFin || '';
             document.getElementById('excedenciaError').classList.add('d-none');
+
+            const descripcion = this.dataset.descripcion || '';
+            const tipoSelect = document.getElementById('excedenciaTipo');
+            const tipoEncontrado = TIPOS_EXCEDENCIA.find(t => descripcion.startsWith(t));
+            if (tipoEncontrado) {
+                tipoSelect.value = tipoEncontrado;
+                const resto = descripcion.slice(tipoEncontrado.length);
+                document.getElementById('excedenciaMotivo').value = resto.startsWith(': ') ? resto.slice(2) : '';
+            } else {
+                tipoSelect.selectedIndex = 1;
+                document.getElementById('excedenciaMotivo').value = '';
+            }
         });
     });
 
