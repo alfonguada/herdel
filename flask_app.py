@@ -467,6 +467,16 @@ class Baja(db.Model):
     usuario = db.relationship('User', back_populates='bajas')
 
 
+def excedencia_activa_de(user_id, fecha=None):
+    fecha = fecha or datetime.now(timezone_spain).date()
+    return Absence.query.filter(
+        Absence.user_id == user_id,
+        Absence.absence_type == 'Excedencia',
+        Absence.start_date <= fecha,
+        Absence.end_date >= fecha
+    ).first()
+
+
 class QR(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     imagen = db.Column(db.String(255), nullable=False)  # Ruta de la imagen del QR
@@ -1639,6 +1649,21 @@ def user_page():
         hora_salida2 = datetime.strptime(hora_salida_str[:5], "%H:%M").time()
 
     print("DEBUG: today =", today)
+
+    excedencias = Absence.query.filter(
+        Absence.user_id == current_user.id,
+        Absence.absence_type == 'Excedencia'
+    ).all()
+    has_active_excedencia = bool(excedencia_activa_de(current_user.id, today))
+    excedencia_events = [{
+        'start': e.start_date.strftime('%Y-%m-%d'),
+        'end': (e.end_date + timedelta(days=1)).strftime('%Y-%m-%d'),
+        'title': "Excedencia",
+        'rendering': 'background',
+        'color': '#8e44ad',
+        'user_id': current_user.id
+    } for e in excedencias]
+
     bajas = Absence.query.filter(
         Absence.user_id == current_user.id,
         Absence.absence_type == 'Baja laboral'
@@ -1677,6 +1702,8 @@ def user_page():
 
     return render_template('user_page.html', active_menu='user_page',
                            sick_leave_events=sick_leave_events,
+                           excedencia_events=excedencia_events,
+                           has_active_excedencia=has_active_excedencia,
                            absences_count_mensual=absences_count_mensual,
                            has_active_baja=has_active_baja,
                            absences_count_anual=absences_count_anual,
@@ -5185,6 +5212,10 @@ def registro():
         print("Usuario autenticado")
         user_id = current_user.id
 
+        excedencia = excedencia_activa_de(user_id)
+        if excedencia:
+            print(f"[DEBUG] Fichaje bloqueado por excedencia activa hasta {excedencia.end_date}")
+            return jsonify({'error': f'No puedes fichar: tienes una excedencia activa hasta el {excedencia.end_date.strftime("%d/%m/%Y")}.'}), 403
 
         # --- NUEVO BLOQUE: evitar duplicados recientes ---
         ultimo_registro = (
@@ -5270,6 +5301,11 @@ def registro_qr():
         usuario = User.query.get(user_id)
         if not usuario:
             return render_template('registro_error.html', mensaje="Usuario no encontrado."), 404
+
+        excedencia = excedencia_activa_de(usuario.id)
+        if excedencia:
+            return render_template('registro_error.html',
+                                   mensaje=f"No puedes fichar: tienes una excedencia activa hasta el {excedencia.end_date.strftime('%d/%m/%Y')}."), 403
 
         ip_address = request.headers.get('X-Real-IP', request.remote_addr)
         print(f"[DEBUG] IP del usuario: {ip_address}")
@@ -10671,6 +10707,46 @@ def toggle_baja():
         baja_activa = Baja.query.filter_by(user_id=user.id, fecha_fin=None).first()
         if baja_activa:
             baja_activa.fecha_fin = datetime.now(timezone_spain).date()
+    db.session.commit()
+    return jsonify({'success': True})
+
+
+@app.route('/admin/asignar_excedencia/<int:user_id>', methods=['POST'])
+@admin_required
+def asignar_excedencia(user_id):
+    user = User.query.get(user_id)
+    if not user:
+        return jsonify({'error': 'Usuario no encontrado'}), 404
+
+    data = request.get_json()
+    fecha_inicio_str = data.get('fecha_inicio')
+    fecha_fin_str = data.get('fecha_fin')
+    tipo = data.get('tipo')
+    motivo = (data.get('motivo') or '').strip()
+
+    if not fecha_inicio_str or not fecha_fin_str or not tipo:
+        return jsonify({'error': 'Faltan datos obligatorios (fecha_inicio, fecha_fin, tipo)'}), 400
+
+    try:
+        fecha_inicio = datetime.strptime(fecha_inicio_str, '%Y-%m-%d').date()
+        fecha_fin = datetime.strptime(fecha_fin_str, '%Y-%m-%d').date()
+    except ValueError:
+        return jsonify({'error': 'Formato de fecha inválido'}), 400
+
+    if fecha_fin < fecha_inicio:
+        return jsonify({'error': 'La fecha de fin no puede ser anterior a la fecha de inicio'}), 400
+
+    descripcion = tipo + (f": {motivo}" if motivo else "")
+
+    nueva_excedencia = Absence(
+        start_date=fecha_inicio,
+        end_date=fecha_fin,
+        absence_type='Excedencia',
+        description=descripcion,
+        user_id=user.id,
+        start_time=time(0, 0)
+    )
+    db.session.add(nueva_excedencia)
     db.session.commit()
     return jsonify({'success': True})
 

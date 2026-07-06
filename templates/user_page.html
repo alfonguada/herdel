@@ -2299,6 +2299,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 const hasActiveBaja = {{ has_active_baja|tojson }};  // true o false
+const hasActiveExcedencia = {{ has_active_excedencia|tojson }};  // true o false
 
 function registrarEntradaSalida(latitud, longitud) {
     const boton = document.getElementById("registroBtn");
@@ -2308,6 +2309,14 @@ function registrarEntradaSalida(latitud, longitud) {
     // ✅ Verificar si hay baja laboral activa
     if (hasActiveBaja) {
         errorMessage.textContent = "No puedes registrar entrada/salida porque tienes una baja laboral activa hoy.";
+        errorMessage.classList.remove("d-none");
+        boton.disabled = true;
+        return;  // Salir de la función
+    }
+
+    // ✅ Verificar si hay excedencia activa
+    if (hasActiveExcedencia) {
+        errorMessage.textContent = "No puedes registrar entrada/salida porque tienes una excedencia activa hoy.";
         errorMessage.classList.remove("d-none");
         boton.disabled = true;
         return;  // Salir de la función
@@ -2380,6 +2389,8 @@ function mostrarLogoSpinner() {
 <script>
     const userSickLeaves = {{ sick_leave_events|tojson }};
     console.log("DEBUG sick_leave_events:", userSickLeaves);
+    const userExcedencias = {{ excedencia_events|tojson }};
+    console.log("DEBUG excedencia_events:", userExcedencias);
 
     document.addEventListener('DOMContentLoaded', function() {
 
@@ -2432,7 +2443,7 @@ function mostrarLogoSpinner() {
             3. MEZCLAR VACACIONES + BAJAS LABORALES
         --------------------------------------------------------- */
         const allEvents = {{ events|tojson }};
-        const allEventsMerged = [...allEvents, ...userSickLeaves];  // ← AQUI LA FUSIÓN
+        const allEventsMerged = [...allEvents, ...userSickLeaves, ...userExcedencias];  // ← AQUI LA FUSIÓN
         console.log("DEBUG allEventsMerged:", allEventsMerged);
 
         const non_workdays = {{ non_workdays|tojson }};
@@ -2603,12 +2614,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const horaEntradaStr = "{{ hora_entrada }}";
     const hasActiveBaja = {{ has_active_baja|tojson }};
+    const hasActiveExcedencia = {{ has_active_excedencia|tojson }};
 
     const contador = document.getElementById("contadorDuracion");
     const registroBtn = document.getElementById("registroBtn");
 
     console.log("DEBUG horaEntrada:", horaEntradaStr);
     console.log("DEBUG hasActiveBaja:", hasActiveBaja);
+    console.log("DEBUG hasActiveExcedencia:", hasActiveExcedencia);
 
     if (!contador) {
         console.error("❌ No existe contadorDuracion");
@@ -2617,6 +2630,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (hasActiveBaja) {
         contador.textContent = "Tienes una baja laboral activa hoy";
+        contador.style.color = "red";
+        contador.style.fontSize = "1.4em";
+
+        if (registroBtn) {
+            registroBtn.disabled = true;
+        }
+        return;
+    }
+
+    if (hasActiveExcedencia) {
+        contador.textContent = "Tienes una excedencia activa hoy";
         contador.style.color = "red";
         contador.style.fontSize = "1.4em";
 

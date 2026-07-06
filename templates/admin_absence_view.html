@@ -1633,6 +1633,10 @@ margin-top:50px;
     .tag_default {
         background-color: #6c757d;
     }
+
+    .tag_excedencia {
+        background-color: #8e44ad;
+    }
     td{
         border-left: none !important;
         border-right: none !important;
@@ -1911,6 +1915,8 @@ margin-top:50px;
                 <td><span class="tag tag_otras">{{ absence.absence_type }}</span></td>
             {% elif absence.absence_type == 'Causa fuerza mayor' %}
                 <td><span class="tag tag_fuerza">{{ absence.absence_type }}</span></td>
+            {% elif absence.absence_type == 'Excedencia' %}
+                <td><span class="tag tag_excedencia">{{ absence.absence_type }}</span></td>
             {% else %}
                 <td><span class="tag tag_default">{{ absence.absence_type }}</span></td>
             {% endif %}
